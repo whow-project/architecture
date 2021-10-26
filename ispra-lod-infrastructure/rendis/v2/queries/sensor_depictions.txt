@@ -1,0 +1,21 @@
+PREFIX ispra: <http://dati.isprambiente.it/ontology/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX odi: <http://datiopen.istat.it/odi/ontologia/territorio/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX csvw: <http://www.w3.org/ns/csvw#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT DISTINCT (STR(?STAT_CODE) AS ?STAT_CODE) (REPLACE(STR(?NETWORK), 'http://dati.isprambiente.it/id/tide/rmn/rmn-', '') AS ?NETWORK) ?SENS_TYPE ?SENS_ID ?DEPICTION
+WHERE{
+   ?sensor a ?TYPE ;
+      ispra:placedOn ?station;
+      foaf:depiction ?DEPICTION;
+      dc:type ?SENS_TYPE .
+   ?TYPE rdfs:subClassOf ispra:Instrument .
+   ?station dct:isPartOf ?NETWORK;
+            ispra:code ?STAT_CODE .
+   FILTER(REGEX(STR(?NETWORK), '^http://dati.isprambiente.it/id/tide/rmn/rmn-'))
+   BIND(IF(REGEX(STR(?sensor), '^http://dati.isprambiente.it/id/([a-zA-Z]+)([0-9]+)/rmn/(.?)+'), REPLACE(STR(?sensor), '^http://dati.isprambiente.it/id/([a-zA-Z]+)([0-9]+)/rmn/(.?)+', '$2'), '') AS ?SENS_ID)
+}

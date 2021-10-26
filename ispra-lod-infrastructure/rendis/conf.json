@@ -1,0 +1,107 @@
+{
+	"dataset": "rendis",
+	"graph_iri": "https://dati.isprambiente.it/ld/rendis",
+	"rdf_dump_file_name": "rendis",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "rendis/v2/data",
+	"rml_folder": "rendis/v2/rml_new",
+	"mappings": [
+        {
+            "rml": "intervention_contract_map.ttl",
+            "data": [
+                {
+                    "id": "intervention_csv",
+                    "file": "intervention_contract.csv"
+                },
+                {
+                    "id": "economic_indicators_csv",
+                    "file": "economic_indicators.csv"
+                },
+                {
+                    "id": "procedure_type_csv",
+                    "file": "procedure.csv"
+                },
+                {
+                    "id": "lot_classifications_csv",
+                    "file": "classificazione_lotti.csv"
+                },
+                {
+                    "id": "comuni_scondari_interventi_csv",
+                    "file": "comuniinterventi.csv"
+                },
+                {
+                    "id": "lot_csv",
+                    "file": "lotto_passi.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "ind_list",
+                    "value": "('L_QE_totGenProg','L_QE_lavProg','L_QE_onerisicProg','L_QE_espropriProg','L_QE_indaginiProg','L_QE_spesetecProg','L_QE_oneriart92Prog','L_QE_pubbProg','L_QE_ivalavProg','L_QE_ivaaltreProg','L_QE_imprevistiProg','L_QE_ribasso','L_QE_totGenFin','L_QE_lavFin','L_QE_onerisicFin','L_QE_espropriFin','L_QE_indaginiFin','L_QE_spesetecFin','L_QE_oneriart92Fin','L_QE_pubbFin','L_QE_ivalavFin','L_QE_ivaaltreFin','L_QE_imprevistiFin')"
+                }
+            ]
+        },
+        {
+            "rml": "lot_map.ttl",
+            "data": [
+                {
+                    "id": "lot_csv",
+                    "file": "lotto_passi.csv"
+                },
+                {
+                    "id": "passi_csv",
+                    "file": "passi.csv"
+                }, 
+                {
+                    "id": "iter_csv",
+                    "file": "tipo_iter.csv"
+                },
+                {
+                    "id": "alignment_csv",
+                    "file": "iter_passi.csv"
+                },
+                {
+                    "id": "iter_passi_first_last",
+                    "file": "iter_passi_first_last.csv"
+                }
+            ]
+        },
+		{
+			"rml": "vocabs_map.ttl",
+			"data": [
+				{
+					"id": "instability_csv",
+					"file": "dissesto.csv"
+				},
+				{
+					"id": "litology_csv",
+					"file": "litologia.csv"
+				},
+				{
+					"id": "repair_csv",
+					"file": "sistemazione.csv"
+				},
+                {
+                    "id": "instability_type_csv",
+                    "file": "classificazione_dissesto.csv"
+                },
+                {
+                    "id": "instability_super_type_csv",
+                    "file": "classificazione_tipi_dissesto.csv"
+                },
+                {
+                    "id": "repair_types_csv",
+                    "file": "classificazione_riparazione.csv"
+                },
+                {
+                    "id": "repair_syper_types_csv",
+                    "file": "classificazione_tipi_riparazione.csv"
+                },
+                {
+                    "id": "lithology_type",
+                    "file": "litologia_tipi.csv"
+                }
+			]
+		}
+	]
+}

@@ -1,0 +1,15 @@
+PREFIX ispra: <http://dati.isprambiente.it/ontology/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX odi: <http://datiopen.istat.it/odi/ontologia/territorio/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT (STR(?code) AS ?MODEL) ?WMO
+WHERE{
+?station dct:isPartOf ?net;
+         ispra:typeOfDataStation ?WMO;
+         ispra:code ?code .
+FILTER(REGEX(STR(?net), '^http://dati.isprambiente.it/id/tide/rmn/'))
+
+}

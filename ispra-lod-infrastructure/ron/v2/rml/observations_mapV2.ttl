@@ -1,0 +1,232 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix inspire: <https://dati.isprambiente.it/ontology/inspire/> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+
+
+<#CSV_DATA>
+    rml:source "{{ csv_data }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+<#ObservationSensor>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE}"
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:implements;
+        rr:objectMap [
+            rr:parentTriplesMap <#Procedure>
+        ]
+    ].
+
+
+<#Procedure>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{NETWORK}/procedure/%eval:observation_type(*)%"
+    ].
+
+<#Catalogue>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+
+	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcatalogue/{STAT_CODE}_%eval:observation_type(*)%";
+	rr:class inspire-mf:MeasureCatalogue
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasMember;
+        rr:objectMap [
+            rr:parentTriplesMap <#ObservationCollection>
+        ]
+    ].
+
+<#ObservationCollection>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}_%eval:observation_type(*)%_{PERIOD}";
+        rr:class inspire-mf:ObservationCollection
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isObservationCollectionMadeBySensor;
+        rr:objectMap [
+            rr:parentTriplesMap <#ObservationSensor>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasValidation;
+        rr:objectMap [
+            rr:parentTriplesMap <#Obs_validation>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DESC_EN}";
+	    rr:language "en" 
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DESC_IT}";
+	    rr:language "it" 
+        ]
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate core:lastUpdate;
+    rr:objectMap [
+          rr:template "{MODIFIED}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasMedia;
+        rr:objectMap [
+            rr:parentTriplesMap <#File>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasFeatureOfInterest;
+        rr:objectMap [
+            rr:parentTriplesMap <#ObservationFeature>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap <#TimeInterval>
+        ]
+    ].
+
+<#Obs_validation>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/validationlevel/{VALIDATION}";
+        rr:class inspire-mf:ValidationLevel
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Livello di validazione {VALIDATION}";
+            rr:language "it"
+        ]
+    ]; 
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Validation level {VALIDATION}";
+            rr:language "en"
+        ]
+    ].
+
+<#Obs_csvSCHEMA>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/dataschema/{TYPE}"
+    ].
+
+<#File>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/media/{STAT_CODE}_%eval:observation_type(*)%_{PERIOD}";
+        rr:class core:Media;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasURI;
+        rr:objectMap [
+            rr:parentTriplesMap <#FileURI>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:mediaType;
+        rr:objectMap [
+            rr:constant "text/csv"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasDataSchema;
+        rr:objectMap [
+            rr:parentTriplesMap <#Obs_csvSCHEMA>
+        ]
+    ].
+
+
+<#FileURI>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "{DATA}";
+    ].
+
+<#ObservationFeature>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+    ].
+
+<#TimeInterval>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/common/timeinterval/%eval:time_interval(*)%";
+        rr:class core:TimeInterval
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{PERIOD}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:startDate;
+        rr:objectMap [
+            rr:template "{START}";
+            rr:datatype xsd:dateTime
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:endDate;
+        rr:objectMap [
+            rr:template "{END}";
+            rr:datatype xsd:dateTime
+        ]
+    ].

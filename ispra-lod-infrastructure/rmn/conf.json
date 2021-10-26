@@ -1,0 +1,82 @@
+{
+	"dataset": "rmn",
+	"graph_iri": "https://dati.isprambiente.it/ld/rmn",
+	"rdf_dump_file_name": "rmn_static",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "rmn/v2/data",
+	"rml_folder": "rmn/v2/rml",
+	"mappings":[
+         {
+            "rml":"stations_map.ttl",
+            "data":[
+               {
+                  "id":"csv_stations",
+                  "file":"stations.csv"
+               },
+               {
+                  "id":"csv_wmo",
+                  "file":"station_model_types_wmo.csv"
+               },
+               {
+                  "id":"csv_station_models",
+                  "file":"station_models.csv"
+               },
+               {
+                  "id":"csv_wmo_classification",
+                  "file":"station_types_wmo_classification.csv"
+               },
+               {
+                  "id":"csv_seas",
+                  "file":"seas.csv"
+               }
+            ]
+         },
+         {
+            "rml":"code_providers_map.ttl",
+            "data":[
+               {
+                  "id":"csv_providers",
+                  "file":"providers.csv"
+               },
+               {
+                  "id":"csv_code_2_providers",
+                  "file":"code_providers.csv"
+               },
+               {
+                  "id":"csv_providers_sameas",
+                  "file":"provider_links.csv"
+               }
+            ]
+         },
+         {
+            "rml":"sensors_map.ttl",
+            "data":[
+               {
+                  "id":"csv_sensors",
+                  "file":"sensors.csv"
+               },
+               {
+                  "id":"csv_sensor_models",
+                  "file":"sensor_models.csv"
+               },
+               {
+                  "id":"csv_sensor_depictions",
+                  "file":"sensor_depictions.csv"
+               }
+            ]
+         },
+         {
+            "rml":"observations_map.ttl",
+            "data":[
+               {
+                  "id":"observation_data",
+                  "file":"observations.csv"
+               },
+               {
+                  "id":"schemata_data",
+                  "file":"observation_schemata.csv"
+               }
+            ]
+		}
+	]
+}

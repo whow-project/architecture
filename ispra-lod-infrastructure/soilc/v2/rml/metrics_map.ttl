@@ -1,0 +1,145 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/indicators_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix metric: <https://dati.isprambiente.it/ontology/common/metric/> .
+@prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
+@prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+
+:CSV
+    rml:source "{{ csv_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+    
+:CSV_mu_sameAs
+    rml:source "{{ csv_mu_sameas_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:Metric
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/metric/{Campo}";
+        rr:class indicators:Metric
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{Descrizione}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{Description}";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap :MU
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasBroader;
+        rr:objectMap [
+            rr:parentTriplesMap :BroaderMetric
+        ]
+    ].
+
+:BroaderMetric
+    rml:logicalSource :CSV;
+    
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/metric/{Broader_ID}";
+        rr:class indicators:Metric
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{Tipo}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{Type}";
+            rr:language "en"
+        ]
+    ].
+
+:MU
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/{Unit_EN}";
+        rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "Unit_EN";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "Unit_IT";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:symbol;
+        rr:objectMap [
+            rml:reference "Unit"
+        ]
+    ] .
+
+:MU_sameAs
+    rml:logicalSource :CSV_mu_sameAs;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/{EN}";
+        rr:class core:UnitOfMeasure
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+            rml:reference "DBPEDIA";
+            rr:termType rr:IRI
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+            rml:reference "WIKIDATA";
+            rr:termType rr:IRI
+        ]
+    ] .

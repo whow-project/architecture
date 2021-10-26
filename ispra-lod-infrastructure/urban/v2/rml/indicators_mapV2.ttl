@@ -1,0 +1,362 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/indicators_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix metric: <https://dati.isprambiente.it/ontology/commons/metric/> .
+@prefix time: <https://dati.isprambiente.it/ontology/commons/time/> .
+@prefix mu: <https://dati.isprambiente.it/ontology/commons/mu/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+
+:CSV
+    rml:source "{{ csv_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+    
+:METRICS_CSV
+    rml:source "{{ metrics_csv_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:DatasetISPRA
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
+            rr:class core:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ].
+
+
+:MainCollection
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/collection/%eval:place_id('{ {{COD_PLACE}} }')%_resources";
+        rr:class core:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasLocation;
+        rr:objectMap [
+            rr:parentTriplesMap :Place
+        ]
+    ] .
+
+#    rr:predicateObjectMap [
+#        rr:predicate core:hasMember;
+#        rr:objectMap [
+#            rr:parentTriplesMap :IndicatorCollections;
+#        ]
+#    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate core:partOf;
+#        rr:objectMap [
+#            rr:parentTriplesMap :DatasetISPRA
+#        ]
+#    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate rdfs:label;
+#        rr:objectMap [
+#            rr:template "Collezione di risorse del ";
+#            rr:language "it"
+#        ]
+#    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate rdfs:label;
+#        rr:objectMap [
+#            rml:reference "GEN_DESCRIPTION";
+#            rr:language "en"
+#        ]
+#    ].
+
+:IndicatorCollections
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/%eval:place_id('{ {{COD_PLACE}} }')%";
+        rr:class indicators:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicatori di consumo del suolo associati al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicators of soil consumption associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCollection;
+        ]
+    ] .
+
+:Place
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/%eval:place_type('{ {{COD_PLACE}} }')%/%eval:place_id('{ {{COD_PLACE}} }')%"
+    ].
+
+:Year
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/time/{{YEAR}}";
+        rr:class core:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:year;
+        rr:objectMap [
+            rml:reference "YEAR";
+            rr:datatype xsd:gYear
+        ]
+    ].
+
+{% for indicator in indicators %}
+:IndicatorsCollectionMetric{{indicator}}
+    
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/%eval:place_id('{ {{COD_PLACE}} }')%_{{indicator}}";
+        rr:class indicators:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorCollections
+        ]
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasAssertionForMembers;
+        rr:objectMap [
+	        rr:parentTriplesMap :PredicateObjectAssertion{{indicator}}
+        ]
+    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate core:hasParameter;
+#        rr:objectMap [
+#	        rr:parentTriplesMap :Metric{{indicator}}
+#        ]
+#    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicatori {{indicator}} associati al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')%.";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{{indicator}} indicators associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:language "en"
+        ]
+    ] .
+
+
+:PredicateObjectAssertion{{indicator}}
+
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/core/hasParameter', 'https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{indicator|lower}}')%";
+        rr:class core:PredicateObjectAssertion
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Asserzione Predicato-Oggetto avente https://dati.isprambiente.it/ontology/core/hasParameter come predicato e https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{indicator|lower}} come valore.";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Predicate-Object Assertion having https://dati.isprambiente.it/ontology/core/hasParameter as predicate and https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{indicator|lower}} as value.";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:withProperty;
+        rr:objectMap [
+            rr:constant "https://dati.isprambiente.it/ontology/core/hasParameter";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:withValue;
+        rr:objectMap [
+            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{indicator|lower}}";
+            rr:termType rr:IRI
+        ]
+    ] .
+    
+:Metric{{indicator}}
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+    	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{indicator|lower}}";
+        rr:class core:Parameter 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:get_unit_of_measure('{{indicator}}', 'it')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:get_unit_of_measure('{{indicator}}', 'en')%";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:symbol;
+        rr:objectMap [
+            rr:template "%eval:get_unit_of_measure('{{indicator}}', 'symbol')%"
+        ]
+    ] .
+
+
+
+
+:Indicators{{indicator}}
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/%eval:place_id('{ {{COD_PLACE}} }')%_{{indicator|lower}}_{{YEAR}}";
+        rr:class indicators:Indicator
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicatore {{indicator}} associato al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')% per l'anno {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicator {{indicator}} associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')% for year {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "en"
+        ]
+    ];
+        
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorsCollectionMetric{{indicator}}
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasValue;
+        rr:objectMap [
+            rr:parentTriplesMap :Value{{indicator}}
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap :Year
+        ]
+    ].
+
+:Value{{indicator}}
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/value/%eval:get_value('{ {{indicator}} }')%_%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+        rr:class core:Value
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language 'en'
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language 'it'
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:value;
+        rr:objectMap [
+            rr:template "%eval:get_value('{ {{indicator}} }')%"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+            rr:termType rr:IRI
+        ]
+    ] .
+
+{%endfor%}

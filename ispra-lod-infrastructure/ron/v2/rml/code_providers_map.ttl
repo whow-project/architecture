@@ -1,0 +1,113 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/code_providers.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+
+
+:PROVIDERS
+  rml:source "{{ csv_providers }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:CODE_2_PROVIDERS
+  rml:source "{{ csv_code_2_providers }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:PROVIDERS_SAMEAS
+    rml:source "{{ csv_providers_sameas }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:Code
+  rml:logicalSource :CODE_2_PROVIDERS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/common/code/{STAT_CODE}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "STAT_CODE";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "STAT_CODE",
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:identifier;
+    rr:objectMap [
+      rml:reference "STAT_CODE"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasCreator;
+    rr:objectMap [
+      rr:parentTriplesMap :Provider;
+      rr:joinCondition [
+        rr:child "PROVIDER";
+        rr:parent "ID"
+      ] 
+    ]
+  ].
+
+:Provider
+  rml:logicalSource :PROVIDERS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/common/organisation/{ID}";
+    rr:class core:Organisation
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESC_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESC_IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :ProviderSameAs;
+      rr:joinCondition [
+        rr:child "ID";
+        rr:parent "PROVIDER_ID"
+      ] 
+    ]
+  ].
+
+:ProviderSameAs
+  rml:logicalSource :PROVIDERS_SAMEAS;
+
+  rr:subjectMap [
+    rr:template "{SAMEAS}"
+  ].

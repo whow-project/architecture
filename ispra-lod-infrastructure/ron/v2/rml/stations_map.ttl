@@ -1,0 +1,1688 @@
+:hasLocation@prefix : <https://dati.isprambiente.it/ld/rml/stations_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf:/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+:CSV_STATIONS
+  rml:source "{{ csv_stations }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:CSV_STATIONTYPE_WMO
+    rml:source "{{ csv_wmo }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:CSV_STATIONTYPE_WMO_CLASSIFICATION
+    rml:source "{{ csv_wmo_classification }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:CSV_SEAS
+    rml:source "{{ csv_seas }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:CSV_STATION_MODELS
+  rml:source "{{ csv_station_models }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:Place
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/municipality/{CODE_PLACE}"
+  ].
+
+:Catalogue
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/collection/{CODE_PLACE}_resources";
+    rr:class core:Collection
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :Place
+    ]
+] .
+
+#  rr:predicateObjectMap [
+#    rr:predicate rdfs:label;
+#    rr:objectMap [
+#      rr:template "Catalogue of {{dataset.upper()}} resources in {PLACE_NAME}";
+#      rr:language "en"
+#    ]
+#  ];
+
+#  rr:predicateObjectMap [
+#    rr:predicate rdfs:label;
+#    rr:objectMap [
+#      rr:template "Catalogo delle risorse {{dataset.upper()}} di {PLACE_NAME}";
+#      rr:language "it"
+#    ]
+#  ] .
+
+:ObservationCatalogue
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}";
+    rr:class inspire-mf:ObservationCollection
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{{dataset.upper()}} observations catalogue of {PLACE_NAME}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Catalogo delle osservazioni {{dataset.upper()}} fatte a {PLACE_NAME}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :Catalogue;
+    ]
+  ] .
+
+:IspraCode
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/code/{STAT_CODE}";
+    rr:class core:Code
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "STAT_CODE";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "STAT_CODE";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:code;
+    rr:objectMap [
+      rml:reference "STAT_CODE";
+    ]
+  ].
+
+:StationCollection
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{CODE_PLACE}";
+    rr:class inspire-mf:PlatformCollection
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :#Place
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Catalogue of the measure stations located in {PLACE_NAME}.";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Catalogo delle stazioni di misurazione localizzate a {PLACE_NAME}.";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :Catalogue;
+    ]
+  ] .
+
+:Station
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
+    rr:class inspire-mf:Platform
+  ];
+
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasPlatformType;
+      rr:objectMap [
+        rr:template :StationType
+      ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :StationCollection;
+        ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasPlatformModel;
+      rr:objectMap [
+        rr:parentTriplesMap :StationModelData;
+	    rr:joinCondition [
+          rr:child "STAT_MODEL";
+          rr:parent "MODEL" 
+        ]
+      ]
+    ];
+
+    #        rr:predicateObjectMap [
+    #            rr:predicate inspire-mf:hasNodeStationModel;
+    #            rr:objectMap [
+    #                rr:parentTriplesMap <#StationModel>
+    #            ]
+    #        ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{STAT_TYPE_EN} part of the {{dataset.upper()}}-{NETWORK} network located near by {PLACE_NAME}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{STAT_TYPE_IT} parte della rete {{dataset.upper()}}-{NETWORK} localizzata in prossimità di {PLACE_NAME}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasUniqueIdentifier;
+    rr:objectMap [
+      rr:parentTriplesMap :IspraCode
+    ]
+  ];
+
+#  rr:predicateObjectMap [
+#    rr:predicate inspire-mf:hosts;
+#    rr:objectMap [
+#      rr:parentTriplesMap :Sensor>
+#  ]
+#];
+
+  rr:predicateObjectMap [
+    rr:predicate places:long;
+    rr:objectMap [
+      rr:template "{LONG}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:lat;
+    rr:objectMap [
+      rr:template "{LAT}"
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate inspire-mf:isPlatformOf;
+    rr:objectMap [
+      rr:parentTriplesMap :Network
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :Feature
+    ]
+  ].
+
+:StationType
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{TYPE_EN}";
+	rr:class inspire-mf:PlatformType
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TYPE_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TYPE_IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :StationTypeWMO;
+      rr:joinCondition [
+	rr:child "MODEL";
+        rr:parent "MODEL"
+      ]
+    ]
+  ].
+
+
+:StationTypeWMO
+
+  rml:logicalSource :CSV_STATIONTYPE_WMO;
+
+    rr:subjectMap [
+      rr:template "{WMO}"
+    ] .
+
+:StationTypeWMOClassification
+
+  rml:logicalSource :CSV_STATIONTYPE_WMO_CLASSIFICATION;
+    
+  rr:subjectMap [
+    rr:template "{WMO_CLASSIFICATION}"
+  ] .
+
+:StationGeometry
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}_{STAT_TYPE_EN}";
+    rr:class places:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Geolocalization of the node station {PLACE_NAME}-{STAT_TYPE_EN} ({{dataset}}-{NETWORK})";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Geolocalizazione del nodo stazione {PLACE_NAME}-{STAT_TYPE_IT} ({{dataset}}-{NETWORK})";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:long;
+    rr:objectMap [
+      rr:template "{LONG}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:lat;
+    rr:objectMap [
+      rr:template "{LAT}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:geometry;
+    rr:objectMap [
+      rr:template "POINT ({LONG} {LAT})";
+      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:hasGeometryType;
+    rr:objectMap [
+      rr:parentTriplesMap :StationGeometryType
+    ]
+  ].
+
+:StationGeometryType
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:constant "https://dati.isprambiente.it/ld/commons/geometrytype/point";
+    rr:class places:GeometryType
+  ].
+
+
+#:STATION_INSPIRE
+#  rml:logicalSource :CSV_STATIONS;
+#
+#  rr:subjectMap [
+#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/nodestation/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
+#    rr:class inspire:MonitoringFacility
+#  ].
+
+:NETWORK
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
+    rr:class inspire-mf:Network
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{{dataset.upper()}} - {NETWORK} Network";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{{dataset.upper()}} - {NETWORK} Network";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate inspire-mf:hasPlatform;
+    rr:objectMap [
+      rr:parentTriplesMap :Station
+    ]
+  ].
+
+#:NETWORK_INSPIRE
+#  rml:logicalSource :CSV_STATIONS;
+#
+#  rr:subjectMap [
+#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
+#    rr:class inspire:MonitoringNetwork
+#  ].
+
+:Feature
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+    rr:class inspire-mf:FeatureOfInterest
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap :FeatureGeometry
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:hasNearbyLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :Place
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :Sea;
+      rr:joinCondition [
+        rr:child "SEA_IT";
+        rr:parent "IT"
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Area di mare vicino la stazione {{dataset|upper}} di {PLACE_NAME}.";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}} station.";
+      rr:language "en"
+    ]
+  ].
+
+#:FEATURE_INSPIRE
+#  rml:logicalSource :CSV_STATIONS;
+#
+#  rr:subjectMap [
+#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+#    rr:class inspire:MonitoringFeature
+#  ].
+
+:FeatureGeometry
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}";	
+    rr:class places:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:geometry;
+    rr:objectMap [
+      rr:template "POINT ({LONG} {LAT})";
+      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:long;
+    rr:objectMap [
+      rr:template "{LONG}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:lat;
+    rr:objectMap [
+      rr:template "{LAT}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate places:hasGeometryType;
+    rr:objectMap [
+      rr:parentTriplesMap :StationGeometryType
+    ]
+  ].
+
+:Sea
+  rml:logicalSource :CSV_SEAS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/sea/{EN}";
+    rr:class places:Sea
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :SeaGN
+    ]
+  ].
+
+:SeaGN
+  rml:logicalSource :CSV_SEAS;
+
+  rr:subjectMap [
+    rr:template "{GEONAMES}%"
+  ].
+
+
+:StationModelType
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}"
+  ].
+
+:StationModelData
+  rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+      rr:template "%eval:station_model_uri(*, '{{dataset}}')%";
+      rr:class inspire-mf:PlatformModel
+    ];
+      
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Platform model named {{dataset.upper()}}{MODEL} based on {MANUFACTURER} - {MODEL_NAME}";
+		rr:language "en"
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Modelo di piattaforma denominato {{dataset.upper()}}{MODEL} basato su {MANUFACTURER} - {MODEL_NAME}";
+		rr:language "it"
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate core:name;
+      rr:objectMap [
+        rml:reference "MODEL_NAME"
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasPlatformType;
+      rr:objectMap [
+        rr:parentTriplesMap :StationType
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate core:hasQualifiedProperty;
+      rr:objectMap [
+        rr:parentTriplesMap :StructureMaterialQP        
+	  ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasPlatformType;
+      rr:objectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{TYPE_EN}";
+	rr:termType rr:IRI
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate core:hasQualifiedProperty;
+      rr:objectMap [
+          rr:parentTriplesMap :StationDiameterQP
+      ]
+    ];
+          
+    rr:predicateObjectMap [
+      rr:predicate core:hasQualifiedProperty;
+      rr:objectMap [
+          rr:parentTriplesMap :MooringTypeQP
+      ]
+    ]; 
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasManufacturer;
+        rr:objectMap [
+            rr:parentTriplesMap :Manufacturer
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasQualifiedProperty;
+        rr:objectMap [
+            rr:parentTriplesMap :HullTypeQP
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasQualifiedProperty;
+        rr:objectMap [
+            rr:parentTriplesMap :PositioningSystemQP
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasReference;
+        rr:objectMap [
+            rr:parentTriplesMap :StationModelPDF
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasDepiction;
+        rr:objectMap [
+            rr:parentTriplesMap :StationModelIMG
+        ]
+    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate inspire-mf:hasWMOclassification;
+#        rr:objectMap [
+#            rr:parentTriplesMap <#StationModelWMO>
+#        ]
+#    ];
+
+     rr:predicateObjectMap [
+       rr:predicate core:isClassifiedBy;
+       rr:objectMap [
+         rr:parentTriplesMap :StationTypeWMOClassification;
+         rr:joinCondition [
+           rr:child "MODEL";
+           rr:parent "MODEL"
+         ]
+       ]
+     ].
+
+
+:PositioningSystemQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Sistema di posizionamento della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Positioning system of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :PositioningSystem
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :PositioningSystemValue
+      ]
+    ] .
+
+:PositioningSystem
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/parameter/positioning_system";
+        rr:class core:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rr:template "Positioning system";
+	  rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rr:template "Sistema di posizionamento";
+	  rr:language "it"
+        ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :PositioningSystemDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :PositioningSystemWikidata
+    ]
+  ] .
+
+:PositioningSystemDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Positioning_system"
+    ] .
+
+:PositioningSystemWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q17141406"
+    ] .
+
+:PositioningSystemValue
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/platformattribute/{POSITIONING_SYSTEM}";
+        rr:class core:PlatformAttribute
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rml:reference "POSITIONING_SYSTEM";
+	      rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rml:reference "POSITIONING_SYSTEM";
+	      rr:language "it"
+        ]
+    ].
+
+
+:HullTypeQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Tipologia di scafo della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Hull type of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :HullType
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :HullTypeValue
+      ]
+    ] .
+
+:HullType
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/parameter/hull";
+        rr:class core:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Hull Type";
+	    rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Tipologia di Scafo";
+	    rr:language "it"
+        ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :HullTypeDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :HullTypeWikidata
+    ]
+  ] .
+
+:HullTypeDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Hull_(watercraft)"
+    ] .
+
+:HullTypeWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q426745"
+    ] .
+
+:HullTypeValue
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/concept/{HULL_TYPE}";
+        rr:class inspire-mf:Concept
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "HULL_TYPE";
+	    rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "HULL_TYPE";
+	    rr:language "it"
+        ]
+    ].
+
+:Manufacturer
+
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/organisation/{MANUFACTURER}";
+    rr:class core:Organisation
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "MANUFACTURER";
+	  rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "MANUFACTURER";
+	  rr:language "it"
+    ]
+  ] .
+
+
+:MooringType
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/parameter/mooring";
+        rr:class inspire-mf:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rr:template "Mooring type";
+	  rr:language "en"
+        ]
+    ];
+       
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rr:template "Tipologia di ormeggio";
+	  rr:language "it"
+        ]
+    ];
+       
+    rr:predicateObjectMap [
+      rr:predicate owl:sameAs;
+      rr:objectMap [
+        rr:parentTriplesMap :MooringTypeDBpedia
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate owl:sameAs;
+      rr:objectMap [
+        rr:parentTriplesMap :MooringTypeWikidata
+      ]
+    ] .
+
+:MooringTypeDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Mooring"
+    ] .
+
+:MooringTypeWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q587735"
+    ] .
+
+:StationMooringType
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/concept/{MOORING_TYPE}";
+        rr:class inspire-mf:Concept
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rml:reference "MOORING_TYPE";
+	      rr:language "en"
+        ]
+    ];
+       
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rml:reference "MOORING_TYPE";
+	      rr:language "it"
+        ]
+    ].
+
+
+:MooringTypeQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Tipo di scafo della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Mooring type of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :MooringType
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :StationMooringType
+      ]
+    ] .
+
+:StationDiameterQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_diameter";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Diametro della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Diameter of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :Diameter
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :StationDiameter
+      ]
+    ] .
+     
+:Diameter
+
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/parameter/diameter";
+    rr:class core:Parameter
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Diametro";
+	  rr:language "it"
+      ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Diameter";
+      rr:language "en"
+    ]
+  ];
+      
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :DiameterDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :DiameterWikidata
+    ]
+  ] .
+
+:DiameterDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Diameter"
+    ] .
+
+:DiameterWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q37221"
+    ] .
+
+:StationDiameter
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/value/{DIAMETER}-meters";
+        rr:class core:Value
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DIAMETER} metri";
+	    rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DIAMETER} meters";
+	    rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:value;
+        rr:objectMap [
+            rml:reference "DIAMETER";
+	    rr:datatype xsd:float
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap :Meter
+        ]
+    ].
+
+
+#<#StationrModelTypeMobile>
+#
+#    rml:logicalSource <#CSV_STATION>;
+#
+#    rr:subjectMap [
+#        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/stationmodel/%eval:mobile_sensor('{MOBILE}')%";
+#        rr:class inspire-mf:StationModelType
+#    ];
+#
+#    rr:predicateObjectMap [
+#        rr:predicate rdfs:label;
+#        rr:objectMap [
+#            rr:template "%eval:mobile_sensor_label('{MOBILE}', 'en')%";
+#	    rr:language "en"
+#        ]
+#    ];
+#
+#    rr:predicateObjectMap [
+#        rr:predicate rdfs:label;
+#        rr:objectMap [
+#            rr:template "%eval:mobile_sensor_label('{MOBILE}', 'it')%";
+#	    rr:language "it"
+#        ]
+#    ].
+
+
+:StructureMaterialQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_material";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Materiale della struttura della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Structural material of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :StructureMaterial
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :StructureMaterialValue
+      ]
+    ] .
+
+:StructureMaterial
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/parameter/material";
+    rr:class core:Parameter
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Materiale";
+	  rr:language "it"
+      ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Material";
+      rr:language "en"
+    ]
+  ];
+      
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :MaterialDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :MaterialWikidata
+    ]
+  ] .
+
+:MaterialDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Material"
+    ] .
+
+:MaterialWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q214609"
+    ] .
+
+
+:StructureMaterialValue
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/material/{STRUCTURE_EN}";
+	rr:class core:Material
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "STRUCTURE_EN";
+	    rr:language "en"
+        ]
+    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "STRUCTURE_IT";
+	    rr:language "it"
+        ]
+    ].
+
+:StationModelPDF
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "{PDF}"
+    ].
+
+:StationModelIMG
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+      rr:template "{IMAGE}"
+    ].
+
+:Meter
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/meter";
+        rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Metro";
+	    rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Meter";
+	    rr:language "en"
+        ]
+    ] .
+
+
+:LevellingQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_levelling";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Livellamento della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Levelling of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :LevellingProperty
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :LevellingValue
+      ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate core:atTime;
+      rr:objectMap [
+        rr:parentTriplesMap :LevellingYear
+      ]
+    ] .
+
+
+:LevellingYear
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/year/{TIME}";
+    rr:class core:Year
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TIME";
+      rr:language "it"
+    ]
+  ];
+     
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TIME";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:value;
+    rr:objectMap [
+      rml:reference "TIME";
+      rr:datatype xsd:gYear
+    ]
+  ].
+
+
+:LevellingProperty
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/parameter/levelling";
+    rr:class core:Parameter
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Metodo di livellamento";
+	  rr:language "it"
+      ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Levelling method";
+      rr:language "en"
+    ]
+  ];
+      
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :LevellingDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :LevellingWikidata
+    ]
+  ] .
+
+:LevellingDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/Levelling"
+    ] .
+
+:LevellingWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q961466"
+    ] .
+
+
+:LevellingValue
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/method/{LEVELLING_EN}";
+    rr:class core:Method
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "LEVELLING_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "LEVELLING_IT";
+      rr:language "it"
+    ]
+  ].
+
+
+
+:DeploymentQP
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_deployment";
+        rr:class core:QualifiedProperty
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+      rr:template "Posizionamento della {TYPE_IT} della rete {{dataset.upper()}} {NETWORK} modello {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "it"
+      ]
+    ];
+     
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rr:template "Deployment of the {TYPE_EN} of the {{dataset.upper()}} {NETWORK} network model {MODEL} {MANUFACTURER} {MODEL_NAME}";
+	    rr:language "en"
+      ]
+    ];
+     
+     
+    rr:predicateObjectMap [
+      rr:predicate core:isParametrisedBy;
+      rr:objectMap [
+        rr:parentTriplesMap :DeploymentProperty
+      ]
+    ];
+        
+    rr:predicateObjectMap [
+      rr:predicate core:hasValue;
+      rr:objectMap [
+        rr:parentTriplesMap :DeploymentValue
+      ]
+    ].
+
+
+:DeploymentProperty
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/commons/parameter/deployment";
+    rr:class core:Parameter
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Posizionamento";
+	  rr:language "it"
+      ]
+    ];
+     
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Deployment";
+      rr:language "en"
+    ]
+  ];
+      
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :DeploymentDBpedia
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:parentTriplesMap :DeploymentWikidata
+    ]
+  ] .
+
+:DeploymentDBpedia
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://dbpedia.org/resource/System_deployment"
+    ] .
+
+:DeploymentWikidata
+
+    rml:logicalSource :CSV_STATION_MODELS;
+
+    rr:subjectMap [
+        rr:template "http://www.wikidata.org/entity/Q4189534"
+    ] .
+
+
+:DeploymentValue
+  rml:logicalSource :CSV_STATION_MODELS;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/place/{LOCATION_EN}";
+    rr:class core:Place
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "LOCATION_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "LOCATION_IT";
+      rr:language "it"
+    ]
+  ].

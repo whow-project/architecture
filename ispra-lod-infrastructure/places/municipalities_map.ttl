@@ -1,0 +1,269 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+
+
+<#CitiesCSV>
+  rml:source "places/input/csv/cities.csv" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator "\t".
+
+<#DatasetISPRA>
+    rml:logicalSource <#CitiesCSV>;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places";
+    ].
+
+<#Provinces>
+  rml:logicalSource <#CitiesCSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/%eval:metropolitan_city({COD_PROV})%";
+  ].
+   
+ <#Regions>
+  rml:logicalSource <#CitiesCSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/region/{COD_REG}"
+  ].
+
+ 
+ <#IstatCode>
+  rml:logicalSource <#CitiesCSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/{PRO_COM_T}";
+    rr:class core:UniqueIdentifier
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "PRO_COM_T";
+      rr:language "it"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "PRO_COM_T";
+      rr:language "en"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:identifier;
+    rr:objectMap [
+      rml:reference "PRO_COM_T"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:isIssuedBy;
+    rr:objectMap [
+      rr:parentTriplesMap <#IstatOrg>
+      ]
+    ] . 
+
+ <#IstatOrg>
+
+  rml:logicalSource <#CitiesCSV>;
+
+  rr:subjectMap [
+    rr:constant "https://dati.isprambiente.it/ld/places/organisation/istat";
+    rr:class core:Organisation
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:constant "Istituto nazionale di statistica ";
+      rr:language "it"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:constant "Italian National Institute of Statistics";
+      rr:language "en"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:acronym;
+    rr:objectMap [
+      rr:constant "ISTAT"
+      ]
+    ] .
+
+ <#Cities>
+  rml:logicalSource <#CitiesCSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/municipality/{PRO_COM_T}";
+    rr:class places:Municipality
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:name;
+    rr:objectMap [
+      rml:reference "COMUNE";
+      rr:language "it"
+      ]
+    ];
+    
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "COMUNE";
+      rr:language "it"
+      ]
+    ];
+    
+  rr:predicateObjectMap [
+    rr:predicate places:istat;
+    rr:objectMap [
+      rml:reference "PRO_COM_T";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasUniqueIdentifier;
+    rr:objectMap [
+      rr:parentTriplesMap <#IstatCode>
+      ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate core:name;
+    rr:objectMap [
+      rml:reference "COMUNE_A";
+      rr:language "{LANGUAGE_A}"
+      ]
+    ];
+  
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "COMUNE_A";
+      rr:language "{LANGUAGE_A}"
+      ]
+    ];
+    
+  rr:predicateObjectMap [
+    rr:predicate places:hasCountry;
+    rr:objectMap [
+      rr:parentTriplesMap <#Nation>
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate places:hasRegion;
+    rr:objectMap [
+      rr:parentTriplesMap <#Regions>
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate places:hasProvince;
+    rr:objectMap [
+      rr:parentTriplesMap <#Provinces>
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate places:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#CityPoint>
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate places:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap <#CityPolygon>
+    ]
+  ];
+
+  rr:predicateObjectMap [
+            rr:predicate core:partOf;
+            rr:objectMap [
+                rr:parentTriplesMap <#DatasetISPRA>;
+            ]
+        ];
+  
+  rr:predicateObjectMap [
+    rr:predicate core:lastUpdate;
+    rr:objectMap [
+      rr:parentTriplesMap <#CityYear>
+    ]
+  ].
+  
+ <#CityPoint>
+   rml:logicalSource <#CitiesCSV>;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/places/geometry/{PRO_COM_T}_point";
+     rr:class places:Geometry
+   ];
+  
+   rr:predicateObjectMap [
+     rr:predicate places:geometry;
+     rr:objectMap [
+       rml:reference "CENTROID_COM";
+       rr:datatype geosparql:wktLiteral
+     ]
+   ].
+ 
+ <#CityPolygon>
+   rml:logicalSource <#CitiesCSV>;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/places/geometry/{PRO_COM_T}_polygon";
+     rr:class places:Geometry
+   ];
+  
+   rr:predicateObjectMap [
+     rr:predicate places:geometry;
+     rr:objectMap [
+       rml:reference "POLYGON_COM";
+       rr:datatype geosparql:wktLiteral
+     ]
+   ].
+   
+   
+ <#CityYear>
+  rml:logicalSource <#CitiesCSV>;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_COM}";
+    rr:class core:Year
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate core:year;
+    rr:objectMap [
+      rml:reference "YEAR_COM";
+      rr:datatype xsd:gYear
+    ]
+  ].
+
+ <#Nation>
+  rml:logicalSource <#CitiesCSV>;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/places/country/1"
+  ].

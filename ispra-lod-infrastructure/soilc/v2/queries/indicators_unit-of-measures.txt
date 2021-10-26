@@ -1,0 +1,10 @@
+prefix core: <http://dati.isprambiente.it/ontology/core#>
+prefix dct: <http://purl.org/dc/terms/>
+select distinct (REPLACE(STR(?t), 'http://dati.isprambiente.it/id/skos/sc/', '') AS ?INDICATOR) ?UNIT (?t AS ?SKOS)
+where{
+?ind a core:SoilUseIndicator;
+  dct:type ?t .
+?t <http://qudt.org/schema/qudt#unit> ?u
+BIND(REPLACE(REPLACE(STR(?u), 'http://qudt.org/1.1/vocab/unit#', ''), 'Percent', 'Percentage') AS ?UNIT)
+}
+ORDER BY ?INDICATOR

@@ -1,0 +1,1285 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/intervention_contract_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
+@prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+
+:CSV
+  rml:source "{{intervention_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:LOT_STEP_CSV
+  rml:source "{{lot_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+# :INSTABILITY_TYPE_CSV
+#  rml:source "{{instability_type_csv}}" ;
+#  rml:referenceFormulation ql:CSV;
+#  crml:separator ";".
+
+:PROCEDURE_TYPE_CSV
+  rml:source "{{procedure_type_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:ECONOMIC_INDICATORS_CSV
+  rml:source "{{economic_indicators_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:LOT_CLASSIFICATIONS_CSV
+  rml:source "{{lot_classifications_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:COMUNI_SECONDARI_INTERVENTI_CSV
+  rml:source "{{comuni_scondari_interventi_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:DatasetISPRA
+    rml:logicalSource :CSV;
+        rr:subjectMap [
+            rr:constant "https://dati.isprambiente.it/ld/rendis";
+            rr:class core:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Rendis Dataset";
+        ]
+    ].
+
+:IntervetionCode
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/uniqueidentifier/{I_idIntervento}";
+    rr:class core:UniqueIdentifier
+  ];
+ 
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "I_idIntervento";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "I_idIntervento";
+      rr:language "en"
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:identifier;
+    rr:objectMap [
+      rml:reference "I_idIntervento"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasCreator;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/commons/organisation/ispra";
+      rr:termType rr:IRI
+    ]
+  ].
+  
+
+
+:Intervention
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/procedure/{I_idIntervento}";
+    rr:class rendis:Procedure
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "_I_Titolo_intervento";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasUniqueIdentifier;
+    rr:objectMap [
+      rr:parentTriplesMap :IntervetionCode
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasProcedureType;
+    rr:objectMap [
+      rr:parentTriplesMap :ProcedureType;
+      rr:joinCondition [
+        rr:child "L_modAggiudicazione";
+        rr:parent "IT" 
+      ]
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :PlaceCollection
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :InterventionPlace
+    ]
+  ];
+
+#  rr:predicateObjectMap [
+#    rr:predicate rendis:hasInstabilityType;
+#    rr:objectMap [
+#      rr:parentTriplesMap :InstabilityType
+#      rr:joinCondition [
+#          rr:child "_FROM_I_Tipo_dissesto";
+#          rr:parent "DISSESTO_IT" 
+#      ]
+#    ]
+#  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasFinancedAmount;
+    rr:objectMap [
+      rr:parentTriplesMap :FinancedAmount
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasReference;
+    rr:objectMap [
+      rml:reference "_URL_scheda_int";
+      rr:termType rr:IRI	
+
+    ]
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate core:partOf;
+      rr:objectMap [
+          rr:parentTriplesMap :DatasetISPRA;
+      ]
+  ];
+
+  
+#  rr:predicateObjectMap [
+#    rr:predicate rendis:hasMunicipalityRoleInIntervention;
+#    rr:objectMap [
+#      rr:parentTriplesMap :PrimaryMunicipalityRoleInIntervetion
+#    ]
+#  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasPrimaryLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :Place
+    ]
+  ];
+
+#  rr:predicateObjectMap [
+#    rr:predicate rendis:hasMunicipalityRoleInIntervention;
+#    rr:objectMap [
+#      rr:parentTriplesMap :SecondaryMunicipalityRoleInIntervetion;
+#      rr:joinCondition [
+#        rr:child "I_idIntervento";
+#        rr:parent "id_intervento"  
+#      ]
+#    ]
+#  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasAlternativeLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :SecondaryPlace;
+      rr:joinCondition [
+        rr:child "I_idIntervento";
+        rr:parent "id_intervento"  
+      ]
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasAgentRole;
+    rr:objectMap [
+      rr:parentTriplesMap :ProposingAgentRole
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasAgentRole;
+    rr:objectMap [
+      rr:parentTriplesMap :BasinAuthorityAgentRole
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasAgentRole;
+    rr:objectMap [
+      rr:parentTriplesMap :DistrictAuthorityAgentRole
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasLegalBasis;
+    rr:objectMap [
+      rr:parentTriplesMap :Agreement
+    ]
+  ].
+
+
+:FinancedAmount
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/amount/{_I_finanziamento intervento}_euro";
+	rr:class rendis:Amount
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{_I_finanziamento intervento} euro";
+            rr:language "it" 
+        ] 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{_I_finanziamento intervento} euro";
+            rr:language "en" 
+        ] 
+    ];
+
+
+   rr:predicateObjectMap [
+        rr:predicate rendis:hasCurrency;
+        rr:objectMap [
+            rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
+            rr:termType rr:IRI
+        ] 
+    ] .
+    
+
+:Currency
+
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
+	rr:class rendis:Currency
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Euro";
+            rr:language "it" 
+        ] 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Euro";
+            rr:language "en" 
+        ] 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:refobjectMap [
+            rr:constant "https://dbpedia.org/resource/Euro";
+            rr:termType rr:IRI
+        ] 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:refobjectMap [
+            rr:constant "http://www.wikidata.org/entity/Q4916";
+            rr:termType rr:IRI
+        ] 
+    ] .
+
+
+# :InstabilityType
+#     rml:logicalSource :INSTABILITY_TYPE_CSV;
+#     
+#     rr:subjectMap [
+#         rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{DISSESTO_EN}";
+# 	rr:class rendis:InstabilityType 
+#     ];
+# 
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rml:reference "DISSESTO_IT";
+#             rr:language "it" 
+#         ] 
+#     ];
+# 
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rml:reference "DISSESTO_EN";
+#             rr:language "en" 
+#         ] 
+#     ];
+# 
+#     rr:predicateObjectMap [
+#         rr:predicate owl:sameAs;
+#         rr:objectMap [
+#             rml:reference "DBPEDIA";
+#             rr:termType rr:IRI
+#         ] 
+#     ];
+# 
+#     rr:predicateObjectMap [
+#         rr:predicate owl:sameAs;
+#         rr:objectMap [
+#             rml:reference "WIKIDATA";
+#              rr:termType rr:IRI
+#         ] 
+#     ] .
+
+
+:InterventionPlace
+    rml:logicalSource :CSV;
+    
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/place/%eval:digest('{POINT}')%";
+	rr:class core:Place 
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate rdfs:label;
+	rml:reference "I_localita"
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate places:hasGeometry;
+	rr:objectMap [
+	    rr:parentTriplesMap :Geometry
+	]
+    ] .
+
+#:PrimaryMunicipalityRoleInIntervetion
+#    rml:logicalSource :CSV;
+#    
+#    rr:subjectMap [
+#        rr:template "https://dati.isprambiente.it/ld/places/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
+#        rr:class rendis:MunicipalityRoleInIntervention
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rdfs:label;
+#        rr:objectMap [
+#	    rr:template "Role of the municipality {CI_FROM_I_CI_ISTATComPrimario} in the intervention {I_idIntervento}: Primary Municipality";
+#            rr:language "en" 
+#        ]
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rdfs:label;
+#        rr:objectMap [
+#	    rr:template "Ruolo del comune {CI_FROM_I_CI_ISTATComPrimario} nell'ambito dell'intervento a difesa del suolo {I_idIntervento}: Municipalità Primaria";
+#            rr:language "it" 
+#        ]
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rendis:ofPlace;
+#        rr:objectMap [
+#	    rr:parentTriplesMap :Place
+#        ]
+#    ];
+#
+#
+#    rr:predicateObjectMap [
+#	rr:predicate core:withRole;
+#        rr:objectMap [
+#	    rr:template "https://dati.isprambiente.it/ld/rendis/role/primary_municipality";
+#        ]
+#    ] .
+
+
+#:SecondaryMunicipalityRoleInIntervetion
+#    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
+#    
+#    rr:subjectMap [
+#        rr:template "https://dati.isprambiente.it/ld/places/municipalityroleinintervention/{id_intervento}_{cod_istat}";
+#        rr:class rendis:MunicipalityRoleInIntervention
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rdfs:label;
+#        rr:objectMap [
+#	    rr:template "Role of {cod_istat} in the intervention {id_intervento}: Secondary Municipality";
+#            rr:language "en" 
+#        ]
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rdfs:label;
+#        rr:objectMap [
+#	    rr:template "Ruolo di {cod_istat} nell'ambito dell'intervento a difesa del suolo {id_intervento}: Municipalità Secondaria";
+#            rr:language "it" 
+#        ]
+#    ];
+#
+#    rr:predicateObjectMap [
+#	rr:predicate rendis:ofPlace;
+#        rr:objectMap [
+#	    rr:parentTriplesMap :SecondaryPlace
+#        ]
+#    ];
+#
+#
+#    rr:predicateObjectMap [
+#	rr:predicate core:withRole;
+#        rr:objectMap [
+#	    rr:template "https://dati.isprambiente.it/ld/rendis/role/secondary_municipality";
+#            rr:termType rr:IRI
+#        ]
+#    ] .
+
+:Place
+    rml:logicalSource :CSV;
+    
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/municipality/{CI_FROM_I_CI_ISTATComPrimario}"
+    ].
+
+:PlaceCollection
+    rml:logicalSource :CSV;
+    
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/{CI_FROM_I_CI_ISTATComPrimario}_primary"
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate core:isPartOf;
+        rr:objectMap [
+	    rr:template "https://dati.isprambiente.it/ld/places/collection/{CI_FROM_I_CI_ISTATComPrimario}_resources";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate core:hasAssertionForMembers;
+        rr:objectMap [
+	    rr:parentTriplesMap :PlaceCollectionPOAssertion
+        ]
+    ] .
+
+:PlaceCollectionPOAssertion
+
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/places/municipality/{CI_FROM_I_CI_ISTATComPrimario}')%";
+        rr:class core:PredicateObjectAssertion
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Asserzione Predicato-Oggetto per indicare che tutte le procedure della collezione hanno {_E_FROM_I_CI_Comune_primario} come comune di intervento primario.";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Predicate-Object Assertion for representing that all procedures belonging to the collection have {_E_FROM_I_CI_Comune_primario} has primary municipality of intervention.";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:withPredicate;
+        rr:objectMap [
+            rr:constant "https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:withObject;
+        rr:objectMap [
+            rr:parentTriplesMap :Place
+        ]
+    ] .
+
+
+:SecondaryPlace
+    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
+    
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/municipality/{cod_istat}"
+    ].
+
+:ProposingAgentRole
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_proposing_institution";
+    rr:class core:AgentRole
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Ente proponente dell'intervento {I_idIntervento}" ;
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Proposing entity of the intervention {I_idIntervento}" ;
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:involvesAgent;
+    rr:objectMap [
+      rr:parentTriplesMap :ProposingAgent
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:involvesRole;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/rendis/role/proposing_institution";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:ProposingAgent
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteProp}";
+    rr:class core:Organisation 
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/{ENTE_PROPONENTE_TYPE}/{E_FROM_I_idEnteProp}";
+      rr:termType rr:IRI
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "ENTE_PROPONENTE_LABEL";
+      rr:language "it"
+    ]
+  ] .
+
+:BasinAuthorityAgentRole
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_basin_authority";
+    rr:class core:AgentRole
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Autorità di supervisione dell'intervento {I_idIntervento}: {TE_E_FROM_I_autoritaBacino}" ;
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Supervisory authority of the intervention {I_idIntervento}: {TE_E_FROM_I_autoritaBacino}" ;
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:ofAgent;
+    rr:objectMap [
+      rr:parentTriplesMap :BasinAuthority
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:withRole;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/rendis/role/supervisory_authority";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:BasinAuthority
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteAutBac}";
+    rr:class core:Organisation 
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TE_E_FROM_I_autoritaBacino";
+      rr:language "it"
+    ]
+  ] .
+
+
+:DistrictAuthorityAgentRole
+
+  rml:logicalSource :CSV;
+
+  crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_district_authority";
+    rr:class core:AgentRole
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Autorità di supervisione dell'intervento {I_idIntervento}: {TE_E_FROM_I_autoritaDistretto}" ;
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Supervisory authority of the intervention {I_idIntervento}: {TE_E_FROM_I_autoritaDistretto}" ;
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:ofAgent;
+    rr:objectMap [
+      rr:parentTriplesMap :DistrictAuthority
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:withRole;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/rendis/role/supervisory_authority";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+:DistrictAuthority
+
+  rml:logicalSource :CSV;
+
+  crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteAutDis}";
+    rr:class core:Organisation 
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "TE_E_FROM_I_autoritaDistretto";
+      rr:language "it"
+    ]
+  ] .
+
+:Agreement
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/legalact/{I_idIntervento}";
+    rr:class rendis:LegalAct
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "_I_Decreto" ;
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:time;
+    rr:objectMap [
+      rml:reference "D_dataApprovazione" ;
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasSource;
+    rr:objectMap [
+      rml:reference "D_gazzettaUfficiale" ;
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasReference;
+    rr:objectMap [
+	rml:reference "ID_URL_scheda_intervento_decreto";
+	rr:termType rr:IRI
+    ]
+  ] .
+
+:Lot
+    rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{I_idIntervento}_{L_idLotto}";
+    rr:class rendis:Lot
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Intervento {I_idIntervento} - lotto {L_idLotto}: '{_I_Titolo_intervento}'";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Intervention {I_idIntervento} - lot {L_idLotto}: '{_I_Titolo_intervento}'";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasLocation;
+    rr:objectMap [
+      rr:parentTriplesMap :InterventionPlace
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasAgentRole;
+    rr:objectMap [
+      rr:parentTriplesMap :ResponsibleAgentRole
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasAgentRole;
+    rr:objectMap [
+      rr:parentTriplesMap :ActuatorAgentRole
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasReference;
+    rr:objectMap [
+      rml:reference "_URL_scheda_lotto";
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasImplementationPlan;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{L_idIter}";
+      rr:termType rr:IRI 
+    ]
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate rendis:hasImplementationPlanExecution;
+      rr:objectMap [
+        rr:parentTriplesMap :ImplementationPlanExecution
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:isIncludedInProcedure;
+    rr:objectMap [
+      rr:parentTriplesMap :Intervention
+    ]
+  ] .
+
+:ImplementationPlanExecution
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanexecution/{I_idIntervento}_{L_idLotto}_{L_idIter}";
+    rr:class rendis:ImplementationPlanExecution
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Esecuzione del piano \"{TI_desIter}\" nel contesto del lotto {L_idLotto} della procedura \"{_I_Titolo_intervento}\"";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Execution of the plan \"{TI_desIter}\" in the context of the lot {L_idLotto} of the procedure \"{_I_Titolo_intervento}\"";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:satisfies;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{L_idIter}";
+      rr:termType rr:IRI 
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasImplementationPlanAction;
+    rr:objectMap [
+      rr:parentTriplesMap :ImplementationPlanAction;
+      rr:joinCondition [
+        rr:child "I_idIntervento";
+        rr:parent "id_intervento" 
+      ], [
+        rr:child "L_idLotto";
+        rr:parent "id_lotto" 
+      ]
+    ]
+  ] .
+
+
+:ImplementationPlanAction
+  
+  rml:logicalSource :LOT_STEP_CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanaction/{id_intervento}_{id_lotto}_{id_passo}";
+    rr:class rendis:ImplementationPlanAction
+  ];
+
+    rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Esecuzione del passo {id_passo} nel contesto del lotto {id_lotto} della procedura {id_passo}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Execution of the step {id_passo} in the context of the lot {id_lotto} of the procedure {id_passo}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:satisfies;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+      rr:termType rr:IRI 
+    ]
+  ] .
+
+:ProcedureType
+
+  rml:logicalSource :PROCEDURE_TYPE_CSV;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/rendis/proceduretype/{ID}";
+     rr:class rendis:ProcedureType
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rml:reference "IT";
+       rr:language "it"
+     ] 
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rml:reference "EN";
+       rr:language "en"
+     ] 
+   ] .
+
+
+:ResponsibleAgentRole
+
+   rml:logicalSource :CSV;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/%eval:responsible_agent_role('{L_nominativoresp}', '{L_ruoloresp}')%";
+     rr:class core:AgentRole
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rr:template "Responsabile del lotto {L_idLotto} dell'intervento {I_idIntervento}: {L_nominativoresp}";
+       rr:language "it"
+     ]
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rr:template "Responsible of lot {L_idLotto} of the intervention {I_idIntervento}: {L_nominativoresp}";
+       rr:language "en"
+     ]
+   ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:ofAgent;
+    rr:objectMap [
+      rr:parentTriplesMap :ResponsibleAgent
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:withRole;
+    rr:objectMap [
+      rr:parentTriplesMap :ResponsibleRole
+    ]
+  ] .
+
+
+:ResponsibleAgent
+
+   rml:logicalSource :CSV;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/rendis/agent/%eval:digest('{L_nominativoresp}')%";
+     rr:class core:Agent
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rml:reference "L_nominativoresp";
+       rr:language "it"
+     ]
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rml:reference "L_nominativoresp";
+       rr:language "en"
+     ]
+   ] .
+
+:ResponsibleRole
+
+   rml:logicalSource :CSV;
+  
+   rr:subjectMap [
+     rr:template "%eval:responsible_role('{L_ruoloresp}')%";
+     rr:class core:Role
+   ];
+
+   rr:predicateObjectMap [
+     rr:predicate rdfs:label;
+     rr:objectMap [
+       rml:reference "L_ruoloresp";
+       rr:language "it"
+     ]
+   ] .
+
+
+:Geometry
+  rml:logicalSource :CSV;
+  
+   rr:subjectMap [
+     rr:template "https://dati.isprambiente.it/ld/rendis/geometry/%eval:digest('{POINT}')%";
+     rr:class places:Geometry
+   ];
+  
+   rr:predicateObjectMap [
+     rr:predicate places:geometry;
+     rr:objectMap [
+       rml:reference "POINT";
+       rr:datatype geosparql:wktLiteral
+     ]
+   ].
+
+
+
+:ActuatorAgentRole
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_actuator_institution";
+    rr:class core:AgentRole
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Ente attuatore dell'intervento {I_idIntervento}" ;
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Actuator entity of the intervention {I_idIntervento}" ;
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:ofAgent;
+    rr:objectMap [
+      rr:parentTriplesMap :ActuatorAgent
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate core:withRole;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/rendis/role/actuator_institution";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:ActuatorAgent
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/{ENTE_ATTUATORE_TYPE}/{E_FROM_L_idEnteAttuat}"
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdf:type;
+    rr:objectMap [
+      rml:reference "ENTE_ATTUATORE_TYPE_URI";
+      rr:termType rr:IRI
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "ENTE_ATTUATORE_LABEL";
+      rr:language "it"
+    ]
+  ] .
+
+
+
+{% for ind in ind_list %}
+:{{ind}}
+    rml:logicalSource :CSV;
+
+    crml:condition "df['{{ind}}'].notnull()";
+
+     rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
+        rr:class measures:Indicator
+      ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "Indicatore {{ind|lower}} per il lotto {L_idLotto} dell'intervento {I_idIntervento}";
+           rr:language "it"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "Indicator {{ind|lower}} for the lot {L_idLotto} of intervention {I_idIntervento}";
+           rr:language "en"
+        ]
+     ];
+
+    rr:predicateObjectMap [
+      rr:predicate measures:isIndicatorOf;
+      rr:objectMap [
+        rr:parentTriplesMap :Lot
+      ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rendis:hasAmount;;
+        rr:objectMap [
+           rr:parentTriplesMap :{{ind}}Amount
+        ]
+     ];
+
+     rr:predicateObjectMap [
+       rr:predicate core:hasParameter;
+       rr:objectMap [
+          rr:constant "https://dati.isprambiente.it/ld/rendis/parameter/{{ind|lower}}";
+	  rr:termType rr:IRI
+       ]
+     ] .
+
+:{{ind}}Amount
+
+     rml:logicalSource :CSV;
+
+     rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/amount/{ {{ind}} }_euro";
+        rr:class rendis:Amount
+      ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "{ {{ind}} } euro";
+           rr:language "it"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "{ {{ind}} } euros";
+           rr:language "en"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate core:value;
+        rr:objectMap [
+           rml:reference "{{ind}}";
+           rr:datatype xsd:float
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate rendis:hasCurrency;
+        rr:objectMap [
+            rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
+            rr:termType rr:IRI
+        ] 
+     ] .
+
+{%endfor%}
+
+
+:EconomicMetric
+     rml:logicalSource :ECONOMIC_INDICATORS_CSV;
+
+     rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/parameter/{ID}";
+        rr:class core:Parameter
+      ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rml:reference "LABEL_IT";
+           rr:language "it"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rml:reference "LABEL_EN";
+           rr:language "en"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+           rml:reference "SKOS";
+           rr:termType rr:IRI
+        ]
+     ] .
+
+:LotClassification
+     rml:logicalSource :LOT_CLASSIFICATIONS_CSV;
+
+     rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/concept/{LABEL_EN}";
+        rr:class core:Concept
+      ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rml:reference "LABEL_IT";
+           rr:language "it"
+        ]
+     ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rml:reference "LABEL_EN";
+           rr:language "en"
+        ]
+     ] .

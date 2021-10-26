@@ -1,0 +1,70 @@
+{
+	"dataset": "urban",
+	"graph_iri": "https://dati.isprambiente.it/ld/urban",
+	"rdf_dump_file_name": "urban_{{year}}",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "urban/v2/data",
+	"rml_folder": "urban/v2/rml",
+	"year": {{year}},
+	"mappings": [
+		{
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Province_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('urban/v2/data/Province_{{year}}.csv')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'IdOST_Origine'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Comuni_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('urban/v2/data/Comuni_{{year}}.csv')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'IdOST_Origine'"
+                }
+            ]
+        },
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Metriche.csv"
+                },
+                {
+                    "id": "csv_mu_sameas_file",
+                    "file": "UnitOfMeasuresSameAses.csv"
+                }
+            ]
+        }
+	]
+}

@@ -1,0 +1,195 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/lot_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+
+
+
+:CSV
+  rml:source "{{lot_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:passi_CSV
+  rml:source "{{passi_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:iter_type_CSV
+  rml:source "{{iter_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:alignem_CSV
+  rml:source "{{alignment_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:iter_passi_first_last_CSV
+  rml:source "{{iter_passi_first_last}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:LotStep
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
+    rr:class rendis:LotStep
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "documento"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:time;
+    rr:objectMap [
+      rml:reference "data";
+      rr:datatype xsd:dateTime
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasStepType;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/iterstep/{id_passo}";
+      rr:termType rr:IRI
+    ]
+  ].
+
+:StepType_Entity
+  rml:logicalSource :passi_CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+    rr:class rendis:ImplementationPlanStep
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{tipo} ({fase}): {descrizione}";
+      rr:langauge "it"
+    ]
+  ].
+
+
+:Iter
+  rml:logicalSource :iter_type_CSV;
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{id_iter}";
+    rr:class rendis:ImplementationPlan
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "descrizione_it";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "descrizione_en";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasInitialImplementationStep;
+    rr:objectMap [
+      rr:parentTriplesMap :ImplementationPlanStepFirst;
+      rr:joinCondition [
+        rr:child "id_iter";
+        rr:parent "id_iter";
+      ]
+    ]
+  ] ;
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasFinalImplementationStep;
+    rr:objectMap [
+      rr:parentTriplesMap :ImplementationPlanStepLast;
+      rr:joinCondition [
+        rr:child "id_iter";
+        rr:parent "id_iter";
+      ]
+    ]
+  ] .
+
+
+
+:Iteralign
+  rml:logicalSource :alignem_CSV;
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{id_iter}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasImplementationPlanStep;
+    rr:objectMap [
+      rr:parentTriplesMap :ImplementationPlanStep
+    ]
+  ].
+
+
+:ImplementationPlanStep
+  rml:logicalSource :alignem_CSV;
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:follows;
+    rr:objectMap [
+      rr:parentTriplesMap :ImplementationPlanStepPrevious
+    ]
+  ] .
+
+:ImplementationPlanStepFirst
+
+  rml:logicalSource :iter_passi_first_last_CSV;
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{first}";
+  ] .
+
+:ImplementationPlanStepLast
+
+  rml:logicalSource :iter_passi_first_last_CSV;
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{last}";
+  ] .
+
+
+:ImplementationPlanStepPrevious
+
+  rml:logicalSource :alignem_CSV;
+
+  crml:condition "df['id_passo_prec'].notnull()";
+      
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo_prec}";
+  ] .

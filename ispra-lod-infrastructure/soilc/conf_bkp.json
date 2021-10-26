@@ -1,0 +1,119 @@
+{
+	"dataset": "soilc",
+	"graph_iri": "https://dati.isprambiente.it/ld/soilc",
+	"rdf_dump_file_name": "soilc_{{year}}",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "soilc/v2/data",
+	"rml_folder": "soilc/v2/rml",
+	"year": {{year}},
+	"mappings": [
+		{
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Nazionale_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "('CSUOLO1','CSUOLO2','CSUOLO3','CSUOLO4','CSUOLO5','CSUOLO6','CSUOLO8','CSUOLO9','CAREEP1','CAREEP2','CAREEP3','CCIDRI1','CCIDRI2','CCIDRI3','CCIDRI4','CCIDRI5','CCOSTE1','CCOSTE2','CCOSTE3','CCOSTE4','CCOSTE5','CCOSTE6','CCOSTE7','CCOSTE8','CCOSTE9','CCOSTE10','CCOSTE11','CALTIM1','CALTIM2','CALTIM3','CALTIM4','CALTIM5','CALTIM6','CALTIM7','CALTIM8','CALTIM9','CALTIM10','CALTIM11','CALTIM12','CALTIM13','CALTIM14','CALTIM15','PIDRAU1','PIDRAU2','PIDRAU3','PIDRAU4','PIDRAU5','PIDRAU6','PIDRAU7','PIDRAU8','PIDRAU9','PFRANE1','PFRANE2','PFRANE3','PFRANE4','PFRANE5','PFRANE6','PFRANE7','PFRANE8','PFRANE9','PFRANE10','PFRANE11','PFRANE12','PFRANE13','PFRANE14','PFRANE15','CSISMI1','CSISMI2','CSISMI3','CSISMI4','CSISMI5','CSISMI6','DISECO1','DISECO2','DISECO3','DISECO4','DISECO5','DISECO6','DISECO7','DISECO8','DISECO9','DISECO10','DISECO11','CLAMMI1','CLAMMI2','CLAMMI3','CLAMMI4','FORMET1','FORMET2','FORMET3','FORMET4','FORMET5','VINPAE1','VINPAE2','ECOSIS1','ECOSIS2','ECOSIS3','ECOSIS4','ECOSIS5','ECOSIS6','ECOSIS7','ECOSIS11','ECOSIS12','ECOSIS13','ECOSIS14','ECOSIS19','ECOSIS20','ECOSIS21','ECOSIS22','ECOSIS23','ECOSIS25','ECOSIS26','SDGIND1','SDGIND2','SDGIND3')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nazione'"
+                }
+            ]
+        },
+		{
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Regioni_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "('CSUOLO1','CSUOLO2','CSUOLO3','CSUOLO4','CSUOLO5','CSUOLO6','CSUOLO8','CSUOLO9','CAREEP1','CAREEP2','CAREEP3','CCIDRI1','CCIDRI2','CCIDRI3','CCIDRI4','CCIDRI5','CCOSTE1','CCOSTE2','CCOSTE3','CCOSTE4','CCOSTE5','CCOSTE6','CCOSTE7','CCOSTE8','CCOSTE9','CCOSTE10','CCOSTE11','CALTIM1','CALTIM2','CALTIM3','CALTIM4','CALTIM5','CALTIM6','CALTIM7','CALTIM8','CALTIM9','CALTIM10','CALTIM11','CALTIM12','CALTIM13','CALTIM14','CALTIM15','PIDRAU1','PIDRAU2','PIDRAU3','PIDRAU4','PIDRAU5','PIDRAU6','PIDRAU7','PIDRAU8','PIDRAU9','PFRANE1','PFRANE2','PFRANE3','PFRANE4','PFRANE5','PFRANE6','PFRANE7','PFRANE8','PFRANE9','PFRANE10','PFRANE11','PFRANE12','PFRANE13','PFRANE14','PFRANE15','CSISMI1','CSISMI2','CSISMI3','CSISMI4','CSISMI5','CSISMI6','DISECO1','DISECO2','DISECO3','DISECO4','DISECO5','DISECO6','DISECO7','DISECO8','DISECO9','DISECO10','DISECO11','CLAMMI1','CLAMMI2','CLAMMI3','CLAMMI4','FORMET1','FORMET2','FORMET3','FORMET4','FORMET5','VINPAE1','VINPAE2','ECOSIS1','ECOSIS2','ECOSIS3','ECOSIS4','ECOSIS5','ECOSIS6','ECOSIS7','ECOSIS11','ECOSIS12','ECOSIS13','ECOSIS14','ECOSIS19','ECOSIS20','ECOSIS21','ECOSIS22','ECOSIS23','ECOSIS25','ECOSIS26','SDGIND1','SDGIND2','SDGIND3')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD_REG'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'NOME_Regione'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Province_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "('CSUOLO1','CSUOLO2','CSUOLO3','CSUOLO4','CSUOLO5','CSUOLO6','CSUOLO8','CSUOLO9','CAREEP1','CAREEP2','CAREEP3','CCIDRI1','CCIDRI2','CCIDRI3','CCIDRI4','CCIDRI5','CCOSTE1','CCOSTE2','CCOSTE3','CCOSTE4','CCOSTE5','CCOSTE6','CCOSTE7','CCOSTE8','CCOSTE9','CCOSTE10','CCOSTE11','CALTIM1','CALTIM2','CALTIM3','CALTIM4','CALTIM5','CALTIM6','CALTIM7','CALTIM8','CALTIM9','CALTIM10','CALTIM11','CALTIM12','CALTIM13','CALTIM14','CALTIM15','PIDRAU1','PIDRAU2','PIDRAU3','PIDRAU4','PIDRAU5','PIDRAU6','PIDRAU7','PIDRAU8','PIDRAU9','PFRANE1','PFRANE2','PFRANE3','PFRANE4','PFRANE5','PFRANE6','PFRANE7','PFRANE8','PFRANE9','PFRANE10','PFRANE11','PFRANE12','PFRANE13','PFRANE14','PFRANE15','CSISMI1','CSISMI2','CSISMI3','CSISMI4','CSISMI5','CSISMI6','DISECO1','DISECO2','DISECO3','DISECO4','DISECO5','DISECO6','DISECO7','DISECO8','DISECO9','DISECO10','DISECO11','CLAMMI1','CLAMMI2','CLAMMI3','CLAMMI4','FORMET1','FORMET2','FORMET3','FORMET4','FORMET5','VINPAE1','VINPAE2','ECOSIS1','ECOSIS2','ECOSIS3','ECOSIS4','ECOSIS5','ECOSIS6','ECOSIS7','ECOSIS11','ECOSIS12','ECOSIS13','ECOSIS14','ECOSIS19','ECOSIS20','ECOSIS21','ECOSIS22','ECOSIS23','ECOSIS25','ECOSIS26','SDGIND1','SDGIND2','SDGIND3')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD_PRO'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'NOME_Provincia'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Comuni_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "('CSUOLO1','CSUOLO2','CSUOLO3','CSUOLO4','CSUOLO5','CSUOLO6','CSUOLO8','CSUOLO9','CAREEP1','CAREEP2','CAREEP3','CCIDRI1','CCIDRI2','CCIDRI3','CCIDRI4','CCIDRI5','CCOSTE1','CCOSTE2','CCOSTE3','CCOSTE4','CCOSTE5','CCOSTE6','CCOSTE7','CCOSTE8','CCOSTE9','CCOSTE10','CCOSTE11','CALTIM1','CALTIM2','CALTIM3','CALTIM4','CALTIM5','CALTIM6','CALTIM7','CALTIM8','CALTIM9','CALTIM10','CALTIM11','CALTIM12','CALTIM13','CALTIM14','CALTIM15','PIDRAU1','PIDRAU2','PIDRAU3','PIDRAU4','PIDRAU5','PIDRAU6','PIDRAU7','PIDRAU8','PIDRAU9','PFRANE1','PFRANE2','PFRANE3','PFRANE4','PFRANE5','PFRANE6','PFRANE7','PFRANE8','PFRANE9','PFRANE10','PFRANE11','PFRANE12','PFRANE13','PFRANE14','PFRANE15','CSISMI1','CSISMI2','CSISMI3','CSISMI4','CSISMI5','CSISMI6','DISECO1','DISECO2','DISECO3','DISECO4','DISECO5','DISECO6','DISECO7','DISECO8','DISECO9','DISECO10','DISECO11','CLAMMI1','CLAMMI2','CLAMMI3','CLAMMI4','FORMET1','FORMET2','FORMET3','FORMET4','FORMET5','VINPAE1','VINPAE2','ECOSIS1','ECOSIS2','ECOSIS3','ECOSIS4','ECOSIS5','ECOSIS6','ECOSIS7','ECOSIS11','ECOSIS12','ECOSIS13','ECOSIS14','ECOSIS19','ECOSIS20','ECOSIS21','ECOSIS22','ECOSIS23','ECOSIS25','ECOSIS26','SDGIND1','SDGIND2','SDGIND3')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'PRO_COM'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'NOME_Comune'"
+                }
+            ]
+        }
+	]
+}

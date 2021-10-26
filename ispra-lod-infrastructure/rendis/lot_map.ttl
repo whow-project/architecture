@@ -1,0 +1,149 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+
+
+
+<#CSV>
+  rml:source "{{lot_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+<#passi_CSV>
+  rml:source "{{passi_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+<#iter_type_CSV>
+  rml:source "{{iter_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+<#alignem_CSV>
+  rml:source "{{alignment_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+<#lot_step>
+  rml:logicalSource <#CSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lot_step/%eval:lower_case(*, id_intervento)%_%eval:lower_case(*, id_lotto)%/%eval:lower_case(*, id_passo)%";
+    rr:class rendis:LotStep
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "documento";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:time;
+    rr:objectMap [
+      rml:reference "data";
+      rr:datatype xsd:string
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasStepType;
+    rr:objectMap [
+      rr:parentTriplesMap <#StepType>
+    ]
+  ].
+
+<#Contrat>
+    rml:logicalSource <#CSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/contract/%eval:lower_case(*, id_intervento)%_%eval:lower_case(*, id_lotto)%";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasLotStep;
+    rr:objectMap [
+      rr:parentTriplesMap <#lot_step>
+    ]
+  ].
+
+
+<#StepType>
+    rml:logicalSource <#CSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/step_type/%eval:lower_case(*, id_passo)%";
+  ].
+
+<#StepType_Entity>
+  rml:logicalSource <#passi_CSV>;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/step_type/%eval:lower_case(*, id_passo)%";
+    rr:class rendis:StepType
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "descrizione";
+      rr:datatype xsd:string
+    ]
+  ].
+
+
+
+
+
+ <#Iter>
+  rml:logicalSource <#iter_type_CSV>;
+      
+      rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/iter/%eval:lower_case(*, id_iter)%";
+        rr:class rendis:Iter
+      ];
+      rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+          rr:template "{descrizione}" ;
+          rr:datatype xsd:string
+        ]
+      ].
+
+
+
+
+ <#Iteralign>
+  rml:logicalSource <#alignem_CSV>;
+      
+      rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/iter/%eval:lower_case(*, id_iter)%";
+      ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasIterStep;
+    rr:objectMap [
+      rr:parentTriplesMap <#Passialign>
+    ]
+  ].
+
+
+<#Passialign>
+  rml:logicalSource <#alignem_CSV>;
+      
+      rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/rendis/step_type/%eval:lower_case(*, id_passo)%";
+      ].
+

@@ -1,0 +1,729 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/sensors_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+
+
+:CSV_SENSORS
+	rml:source "{{ csv_sensors }}" ;
+	rml:referenceFormulation ql:CSV;
+	crml:separator ";".
+
+:CSV_SENSOR_MODELS
+	rml:source "{{ csv_sensor_models }}" ;
+	rml:referenceFormulation ql:CSV;
+	crml:separator ";".
+
+
+:CSV_SENSOR_DEPICTIONS
+	rml:source "{{ csv_sensor_depictions }}" ;
+	rml:referenceFormulation ql:CSV;
+	crml:separator ";".
+
+
+#:Place
+#	rml:logicalSource :CSV_SENSORS;
+#
+#	rr:subjectMap [
+#		rr:template "https://dati.isprambiente.it/ld/places/municipality/#{CODE_PLACE}"
+#	].
+
+
+:Platform
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_tide_gauge";
+	].
+
+
+:Sensor
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}";
+		rr:class inspire-mf:Sensor 
+	];
+
+        rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{SENS_TYPE_IT} posizionato nella piattaforma {STAT_CODE}";
+			rr:language "it"
+      		]
+    	];
+
+        rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{SENS_TYPE_EN} placed on the platform {STAT_CODE}";
+			rr:language "en"
+      		]
+    	];
+
+
+	rr:predicateObjectMap [
+		rr:predicate inspire-mf:isHostedBy;
+		rr:objectMap [
+			rr:parentTriplesMap :Platform
+      		]
+    	];
+
+	rr:predicateObjectMap [
+		rr:predicate inspire-mf:hasSensorModel;
+		rr:objectMap [
+			rr:parentTriplesMap :SensorModelData;
+			rr:joinCondition [
+				rr:child "SENSOR_MODEL"; 
+				rr:parent "ID"
+			]
+		]
+	];
+
+	rr:predicateObjectMap [
+		#rr:predicate inspire-mf:hasPeriod;
+		rr:predicate inspire-mf:hasSystemCapability;
+		rr:objectMap [
+			rr:parentTriplesMap :SensorPeriodQP
+		]
+	];
+
+	
+#	rr:predicateObjectMap [
+#		rr:predicate core:isClassifiedBy;
+#		rr:objectMap [
+#			rr:parentTriplesMap :SensorModelType
+#		]
+#	];
+
+	rr:predicateObjectMap [
+		rr:predicate inspire-mf:hasSystemDeployment;
+		rr:objectMap [
+			rr:parentTriplesMap :MeasurementHeightQP
+		]
+	];
+
+	rr:predicateObjectMap [
+        	rr:predicate inspire-mf:hasSystemCapability;
+        	rr:objectMap [
+	    		rr:parentTriplesMap :SamplingFrequencyQP
+        	]
+    	].
+    
+#===============================================================================
+#SENSOR PROPERTIES
+
+
+:SamplingFrequencyQP
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_sampling_frequency_{SENSOR_SAMPLING_FREQUENCY}_hz";
+        	rr:class inspire-mf:SystemCapability
+    ];
+        
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "Frequenza di campionamento del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+	    		rr:language "it"
+      ]
+    ];
+     
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+        		rr:template "Sampling frequency of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+	    		rr:language "en"
+      		]
+    	];
+     
+     
+	rr:predicateObjectMap [
+      		rr:predicate core:isParametrisedBy;
+		rr:objectMap [
+        		rr:parentTriplesMap :SamplingFrequency
+      		]
+    	];
+        
+    	rr:predicateObjectMap [
+      		rr:predicate core:hasValue;
+      		rr:objectMap [
+        		rr:parentTriplesMap :SamplingFrequencyValue
+      		]
+    	] .
+
+
+:SamplingFrequency
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+    		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling_frequency";
+    		rr:class core:Parameter
+  	];
+
+  	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "Frequenza di campionamento";
+	  		rr:language "it"
+      		]
+    	];
+     
+	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "Sampling frequency";
+	  		rr:language "en"
+      		]
+    	];
+      
+  	rr:predicateObjectMap [
+    		rr:predicate owl:sameAs;
+    		rr:objectMap [
+      			rr:parentTriplesMap :SamplingDBpedia
+    		]
+  	];
+
+	rr:predicateObjectMap [
+    		rr:predicate owl:sameAs;
+    		rr:objectMap [
+      			rr:parentTriplesMap :SamplingWikidata
+    		]
+  	] .
+
+
+:SamplingDBpedia
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+    		rr:template "http://dbpedia.org/resource/Sampling_(signal_processing)"
+  	] .
+
+:SamplingWikidata
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+    		rr:template "http://www.wikidata.org/entity/Q210868"
+  	] .
+
+
+:SamplingFrequencyValue
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/common/value/{SENSOR_SAMPLING_FREQUENCY}_hz";
+		rr:class core:Value
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "SENSOR_SAMPLING_FREQUENCY";
+			rr:language "it"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "SENSOR_SAMPLING_FREQUENCY";
+			rr:language "en"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate core:value;
+		rr:objectMap [
+			rml:reference "SENSOR_SAMPLING_FREQUENCY";
+			rr:datatype xsd:float
+		]
+	];
+
+    	rr:predicateObjectMap [
+        	rr:predicate core:hasUnitOfMeasure;
+        	rr:objectMap [
+            		rr:parentTriplesMap :Hertz
+        	]
+    	].
+
+
+
+
+:SensorPeriodQP
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_averaging_period_{PERIOD}{PERIOD_UNIT}";
+        	rr:class inspire-mf:SystemCapability
+    ];
+        
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "Intervallo di calcolo delle media del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+	    		rr:language "it"
+      ]
+    ];
+     
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+        		rr:template "Averaging period of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+	    		rr:language "en"
+      		]
+    	];
+     
+     
+	rr:predicateObjectMap [
+      		rr:predicate core:isParametrisedBy;
+		rr:objectMap [
+        		rr:parentTriplesMap :SensorPeriod
+      		]
+    	];
+        
+    	rr:predicateObjectMap [
+      		rr:predicate core:hasValue;
+      		rr:objectMap [
+        		rr:parentTriplesMap :SensorPeriodValue
+      		]
+    	] .
+
+
+:SensorPeriod
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+    		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling";
+    		rr:class core:Parameter
+  	];
+
+  	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "Campionamento";
+	  		rr:language "it"
+      		]
+    	];
+     
+	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "Sampling";
+	  		rr:language "en"
+      		]
+    	];
+      
+  	rr:predicateObjectMap [
+    		rr:predicate owl:sameAs;
+    		rr:objectMap [
+      			rr:constant "http://dbpedia.org/resource/Sampling_(signal_processing)";
+			rr:termType rr:IRI
+    		]
+  	];
+
+	rr:predicateObjectMap [
+    		rr:predicate owl:sameAs;
+    		rr:objectMap [
+      			rr:constant "http://www.wikidata.org/entity/Q210868";
+			rr:termType rr:IRI
+    		]
+  	] .
+
+
+:SensorPeriodValue
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/common/value/p{PERIOD}{PERIOD_UNIT}";
+		rr:class core:Value
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{PERIOD}{PERIOD_UNIT}";
+			rr:language "it"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{PERIOD}{PERIOD_UNIT}";
+			rr:language "en"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate core:value;
+		rr:objectMap [
+			rml:reference "PERIOD";
+			rr:datatype xsd:float
+		]
+	];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap :UnitOfMeasure
+        ]
+    ].
+
+
+
+
+:MeasurementHeightQP
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemdeployment/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_measurement_height_%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
+        	rr:class inspire-mf:SystemDeployment
+    ];
+        
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "Altezza di misurazione del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+	    		rr:language "it"
+      ]
+    ];
+     
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+        		rr:template "Measurement height of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+	    		rr:language "en"
+      		]
+    	];
+     
+     
+	rr:predicateObjectMap [
+      		rr:predicate core:isParametrisedBy;
+		rr:objectMap [
+        		rr:parentTriplesMap :MeasurementHeight
+      		]
+    	];
+        
+    	rr:predicateObjectMap [
+      		rr:predicate core:hasValue;
+      		rr:objectMap [
+        		rr:parentTriplesMap :MeasurementHeightValue
+      		]
+    	] .
+
+
+:MeasurementHeight
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+    		rr:template "https://dati.isprambiente.it/ld/common/parameter/measurement_height";
+    		rr:class core:Parameter
+  	];
+
+  	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "Altezza di misurazione";
+	  		rr:language "it"
+      		]
+    	];
+     
+	rr:predicateObjectMap [
+    		rr:predicate rdfs:label;
+    		rr:objectMap [
+      			rr:template "MeasurementH height";
+	  		rr:language "en"
+      		]
+    	] .
+
+:MeasurementHeightValue
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/common/value/%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
+		rr:class core:Value
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{MEASUREMENT_HEIGHT} metri";
+			rr:language "it"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rr:template "{MEASUREMENT_HEIGHT} meters";
+			rr:language "en"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate core:value;
+		rr:objectMap [
+			rml:reference "MEASUREMENT_HEIGHT";
+			rr:datatype xsd:float
+		]
+	];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap :Meter
+        ]
+    ].
+
+
+
+#===============================================================================
+#Unit of Measure
+
+:UnitOfMeasure
+
+	rml:logicalSource :CSV_SENSORS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{PERIOD_UNIT_LABEL_EN}";
+		rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "PERIOD_UNIT_LABEL_EN";
+	    rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "PERIOD_UNIT_LABEL_IT";
+	    rr:language "en"
+        ]
+    ] .
+
+
+:Meter
+
+    rml:logicalSource :CSV_SENSORS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
+        rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Metro";
+	    rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Meter";
+	    rr:language "en"
+        ]
+    ] .
+
+:Hertz
+
+    rml:logicalSource :CSV_SENSORS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/hertz";
+        rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Hertz";
+	    rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Hertz";
+	    rr:language "en"
+        ]
+    ] .
+
+
+
+#===============================================================================
+#SENSOR TYPE
+
+:SensorType
+	rml:logicalSource :CSV_SENSOR_MODELS;
+
+	rr:subjectMap [
+        	rr:template "https://dati.isprambiente.it/ld/common/sensortype/{EN}";
+		rr:class inspire-mf:SensorType 
+    	];
+
+    	rr:predicateObjectMap [
+        	rr:predicate rdfs:label;
+        	rr:objectMap [
+            		rml:reference "EN";
+            		rr:language "en"
+        	]
+    	];
+
+    	rr:predicateObjectMap [
+        	rr:predicate rdfs:label;
+        	rr:objectMap [
+            		rml:reference "IT";
+            		rr:language "it"
+        	]
+    	] .
+
+#    	rr:predicateObjectMap [
+#        	rr:predicate core:specialises;
+#        	rr:objectMap [
+#            		rr:parentTriplesMap <#SensorTypeBroader>
+#        	]
+#    	].
+#
+#    <#SensorTypeBroader>
+#        rml:logicalSource <#CSV_SENSOR>;
+#
+#        rr:subjectMap [
+#            rr:template "%eval:sensor_type_broader(*)%";
+#	    rr:class inspire-mf:SensorType 
+#        ];
+#
+#        rr:predicateObjectMap [
+#            rr:predicate rdfs:label;
+#            rr:objectMap [
+#                rml:reference "TYPE";
+#                rr:language "en"
+#            ]
+#        ].
+
+#===============================================================================
+#SENSOR MODEL
+
+:SensorModelData
+	rml:logicalSource :CSV_SENSOR_MODELS;
+
+	rr:subjectMap [
+        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensormodel/{ID}";
+	        rr:class inspire-mf:SensorModel
+    	];
+
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+            		rml:reference "ID";
+	    		rr:language "it"
+        	]
+    	];
+
+	rr:predicateObjectMap [
+        	rr:predicate rdfs:label;
+	        rr:objectMap [
+        		rml:reference "ID";
+			rr:language "en"
+		]
+    	];
+
+	rr:predicateObjectMap [
+        	rr:predicate core:name;
+	        rr:objectMap [
+        		rml:reference "NAME"
+		]
+    	];
+
+	rr:predicateObjectMap [
+		rr:predicate inspire-mf:hasSensorType;
+		rr:objectMap [
+			rr:parentTriplesMap :SensorType
+		]
+	];
+
+	rr:predicateObjectMap [
+        	rr:predicate core:hasManufacturer;
+        	rr:objectMap [
+            		rr:parentTriplesMap :Manufacturer
+        	]
+    	];
+
+	rr:predicateObjectMap [
+        	rr:predicate core:isClassifiedBy;
+        	rr:objectMap [
+			rml:reference "WMO";
+			rr:termType rr:IRI
+        	]
+    	].
+
+#===============================================================================
+#Manufacturer
+
+:Manufacturer
+	rml:logicalSource :CSV_SENSOR_MODELS;
+
+	rr:subjectMap [
+    		rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
+		rr:class core:Organisation
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "MANUFACTURER";
+			rr:language "en"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "MANUFACTURER";
+			rr:language "it"
+		]
+	] .
+
+
+#===============================================================================
+#Sensor depictions
+
+:SensorDepiction
+	rml:logicalSource :CSV_SENSOR_DEPICTIONS;
+
+	rr:subjectMap [
+		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}" 
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate core:hasDepiction;
+		rr:objectMap [
+			rml:reference "DEPICTION";
+			rr:termType rr:IRI
+		]
+	] .

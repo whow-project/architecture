@@ -1,0 +1,384 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/indicators_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix metric: <https://dati.isprambiente.it/ontology/commons/metric/> .
+@prefix time: <https://dati.isprambiente.it/ontology/commons/time/> .
+@prefix mu: <https://dati.isprambiente.it/ontology/commons/mu/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+
+:CSV
+    rml:source "{{ csv_indicators }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:DatasetGeneral
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
+        rr:class core:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset|upper}} Dataset";
+        ]
+    ].
+
+:MainCatalogue
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/collection/%eval:cod_place(*)%_resources";
+        rr:class core:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasLocation;
+        rr:objectMap [
+            rr:parentTriplesMap :Place
+        ]
+    ] .
+
+#    rr:predicateObjectMap [
+#        rr:predicate core:isMemberOf;
+#        rr:objectMap [
+#            rr:parentTriplesMap <#DatasetGeneral>
+#        ]
+#    ];
+
+#    rr:predicateObjectMap [
+#        rr:predicate rdfs:label;
+#        rr:objectMap [
+#            rr:template "{{dataset.upper()}} Resources in {PLACE_NAME}";
+#            rr:language "en"
+#        ]
+#    ].
+
+:IndicatorCatalogue
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/{STAT_CODE}";
+        rr:class indicators:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCatalogue;
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione degli indicatori {{dataset|upper}} di {PLACE_NAME}";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collection of {{dataset|upper}} indicators in {PLACE_NAME}";
+            rr:language "en"
+        ]
+    ].
+
+:Place
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/places/municipality/%eval:cod_place(*)%"
+    ].
+
+:Year
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/year/{YEAR}";
+        rr:class core:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:year;
+        rr:objectMap [
+            rml:reference "YEAR";
+            rr:datatype xsd:Year
+        ]
+    ].
+
+:Metric
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/ron/parameter/{METRIC}";
+        rr:class core:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "METRIC_DESCRIPTION_IT";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "METRIC_DESCRIPTION_EN";
+            rr:language "en"
+        ]
+    ].
+
+
+:IndicatorsCollectionMetric
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/{STAT_CODE}_{METRIC}";
+        rr:class indicators:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasParameter;
+        rr:objectMap [
+	        rr:parentTriplesMap :Metric
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorCatalogue;
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{METRIC_DESCRIPTION_IT} in {PLACE_NAME}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{METRIC_DESCRIPTION_EN} in {PLACE_NAME}";
+            rr:language "en"
+        ]
+    ].
+
+:IndicatorsCollectionMetricYEAR
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/{STAT_CODE}_{METRIC}_{YEAR}";
+        rr:class indicators:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{METRIC_DESCRIPTION_EN} in {PLACE_NAME} - Year {YEAR}";
+           rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{METRIC_DESCRIPTION_IT} in {PLACE_NAME} - Anno {YEAR}";
+           rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorsCollectionMetric;
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap :Year
+        ]
+    ].
+
+:Indicators
+    rml:logicalSource :CSV;
+
+    crml:condition "df['VALUE'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:class indicators:Indicator
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "{METRIC_DESCRIPTION_EN} in {PLACE_NAME} - Period {PERIOD}";
+           rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+           rr:template "{METRIC_DESCRIPTION_IT} in {PLACE_NAME} - Period {PERIOD}";
+           rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorsCollectionMetricYEAR
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasValue;
+        rr:objectMap [
+            rr:parentTriplesMap :Value
+        ]
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate measures:hasSource;
+        rr:objectMap [
+            rr:parentTriplesMap :ObservationSource
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap :Month
+        ]
+    ].
+
+:Value
+    rml:logicalSource :CSV;
+
+    crml:condition "df['VALUE'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/value/{VALUE}_%eval:get_unit_of_measure({UNIT})%";
+        rr:class core:Value
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{VALUE} {UNIT_IT}" ;
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{VALUE} {UNIT}" ;
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:value;
+        rr:objectMap [
+            rml:reference "VALUE" ;
+            rr:datatype xsd:float
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap :MU
+        ]
+    ] .
+
+:MU
+    rml:logicalSource :CSV;
+
+    crml:condition "df['UNIT'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/%eval:get_unit_of_measure({UNIT})%";
+        rr:class core:UnitOfMeasure
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "UNIT" ;
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "UNIT_IT" ;
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:symbol;
+        rr:objectMap [
+            rml:reference "UNIT_SYMBOL"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+            rr:template "%eval:get_unit_of_measure_wmo({UNIT})%";
+            rr:termType rr:IRI
+        ]
+    ].
+
+
+:Month
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/commons/timeinterval/%eval:replace('-', '', '{PERIOD}')%";
+        rr:class core:TimeInterval
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate core:time;
+        rr:objectMap [
+            rml:reference "PERIOD"
+        ]
+    ].
+
+
+:ObservationSource
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%"
+    ].
