@@ -72,12 +72,20 @@ class KnowledgeGraphLoader():
             #new_graph.serialize(kg_path, format="nt11")
 
             try:
+            	'''
+            	TODO: It is possible to modify self.__delete() in order to use iSQL instead of VStroke 
+            	(i.e. the RDFLib extension for Virtuoso)  
+            	'''
                 deleted = self.__delete(to_delete, dataset)
             except:
                 self.__save_graph(os.path.join(kg_folder, name.lower()), "delete.nt.gz", to_delete)
                 deleted = False
             
             try:
+            	'''
+            	TODO: It is possible to modify self.__load() in order to use iSQL instead of VStroke 
+            	(i.e. the RDFLib extension for Virtuoso)  
+            	'''
                 loaded = self.__load(to_load, dataset)
             except:
                 self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", to_load)
@@ -220,6 +228,12 @@ class KnowledgeGraphLoader():
         
     def __query(self, query):
         #self.__reconnect()
+        
+        '''
+        TODO: Here we implement the connectivity with the triplestore via RDFLib.
+        It is possible to change this behaviour by modifying this method.
+        For example, it might be the case of executing an iSQL command via bash (e.g. with a dedicated routine).
+        '''
         if self._store is not None:
             try:
                 self._store._query(query, commit=True)
