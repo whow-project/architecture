@@ -52,7 +52,6 @@ class RMNTriplifier(Triplifier):
             }
         
         super().__init__('rmn', functions_dictionary)
-        self._dirty_data_path = os.path.join('rmn', 'v2', 'dirtydata')
         
         
     def _dataset_initialisation(self) -> None:

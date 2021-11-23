@@ -102,10 +102,11 @@ class RDFOutputConfiguration():
 
 class MappingConfiguration():
     
-    def __init__(self, dataset : str, rml_folder : str, data_folder :str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
+    def __init__(self, dataset : str, rml_folder : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
         self.__dataset = dataset
         self.__rml_folder = rml_folder
         self.__data_folder = data_folder
+        self.__dirty_data_folder = dirty_data_folder
         self.__mappings = mappings
         self.__rdf_output_configuration = rdf_output_configuration
         self.__year = year
@@ -118,6 +119,9 @@ class MappingConfiguration():
     
     def get_data_folder(self):
         return self.__data_folder
+    
+    def get_dirty_data_folder(self):
+        return self.__dirty_data_folder
     
     def get_mappings(self):
         return self.__mappings 
@@ -151,6 +155,7 @@ class MappingConfiguration():
                 
         if "dataset" in mapping_conf \
             and "data_folder" in mapping_conf \
+            and "dirty_data_folder" in mapping_conf \
             and "rml_folder" in mapping_conf \
             and "mappings" in mapping_conf \
             and "graph_iri" in mapping_conf \
@@ -161,6 +166,7 @@ class MappingConfiguration():
             
             rml_path = mapping_conf["rml_folder"]
             data_path = mapping_conf["data_folder"]
+            dirty_data_path = mapping_conf["dirty_data_folder"]
             
             mappings = mapping_conf["mappings"]
             
@@ -215,7 +221,7 @@ class MappingConfiguration():
                 
                 maps.append(Mapping(rml_file, input_files, variables))
             
-            mapping_configuration = MappingConfiguration(dataset, rml_path, data_path, maps, rdf_output_configuration, year)
+            mapping_configuration = MappingConfiguration(dataset, rml_path, data_path, dirty_data_path, maps, rdf_output_configuration, year)
         else:
             raise MalfofmedConfigJsonException()
         
@@ -239,9 +245,11 @@ class Triplifier(ABC):
         self._dataset = dataset.lower()
         self._functions_dictionary = functions_dictionary
     
+        self._mapping_conf = os.path.join(dataset, 'conf.json')
+        '''
         self._rml_path = os.path.join(dataset, 'v2', 'rml')
         self._data_path = os.path.join(dataset, 'v2', 'data')
-        self._mapping_conf = os.path.join(dataset, 'conf.json')
+        '''
         
         self._conf_vars : Dict[str, str] = dict()
         
@@ -250,10 +258,16 @@ class Triplifier(ABC):
         pass
     
     def triplify(self) -> TriplificationResult:
+        
+        mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
+        
+        self._rml_path = mapping_configuration.get_rml_folder()
+        self._data_path = mapping_configuration.get_data_folder()
+        self._dirty_data_path = mapping_configuration.get_dirty_data_folder()
+        
         self._dataset_initialisation()
         g = None
         
-        mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
         
         for mapping in mapping_configuration.get_mappings():
             try:

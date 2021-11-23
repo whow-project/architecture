@@ -74,13 +74,13 @@ class KnowledgeGraphLoader():
             try:
                 deleted = self.__delete(to_delete, dataset)
             except:
-                self.__save_graph(os.path.join(kg_folder, name.lower()), "delete.nt.gz", new_graph)
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "delete.nt.gz", to_delete)
                 deleted = False
             
             try:
                 loaded = self.__load(to_load, dataset)
             except:
-                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", new_graph)
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", to_load)
                 loaded = False
                 
             
