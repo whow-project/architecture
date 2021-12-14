@@ -151,7 +151,9 @@
     rr:predicate core:name;
     rr:objectMap [
       rml:reference "COMUNE_A";
-      rr:language "{LANGUAGE_A}"
+      rml:languageMap [
+	rml:reference "LANGUAGE_A"
+	]
       ]
     ];
   
@@ -159,7 +161,9 @@
     rr:predicate rdfs:label;
     rr:objectMap [
       rml:reference "COMUNE_A";
-      rr:language "{LANGUAGE_A}"
+      rml:languageMap [
+	rml:reference "LANGUAGE_A"
+	]
       ]
     ];
     
