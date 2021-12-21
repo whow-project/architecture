@@ -37,32 +37,11 @@ def process(arg_parser: Namespace):
             if triplifier:
                 triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader())
                 triplification_manager.do_triplification()
-        
-        '''
-        if args.test:
-            #f = measuresRDFV2
-            triplification_manager = TriplificationManager(RMNTriplifier(), KnowledgeGraphLoader())
-            f = triplification_manager.do_triplification
-        else:
-            f = measuresRDF
-        for dataset in datasets:
-            print("\t from %s"%(dataset))
-            if args.test:
-                f()
-            else:
-                f(dataset=dataset)
-            print("%s Complete"%(dataset))
-        '''
             
     if args.rendis:
         triplification_manager = TriplificationManager(RendisTriplifier(), KnowledgeGraphLoader())
         triplification_manager.do_triplification()
                
-    if args.indicators:
-        indicatorsRDF("soilc",  separator=";")
-        print("Soilc Complete (Indicators)")
-        indicatorsRDF("urban", separator=";")
-        print("Indicators Complete")
     else:
         if args.soil:
             for year in args.soil:
@@ -70,11 +49,9 @@ def process(arg_parser: Namespace):
                 triplification_manager = TriplificationManager(SoilcTriplifier(year), KnowledgeGraphLoader())
                 triplification_manager.do_triplification()
         if args.urban:
-            #indicatorsRDF("urban", separator=";")
-            #print("Urban Area Complete")
-            year = args.urban[0]
-            triplification_manager = TriplificationManager(UrbanTriplifier(year), KnowledgeGraphLoader())
-            triplification_manager.do_triplification()
+            for year in args.urban:
+                triplification_manager = TriplificationManager(UrbanTriplifier(year), KnowledgeGraphLoader())
+                triplification_manager.do_triplification()
 
 
 
@@ -95,7 +72,7 @@ if __name__ == "__main__":
                             default=False,
                             help="Soil consumption Conversion")
                             
-    arg_parser.add_argument("-u", "--urb", dest="urban", nargs=1,
+    arg_parser.add_argument("-u", "--urb", dest="urban", nargs='+',
                             default=False,
                             help="Urban area Conversion")
 
