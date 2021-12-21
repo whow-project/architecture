@@ -12,12 +12,16 @@ from urban.urban import UrbanTriplifier
 
 
 def process(arg_parser: Namespace):
+    
+    
+    triplifiers = []
+    
     if args.places:
         #place_maker("places/input/data_istat/")
         print("Preprocessing Complete")
         placesRDF()
         print("Places Complete")
-    if args.measures:
+    elif args.measures:
         print("Processing measures...")
         
         if args.dataset:
@@ -35,24 +39,30 @@ def process(arg_parser: Namespace):
                 triplifier = None
                 
             if triplifier:
-                triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader())
-                triplification_manager.do_triplification()
+                triplifiers.append(triplifier)
             
-    if args.rendis:
-        triplification_manager = TriplificationManager(RendisTriplifier(), KnowledgeGraphLoader())
-        triplification_manager.do_triplification()
+    elif args.rendis:
+        triplifiers.append(RendisTriplifier())
                
-    else:
-        if args.soil:
-            for year in args.soil:
-                print(year)
-                triplification_manager = TriplificationManager(SoilcTriplifier(year), KnowledgeGraphLoader())
-                triplification_manager.do_triplification()
-        if args.urban:
-            for year in args.urban:
-                triplification_manager = TriplificationManager(UrbanTriplifier(year), KnowledgeGraphLoader())
-                triplification_manager.do_triplification()
+    elif args.soil:
+        for year in args.soil:
+            print(year)
+            triplifiers.append(SoilcTriplifier(year))
+    elif args.urban:
+        for year in args.urban:
+            print(year)
+            triplifiers.append(UrbanTriplifier(year))
 
+    for triplifier in triplifiers:
+        
+        '''
+        Here we create the TriplificationManager and we optionally set the custom path to the JSON configuration file.
+        Such a path is passed by means of the argument -c via command line.
+        The path value is stored inside the object args.json_config 
+        In case no argument is passed then the default location (e.g. ./soilc/conf.json) is used.
+        '''
+        triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader(), args.json_config)
+        triplification_manager.do_triplification()
 
 
 
@@ -89,6 +99,8 @@ if __name__ == "__main__":
                             help="Testing mode")
                             
     arg_parser.add_argument("-d", "--dat", dest="dataset", required=False, help="Dataset")
+    
+    arg_parser.add_argument("-c", "--config", dest="json_config", required=False, help="Path to JSON configuration file.")
 
 
     args = arg_parser.parse_args()

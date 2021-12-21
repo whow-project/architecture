@@ -146,7 +146,12 @@ class MappingConfiguration():
         
         mapping_configuration = None
         
-        file_loader = FileSystemLoader('.')
+        if os.path.isabs(config_file_path):
+            templates_searchpath = "/"
+        else:
+            templates_searchpath = "."
+        file_loader = FileSystemLoader(templates_searchpath)
+        
         env = Environment(loader=file_loader)
         template = env.get_template(config_file_path)
         json_conf = template.render(template_vars)
@@ -245,10 +250,6 @@ class Triplifier(ABC):
         self._functions_dictionary = functions_dictionary
     
         self._mapping_conf = os.path.join(dataset, 'conf.json')
-        '''
-        self._rml_path = os.path.join(dataset, 'v2', 'rml')
-        self._data_path = os.path.join(dataset, 'v2', 'data')
-        '''
         
         self._conf_vars : Dict[str, str] = dict()
         
@@ -256,8 +257,13 @@ class Triplifier(ABC):
     def _dataset_initialisation(self):
         pass
     
+    def set_mapping_conf(self, json_config_path: str):
+        self._mapping_conf = json_config_path
+    
     def triplify(self) -> TriplificationResult:
         
+        
+        print(f'The triplifier {type(self)} is using the configuration provided in {self._mapping_conf}.')
         mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
         
         self._rml_path = mapping_configuration.get_rml_folder()
@@ -293,9 +299,15 @@ class Triplifier(ABC):
     
 class TriplificationManager():
     
-    def __init__(self, triplifier : Triplifier, kg_loader : KnowledgeGraphLoader = None):
+    def __init__(self, triplifier : Triplifier, kg_loader : KnowledgeGraphLoader = None, path_to_json_config:str = None):
+        
         self.__triplifier = triplifier
+        
+        if path_to_json_config:
+            self.__triplifier.set_mapping_conf(path_to_json_config)    
+        
         self.__kg_loader = kg_loader
+        
         
     def do_triplification(self):
         try:
