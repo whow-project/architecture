@@ -35,8 +35,8 @@ class TriplificationException(Exception):
 
 class MappingData():
     
-    def __init__(self, id : str, file_name : str):
-        self.__id = id
+    def __init__(self, identifier : str, file_name : str):
+        self.__id = identifier
         self.__file_name = file_name
         
     def get_id(self) -> str:
@@ -47,8 +47,8 @@ class MappingData():
 
 class MappingVariable():
     
-    def __init__(self, id : str, value):
-        self.__id = id
+    def __init__(self, identifier : str, value):
+        self.__id = identifier
         self.__value = value
         
     def get_id(self) -> str:
@@ -191,14 +191,13 @@ class MappingConfiguration():
                     
                     data = mapping["data"]
                     
-                    
                     for file_conf in data:
-                        id = file_conf["id"]
+                        identifier = file_conf["id"]
                         filename = file_conf["file"]
                 
                         file_path = os.path.join(data_path, filename)
                         if os.path.exists(file_path):
-                            input_files.append(MappingData(id, file_path))
+                            input_files.append(MappingData(identifier, file_path))
                             
                         else:
                             #raise MissingDataFolderException(file_path)
@@ -206,9 +205,9 @@ class MappingConfiguration():
                             
                     
                     if "variables" in mapping and mapping["variables"]:         
-                        vars = mapping["variables"]
+                        _vars = mapping["variables"]
                         
-                        for var in vars:
+                        for var in _vars:
                             parameter = var["id"]
                             value = var["value"]
                     
