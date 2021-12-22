@@ -49,8 +49,8 @@ def placesRDF():
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
-    rml_converter.register_fucntion("metropolitan_city", metropolitan_city)
-    rml_converter.register_fucntion("metropolitan_city_type", metropolitan_city_type)
+    rml_converter.register_function("metropolitan_city", metropolitan_city)
+    rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
     #toLoad_toDelete(g, "provinces", "places")
@@ -61,7 +61,7 @@ def placesRDF():
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
-    rml_converter.register_fucntion("metropolitan_city", metropolitan_city)
+    rml_converter.register_function("metropolitan_city", metropolitan_city)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")

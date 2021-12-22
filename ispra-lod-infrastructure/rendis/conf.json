@@ -3,8 +3,9 @@
 	"graph_iri": "https://dati.isprambiente.it/ld/rendis",
 	"rdf_dump_file_name": "rendis",
 	"rdf_dump_file_serialisation": "ntriples",
-	"data_folder": "rendis/v2/data",
-	"rml_folder": "rendis/v2/rml_new",
+	"data_folder": "/data/rendis/v2/data",
+	"dirty_data_folder": "/data/rendis/v2/dirtydata",
+	"rml_folder": "/data/rendis/v2/rml",
 	"mappings": [
         {
             "rml": "intervention_contract_map.ttl",

@@ -3,9 +3,9 @@
 	"graph_iri": "https://dati.isprambiente.it/ld/soilc",
 	"rdf_dump_file_name": "soilc_{{year}}",
 	"rdf_dump_file_serialisation": "ntriples",
-	"data_folder": "./soilc/v2/data",
-    "dirty_data_folder": "./v2/dirtydata",
-    "rml_folder": "./soilc/v2/rml",
+	"data_folder": "/data/soilc/v2/data",
+	"dirty_data_folder": "/data/soilc/v2/dirtydata",
+	"rml_folder": "/data/soilc/v2/rml",
 	"year": {{year}},
 	"mappings": [
 		{

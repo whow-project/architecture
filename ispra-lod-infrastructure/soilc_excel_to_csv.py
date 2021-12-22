@@ -24,8 +24,8 @@ def convert_pd(file_in, folder_out):
         df[sheetname].to_csv(file_out, sep=';')
             
 if __name__ == '__main__':
-    parent_folder = file_in = os.path.join('/', 'Users', 'andrea', 'Documents', 'software', 'sourcetree', 'ispra', 'src', 'soilc')
-    file_in = os.path.join(parent_folder, 'consumo_suolo_2021_Com_Prov_Reg_It_1_0.xlsx')
+    parent_folder = file_in = os.path.join('/', 'data')
+    file_in = os.path.join(parent_folder, 'consumo_suolo_2021_com_prov_reg_it_1_0.xlsx')
     folder_out = os.path.join(parent_folder, 'data_2021')
     
     if not os.path.exists(folder_out):

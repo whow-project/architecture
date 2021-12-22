@@ -183,14 +183,14 @@ class SoilcTriplifier(Triplifier):
             df.to_csv(os.path.join(self._data_path, file), sep=sep)
             
             
-        df = pd.read_csv(os.path.join(self._data_path, "Metriche.csv"), sep=None, engine='python', iterator=True)
+        df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
         separator = df._engine.data.dialect.delimiter
         df.close()
         
         global UNIT_OF_MEASURES
         
         
-        units_df = pd.read_csv(os.path.join(self._data_path, "Metriche.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
         UNIT_OF_MEASURES = units_df.to_dict(orient="index")
         
         '''
