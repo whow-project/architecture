@@ -27,6 +27,7 @@ if __name__ == '__main__':
     parent_folder = file_in = os.path.join('/', 'data')
     file_in = os.path.join(parent_folder, 'consumo_suolo_2021_com_prov_reg_it_1_0.xlsx')
     folder_out = os.path.join(parent_folder, 'data_2021')
+    print('test commmit')
     
     if not os.path.exists(folder_out):
         os.makedirs(folder_out)
