@@ -19,7 +19,7 @@ class place_maker:
             Proj(init='epsg:32632'),  # source coordinate system
             Proj(init='epsg:4326'))
 
-        zip_files = [path.join(local_path, f) for f in listdir(local_path)]
+        zip_files = [path.join(local_path, f) for f in listdir(local_path) if f.endswith('.zip')]
         zip_files = sorted(zip_files, key=lambda x:x[-8:])
 
 
@@ -39,9 +39,9 @@ class place_maker:
             self.pack_info(year)
 
 
-        self.csv_creator(self.regions, "COD_REG", "places/input/csv/regions.csv")
-        self.csv_creator(self.provinces, "COD_PROV", "places/input/csv/provinces.csv")
-        self.csv_creator(self.cities, "PRO_COM_T", "places/input/csv/cities.csv")
+        self.csv_creator(self.regions, "COD_REG", "/data/places/v2/dirtydata/regions.csv")
+        self.csv_creator(self.provinces, "COD_PROV", "/data/places/v2/dirtydata/provinces.csv")
+        self.csv_creator(self.cities, "PRO_COM_T", "/data/places/v2/dirtydata/cities.csv")
 
 
     @staticmethod
@@ -171,4 +171,5 @@ class place_maker:
                 self.cities[com_cod]["COMUNE_A"] = x['properties']['COMUNE_A']
                 self.cities[com_cod]["LANGUAGE_A"] = alt_lang
 
-#place_maker("input/data_istat/")
+##to run script, uncomment row below and configure the input folder where zip file is placed
+#place_maker("/data/")
