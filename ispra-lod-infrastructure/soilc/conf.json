@@ -19,7 +19,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('soilc/v2/data/Nazionale_{{year}}.csv', 2)"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/soilc/v2/dirtydata/Nazionale_{{year}}.csv', 2)"
                 },
                 {
                     "id": "YEAR",
@@ -46,7 +46,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('soilc/v2/data/Regioni_{{year}}.csv', 3)"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/soilc/v2/dirtydata/Regioni_{{year}}.csv', 3)"
                 },
                 {
                     "id": "YEAR",
@@ -73,7 +73,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('soilc/v2/data/Province_{{year}}.csv', 5)"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/soilc/v2/dirtydata/Province_{{year}}.csv', 5)"
                 },
                 {
                     "id": "YEAR",
@@ -100,7 +100,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('soilc/v2/data/Comuni_{{year}}.csv', 7)"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/soilc/v2/dirtydata/Comuni_{{year}}.csv', 7)"
                 },
                 {
                     "id": "YEAR",

@@ -19,7 +19,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('urban/v2/data/Province_{{year}}.csv')"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/urban/v2/dirtydata/Province_{{year}}.csv')"
                 },
                 {
                     "id": "YEAR",
@@ -42,7 +42,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('urban/v2/data/Comuni_{{year}}.csv')"
+                    "value": "MappingConfiguration.columns_as_tuple('/data/urban/v2/dirtydata/Comuni_{{year}}.csv')"
                 },
                 {
                     "id": "YEAR",
