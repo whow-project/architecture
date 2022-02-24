@@ -180,7 +180,7 @@ class SoilcTriplifier(Triplifier):
             df.close()
             df = pd.read_csv(os.path.join(self._data_path, file), sep=sep)
             df = istat_normaliser(df)
-            df.to_csv(os.path.join(self._data_path, file), sep=sep)
+            df.to_csv(os.path.join(self._data_path, file), sep=sep, index=None)
             
             
         df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
