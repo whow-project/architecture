@@ -17,7 +17,7 @@ def process(arg_parser: Namespace):
     triplifiers = []
     
     if args.places:
-        #place_maker("places/input/data_istat/")
+        #place_maker("/data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
         placesRDF()
         print("Places Complete")
@@ -104,5 +104,5 @@ if __name__ == "__main__":
 
 
     args = arg_parser.parse_args()
-
+    
     process(args)

@@ -8,7 +8,7 @@ import csv
 
 class place_maker:
 
-    def __init__(self, local_path):
+    def __init__(self, local_file):
         # data from https://www.istat.it/it/archivio/222527
 
         self.regions = dict()
@@ -19,24 +19,21 @@ class place_maker:
             Proj(init='epsg:32632'),  # source coordinate system
             Proj(init='epsg:4326'))
 
-        zip_files = [path.join(local_path, f) for f in listdir(local_path) if f.endswith('.zip')]
-        zip_files = sorted(zip_files, key=lambda x:x[-8:])
+        
+        x = local_file
+        print("\t Processing", x)
+        year = x[:-4][-4:]
+        with zipfile.ZipFile(x) as zip_file:
+            # COMUNI
+            self.COM = self.shp2dict(zip_file, "Com")
 
+            # PROVINCE
+            self.PRO = self.shp2dict(zip_file, "Prov")
 
-        for x in zip_files:
-            print("\t Processing", x)
-            year = x[:-4][-4:]
-            with zipfile.ZipFile(x) as zip_file:
-                # COMUNI
-                self.COM = self.shp2dict(zip_file, "Com")
+            # REG
+            self.REG = self.shp2dict(zip_file, "Reg")
 
-                # PROVINCE
-                self.PRO = self.shp2dict(zip_file, "Prov")
-
-                # REG
-                self.REG = self.shp2dict(zip_file, "Reg")
-
-            self.pack_info(year)
+        self.pack_info(year)
 
 
         self.csv_creator(self.regions, "COD_REG", "/data/places/v2/dirtydata/regions.csv")
@@ -172,4 +169,4 @@ class place_maker:
                 self.cities[com_cod]["LANGUAGE_A"] = alt_lang
 
 ##to run script, uncomment row below and configure the input folder where zip file is placed
-#place_maker("/data/")
+#place_maker("/data/istat_temp/Limiti01012015.zip")
