@@ -102,8 +102,68 @@ def get_value(indicator_value, iri=False):
         value = TermUtils.irify(value)
     
     return value
+
+
+def place_code(istat, field):
+    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
     
+    length = 0
+    if field == "PRO_COM" or field == "IdOST_Origine":
+        length = 6
+        type = "municipality"
+    elif field == "COD_PRO":
+        length = 3
+        if istat.startswith("2"):
+            type = "metropolitancity"
+        else:
+            type = "province"
+    elif field == "COD_REG":
+        length = 2
+        type = "region"
+    elif field == "COD":
+        length = 1
+        type = "country"
+        
+    else:
+        return None
+        
+    while len(istat) < length:
+        istat = str(0) + istat
+        
+    return "%s"%(istat)
+
+
+def place_type(istat, field, istat_only):
+    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
     
+    length = 0
+    if field == "PRO_COM" or field == "IdOST_Origine":
+        length = 6
+        type = "municipality"
+    elif field == "COD_PRO":
+        length = 3
+        if istat.startswith("2"):
+            type = "metropolitancity"
+        else:
+            type = "province"
+    elif field == "COD_REG":
+        length = 2
+        type = "region"
+    elif field == "COD":
+        length = 1
+        type = "country"
+        
+    else:
+        return None
+        
+    while len(istat) < length:
+        istat = str(0) + istat
+        
+    if istat_only:
+        return None
+    else:
+        return "%s"%(type)
+
 
 def place_id(istat, field, istat_only):
     metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
@@ -154,6 +214,8 @@ class SoilcTriplifier(Triplifier):
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
             'place_id': place_id,
+            'place_code': place_code,
+            'place_type': place_type,
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
             'get_value': get_value

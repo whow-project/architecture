@@ -27,7 +27,7 @@
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/%eval:metropolitan_city({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/places/%eval:metropolitan_city_type({COD_PROV})%/%eval:metropolitan_city_code({COD_PROV})%";
   ].
    
  <#Regions>

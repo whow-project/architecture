@@ -13,7 +13,7 @@ def metropolitan_city(istat):
         out = "metropolitancity/" + str(2) + istat[1:]
     else:
         out = "province/" + istat
-        
+    
     return out
         
 def metropolitan_city_type(istat):
@@ -26,6 +26,16 @@ def metropolitan_city_type(istat):
         out = "Province"
     return out
 
+def metropolitan_city_code(istat):
+    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
+
+    out = None
+    if istat in metropolitan_cities:
+        out = str(2) + istat[1:]
+    else:
+        out = istat
+
+    return out
 
 def placesRDF():
     file_loader = FileSystemLoader('.')
@@ -51,6 +61,7 @@ def placesRDF():
     rml_converter = RMLConverter()
     rml_converter.register_function("metropolitan_city", metropolitan_city)
     rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
+    rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
     #toLoad_toDelete(g, "provinces", "places")
@@ -62,6 +73,8 @@ def placesRDF():
 
     rml_converter = RMLConverter()
     rml_converter.register_function("metropolitan_city", metropolitan_city)
+    rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
+    rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")
