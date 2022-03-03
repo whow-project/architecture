@@ -285,15 +285,15 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_COM}";
+    rr:template "https://dati.isprambiente.it/ld/commons/time/year_{YEAR_COM}";
     rr:class core:Year
   ];
   
   rr:predicateObjectMap [
     rr:predicate core:year;
     rr:objectMap [
-      rml:reference "YEAR_COM";
-      rr:datatype xsd:gYear
+      rr:template "{YEAR_COM}";
+      rr:datatype xsd:int
     ]
   ].
 
