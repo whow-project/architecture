@@ -37,14 +37,14 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/{COD_REG}";
+    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/istat_{COD_REG}";
     rr:class core:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "COD_REG";
+      rr:template "{COD_REG} (Istat)";
       rr:language "it"
       ]
     ];
@@ -52,7 +52,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "COD_REG";
+      rr:template "{COD_REG} (Istat)";
       rr:language "en"
       ]
     ];
@@ -108,7 +108,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/region/{COD_REG}";
+    rr:template "https://dati.isprambiente.it/ld/places/region/istat_{COD_REG}";
     rr:class places:Region
   ];
   
@@ -161,7 +161,7 @@
   rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/country/1";
+    rr:template "https://dati.isprambiente.it/ld/places/country/istat_1";
     rr:class places:Country
   ];
 

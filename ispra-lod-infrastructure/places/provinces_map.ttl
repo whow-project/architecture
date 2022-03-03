@@ -28,14 +28,14 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/{COD_PROV}";
+    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/istat_{COD_PROV}";
     rr:class core:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "COD_PROV";
+      rr:template "{COD_PROV} (Istat)";
       rr:language "it"
       ]
     ];
@@ -43,7 +43,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "COD_PROV";
+     rr:template "{COD_PROV} (Istat)";
       rr:language "en"
       ]
     ];
@@ -98,7 +98,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/%eval:metropolitan_city_type({COD_PROV})%/%eval:metropolitan_city_code({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/places/%eval:metropolitan_city_type({COD_PROV})%/istat_%eval:metropolitan_city_code({COD_PROV})%";
   ];
 
   rr:predicateObjectMap [
@@ -178,14 +178,14 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ontology/places/%eval:metropolitan_city_type({COD_PROV})%"
+    rr:template "https://dati.isprambiente.it/ontology/places/istat_%eval:metropolitan_city_type({COD_PROV})%"
   ].
    
  <#Regions>
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/region/{COD_REG}"
+    rr:template "https://dati.isprambiente.it/ld/places/region/istat_{COD_REG}"
   ].
   
   
@@ -193,7 +193,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/geometry/{COD_PROV}_point";
+    rr:template "https://dati.isprambiente.it/ld/places/geometry/istat_{COD_PROV}_point";
     rr:class places:Geometry
   ];
   
@@ -203,8 +203,24 @@
       rml:reference "CENTROID_PROV";
       rr:datatype geosparql:wktLiteral
     ]
+  ];
+
+  rr:predicateObjectMap [
+  rr:predicate rdfs:label;
+  rr:objectMap [
+    rr:template "{DEN_PROV} - Punto";
+    rr:language "it"
+   ]
+  ];  
+
+rr:predicateObjectMap [
+  rr:predicate rdfs:label;
+  rr:objectMap [
+    rr:template "{DEN_PROV} - Point";
+    rr:language "en"
+    ]
   ].
-  
+
  <#ProvinceYear>
   rml:logicalSource <#ProvincesCSV>;
   
@@ -226,5 +242,5 @@
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/country/1"
+    rr:template "https://dati.isprambiente.it/ld/places/country/istat_1"
   ].
