@@ -115,6 +115,22 @@
                     "value": "'Nome_Comune'"
                 }
             ]
+        },
+
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Descrizione_campi.csv"
+                },
+
+                {
+                    "id": "csv_mu_sameas_file",
+                    "file": "UnitOfMeasuresSameAses.csv"
+                }
+            ]
         }
+
 	]
 }
