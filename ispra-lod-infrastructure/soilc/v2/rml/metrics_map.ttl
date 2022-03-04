@@ -31,7 +31,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/metric/{Campo}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{Campo}";
         rr:class indicators:Metric
     ];
 
@@ -69,7 +69,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/metric/{Broader_ID}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{Broader_ID}";
         rr:class indicators:Metric
     ];
 

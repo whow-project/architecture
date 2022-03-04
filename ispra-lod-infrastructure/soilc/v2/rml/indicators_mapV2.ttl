@@ -55,7 +55,7 @@
         rr:objectMap [
             rr:parentTriplesMap :Place
         ]
-    ] .
+    ];
 
 #    rr:predicateObjectMap [
 #        rr:predicate core:hasMember;
@@ -71,21 +71,21 @@
 #        ]
 #    ];
 
-#    rr:predicateObjectMap [
-#        rr:predicate rdfs:label;
-#        rr:objectMap [
-#            rr:template "Collezione di risorse del ";
-#            rr:language "it"
-#        ]
-#    ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di risorse associate a: { {{NOME_PLACE}} }";
+            rr:language "it"
+        ]
+    ];
 
-#    rr:predicateObjectMap [
-#        rr:predicate rdfs:label;
-#        rr:objectMap [
-#            rml:reference "GEN_DESCRIPTION";
-#            rr:language "en"
-#        ]
-#    ].
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection associated to: { {{NOME_PLACE}} }";
+            rr:language "en"
+        ]
+    ].
 
 :IndicatorCollections
     rml:logicalSource :CSV;
@@ -98,7 +98,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori di consumo del suolo associati di { {{NOME_PLACE}} }";
+            rr:template "Indicatori di consumo del suolo associati a { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -169,7 +169,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori {{indicator}}  di { {{NOME_PLACE}} }";
+            rr:template "Indicatori {{indicator}} associati a { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -195,7 +195,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatore {{indicator}} di { {{NOME_PLACE}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:template "Indicatore {{indicator}} associato a { {{NOME_PLACE}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
             rr:language "it"
         ]
     ];
