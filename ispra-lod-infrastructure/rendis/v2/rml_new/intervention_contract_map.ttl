@@ -3,7 +3,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix location: <https://dati.isprambiente.it/ontology/location/> .
 @prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
@@ -392,7 +392,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate places:hasGeometry;
+        rr:predicate location:hasGeometry;
 	rr:objectMap [
 	    rr:parentTriplesMap :Geometry
 	]
@@ -402,7 +402,7 @@
 #    rml:logicalSource :CSV;
 #    
 #    rr:subjectMap [
-#        rr:template "https://dati.isprambiente.it/ld/places/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
+#        rr:template "https://dati.isprambiente.it/ld/location/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
 #        rr:class rendis:MunicipalityRoleInIntervention
 #    ];
 #
@@ -442,7 +442,7 @@
 #    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
 #    
 #    rr:subjectMap [
-#        rr:template "https://dati.isprambiente.it/ld/places/municipalityroleinintervention/{id_intervento}_{cod_istat}";
+#        rr:template "https://dati.isprambiente.it/ld/location/municipalityroleinintervention/{id_intervento}_{cod_istat}";
 #        rr:class rendis:MunicipalityRoleInIntervention
 #    ];
 #
@@ -482,7 +482,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/places/municipality/{CI_FROM_I_CI_ISTATComPrimario}"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/{CI_FROM_I_CI_ISTATComPrimario}"
     ].
 
 :PlaceCollection
@@ -495,7 +495,7 @@
     rr:predicateObjectMap [
 	rr:predicate core:isPartOf;
         rr:objectMap [
-	    rr:template "https://dati.isprambiente.it/ld/places/collection/{CI_FROM_I_CI_ISTATComPrimario}_resources";
+	    rr:template "https://dati.isprambiente.it/ld/location/collection/{CI_FROM_I_CI_ISTATComPrimario}_resources";
             rr:termType rr:IRI
         ]
     ];
@@ -512,7 +512,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/places/municipality/{CI_FROM_I_CI_ISTATComPrimario}')%";
+        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/location/municipality/{CI_FROM_I_CI_ISTATComPrimario}')%";
         rr:class core:PredicateObjectAssertion
     ];
 
@@ -552,7 +552,7 @@
     rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/places/municipality/{cod_istat}"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/{cod_istat}"
     ].
 
 :ProposingAgentRole
@@ -1054,11 +1054,11 @@
   
    rr:subjectMap [
      rr:template "https://dati.isprambiente.it/ld/rendis/geometry/%eval:digest('{POINT}')%";
-     rr:class places:Geometry
+     rr:class location:Geometry
    ];
   
    rr:predicateObjectMap [
-     rr:predicate places:geometry;
+     rr:predicate location:geometry;
      rr:objectMap [
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral

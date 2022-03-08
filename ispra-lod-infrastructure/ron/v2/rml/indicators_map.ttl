@@ -3,7 +3,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix location: <https://dati.isprambiente.it/ontology/location/> .
 @prefix metric: <https://dati.isprambiente.it/ontology/commons/metric/> .
 @prefix time: <https://dati.isprambiente.it/ontology/commons/time/> .
 @prefix mu: <https://dati.isprambiente.it/ontology/commons/mu/> .
@@ -41,7 +41,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/places/collection/%eval:cod_place(*)%_resources";
+        rr:template "https://dati.isprambiente.it/ld/location/collection/%eval:cod_place(*)%_resources";
         rr:class core:Collection
     ];
 
@@ -102,7 +102,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/places/municipality/%eval:cod_place(*)%"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/%eval:cod_place(*)%"
     ].
 
 :Year

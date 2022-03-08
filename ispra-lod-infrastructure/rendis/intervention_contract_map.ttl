@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix location: <https://dati.isprambiente.it/ontology/location/> .
 @prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -285,7 +285,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate places:hasGeometry;
+    rr:predicate location:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#geometry>
     ]
@@ -324,11 +324,11 @@
   
    rr:subjectMap [
      rr:template "https://dati.isprambiente.it/ld/rendis/contract/%eval:lower_case(*, I_idIntervento)%_%eval:lower_case(*, L_idLotto)%_geometry";
-     rr:class places:Geometry
+     rr:class location:Geometry
    ];
   
    rr:predicateObjectMap [
-     rr:predicate places:geometry;
+     rr:predicate location:geometry;
      rr:objectMap [
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral

@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix places: <https://dati.isprambiente.it/ontology/places/> .
+@prefix location: <https://dati.isprambiente.it/ontology/location/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -13,7 +13,7 @@
 
 
 <#RegionsCSV>
-  rml:source "places/input/csv/regions.csv" ;
+  rml:source "location/input/csv/regions.csv" ;
   rml:referenceFormulation ql:CSV;
   crml:separator "\t".
 
@@ -22,14 +22,14 @@
     rml:logicalSource <#RegionsCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/places";
+        rr:template "https://dati.isprambiente.it/ld/location";
         rr:class core:Dataset
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "Places Dataset";
+            rr:template  "location Dataset";
         ]
     ].
 
@@ -37,7 +37,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/uniqueidentifier/istat_{COD_REG}";
+    rr:template "https://dati.isprambiente.it/ld/location/uniqueidentifier/{COD_REG}";
     rr:class core:UniqueIdentifier
   ];
 
@@ -76,7 +76,7 @@
   rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/places/organisation/istat";
+    rr:constant "https://dati.isprambiente.it/ld/location/organisation/istat";
     rr:class core:Organisation
   ];
 
@@ -108,8 +108,8 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/region/istat_{COD_REG}";
-    rr:class places:Region
+    rr:template "https://dati.isprambiente.it/ld/location/region/{COD_REG}";
+    rr:class location:Region
   ];
   
   rr:predicateObjectMap [
@@ -129,7 +129,7 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate places:istat;
+    rr:predicate location:istat;
     rr:objectMap [
       rml:reference "COD_REG";
       rr:datatype xsd:string
@@ -151,7 +151,7 @@
     ];
 
   rr:predicateObjectMap [
-        rr:predicate places:hasCountry;
+        rr:predicate location:hasCountry;
         rr:objectMap [
             rr:parentTriplesMap <#Nation>;
         ]
@@ -161,8 +161,8 @@
   rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/places/country/istat_1";
-    rr:class places:Country
+    rr:template "https://dati.isprambiente.it/ld/location/country/1";
+    rr:class location:Country
   ];
 
   rr:predicateObjectMap [
@@ -181,7 +181,7 @@
       ]
     ];
   rr:predicateObjectMap [
-    rr:predicate places:istat;
+    rr:predicate location:istat;
     rr:objectMap [
       rr:template "1";
       rr:datatype xsd:string
