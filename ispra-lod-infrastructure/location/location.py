@@ -37,7 +37,7 @@ def metropolitan_city_code(istat):
 
     return out
 
-def placesRDF():
+def locationRDF():
     file_loader = FileSystemLoader('.')
     env = Environment(loader=file_loader)
 

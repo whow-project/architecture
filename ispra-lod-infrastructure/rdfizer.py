@@ -3,8 +3,8 @@ from argparse import ArgumentParser, Namespace
 from kg_loader import KnowledgeGraphLoader
 from rmn.rmn import RMNTriplifier
 from ron.ron import RONTriplifier
-from places.place_shp2csv import place_maker
-from places.places import placesRDF
+from location.place_shp2csv import place_maker
+from location.location import locationRDF
 from rendis.rendisV2 import RendisTriplifier
 from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
@@ -16,11 +16,11 @@ def process(arg_parser: Namespace):
     
     triplifiers = []
     
-    if args.places:
+    if args.location:
         #place_maker("/data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
-        placesRDF()
-        print("Places Complete")
+        locationRDF()
+        print("Location Complete")
     elif args.measures:
         print("Processing measures...")
         
@@ -70,9 +70,9 @@ def process(arg_parser: Namespace):
 if __name__ == "__main__":
     arg_parser = ArgumentParser("annual_run.py", description="This script runs ISPRA Data Conversion (annual)")
 
-    arg_parser.add_argument("-p", "--pl", dest="places", nargs='?',
+    arg_parser.add_argument("-p", "--pl", dest="location", nargs='?',
                             const=True, default=False,
-                            help="Places Conversion")
+                            help="location Conversion")
 
     arg_parser.add_argument("-i", "--ind", dest="indicators", nargs='?',
                             const=True, default=False,
