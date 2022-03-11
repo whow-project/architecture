@@ -382,7 +382,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/place/%eval:digest('{POINT}')%";
+        rr:template "https://dati.isprambiente.it/ld/rendis/location/%eval:digest('{POINT}')%";
 	rr:class core:Place 
     ];
 
