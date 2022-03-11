@@ -102,7 +102,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location/municipality/%eval:cod_place(*)%"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_%eval:cod_place(*)%"
     ].
 
 :Year

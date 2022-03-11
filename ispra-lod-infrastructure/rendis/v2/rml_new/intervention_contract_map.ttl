@@ -482,7 +482,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location/municipality/{CI_FROM_I_CI_ISTATComPrimario}"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_{CI_FROM_I_CI_ISTATComPrimario}"
     ].
 
 :PlaceCollection
@@ -512,7 +512,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/location/municipality/{CI_FROM_I_CI_ISTATComPrimario}')%";
+        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/location/municipality/0201_{CI_FROM_I_CI_ISTATComPrimario}')%";
         rr:class core:PredicateObjectAssertion
     ];
 
@@ -552,7 +552,7 @@
     rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location/municipality/{cod_istat}"
+        rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_{cod_istat}"
     ].
 
 :ProposingAgentRole

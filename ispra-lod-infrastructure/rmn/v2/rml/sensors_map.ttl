@@ -35,7 +35,7 @@
 #	rml:logicalSource :CSV_SENSORS;
 #
 #	rr:subjectMap [
-#		rr:template "https://dati.isprambiente.it/ld/location/municipality/#{CODE_PLACE}"
+#		rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_#{CODE_PLACE}"
 #	].
 
 
