@@ -178,7 +178,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ontology/location/0201_%eval:metropolitan_city_type({COD_PROV})%"
+    rr:template "https://dati.isprambiente.it/ontology/location/%eval:metropolitan_city_type({COD_PROV})%"
   ].
    
  <#Regions>
