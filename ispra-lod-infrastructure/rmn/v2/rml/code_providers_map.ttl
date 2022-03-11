@@ -74,7 +74,7 @@
   rml:logicalSource :PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/organisation/{ID}";
+    rr:template "https://dati.isprambiente.it/ld/common/organisation/{ID}";
     rr:class core:Organisation
   ];
 

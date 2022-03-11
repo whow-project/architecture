@@ -384,7 +384,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/commons/geometrytype/point";
+    rr:constant "https://dati.isprambiente.it/ld/common/geometrytype/point";
     rr:class location:GeometryType
   ].
 
@@ -742,7 +742,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/parameter/positioning_system";
+        rr:template "https://dati.isprambiente.it/ld/common/parameter/positioning_system";
         rr:class core:Parameter
     ];
 
@@ -797,7 +797,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/platformattribute/{POSITIONING_SYSTEM}";
+        rr:template "https://dati.isprambiente.it/ld/common/platformattribute/{POSITIONING_SYSTEM}";
         rr:class core:PlatformAttribute
     ];
 
@@ -863,7 +863,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/parameter/hull";
+        rr:template "https://dati.isprambiente.it/ld/common/parameter/hull";
         rr:class core:Parameter
     ];
 
@@ -918,7 +918,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/concept/{HULL_TYPE}";
+        rr:template "https://dati.isprambiente.it/ld/common/concept/{HULL_TYPE}";
         rr:class inspire-mf:Concept
     ];
 
@@ -943,7 +943,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/organisation/{MANUFACTURER}";
+    rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
     rr:class core:Organisation
   ];
 
@@ -969,7 +969,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/parameter/mooring";
+        rr:template "https://dati.isprambiente.it/ld/common/parameter/mooring";
         rr:class inspire-mf:Parameter
     ];
 
@@ -1024,7 +1024,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/concept/{MOORING_TYPE}";
+        rr:template "https://dati.isprambiente.it/ld/common/concept/{MOORING_TYPE}";
         rr:class inspire-mf:Concept
     ];
 
@@ -1130,7 +1130,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/parameter/diameter";
+    rr:template "https://dati.isprambiente.it/ld/common/parameter/diameter";
     rr:class core:Parameter
   ];
 
@@ -1185,7 +1185,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/value/{DIAMETER}-meters";
+    rr:template "https://dati.isprambiente.it/ld/common/value/{DIAMETER}-meters";
         rr:class core:Value
     ];
 
@@ -1291,7 +1291,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/parameter/material";
+    rr:template "https://dati.isprambiente.it/ld/common/parameter/material";
     rr:class core:Parameter
   ];
 
@@ -1346,7 +1346,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/material/{STRUCTURE_EN}";
+        rr:template "https://dati.isprambiente.it/ld/common/material/{STRUCTURE_EN}";
 	rr:class core:Material
     ];
 
@@ -1384,7 +1384,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/meter";
+        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
         rr:class core:UnitOfMeasure
     ];
 
@@ -1457,7 +1457,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/year/{TIME}";
+    rr:template "https://dati.isprambiente.it/ld/common/year/{TIME}";
     rr:class core:Year
   ];
 
@@ -1490,7 +1490,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/parameter/levelling";
+    rr:template "https://dati.isprambiente.it/ld/common/parameter/levelling";
     rr:class core:Parameter
   ];
 
@@ -1545,7 +1545,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/method/{LEVELLING_EN}";
+    rr:template "https://dati.isprambiente.it/ld/common/method/{LEVELLING_EN}";
     rr:class core:Method
   ];
 
@@ -1612,7 +1612,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/commons/parameter/deployment";
+    rr:template "https://dati.isprambiente.it/ld/common/parameter/deployment";
     rr:class core:Parameter
   ];
 

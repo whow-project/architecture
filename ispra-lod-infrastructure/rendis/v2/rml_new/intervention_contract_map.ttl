@@ -104,7 +104,7 @@
   rr:predicateObjectMap [
     rr:predicate core:hasCreator;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/commons/organisation/ispra";
+      rr:constant "https://dati.isprambiente.it/ld/common/organisation/ispra";
       rr:termType rr:IRI
     ]
   ].

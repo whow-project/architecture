@@ -4,9 +4,9 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix location: <https://dati.isprambiente.it/ontology/location/> .
-@prefix metric: <https://dati.isprambiente.it/ontology/commons/metric/> .
-@prefix time: <https://dati.isprambiente.it/ontology/commons/time/> .
-@prefix mu: <https://dati.isprambiente.it/ontology/commons/mu/> .
+@prefix metric: <https://dati.isprambiente.it/ontology/common/metric/> .
+@prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
+@prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
@@ -129,7 +129,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/time/{{YEAR}}";
+        rr:template "https://dati.isprambiente.it/ld/common/time/{{YEAR}}";
         rr:class core:Year
     ];
 
@@ -324,7 +324,7 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/commons/value/%eval:get_value('{ {{indicator}} }')%_%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+        rr:template "https://dati.isprambiente.it/ld/common/value/%eval:get_value('{ {{indicator}} }')%_%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
         rr:class core:Value
     ];
     
@@ -354,7 +354,7 @@
     rr:predicateObjectMap [
         rr:predicate core:hasUnitOfMeasure;
         rr:objectMap [
-            rr:template "https://dati.isprambiente.it/ld/commons/unitofmeasure/%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+            rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
             rr:termType rr:IRI
         ]
     ] .
