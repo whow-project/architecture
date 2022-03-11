@@ -36,9 +36,9 @@ class place_maker:
         self.pack_info(year)
 
 
-        self.csv_creator(self.regions, "COD_REG", "/data/places/v2/dirtydata/regions.csv")
-        self.csv_creator(self.provinces, "COD_PROV", "/data/places/v2/dirtydata/provinces.csv")
-        self.csv_creator(self.cities, "PRO_COM_T", "/data/places/v2/dirtydata/cities.csv")
+        self.csv_creator(self.regions, "COD_REG", "/data/location/v2/dirtydata/regions.csv")
+        self.csv_creator(self.provinces, "COD_PROV", "/data/location/v2/dirtydata/provinces.csv")
+        self.csv_creator(self.cities, "PRO_COM_T", "/data/location/v2/dirtydata/cities.csv")
 
 
     @staticmethod

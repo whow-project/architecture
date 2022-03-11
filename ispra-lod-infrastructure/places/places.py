@@ -44,18 +44,18 @@ def placesRDF():
     loader = KnowledgeGraphLoader()
     
     #regions
-    template = env.get_template('places/regions_map.ttl')
+    template = env.get_template('location/regions_map.ttl')
     rml_mapping = template.render()
     
     rml_converter = RMLConverter()
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
     #toLoad_toDelete (g, "regions", "places")
-    loader.toLoad_toDelete(g, "regions", "places")
+    loader.toLoad_toDelete(g, "regions", "location")
     
 
     #provinces
-    template = env.get_template('places/provinces_map.ttl')
+    template = env.get_template('location/provinces_map.ttl')
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
@@ -65,10 +65,10 @@ def placesRDF():
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
     #toLoad_toDelete(g, "provinces", "places")
-    loader.toLoad_toDelete(g, "provinces", "places")
+    loader.toLoad_toDelete(g, "provinces", "location")
 
     #municipalities
-    template = env.get_template('places/municipalities_map.ttl')
+    template = env.get_template('location/municipalities_map.ttl')
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
@@ -78,4 +78,4 @@ def placesRDF():
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")
-    loader.toLoad_toDelete(g, "municipalities", "places")
+    loader.toLoad_toDelete(g, "municipalities", "location")
