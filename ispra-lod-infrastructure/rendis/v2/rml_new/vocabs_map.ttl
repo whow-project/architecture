@@ -409,7 +409,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{ID}";
-    rr:class rendis: RepairWork
+    rr:class rendis:RepairWork
   ];
 
   rr:predicateObjectMap [
