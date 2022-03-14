@@ -50,9 +50,25 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/collection/{CODE_PLACE}_resources";
+    rr:template "https://dati.isprambiente.it/ld/ron/collection/0201_{CODE_PLACE}";
     rr:class core:Collection
   ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di risorse RON associate a: {PLACE_NAME}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "RON resources collection associated with: {PLACE_NAME}";
+            rr:language "en"
+        ]
+    ];
 
   rr:predicateObjectMap [
     rr:predicate core:hasLocation;
