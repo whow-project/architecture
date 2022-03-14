@@ -5,7 +5,7 @@
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "/data/rendis/v2/data",
 	"dirty_data_folder": "/data/rendis/v2/dirtydata",
-	"rml_folder": "/data/rendis/v2/rml",
+	"rml_folder": "/data/rendis/v2/rml_new",
 	"mappings": [
         {
             "rml": "intervention_contract_map.ttl",
