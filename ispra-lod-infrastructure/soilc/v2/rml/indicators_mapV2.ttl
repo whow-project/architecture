@@ -46,8 +46,24 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location/collection/{ {{COD_PLACE}} }";
+        rr:template "https://dati.isprambiente.it/ld/soilc/collection/0201_{ {{COD_PLACE}} }";
         rr:class core:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di risorse di consumo del suolo associate a: { {{NOME_PLACE}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection of soil consumption associated with: { {{NOME_PLACE}} }";
+            rr:language "en"
+        ]
     ];
 
     rr:predicateObjectMap [
@@ -55,7 +71,7 @@
         rr:objectMap [
             rr:parentTriplesMap :Place
         ]
-    ];
+    ].
 
 #    rr:predicateObjectMap [
 #        rr:predicate core:hasMember;
@@ -70,22 +86,6 @@
 #            rr:parentTriplesMap :DatasetISPRA
 #        ]
 #    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Collezione di risorse associate a: { {{NOME_PLACE}} }";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Resources collection associated to: { {{NOME_PLACE}} }";
-            rr:language "en"
-        ]
-    ].
 
 :IndicatorCollections
     rml:logicalSource :CSV;
