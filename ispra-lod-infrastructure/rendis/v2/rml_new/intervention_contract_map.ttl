@@ -489,13 +489,13 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/{CI_FROM_I_CI_ISTATComPrimario}_primary"
+        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/0201_{CI_FROM_I_CI_ISTATComPrimario}_primary"
     ];
 
     rr:predicateObjectMap [
 	rr:predicate core:isPartOf;
         rr:objectMap [
-	    rr:template "https://dati.isprambiente.it/ld/location/collection/{CI_FROM_I_CI_ISTATComPrimario}_resources";
+	    rr:template "https://dati.isprambiente.it/ld/location/collection/0201_{CI_FROM_I_CI_ISTATComPrimario}_resources";
             rr:termType rr:IRI
         ]
     ];
