@@ -495,8 +495,24 @@
     rr:predicateObjectMap [
 	rr:predicate core:isPartOf;
         rr:objectMap [
-	    rr:template "https://dati.isprambiente.it/ld/location/collection/0201_{CI_FROM_I_CI_ISTATComPrimario}_resources";
+	    rr:template "https://dati.isprambiente.it/ld/rendis/collection/0201_{CI_FROM_I_CI_ISTATComPrimario}";
             rr:termType rr:IRI
+        ]
+    ];
+
+  rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di risorse Rendis associate a: {_E_FROM_I_CI_Comune_primario}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Rendis resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
+            rr:language "en"
         ]
     ];
 
