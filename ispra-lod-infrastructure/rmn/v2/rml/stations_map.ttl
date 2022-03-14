@@ -51,9 +51,25 @@
 
   rr:subjectMap [
     #rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/{CODE_PLACE}_resources";
-    rr:template "https://dati.isprambiente.it/ld/location/collection/{CODE_PLACE}_resources";
+    rr:template "https://dati.isprambiente.it/ld/rmn/collection/0201_{CODE_PLACE}";
 #    rr:class core:Collection
   ] ;
+
+  rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di risorse RMN associate a: {PLACE_NAME}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "RMN resources collection associated with: {PLACE_NAME}";
+            rr:language "en"
+        ]
+    ];
 
   rr:predicateObjectMap [
     rr:predicate core:hasLocation;
@@ -61,6 +77,8 @@
       rr:parentTriplesMap :Place
     ]
 ] .
+
+
 
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
