@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix location: <https://dati.isprambiente.it/ontology/location/> .
+@prefix location: <https://dati.isprambiente.it/ontology/place/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -178,7 +178,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ontology/location/%eval:metropolitan_city_type({COD_PROV})%"
+    rr:template "https://dati.isprambiente.it/ontology/place/%eval:metropolitan_city_type({COD_PROV})%"
   ].
    
  <#Regions>
