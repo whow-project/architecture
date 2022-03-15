@@ -1,0 +1,429 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/vocabs_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
+@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+
+
+:CSV
+  rml:source "{{litology_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:instability_csv
+  rml:source "{{instability_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:instability_types_csv
+  rml:source "{{instability_type_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:instability_super_types_csv
+  rml:source "{{instability_super_type_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:repair_csv
+  rml:source "{{repair_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:repair_types_csv
+  rml:source "{{repair_types_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:repair_super_types_csv
+  rml:source "{{repair_syper_types_csv}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:lithology_type
+  rml:source "{{lithology_type}}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+:Litology
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lithology/{id_intervento}_{id_lotto}";
+    rr:class rendis:Lithology
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Litologia relativa al lotto {id_lotto} dell'intervento {id_intervento}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Lithology of the lot {id_lotto} of intervention {id_intervento}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasLithologyType;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/lithologytype/{cod_litologia}";
+      rr:termType rr:IRI 
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:isLithologyOf;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:LithologyType
+  rml:logicalSource :lithology_type;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lithologytype/{ID}";
+    rr:class rendis:Lithology
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "EN";
+      rr:language "en"
+    ]
+  ].
+
+
+:LotLitology
+
+  rml:logicalSource :CSV;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:hasLithology;
+    rr:objectMap [
+      rr:parentTriplesMap :Litology
+    ]
+  ] .
+  
+#  rr:predicateObjectMap [
+#   rr:predicate rendis:hasInstabilityRelatedTo;
+#    rr:objectMap [
+#      rr:parentTriplesMap :Instability
+#    ]
+#  ].
+
+
+:LotInstability
+
+  rml:logicalSource :instability_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:addressesInstability;
+    rr:objectMap [
+      rr:parentTriplesMap :Instability
+    ]
+  ].
+
+#:LotRepair
+#  rml:logicalSource :repair_csv;
+#  
+#  rr:subjectMap [
+#    rr:template "https://dati.isprambiente.it/ld/rendis/contract/{id_intervento}_{id_lotto}";
+#  ];
+#
+#  rr:predicateObjectMap [
+#    rr:predicate rendis:hasRepairWork;
+#    rr:objectMap [
+#      rr:parentTriplesMap :Repair
+#    ]
+#  ].
+
+
+:InterventionInstability
+
+  rml:logicalSource :instability_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/procedure/{id_intervento}";
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:addressesInstabilityType;
+    rr:objectMap [
+      rr:parentTriplesMap :InstabilitySuperTypeJoinIntervention;
+      rr:joinCondition [
+        rr:child "cod_dissesto";
+        rr:parent "ID" 
+      ]
+    ]
+  ] .
+
+
+:Instability
+  rml:logicalSource :instability_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/instability/{id_intervento}_{id_lotto}_{cod_dissesto}";
+    rr:class rendis:Instability
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Instabilità con codice {cod_dissesto} legata al lotto {id_lotto} dell'intervento {id_intervento}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Instability with code {cod_dissesto} related to the lot {id_lotto} of the intervention {id_intervento}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:isInstabilityOf;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:termType rr:IRI
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate core:hasInstabilityType;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{cod_dissesto}";
+      rr:termType rr:IRI
+    ]
+  ].
+
+
+:InstabilityType
+  rml:logicalSource :instability_types_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{ID}";
+    rr:class rendis:InstabilityType
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESCRIZIONE_IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESCRIZIONE_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:specialises;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{TIPO_ID}";
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rr:template "http://dati.isprambiente.it/id/skos/ihi/instabilitytype/{ID}";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:InstabilitySuperType
+  rml:logicalSource :instability_super_types_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{ID}";
+    rr:class rendis:InstabilityType
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rml:reference "DBPEDIA";
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate owl:sameAs;
+    rr:objectMap [
+      rml:reference "WIKIDATA";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:InstabilitySuperTypeJoinIntervention
+  rml:logicalSource :instability_types_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{TIPO_ID}";
+  ] .
+
+
+:Repair
+  rml:logicalSource :repair_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/repairworkexecution/{id_intervento}_{id_lotto}_{cod_sistemazione}";
+    rr:class rendis:RepairWorkExecution
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{from_tp_descrizione} nell'ambito del lotto {id_lotto} relativo all'intervento {id_intervento}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{from_tp_descrizione} in the context of the lot {id_lotto} related to the intervention {id_intervento}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:satisfies;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{cod_sistemazione}";
+      rr:termType rr:IRI
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rendis:isRepairWorkExecutionOf;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:RepairType
+  rml:logicalSource :repair_types_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{ID}";
+    rr:class rendis:RepairWork
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESCRIZIONE_IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESCRIZIONE_EN";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate core:specialises;
+    rr:objectMap [
+      rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{TIPO_ID}";
+      rr:termType rr:IRI
+    ]
+  ] .
+
+
+:RepairSuperType
+  rml:logicalSource :repair_super_types_csv;
+  
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{ID}";
+    rr:class rendis:RepairWork
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "IT";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "EN";
+      rr:language "en"
+    ]
+  ] .
