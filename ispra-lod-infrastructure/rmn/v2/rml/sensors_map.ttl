@@ -4,7 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -100,7 +100,7 @@
 
 	
 #	rr:predicateObjectMap [
-#		rr:predicate core:isClassifiedBy;
+#		rr:predicate ispra-top:isClassifiedBy;
 #		rr:objectMap [
 #			rr:parentTriplesMap :SensorModelType
 #		]
@@ -151,14 +151,14 @@
      
      
 	rr:predicateObjectMap [
-      		rr:predicate core:isParametrisedBy;
+      		rr:predicate ispra-top:isParametrisedBy;
 		rr:objectMap [
         		rr:parentTriplesMap :SamplingFrequency
       		]
     	];
         
     	rr:predicateObjectMap [
-      		rr:predicate core:hasValue;
+      		rr:predicate ispra-top:hasValue;
       		rr:objectMap [
         		rr:parentTriplesMap :SamplingFrequencyValue
       		]
@@ -170,7 +170,7 @@
 
 	rr:subjectMap [
     		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling_frequency";
-    		rr:class core:Parameter
+    		rr:class ispra-top:Parameter
   	];
 
   	rr:predicateObjectMap [
@@ -225,7 +225,7 @@
 
 	rr:subjectMap [
 		rr:template "https://dati.isprambiente.it/ld/common/value/{SENSOR_SAMPLING_FREQUENCY}_hz";
-		rr:class core:Value
+		rr:class ispra-top:Value
 	];
 
 	rr:predicateObjectMap [
@@ -245,7 +245,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate core:value;
+		rr:predicate ispra-top:value;
 		rr:objectMap [
 			rml:reference "SENSOR_SAMPLING_FREQUENCY";
 			rr:datatype xsd:float
@@ -253,7 +253,7 @@
 	];
 
     	rr:predicateObjectMap [
-        	rr:predicate core:hasUnitOfMeasure;
+        	rr:predicate ispra-top:hasUnitOfMeasure;
         	rr:objectMap [
             		rr:parentTriplesMap :Hertz
         	]
@@ -289,14 +289,14 @@
      
      
 	rr:predicateObjectMap [
-      		rr:predicate core:isParametrisedBy;
+      		rr:predicate ispra-top:isParametrisedBy;
 		rr:objectMap [
         		rr:parentTriplesMap :SensorPeriod
       		]
     	];
         
     	rr:predicateObjectMap [
-      		rr:predicate core:hasValue;
+      		rr:predicate ispra-top:hasValue;
       		rr:objectMap [
         		rr:parentTriplesMap :SensorPeriodValue
       		]
@@ -308,7 +308,7 @@
 
 	rr:subjectMap [
     		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling";
-    		rr:class core:Parameter
+    		rr:class ispra-top:Parameter
   	];
 
   	rr:predicateObjectMap [
@@ -350,7 +350,7 @@
 
 	rr:subjectMap [
 		rr:template "https://dati.isprambiente.it/ld/common/value/p{PERIOD}{PERIOD_UNIT}";
-		rr:class core:Value
+		rr:class ispra-top:Value
 	];
 
 	rr:predicateObjectMap [
@@ -370,7 +370,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate core:value;
+		rr:predicate ispra-top:value;
 		rr:objectMap [
 			rml:reference "PERIOD";
 			rr:datatype xsd:float
@@ -378,7 +378,7 @@
 	];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasUnitOfMeasure;
+        rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
             rr:parentTriplesMap :UnitOfMeasure
         ]
@@ -414,14 +414,14 @@
      
      
 	rr:predicateObjectMap [
-      		rr:predicate core:isParametrisedBy;
+      		rr:predicate ispra-top:isParametrisedBy;
 		rr:objectMap [
         		rr:parentTriplesMap :MeasurementHeight
       		]
     	];
         
     	rr:predicateObjectMap [
-      		rr:predicate core:hasValue;
+      		rr:predicate ispra-top:hasValue;
       		rr:objectMap [
         		rr:parentTriplesMap :MeasurementHeightValue
       		]
@@ -433,7 +433,7 @@
 
 	rr:subjectMap [
     		rr:template "https://dati.isprambiente.it/ld/common/parameter/measurement_height";
-    		rr:class core:Parameter
+    		rr:class ispra-top:Parameter
   	];
 
   	rr:predicateObjectMap [
@@ -458,7 +458,7 @@
 
 	rr:subjectMap [
 		rr:template "https://dati.isprambiente.it/ld/common/value/%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
-		rr:class core:Value
+		rr:class ispra-top:Value
 	];
 
 	rr:predicateObjectMap [
@@ -478,7 +478,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate core:value;
+		rr:predicate ispra-top:value;
 		rr:objectMap [
 			rml:reference "MEASUREMENT_HEIGHT";
 			rr:datatype xsd:float
@@ -486,7 +486,7 @@
 	];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasUnitOfMeasure;
+        rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
             rr:parentTriplesMap :Meter
         ]
@@ -503,7 +503,7 @@
 
 	rr:subjectMap [
 		rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{PERIOD_UNIT_LABEL_EN}";
-		rr:class core:UnitOfMeasure
+		rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -529,7 +529,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -554,7 +554,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/hertz";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -603,7 +603,7 @@
     	] .
 
 #    	rr:predicateObjectMap [
-#        	rr:predicate core:specialises;
+#        	rr:predicate ispra-top:specialises;
 #        	rr:objectMap [
 #            		rr:parentTriplesMap <#SensorTypeBroader>
 #        	]
@@ -654,7 +654,7 @@
     	];
 
 	rr:predicateObjectMap [
-        	rr:predicate core:name;
+        	rr:predicate ispra-top:name;
 	        rr:objectMap [
         		rml:reference "NAME"
 		]
@@ -668,14 +668,14 @@
 	];
 
 	rr:predicateObjectMap [
-        	rr:predicate core:hasManufacturer;
+        	rr:predicate ispra-top:hasManufacturer;
         	rr:objectMap [
             		rr:parentTriplesMap :Manufacturer
         	]
     	];
 
 	rr:predicateObjectMap [
-        	rr:predicate core:isClassifiedBy;
+        	rr:predicate ispra-top:isClassifiedBy;
         	rr:objectMap [
 			rml:reference "WMO";
 			rr:termType rr:IRI
@@ -690,7 +690,7 @@
 
 	rr:subjectMap [
     		rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
-		rr:class core:Organisation
+		rr:class ispra-top:Organisation
 	];
 
 	rr:predicateObjectMap [
@@ -721,7 +721,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate core:hasDepiction;
+		rr:predicate ispra-top:hasDepiction;
 		rr:objectMap [
 			rml:reference "DEPICTION";
 			rr:termType rr:IRI

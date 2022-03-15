@@ -7,7 +7,7 @@
 @prefix metric: <https://dati.isprambiente.it/ontology/common/metric/> .
 @prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
 @prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -27,7 +27,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
-        rr:class core:Dataset
+        rr:class ispra-top:Dataset
     ];
 
     rr:predicateObjectMap [
@@ -42,7 +42,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/ron/collection/0201_%eval:cod_place(*)%";
-        rr:class core:Collection
+        rr:class ispra-top:Collection
     ];
 
     rr:predicateObjectMap [
@@ -62,14 +62,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasLocation;
+        rr:predicate ispra-top:hasLocation;
         rr:objectMap [
             rr:parentTriplesMap :Place
         ]
     ] .
 
 #    rr:predicateObjectMap [
-#        rr:predicate core:isMemberOf;
+#        rr:predicate ispra-top:isMemberOf;
 #        rr:objectMap [
 #            rr:parentTriplesMap <#DatasetGeneral>
 #        ]
@@ -92,7 +92,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:isPartOf;
+        rr:predicate ispra-top:isPartOf;
         rr:objectMap [
             rr:parentTriplesMap :MainCatalogue;
         ]
@@ -126,11 +126,11 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/year/{YEAR}";
-        rr:class core:Year
+        rr:class ispra-top:Year
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:year;
+        rr:predicate ispra-top:year;
         rr:objectMap [
             rml:reference "YEAR";
             rr:datatype xsd:Year
@@ -142,7 +142,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/ron/parameter/{METRIC}";
-        rr:class core:Parameter
+        rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
@@ -171,14 +171,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasParameter;
+        rr:predicate ispra-top:hasParameter;
         rr:objectMap [
 	        rr:parentTriplesMap :Metric
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:isPartOf;
+        rr:predicate ispra-top:isPartOf;
         rr:objectMap [
             rr:parentTriplesMap :IndicatorCatalogue;
         ]
@@ -225,14 +225,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:isPartOf;
+        rr:predicate ispra-top:isPartOf;
         rr:objectMap [
             rr:parentTriplesMap :IndicatorsCollectionMetric;
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:atTime;
+        rr:predicate ispra-top:atTime;
         rr:objectMap [
             rr:parentTriplesMap :Year
         ]
@@ -265,14 +265,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:isPartOf;
+        rr:predicate ispra-top:isPartOf;
         rr:objectMap [
             rr:parentTriplesMap :IndicatorsCollectionMetricYEAR
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasValue;
+        rr:predicate ispra-top:hasValue;
         rr:objectMap [
             rr:parentTriplesMap :Value
         ]
@@ -287,7 +287,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:atTime;
+        rr:predicate ispra-top:atTime;
         rr:objectMap [
             rr:parentTriplesMap :Month
         ]
@@ -300,7 +300,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/value/{VALUE}_%eval:get_unit_of_measure({UNIT})%";
-        rr:class core:Value
+        rr:class ispra-top:Value
     ];
 
     rr:predicateObjectMap [
@@ -320,7 +320,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:value;
+        rr:predicate ispra-top:value;
         rr:objectMap [
             rml:reference "VALUE" ;
             rr:datatype xsd:float
@@ -328,7 +328,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasUnitOfMeasure;
+        rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
             rr:parentTriplesMap :MU
         ]
@@ -341,7 +341,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/%eval:get_unit_of_measure({UNIT})%";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -361,7 +361,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:symbol;
+        rr:predicate ispra-top:symbol;
         rr:objectMap [
             rml:reference "UNIT_SYMBOL"
         ]
@@ -381,11 +381,11 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/timeinterval/%eval:replace('-', '', '{PERIOD}')%";
-        rr:class core:TimeInterval
+        rr:class ispra-top:TimeInterval
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:time;
+        rr:predicate ispra-top:time;
         rr:objectMap [
             rml:reference "PERIOD"
         ]

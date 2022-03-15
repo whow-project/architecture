@@ -3,7 +3,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -29,7 +29,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/{COD_PROV}";
-    rr:class core:UniqueIdentifier
+    rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
@@ -49,14 +49,14 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:identifier;
+    rr:predicate ispra-top:identifier;
     rr:objectMap [
       rml:reference "COD_PROV"
       ]
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:isIssuedBy;
+    rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
       rr:parentTriplesMap <#IstatOrg>
       ]
@@ -68,7 +68,7 @@
 
   rr:subjectMap [
     rr:constant "https://dati.isprambiente.it/ld/place/organisation/istat";
-    rr:class core:Organisation
+    rr:class ispra-top:Organisation
   ];
 
   rr:predicateObjectMap [
@@ -88,7 +88,7 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:acronym;
+    rr:predicate ispra-top:acronym;
     rr:objectMap [
       rr:constant "ISTAT"
       ]
@@ -109,7 +109,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:name;
+    rr:predicate ispra-top:name;
     rr:objectMap [
       rml:reference "DEN_PROV";
       rr:datatype xsd:string
@@ -125,7 +125,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasUniqueIdentifier;
+    rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
       rr:parentTriplesMap <#IstatCode>
       ]
@@ -161,14 +161,14 @@
   ];
 
   rr:predicateObjectMap [
-        rr:predicate core:partOf;
+        rr:predicate ispra-top:partOf;
         rr:objectMap [
             rr:parentTriplesMap <#DatasetISPRA>;
         ]
     ];
   
   rr:predicateObjectMap [
-    rr:predicate core:lastUpdate;
+    rr:predicate ispra-top:lastUpdate;
     rr:objectMap [
       rr:parentTriplesMap <#ProvinceYear>
     ]
@@ -226,11 +226,11 @@ rr:predicateObjectMap [
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_PROV}";
-    rr:class core:Year
+    rr:class ispra-top:Year
   ];
   
   rr:predicateObjectMap [
-    rr:predicate core:year;
+    rr:predicate ispra-top:year;
     rr:objectMap [
       rml:reference "YEAR_PROV";
       rr:datatype xsd:gYear

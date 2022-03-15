@@ -4,7 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -86,14 +86,14 @@
     ];
 
     rr:predicateObjectMap [
-    rr:predicate core:lastUpdate;
+    rr:predicate ispra-top:lastUpdate;
     rr:objectMap [
           rml:reference "MODIFIED"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasMedia;
+        rr:predicate ispra-top:hasMedia;
         rr:objectMap [
             rr:parentTriplesMap :File
         ]
@@ -108,14 +108,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:atTime;
+        rr:predicate ispra-top:atTime;
         rr:objectMap [
             rr:parentTriplesMap :TimeInterval
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:isPartOf;
+        rr:predicate ispra-top:isPartOf;
         rr:objectMap [
             rr:parentTriplesMap :Catalogue
         ]
@@ -150,11 +150,11 @@
 
     rr:subjectMap [
 	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_{PERIOD}";
-        rr:class core:Media;
+        rr:class ispra-top:Media;
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasURI;
+        rr:predicate ispra-top:hasURI;
         rr:objectMap [
             rml:reference "DATA";
             rr:termType rr:IRI
@@ -162,14 +162,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:mediaType;
+        rr:predicate ispra-top:mediaType;
         rr:objectMap [
             rr:constant "text/csv"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasDataSchema;
+        rr:predicate ispra-top:hasDataSchema;
         rr:objectMap [
             rr:template "https://dati.isprambiente.it/ld/{{dataset}}/dataschema/{TYPE}";
             rr:termType rr:IRI
@@ -181,7 +181,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/timeinterval/%eval:time_interval(*)%";
-        rr:class core:TimeInterval
+        rr:class ispra-top:TimeInterval
     ];
 
     rr:predicateObjectMap [
@@ -192,7 +192,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:startDate;
+        rr:predicate ispra-top:startDate;
         rr:objectMap [
             rml:reference "START";
             rr:datatype xsd:dateTime
@@ -200,7 +200,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:endDate;
+        rr:predicate ispra-top:endDate;
         rr:objectMap [
             rml:reference "END";
             rr:datatype xsd:dateTime
@@ -224,7 +224,7 @@
 
     rr:subjectMap [
 	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/dataschema/{SCHEMA}";
-        rr:class core:DataSchema
+        rr:class ispra-top:DataSchema
     ];
 
     rr:predicateObjectMap [
@@ -244,7 +244,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasDataSchemaAttribute;
+        rr:predicate ispra-top:hasDataSchemaAttribute;
         rr:objectMap [
             rr:parentTriplesMap :Column;
         ]
@@ -258,7 +258,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/schemaattribute/{SCHEMA}_{COL_NUMBER}";
-        rr:class core:SchemaAttribute
+        rr:class ispra-top:SchemaAttribute
     ];
 
     rr:predicateObjectMap [
@@ -279,7 +279,7 @@
 
    
     rr:predicateObjectMap [
-        rr:predicate core:name;
+        rr:predicate ispra-top:name;
         rr:objectMap [
             rml:reference "PARAMETER"
         ]
@@ -287,7 +287,7 @@
 
 
     rr:predicateObjectMap [
-        rr:predicate core:isClassifiedBy;
+        rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
             rr:parentTriplesMap :Parameter
         ]
@@ -328,14 +328,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasUnitOfMeasure;
+        rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
             rr:parentTriplesMap :UnitOfMeasure
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:acronym;
+        rr:predicate ispra-top:acronym;
         rr:objectMap [
             rml:reference "PARAMETER"
         ]
@@ -347,7 +347,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{UNIT_OF_MEASURE}";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
   
     rr:predicateObjectMap [

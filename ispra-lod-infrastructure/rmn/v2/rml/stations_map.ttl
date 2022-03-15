@@ -4,7 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -52,7 +52,7 @@
   rr:subjectMap [
     #rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/{CODE_PLACE}_resources";
     rr:template "https://dati.isprambiente.it/ld/rmn/collection/0201_{CODE_PLACE}";
-#    rr:class core:Collection
+#    rr:class ispra-top:Collection
   ] ;
 
   rr:predicateObjectMap [
@@ -72,7 +72,7 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasLocation;
+    rr:predicate ispra-top:hasLocation;
     rr:objectMap [
       rr:parentTriplesMap :Place
     ]
@@ -122,7 +122,7 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate core:isPartOf;
+    rr:predicate ispra-top:isPartOf;
     rr:objectMap [
       rr:parentTriplesMap :Catalogue;
     ]
@@ -157,7 +157,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/code/{STAT_CODE}";
-    rr:class core:Code
+    rr:class ispra-top:Code
   ];
 
   rr:predicateObjectMap [
@@ -177,7 +177,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:code;
+    rr:predicate ispra-top:code;
     rr:objectMap [
       rml:reference "STAT_CODE"
     ]
@@ -188,11 +188,11 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{CODE_PLACE}_platforms";
-    rr:class core:PlatformCollection
+    rr:class ispra-top:PlatformCollection
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasLocation;
+    rr:predicate ispra-top:hasLocation;
     rr:objectMap [
       rr:parentTriplesMap :#Place
     ]
@@ -215,7 +215,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:isPartOf;
+    rr:predicate ispra-top:isPartOf;
     rr:objectMap [
       rr:parentTriplesMap :Catalogue;
     ]
@@ -239,7 +239,7 @@
     ];
     
     rr:predicateObjectMap [
-    	rr:predicate core:isPartOf;
+    	rr:predicate ispra-top:isPartOf;
     	rr:objectMap [
       		rr:parentTriplesMap :StationCollection;
       	]
@@ -280,7 +280,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasUniqueIdentifier;
+    rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
       rr:parentTriplesMap :IspraCode
     ]
@@ -308,14 +308,14 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate core:isPartOf;
+    rr:predicate ispra-top:isPartOf;
     rr:objectMap [
       rr:parentTriplesMap :NETWORK
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasLocation;
+    rr:predicate ispra-top:hasLocation;
     rr:objectMap [
       rr:parentTriplesMap :Feature
     ]
@@ -489,7 +489,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:isPartOf;
+    rr:predicate ispra-top:isPartOf;
     rr:objectMap [
       rr:parentTriplesMap :Sea;
       rr:joinCondition [
@@ -626,7 +626,7 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate core:name;
+      rr:predicate ispra-top:name;
       rr:objectMap [
         rml:reference "MODEL_NAME"
       ]
@@ -661,14 +661,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasReference;
+        rr:predicate ispra-top:hasReference;
         rr:objectMap [
             rr:parentTriplesMap :StationModelPDF
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasDepiction;
+        rr:predicate ispra-top:hasDepiction;
         rr:objectMap [
             rr:parentTriplesMap :StationModelIMG
         ]
@@ -682,7 +682,7 @@
 #    ];
 
      rr:predicateObjectMap [
-       rr:predicate core:isClassifiedBy;
+       rr:predicate ispra-top:isClassifiedBy;
        rr:objectMap [
          rr:parentTriplesMap :StationTypeWMOClassification;
          rr:joinCondition [
@@ -720,14 +720,14 @@
      
      
     rr:predicateObjectMap [
-      rr:predicate core:isParametrisedBy;
+      rr:predicate ispra-top:isParametrisedBy;
       rr:objectMap [
         rr:parentTriplesMap :StructureMaterial
       ]
     ];
         
     rr:predicateObjectMap [
-      rr:predicate core:hasValue;
+      rr:predicate ispra-top:hasValue;
       rr:objectMap [
         rr:parentTriplesMap :StructureMaterialValue
       ]
@@ -738,7 +738,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/parameter/material";
-    rr:class core:Parameter
+    rr:class ispra-top:Parameter
   ];
 
   rr:predicateObjectMap [
@@ -778,7 +778,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/material/{STRUCTURE_EN}";
-	rr:class core:Material
+	rr:class ispra-top:Material
     ];
 
     rr:predicateObjectMap [
@@ -816,7 +816,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -863,21 +863,21 @@
      
      
     rr:predicateObjectMap [
-      rr:predicate core:isParametrisedBy;
+      rr:predicate ispra-top:isParametrisedBy;
       rr:objectMap [
         rr:parentTriplesMap :LevellingProperty
       ]
     ];
         
     rr:predicateObjectMap [
-      rr:predicate core:hasValue;
+      rr:predicate ispra-top:hasValue;
       rr:objectMap [
         rr:parentTriplesMap :LevellingValue
       ]
     ];
 
     rr:predicateObjectMap [
-      rr:predicate core:atTime;
+      rr:predicate ispra-top:atTime;
       rr:objectMap [
         rr:parentTriplesMap :LevellingYear
       ]
@@ -889,7 +889,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/year/{TIME}";
-    rr:class core:Year
+    rr:class ispra-top:Year
   ];
 
   rr:predicateObjectMap [
@@ -909,7 +909,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:value;
+    rr:predicate ispra-top:value;
     rr:objectMap [
       rml:reference "TIME";
       rr:datatype xsd:gYear
@@ -922,7 +922,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/parameter/levelling";
-    rr:class core:Parameter
+    rr:class ispra-top:Parameter
   ];
 
   rr:predicateObjectMap [
@@ -963,7 +963,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/method/{LEVELLING_EN}";
-    rr:class core:Method
+    rr:class ispra-top:Method
   ];
 
   rr:predicateObjectMap [
@@ -1011,14 +1011,14 @@
      
      
     rr:predicateObjectMap [
-      rr:predicate core:isParametrisedBy;
+      rr:predicate ispra-top:isParametrisedBy;
       rr:objectMap [
         rr:parentTriplesMap :DeploymentProperty
       ]
     ];
         
     rr:predicateObjectMap [
-      rr:predicate core:hasValue;
+      rr:predicate ispra-top:hasValue;
       rr:objectMap [
         rr:parentTriplesMap :DeploymentValue
       ]
@@ -1030,7 +1030,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/parameter/deployment";
-    rr:class core:Parameter
+    rr:class ispra-top:Parameter
   ];
 
   rr:predicateObjectMap [
@@ -1068,7 +1068,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/place/{LOCATION_EN}";
-    rr:class core:Location
+    rr:class ispra-top:Location
   ];
 
   rr:predicateObjectMap [

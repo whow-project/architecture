@@ -194,7 +194,7 @@ class RendisTriplifier(Triplifier):
                     else:
                         ente_proponente_type = "organisation"
                         label_ente_proponente = ente_proponente
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/core/Organisation"
+                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/top/Organisation"
                         
                     row.update({"ENTE_PROPONENTE_LABEL": label_ente_proponente})
                     row.update({"ENTE_PROPONENTE_TYPE": ente_proponente_type})
@@ -227,7 +227,7 @@ class RendisTriplifier(Triplifier):
                     else:
                         ente_attuatore_type = "organisation"
                         label_ente_attuatore = ente_proponente
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/core/Organisation"
+                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/top/Organisation"
                         
                     row.update({"ENTE_ATTUATORE_LABEL": label_ente_attuatore})
                     row.update({"ENTE_ATTUATORE_TYPE": ente_attuatore_type})

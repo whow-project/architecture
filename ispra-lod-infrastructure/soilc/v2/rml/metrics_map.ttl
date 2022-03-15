@@ -7,7 +7,7 @@
 @prefix metric: <https://dati.isprambiente.it/ontology/common/metric/> .
 @prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
 @prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -52,14 +52,14 @@
     ];
     
     rr:predicateObjectMap [
-        rr:predicate core:hasUnitOfMeasure;
+        rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
             rr:parentTriplesMap :MU
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate core:hasBroader;
+        rr:predicate ispra-top:hasBroader;
         rr:objectMap [
             rr:parentTriplesMap :BroaderMetric
         ]
@@ -94,7 +94,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{Unit_EN}";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
@@ -114,7 +114,7 @@
     ];
     
     rr:predicateObjectMap [
-        rr:predicate core:symbol;
+        rr:predicate ispra-top:symbol;
         rr:objectMap [
             rml:reference "Unit"
         ]
@@ -125,7 +125,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{EN}";
-        rr:class core:UnitOfMeasure
+        rr:class ispra-top:UnitOfMeasure
     ];
     
     rr:predicateObjectMap [

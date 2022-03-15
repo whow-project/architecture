@@ -3,7 +3,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -43,7 +43,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/{PRO_COM_T}";
-    rr:class core:UniqueIdentifier
+    rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
@@ -63,14 +63,14 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:identifier;
+    rr:predicate ispra-top:identifier;
     rr:objectMap [
       rml:reference "PRO_COM_T"
       ]
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:isIssuedBy;
+    rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
       rr:parentTriplesMap <#IstatOrg>
       ]
@@ -82,7 +82,7 @@
 
   rr:subjectMap [
     rr:constant "https://dati.isprambiente.it/ld/place/organisation/istat";
-    rr:class core:Organisation
+    rr:class ispra-top:Organisation
   ];
 
   rr:predicateObjectMap [
@@ -102,7 +102,7 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate core:acronym;
+    rr:predicate ispra-top:acronym;
     rr:objectMap [
       rr:constant "ISTAT"
       ]
@@ -117,7 +117,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:name;
+    rr:predicate ispra-top:name;
     rr:objectMap [
       rml:reference "COMUNE";
       rr:language "it"
@@ -141,14 +141,14 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:hasUniqueIdentifier;
+    rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
       rr:parentTriplesMap <#IstatCode>
       ]
     ];
   
   rr:predicateObjectMap [
-    rr:predicate core:name;
+    rr:predicate ispra-top:name;
     rr:objectMap [
       rml:reference "COMUNE_A";
       rml:languageMap [
@@ -203,14 +203,14 @@
   ];
 
   rr:predicateObjectMap [
-            rr:predicate core:partOf;
+            rr:predicate ispra-top:partOf;
             rr:objectMap [
                 rr:parentTriplesMap <#DatasetISPRA>;
             ]
         ];
   
   rr:predicateObjectMap [
-    rr:predicate core:lastUpdate;
+    rr:predicate ispra-top:lastUpdate;
     rr:objectMap [
       rr:parentTriplesMap <#CityYear>
     ]
@@ -286,11 +286,11 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_COM}";
-    rr:class core:Year
+    rr:class ispra-top:Year
   ];
   
   rr:predicateObjectMap [
-    rr:predicate core:year;
+    rr:predicate ispra-top:year;
     rr:objectMap [
       rr:template "{YEAR_COM}";
       rr:datatype xsd:gYear

@@ -5,7 +5,7 @@
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
-@prefix core: <https://dati.isprambiente.it/ontology/core/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -57,7 +57,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:time;
+    rr:predicate ispra-top:time;
     rr:objectMap [
       rml:reference "data";
       rr:datatype xsd:dateTime
@@ -161,7 +161,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate core:follows;
+    rr:predicate ispra-top:follows;
     rr:objectMap [
       rr:parentTriplesMap :ImplementationPlanStepPrevious
     ]
