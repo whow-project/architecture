@@ -46,7 +46,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/urban/collection/0201_%eval:place_id('{ {{COD_PLACE}} }')%_resources";
+        rr:template "https://dati.isprambiente.it/ld/urban/collection/0201_%eval:place_id('{ {{COD_PLACE}} }')%";
         rr:class core:Collection
     ];
 
