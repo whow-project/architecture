@@ -225,7 +225,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/time/year_{YEAR_PROV}";
+    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_PROV}";
     rr:class core:Year
   ];
   
@@ -233,7 +233,7 @@ rr:predicateObjectMap [
     rr:predicate core:year;
     rr:objectMap [
       rml:reference "YEAR_PROV";
-      rr:datatype xsd:int
+      rr:datatype xsd:gYear
     ]
   ].
   

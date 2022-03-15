@@ -285,7 +285,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/time/year_{YEAR_COM}";
+    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_COM}";
     rr:class core:Year
   ];
   
@@ -293,7 +293,7 @@
     rr:predicate core:year;
     rr:objectMap [
       rr:template "{YEAR_COM}";
-      rr:datatype xsd:int
+      rr:datatype xsd:gYear
     ]
   ].
 
