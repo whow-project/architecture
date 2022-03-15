@@ -12,7 +12,7 @@
 
 
 <#ProvincesCSV>
-  rml:source "location/input/csv/provinces.csv" ;
+  rml:source "place/input/csv/provinces.csv" ;
   rml:referenceFormulation ql:CSV;
   crml:separator "\t".
 
@@ -21,14 +21,14 @@
     rml:logicalSource <#ProvincesCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location";
+        rr:template "https://dati.isprambiente.it/ld/place";
     ].
 
 <#IstatCode>
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/uniqueidentifier/{COD_PROV}";
+    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/{COD_PROV}";
     rr:class core:UniqueIdentifier
   ];
 
@@ -67,7 +67,7 @@
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/location/organisation/istat";
+    rr:constant "https://dati.isprambiente.it/ld/place/organisation/istat";
     rr:class core:Organisation
   ];
 
@@ -98,7 +98,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/%eval:metropolitan_city_type({COD_PROV})%/0201_%eval:metropolitan_city_code({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type({COD_PROV})%/0201_%eval:metropolitan_city_code({COD_PROV})%";
   ];
 
   rr:predicateObjectMap [
@@ -185,7 +185,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/region/0201_{COD_REG}"
+    rr:template "https://dati.isprambiente.it/ld/place/region/0201_{COD_REG}"
   ].
   
   
@@ -193,7 +193,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/geometry/0201_{COD_PROV}_point";
+    rr:template "https://dati.isprambiente.it/ld/place/geometry/0201_{COD_PROV}_point";
     rr:class place:Geometry
   ];
   
@@ -242,5 +242,5 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/country/1"
+    rr:template "https://dati.isprambiente.it/ld/place/country/1"
   ].

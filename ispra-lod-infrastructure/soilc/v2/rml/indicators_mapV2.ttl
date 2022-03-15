@@ -122,7 +122,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}', False)%/0201_%eval:place_code('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%"
+        rr:template "https://dati.isprambiente.it/ld/place/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}', False)%/0201_%eval:place_code('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%"
     ].
 
 :Year

@@ -43,7 +43,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_{CODE_PLACE}"
+    rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_{CODE_PLACE}"
   ].
 
 :Catalogue
@@ -550,7 +550,7 @@
   rml:logicalSource :CSV_SEAS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/sea/{EN}";
+    rr:template "https://dati.isprambiente.it/ld/place/sea/{EN}";
     rr:class place:Sea
   ];
 
@@ -1683,7 +1683,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/place/{LOCATION_EN}";
+    rr:template "https://dati.isprambiente.it/ld/place/place/{LOCATION_EN}";
     rr:class core:Place
   ];
 

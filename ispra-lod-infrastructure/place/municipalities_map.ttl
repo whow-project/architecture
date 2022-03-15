@@ -12,7 +12,7 @@
 
 
 <#CitiesCSV>
-  rml:source "location/input/csv/cities.csv" ;
+  rml:source "place/input/csv/cities.csv" ;
   rml:referenceFormulation ql:CSV;
   crml:separator "\t".
 
@@ -20,21 +20,21 @@
     rml:logicalSource <#CitiesCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/location";
+        rr:template "https://dati.isprambiente.it/ld/place";
     ].
 
 <#Provinces>
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/%eval:metropolitan_city_type({COD_PROV})%/0201_%eval:metropolitan_city_code({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type({COD_PROV})%/0201_%eval:metropolitan_city_code({COD_PROV})%";
   ].
    
  <#Regions>
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/region/0201_{COD_REG}"
+    rr:template "https://dati.isprambiente.it/ld/place/region/0201_{COD_REG}"
   ].
 
  
@@ -42,7 +42,7 @@
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/uniqueidentifier/{PRO_COM_T}";
+    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/{PRO_COM_T}";
     rr:class core:UniqueIdentifier
   ];
 
@@ -81,7 +81,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/location/organisation/istat";
+    rr:constant "https://dati.isprambiente.it/ld/place/organisation/istat";
     rr:class core:Organisation
   ];
 
@@ -112,7 +112,7 @@
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/municipality/0201_{PRO_COM_T}";
+    rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_{PRO_COM_T}";
     rr:class place:Municipality
   ];
 
@@ -220,7 +220,7 @@
    rml:logicalSource <#CitiesCSV>;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/location/geometry/0201_{PRO_COM_T}_point";
+     rr:template "https://dati.isprambiente.it/ld/place/geometry/0201_{PRO_COM_T}_point";
      rr:class place:Geometry
    ];
   
@@ -252,7 +252,7 @@
    rml:logicalSource <#CitiesCSV>;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/location/geometry/0201_{PRO_COM_T}_polygon";
+     rr:template "https://dati.isprambiente.it/ld/place/geometry/0201_{PRO_COM_T}_polygon";
      rr:class place:Geometry
    ];
   
@@ -301,5 +301,5 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/location/country/1"
+    rr:template "https://dati.isprambiente.it/ld/place/country/1"
   ].
