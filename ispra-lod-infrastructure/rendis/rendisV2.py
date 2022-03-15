@@ -175,7 +175,7 @@ class RendisTriplifier(Triplifier):
                     label_ente_proponente = ""
                     if ente_proponente.startswith("Comune - "):
                         ente_proponente_type = "municipality"
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/location/Municipality"
+                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Municipality"
                         #ente_proponente = ente_proponente.replace("Comune - ", "")
                     elif ente_proponente.startswith("Provincia - "):
                     
@@ -183,14 +183,14 @@ class RendisTriplifier(Triplifier):
                         
                         if ente_proponente_id in metropolitan_cities:
                             ente_proponente_type = "metropolitancity"
-                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/location/MetropolitanCity"
+                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/MetropolitanCity"
                         else:
                             ente_proponente_type = "province"
-                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/location/Province"
+                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Province"
                     elif ente_proponente.startswith("Regione - "):
                     
                         ente_proponente_type = "region"
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/location/Region"
+                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Region"
                     else:
                         ente_proponente_type = "organisation"
                         label_ente_proponente = ente_proponente
@@ -208,7 +208,7 @@ class RendisTriplifier(Triplifier):
                     label_ente_attuatore = ""
                     if ente_attuatore.startswith("Comune - "):
                         ente_attuatore_type = "municipality"
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/location/Municipality"
+                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Municipality"
                         
                     elif ente_attuatore.startswith("Provincia - "):
                     
@@ -216,14 +216,14 @@ class RendisTriplifier(Triplifier):
                         
                         if ente_attuatore_id in metropolitan_cities:
                             ente_attuatore_type = "metropolitancity"
-                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/location/MetropolitanCity"
+                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/MetropolitanCity"
                         else:
                             ente_attuatore_type = "province"
-                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/location/Province"
+                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Province"
                     elif ente_attuatore.startswith("Regione - "):
                     
                         ente_attuatore_type = "region"
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/location/Region"
+                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Region"
                     else:
                         ente_attuatore_type = "organisation"
                         label_ente_attuatore = ente_proponente
