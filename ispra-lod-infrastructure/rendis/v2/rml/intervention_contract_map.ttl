@@ -1074,7 +1074,7 @@
    ];
   
    rr:predicateObjectMap [
-     rr:predicate ispra-place:geometry;
+     rr:predicate ispra-place:serialization;
      rr:objectMap [
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral
