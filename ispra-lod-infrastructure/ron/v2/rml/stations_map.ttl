@@ -3,7 +3,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf:/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -264,14 +264,14 @@
 #];
 
   rr:predicateObjectMap [
-    rr:predicate place:long;
+    rr:predicate ispra-place:long;
     rr:objectMap [
       rr:template "{LONG}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:lat;
+    rr:predicate ispra-place:lat;
     rr:objectMap [
       rr:template "{LAT}"
     ]
@@ -348,7 +348,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}_{STAT_TYPE_EN}";
-    rr:class place:Geometry
+    rr:class ispra-place:Geometry
   ];
 
   rr:predicateObjectMap [
@@ -368,21 +368,21 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:long;
+    rr:predicate ispra-place:long;
     rr:objectMap [
       rr:template "{LONG}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:lat;
+    rr:predicate ispra-place:lat;
     rr:objectMap [
       rr:template "{LAT}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:geometry;
+    rr:predicate ispra-place:geometry;
     rr:objectMap [
       rr:template "POINT ({LONG} {LAT})";
       rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
@@ -390,7 +390,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:hasGeometryType;
+    rr:predicate ispra-place:hasGeometryType;
     rr:objectMap [
       rr:parentTriplesMap :StationGeometryType
     ]
@@ -401,7 +401,7 @@
 
   rr:subjectMap [
     rr:constant "https://dati.isprambiente.it/ld/common/geometrytype/point";
-    rr:class place:GeometryType
+    rr:class ispra-place:GeometryType
   ].
 
 
@@ -461,14 +461,14 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:hasGeometry;
+    rr:predicate ispra-place:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap :FeatureGeometry
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:hasNearbyLocation;
+    rr:predicate ispra-place:hasNearbyLocation;
     rr:objectMap [
       rr:parentTriplesMap :Place
     ]
@@ -514,11 +514,11 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}";	
-    rr:class place:Geometry
+    rr:class ispra-place:Geometry
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:geometry;
+    rr:predicate ispra-place:geometry;
     rr:objectMap [
       rr:template "POINT ({LONG} {LAT})";
       rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
@@ -526,21 +526,21 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:long;
+    rr:predicate ispra-place:long;
     rr:objectMap [
       rr:template "{LONG}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:lat;
+    rr:predicate ispra-place:lat;
     rr:objectMap [
       rr:template "{LAT}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate place:hasGeometryType;
+    rr:predicate ispra-place:hasGeometryType;
     rr:objectMap [
       rr:parentTriplesMap :StationGeometryType
     ]
@@ -551,7 +551,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/sea/{EN}";
-    rr:class place:Sea
+    rr:class ispra-place:Sea
   ];
 
   rr:predicateObjectMap [

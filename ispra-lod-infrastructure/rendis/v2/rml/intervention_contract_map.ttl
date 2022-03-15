@@ -3,7 +3,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
@@ -392,7 +392,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate place:hasGeometry;
+        rr:predicate ispra-place:hasGeometry;
 	rr:objectMap [
 	    rr:parentTriplesMap :Geometry
 	]
@@ -1070,11 +1070,11 @@
   
    rr:subjectMap [
      rr:template "https://dati.isprambiente.it/ld/rendis/geometry/%eval:digest('{POINT}')%";
-     rr:class place:Geometry
+     rr:class ispra-place:Geometry
    ];
   
    rr:predicateObjectMap [
-     rr:predicate place:geometry;
+     rr:predicate ispra-place:geometry;
      rr:objectMap [
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral

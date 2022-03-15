@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -109,7 +109,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/region/0201_{COD_REG}";
-    rr:class place:Region
+    rr:class ispra-place:Region
   ];
   
   rr:predicateObjectMap [
@@ -129,7 +129,7 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate place:istat;
+    rr:predicate ispra-place:istat;
     rr:objectMap [
       rml:reference "COD_REG";
       rr:datatype xsd:string
@@ -151,7 +151,7 @@
     ];
 
   rr:predicateObjectMap [
-        rr:predicate place:hasCountry;
+        rr:predicate ispra-place:hasCountry;
         rr:objectMap [
             rr:parentTriplesMap <#Nation>;
         ]
@@ -162,7 +162,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/country/1";
-    rr:class place:Country
+    rr:class ispra-place:Country
   ];
 
   rr:predicateObjectMap [
@@ -181,7 +181,7 @@
       ]
     ];
   rr:predicateObjectMap [
-    rr:predicate place:istat;
+    rr:predicate ispra-place:istat;
     rr:objectMap [
       rr:template "1";
       rr:datatype xsd:string

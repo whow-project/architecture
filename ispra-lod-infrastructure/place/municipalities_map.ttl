@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -113,7 +113,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_{PRO_COM_T}";
-    rr:class place:Municipality
+    rr:class ispra-place:Municipality
   ];
 
   rr:predicateObjectMap [
@@ -133,7 +133,7 @@
     ];
     
   rr:predicateObjectMap [
-    rr:predicate place:istat;
+    rr:predicate ispra-place:istat;
     rr:objectMap [
       rml:reference "PRO_COM_T";
       rr:datatype xsd:string
@@ -168,35 +168,35 @@
     ];
     
   rr:predicateObjectMap [
-    rr:predicate place:hasCountry;
+    rr:predicate ispra-place:hasCountry;
     rr:objectMap [
       rr:parentTriplesMap <#Nation>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate place:hasRegion;
+    rr:predicate ispra-place:hasRegion;
     rr:objectMap [
       rr:parentTriplesMap <#Regions>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate place:hasProvince;
+    rr:predicate ispra-place:hasProvince;
     rr:objectMap [
       rr:parentTriplesMap <#Provinces>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate place:hasGeometry;
+    rr:predicate ispra-place:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#CityPoint>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate place:hasGeometry;
+    rr:predicate ispra-place:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#CityPolygon>
     ]
@@ -221,11 +221,11 @@
   
    rr:subjectMap [
      rr:template "https://dati.isprambiente.it/ld/place/geometry/0201_{PRO_COM_T}_point";
-     rr:class place:Geometry
+     rr:class ispra-place:Geometry
    ];
   
    rr:predicateObjectMap [
-     rr:predicate place:geometry;
+     rr:predicate ispra-place:geometry;
      rr:objectMap [
        rml:reference "CENTROID_COM";
        rr:datatype geosparql:wktLiteral
@@ -253,11 +253,11 @@
   
    rr:subjectMap [
      rr:template "https://dati.isprambiente.it/ld/place/geometry/0201_{PRO_COM_T}_polygon";
-     rr:class place:Geometry
+     rr:class ispra-place:Geometry
    ];
   
    rr:predicateObjectMap [
-     rr:predicate place:geometry;
+     rr:predicate ispra-place:geometry;
      rr:objectMap [
        rml:reference "POLYGON_COM";
        rr:datatype geosparql:wktLiteral
