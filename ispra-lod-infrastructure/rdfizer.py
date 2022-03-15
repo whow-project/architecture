@@ -20,7 +20,7 @@ def process(arg_parser: Namespace):
         #place_maker("/data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
         placeRDF()
-        print("Location Complete")
+        print("Place Complete")
     elif args.measures:
         print("Processing measures...")
         
