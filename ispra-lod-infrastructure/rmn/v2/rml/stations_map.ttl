@@ -1068,7 +1068,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/place/{LOCATION_EN}";
-    rr:class core:Place
+    rr:class core:Location
   ];
 
   rr:predicateObjectMap [

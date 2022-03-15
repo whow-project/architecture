@@ -383,7 +383,7 @@
     
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/rendis/place/%eval:digest('{POINT}')%";
-	rr:class core:Place 
+	rr:class core:Location 
     ];
 
     rr:predicateObjectMap [
