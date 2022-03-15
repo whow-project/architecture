@@ -3,8 +3,8 @@ from argparse import ArgumentParser, Namespace
 from kg_loader import KnowledgeGraphLoader
 from rmn.rmn import RMNTriplifier
 from ron.ron import RONTriplifier
-from location.place_shp2csv import place_maker
-from location.location import locationRDF
+from place.place_shp2csv import place_maker
+from place.place import placeRDF
 from rendis.rendisV2 import RendisTriplifier
 from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
@@ -16,10 +16,10 @@ def process(arg_parser: Namespace):
     
     triplifiers = []
     
-    if args.location:
+    if args.place:
         #place_maker("/data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
-        locationRDF()
+        placeRDF()
         print("Location Complete")
     elif args.measures:
         print("Processing measures...")
@@ -59,7 +59,7 @@ def process(arg_parser: Namespace):
         Here we create the TriplificationManager and we optionally set the custom path to the JSON configuration file.
         Such a path is passed by means of the argument -c via command line.
         The path value is stored inside the object args.json_config 
-        In case no argument is passed then the default location (e.g. ./soilc/conf.json) is used.
+        In case no argument is passed then the default path (e.g. ./soilc/conf.json) is used.
         '''
         triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader(), args.json_config)
         triplification_manager.do_triplification()
@@ -70,9 +70,9 @@ def process(arg_parser: Namespace):
 if __name__ == "__main__":
     arg_parser = ArgumentParser("annual_run.py", description="This script runs ISPRA Data Conversion (annual)")
 
-    arg_parser.add_argument("-p", "--pl", dest="location", nargs='?',
+    arg_parser.add_argument("-p", "--pl", dest="place", nargs='?',
                             const=True, default=False,
-                            help="location Conversion")
+                            help="place Conversion")
 
     arg_parser.add_argument("-i", "--ind", dest="indicators", nargs='?',
                             const=True, default=False,

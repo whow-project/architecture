@@ -117,11 +117,11 @@ class KnowledgeGraphLoader():
             
         return ret
         
-    def __save_graph(self, location, file_name, graph):
-        if not os.path.exists(location):
-            os.makedirs(location)
+    def __save_graph(self, place, file_name, graph):
+        if not os.path.exists(place):
+            os.makedirs(place)
                     
-        gzip_nt = os.path.join(location, file_name)
+        gzip_nt = os.path.join(place, file_name)
                     
         with gzip.open(gzip_nt, 'wb') as f:
             f.write(graph.serialize(format="nt11"))

@@ -1,4 +1,4 @@
-#usage: python3 delete_location.py <SAMPLE>
+#usage: python3 delete_place.py <SAMPLE>
 #<SAMPLE> = municipalities, provinces, regions
 
 import sys
@@ -31,10 +31,10 @@ if __name__ == '__main__':
 
     print ('Category:', str(sys.argv[1]))
 
-    str_ispra_graph = 'https://dati.isprambiente.it/ld/location/'
+    str_ispra_graph = 'https://dati.isprambiente.it/ld/place/'
 
-    file_triples_todel = 'rdf/location/kg/' + sys.argv[1] + '/delete.nt.gz'
-    file_triples_update = 'rdf/location/kg/' + sys.argv[1] + '.nt.gz'
+    file_triples_todel = 'rdf/place/kg/' + sys.argv[1] + '/delete.nt.gz'
+    file_triples_update = 'rdf/place/kg/' + sys.argv[1] + '.nt.gz'
 
     triple_todel = Graph()
     triple_update = Graph()
