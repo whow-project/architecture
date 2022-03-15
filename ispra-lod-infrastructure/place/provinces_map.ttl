@@ -2,7 +2,7 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix location: <https://dati.isprambiente.it/ontology/place/> .
+@prefix place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix core: <https://dati.isprambiente.it/ontology/core/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -117,7 +117,7 @@
     ];
 
   rr:predicateObjectMap [
-    rr:predicate location:istat;
+    rr:predicate place:istat;
     rr:objectMap [
       rml:reference "COD_PROV";
       rr:datatype xsd:string
@@ -140,21 +140,21 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate location:hasCountry;
+    rr:predicate place:hasCountry;
     rr:objectMap [
       rr:parentTriplesMap <#Nation>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate location:hasRegion;
+    rr:predicate place:hasRegion;
     rr:objectMap [
       rr:parentTriplesMap <#Regions>
     ]
   ];
   
   rr:predicateObjectMap [
-    rr:predicate location:hasGeometry;
+    rr:predicate place:hasGeometry;
     rr:objectMap [
       rr:parentTriplesMap <#Geometry>
     ]
@@ -194,11 +194,11 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/location/geometry/0201_{COD_PROV}_point";
-    rr:class location:Geometry
+    rr:class place:Geometry
   ];
   
   rr:predicateObjectMap [
-    rr:predicate location:geometry;
+    rr:predicate place:geometry;
     rr:objectMap [
       rml:reference "CENTROID_PROV";
       rr:datatype geosparql:wktLiteral
