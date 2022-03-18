@@ -1,11 +1,11 @@
 from rdflib import Graph
 from rdflib.store import Store
-from SPARQLWrapper import SPARQLWrapper
+#from SPARQLWrapper import SPARQLWrapper
 from rdflib.plugin import get as plugin
 import os, sys
 import configuration as conf
 import vstroke
-from virtuoso.vsparql import Result
+#from virtuoso.vsparql import Result
 #import virtuoso
 import gzip, tarfile
 from builtins import staticmethod
@@ -112,7 +112,7 @@ class KnowledgeGraphLoader():
                 
         graph_string = new_graph.serialize(format="nt11")
         
-        with gzip.open(kg_path, 'wb') as f:
+        with gzip.open(kg_path, 'wt') as f:
             f.write(graph_string)
             
         return ret
@@ -123,7 +123,7 @@ class KnowledgeGraphLoader():
                     
         gzip_nt = os.path.join(place, file_name)
                     
-        with gzip.open(gzip_nt, 'wb') as f:
+        with gzip.open(gzip_nt, 'wt') as f:
             f.write(graph.serialize(format="nt11"))
 
     #@synchronized

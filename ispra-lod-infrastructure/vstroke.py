@@ -28,7 +28,7 @@ __all__ = ['Virtuoso', 'OperationalError', 'resolve', 'VirtRDF']
 
 VirtRDF = Namespace('http://www.openlinksw.com/schemas/virtrdf#')
 
-from virtuoso.common import READ_COMMITTED
+#from virtuoso.common import READ_COMMITTED
 import logging
 log = logging.getLogger(__name__)
 
@@ -274,13 +274,13 @@ class Virtuoso(Store):
                 raise
         return self._connection
 
-    def cursor(self, isolation=READ_COMMITTED):
-        """
-        Acquire a cursor, setting the isolation level.
-        """
-        cursor = self.connection.cursor()
-        cursor.execute("SET TRANSACTION ISOLATION LEVEL %s" % isolation)
-        return cursor
+#    def cursor(self, isolation=READ_COMMITTED):
+#        """
+#        Acquire a cursor, setting the isolation level.
+#        """
+#        cursor = self.connection.cursor()
+#        cursor.execute("SET TRANSACTION ISOLATION LEVEL %s" % isolation)
+#        return cursor
 
     def close(self, commit_pending_transaction=False):
         if commit_pending_transaction:
