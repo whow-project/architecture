@@ -37,7 +37,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/{COD_REG}";
+    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_{COD_REG}";
     rr:class ispra-top:UniqueIdentifier
   ];
 

@@ -72,7 +72,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/uniqueidentifier/{I_idIntervento}";
+    rr:template "https://dati.isprambiente.it/ld/rendis/uniqueidentifier/00104_{I_idIntervento}";
     rr:class ispra-top:UniqueIdentifier
   ];
  
