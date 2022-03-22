@@ -93,6 +93,12 @@
     ]
   ];
 
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:hasIdentifierSchema;
+    rr:objectMap [
+      rr:parentTriplesMap <#IspraIdentifierSchema>
+      ]
+    ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
@@ -104,11 +110,50 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasCreator;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/common/organisation/ispra";
+      rr:constant "https://dati.isprambiente.it/ld/common/organisation/001";
       rr:termType rr:IRI
     ]
   ].
   
+
+ <#IspraIdentifierSchema>
+
+   rml:logicalSource :CSV;
+
+   rr:subjectMap [
+    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00201";
+    rr:class ispra-top:IdentifierSchema
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:constant "Schema ISPRA identificativi interventi Rendis";
+      rr:language "it"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:constant "ISPRA identifier schema of Rendis interventions";
+      rr:language "en"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:identifier;
+    rr:objectMap [
+      rml:constant "04"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isIssuedBy;
+    rr:objectMap [
+      rr:constant "https://dati.isprambiente.it/ld/common/organisation/001";
+      ]
+    ] .
 
 
 :Intervention
