@@ -108,7 +108,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/region/0201_{COD_REG}";
+    rr:template "https://dati.isprambiente.it/ld/place/region/00201_{COD_REG}";
     rr:class ispra-place:Region
   ];
   

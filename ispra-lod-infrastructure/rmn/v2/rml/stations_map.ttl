@@ -43,7 +43,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_{CODE_PLACE}"
+    rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{CODE_PLACE}"
   ].
 
 :Catalogue
@@ -51,7 +51,7 @@
 
   rr:subjectMap [
     #rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/{CODE_PLACE}_resources";
-    rr:template "https://dati.isprambiente.it/ld/rmn/collection/0201_{CODE_PLACE}";
+    rr:template "https://dati.isprambiente.it/ld/rmn/collection/00201_{CODE_PLACE}";
 #    rr:class ispra-top:Collection
   ] ;
 

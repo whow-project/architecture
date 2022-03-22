@@ -41,7 +41,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/ron/collection/0201_%eval:cod_place(*)%";
+        rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_%eval:cod_place(*)%";
         rr:class ispra-top:Collection
     ];
 
@@ -118,7 +118,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_%eval:cod_place(*)%"
+        rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_%eval:cod_place(*)%"
     ].
 
 :Year

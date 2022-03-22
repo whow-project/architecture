@@ -43,14 +43,14 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/municipality/0201_{CODE_PLACE}"
+    rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{CODE_PLACE}"
   ].
 
 :Catalogue
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/ron/collection/0201_{CODE_PLACE}";
+    rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_{CODE_PLACE}";
     rr:class ispra-top:Collection
   ];
 
