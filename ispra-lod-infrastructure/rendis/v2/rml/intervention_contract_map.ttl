@@ -121,7 +121,7 @@
    rml:logicalSource :CSV;
 
    rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00201";
+    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00104";
     rr:class ispra-top:IdentifierSchema
   ];
 
