@@ -47,7 +47,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "STAT_CODE",
+      rml:reference "STAT_CODE";
       rr:language "it"
     ]
   ];
