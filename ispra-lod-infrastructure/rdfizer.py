@@ -15,9 +15,10 @@ def process(arg_parser: Namespace):
     
     
     triplifiers = []
+    files_to_upload = []
     
     if args.place:
-        #place_maker("/data/istat/Limiti01012015.zip")
+        #place_maker("data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
         placeRDF()
         print("Place Complete")
@@ -62,9 +63,8 @@ def process(arg_parser: Namespace):
         In case no argument is passed then the default path (e.g. ./soilc/conf.json) is used.
         '''
         triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader(), args.json_config)
-        triplification_manager.do_triplification()
-
-
+        #triplification_manager.do_triplification()
+        triplification_manager.do_triplification(args.upload)
 
 
 if __name__ == "__main__":
@@ -101,6 +101,8 @@ if __name__ == "__main__":
     arg_parser.add_argument("-d", "--dat", dest="dataset", required=False, help="Dataset")
     
     arg_parser.add_argument("-c", "--config", dest="json_config", required=False, help="Path to JSON configuration file.")
+
+    arg_parser.add_argument("--upload", help="upload the output files on the test server", action="store_true")
 
 
     args = arg_parser.parse_args()

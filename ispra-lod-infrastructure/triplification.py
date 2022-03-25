@@ -102,9 +102,13 @@ class RDFOutputConfiguration():
 
 class MappingConfiguration():
     
-    def __init__(self, dataset : str, rml_folder : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
+    def __init__(self, dataset : str, rml_folder : str, dest_address : str, dest_folder : str, username : str, passwd : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
         self.__dataset = dataset
         self.__rml_folder = rml_folder
+        self.__dest_address = dest_address
+        self.__dest_folder = dest_folder
+        self.__username = username
+        self.__passwd = passwd
         self.__data_folder = data_folder
         self.__dirty_data_folder = dirty_data_folder
         self.__mappings = mappings
@@ -116,6 +120,18 @@ class MappingConfiguration():
     
     def get_rml_folder(self):
         return self.__rml_folder
+
+    def get_dest_address(self):
+        return self.__dest_address
+
+    def get_dest_folder(self):
+        return self.__dest_folder
+
+    def get_username(self):
+        return self.__username
+
+    def get_passwd(self):
+        return self.__passwd
     
     def get_data_folder(self):
         return self.__data_folder
@@ -170,6 +186,14 @@ class MappingConfiguration():
             dataset = mapping_conf["dataset"]
             
             rml_path = mapping_conf["rml_folder"]
+            global dest_ip
+            dest_ip = mapping_conf["dest_address"]
+            global dest_path
+            dest_path = mapping_conf["dest_folder"]
+            global user_str
+            user_str = mapping_conf["username"]
+            global pass_str
+            pass_str = mapping_conf["passwd"]
             data_path = mapping_conf["data_folder"]
             dirty_data_path = mapping_conf["dirty_data_folder"]
             
@@ -225,7 +249,7 @@ class MappingConfiguration():
                 
                 maps.append(Mapping(rml_file, input_files, variables))
             
-            mapping_configuration = MappingConfiguration(dataset, rml_path, data_path, dirty_data_path, maps, rdf_output_configuration, year)
+            mapping_configuration = MappingConfiguration(dataset, rml_path, dest_ip, dest_path, user_str, pass_str, data_path, dirty_data_path, maps, rdf_output_configuration, year)
         else:
             raise MalfofmedConfigJsonException()
         
@@ -267,6 +291,10 @@ class Triplifier(ABC):
         mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
         
         self._rml_path = mapping_configuration.get_rml_folder()
+        self._dest_ip = mapping_configuration.get_dest_address()
+        self._dest_path = mapping_configuration.get_dest_folder()
+        self._user_str = mapping_configuration.get_username()
+        self._pass_str = mapping_configuration.get_passwd()
         self._data_path = mapping_configuration.get_data_folder()
         self._dirty_data_path = mapping_configuration.get_dirty_data_folder()
         
@@ -309,7 +337,8 @@ class TriplificationManager():
         self.__kg_loader = kg_loader
         
         
-    def do_triplification(self):
+    #def do_triplification(self):
+    def do_triplification(self, bool_upload):
         try:
             result = self.__triplifier.triplify()
         except MissingDataFolderException as e:
@@ -318,8 +347,16 @@ class TriplificationManager():
              
         if result and self.__kg_loader:
             rdf_output_configuration = result.get_mapping_configuration().get_rdf_output_configuration()
-            self.__kg_loader.toLoad_toDelete(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
-            
+            #self.__kg_loader.toLoad_toDelete(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
+            file_triple, file_load, file_delete = self.__kg_loader.toLoad_toDelete_2(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
+
+        if bool_upload:
+            self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple)))
+            if os.path.exists(file_load):
+                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path), str(file_load)))
+            if os.path.exists(file_delete):
+                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path), str(file_delete)))
+           
         
 
 class UtilsFunctions():
