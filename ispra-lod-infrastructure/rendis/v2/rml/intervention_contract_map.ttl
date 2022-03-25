@@ -67,7 +67,7 @@
         ]
     ].
 
-:IntervetionCode
+:InterventionCode
 
   rml:logicalSource :CSV;
   
@@ -175,7 +175,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
-      rr:parentTriplesMap :IntervetionCode
+      rr:parentTriplesMap :InterventionCode
     ]
   ];
 
