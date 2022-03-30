@@ -15,7 +15,6 @@ def process(arg_parser: Namespace):
     
     
     triplifiers = []
-    files_to_upload = []
     
     if args.place:
         #place_maker("data/istat/Limiti01012015.zip")
