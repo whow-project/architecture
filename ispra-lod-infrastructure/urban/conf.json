@@ -3,9 +3,13 @@
 	"graph_iri": "https://dati.isprambiente.it/ld/urban",
 	"rdf_dump_file_name": "urban_{{year}}",
 	"rdf_dump_file_serialisation": "ntriples",
-	"data_folder": "/data/urban/v2/data",
-	"dirty_data_folder": "/data/urban/v2/dirtydata",
-	"rml_folder": "/data/urban/v2/rml",
+	"data_folder": "data/urban/v2/data",
+	"dirty_data_folder": "data/urban/v2/dirtydata",
+	"rml_folder": "data/urban/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
 	"year": {{year}},
 	"mappings": [
 		{
@@ -19,7 +23,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('/data/urban/v2/dirtydata/Province_{{year}}.csv')"
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Province_{{year}}.csv')"
                 },
                 {
                     "id": "YEAR",
@@ -42,7 +46,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('/data/urban/v2/dirtydata/Comuni_{{year}}.csv')"
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Comuni_{{year}}.csv')"
                 },
                 {
                     "id": "YEAR",
