@@ -8,6 +8,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix prov: <https://www.w3.org/ns/prov#> .
 
 
 
@@ -351,3 +352,31 @@
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/country/1"
   ].
+
+#=================
+#CITIES NO LONGER EXISTING
+<#DeadCitiesCSV>
+  rml:source "data/place/v2/data/comuni_soppressi.csv" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+<#DeadCities>
+  rml:logicalSource <#DeadCitiesCSV>;
+
+  rr:subjectMap [
+  rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{Codice_del_Comune_associato_alla_variazione}"
+];
+
+  rr:predicateObjectMap [
+  rr:predicate prov:wasDerivedFrom;
+  rr:objectMap [
+    rr:parentTriplesMap <#DeadCityOrigin>
+  ]
+].
+
+<#DeadCityOrigin>
+rml:logicalSource <#DeadCitiesCSV>;
+
+rr:subjectMap [
+  rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{Codice_Comune}"
+].

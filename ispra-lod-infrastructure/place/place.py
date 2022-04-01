@@ -5,6 +5,7 @@ from rdflib.parser import StringInputSource
 #from load_delete import toLoad_toDelete
 from kg_loader import KnowledgeGraphLoader
 from pyrml import TermUtils, RMLConverter
+from utf8_converter import UTF8Converter
 from typing import Dict
 
 
@@ -89,6 +90,15 @@ def placeRDF(config_file_path : str, bool_upload : bool):
     file_tripleP, file_loadP, file_deleteP = loader.toLoad_toDelete_2(g, "provinces", "place")
 
     #municipalities
+    utf8_converter = UTF8Converter('data/place/v2/dirtydata','data/place/v2/data')
+    utf8_converter.convert_single_file('comuni_soppressi.csv')
+    
+    with open("data/place/v2/data/comuni_soppressi.csv","rt") as f:
+        lines = f.readlines()
+    lines[0] = lines[0].replace(' ','_') #remove empty spaces from header
+    with open("data/place/v2/data/comuni_soppressi.csv","wt") as ff:
+        ff.writelines(lines)
+
     template = env.get_template('place/municipalities_map.ttl')
     rml_mapping = template.render()
 
