@@ -9,6 +9,8 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix onto-clv: <https://w3id.org/italia/onto/CLV/> .
+
 
 
 <#ProvincesCSV>
@@ -213,7 +215,15 @@
             rr:parentTriplesMap <#DatasetISPRA>;
         ]
     ];
+
+  rr:predicateObjectMap [
+    rr:predicate onto-clv:hasRankOrder;
+    rr:objectMap [
+        rr:constant "3";
+    ]
+  ];
   
+
   rr:predicateObjectMap [
     rr:predicate ispra-top:lastUpdate;
     rr:objectMap [
