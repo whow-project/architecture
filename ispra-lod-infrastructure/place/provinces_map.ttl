@@ -30,14 +30,14 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_{COD_PROV}";
+    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_%eval:metropolitan_city_code({COD_PROV})%";
     rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{COD_PROV} (Istat)";
+      rr:template "%eval:metropolitan_city_code({COD_PROV})% (Istat)";
       rr:language "it"
       ]
     ];
@@ -45,7 +45,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-     rr:template "{COD_PROV} (Istat)";
+     rr:template "%eval:metropolitan_city_code({COD_PROV})% (Istat)";
       rr:language "en"
       ]
     ];
@@ -60,7 +60,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rml:reference "COD_PROV"
+      rml:reference "%eval:metropolitan_city_code({COD_PROV})%"
       ]
     ];
 
@@ -168,7 +168,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:istat;
     rr:objectMap [
-      rml:reference "COD_PROV";
+      rr:template "%eval:metropolitan_city_code({COD_PROV})%";
       rr:datatype xsd:string
     ]
   ];
