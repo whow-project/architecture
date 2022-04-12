@@ -3,9 +3,13 @@
 	"graph_iri": "https://dati.isprambiente.it/ld/rmn/",
 	"rdf_dump_file_name": "rmn_dump",
 	"rdf_dump_file_serialisation": "ntriples",
-	"data_folder": "/data/rmn/v2/data",
-	"dirty_data_folder": "/data/rmn/v2/dirtydata",
-	"rml_folder": "/data/rmn/v2/rml",
+	"data_folder": "data/rmn/v2/data",
+	"dirty_data_folder": "data/rmn/v2/dirtydata",
+	"rml_folder": "data/rmn/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
 	"mappings":[
          {
             "rml":"stations_map.ttl",

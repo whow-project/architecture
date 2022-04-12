@@ -44,7 +44,92 @@ class KnowledgeGraphLoader():
         for (s,p,o) in g2:
             g1.add((s,p,o))
         return g1
+ 
+
+    def upload_triple_file(self,ipaddr,user,passwd,file,folder):
+
+        ssh = SSHClient()
+        ssh.load_system_host_keys()
+        ssh.set_missing_host_key_policy(AutoAddPolicy())
+        ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
+
+        scp = SCPClient(ssh.get_transport())
+        print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
+        scp.put(file,folder)
+
+
+    def toLoad_toDelete_2 (self, new_graph, name, dataset):
         
+        #as toLoad_toDelete, but returns folder of produced files
+        kg_folder = os.path.join("rdf", dataset, "kg")
+        kg_name = name.lower() + ".nt.gz"
+        kg_path = os.path.join(kg_folder, kg_name)
+        
+        if not os.path.exists(os.path.dirname(kg_path)):
+            os.makedirs(os.path.dirname(kg_path))
+            
+        
+        
+        if os.path.isfile(kg_path):
+        
+            with gzip.open(kg_path, 'rb') as f:
+                graph_string = f.read()
+        
+            old_graph = Graph()
+            
+            old_graph.parse(data = graph_string, format="nt11")
+            
+            to_load = new_graph - old_graph
+            to_delete = old_graph - new_graph
+            
+            #new_graph.serialize(kg_path, format="nt11")
+
+            try:
+                '''
+                TODO: It is possible to modify self.__delete() in order to use iSQL instead of VStroke 
+                (i.e. the RDFLib extension for Virtuoso)  
+                '''
+                deleted = self.__delete(to_delete, dataset)
+            except:
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "delete.nt.gz", to_delete)
+                deleted = False
+            
+            try:
+                '''
+                TODO: It is possible to modify self.__load() in order to use iSQL instead of VStroke 
+                (i.e. the RDFLib extension for Virtuoso)  
+                '''
+                loaded = self.__load(to_load, dataset)
+            except:
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", to_load)
+                loaded = False
+                
+            
+            if deleted and loaded: 
+                ret = True
+            else:
+                ret = False
+
+        else:
+            try:
+                loaded = self.__load(new_graph, dataset)
+            except:
+                loaded = False
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", new_graph)
+                
+                
+            if loaded:                    
+                ret = True
+            else:
+                ret = False
+                
+        graph_string = new_graph.serialize(format="nt11")
+        
+        with gzip.open(kg_path, 'wt') as f:
+            f.write(graph_string)
+
+        return kg_path, (os.path.join(kg_folder, name.lower(), "load.nt.gz")), (os.path.join(kg_folder, name.lower(), "delete.nt.gz"))
+
 
     def toLoad_toDelete (self, new_graph, name, dataset):
         
@@ -114,7 +199,7 @@ class KnowledgeGraphLoader():
         
         with gzip.open(kg_path, 'wt') as f:
             f.write(graph_string)
-            
+
         return ret
         
     def __save_graph(self, place, file_name, graph):

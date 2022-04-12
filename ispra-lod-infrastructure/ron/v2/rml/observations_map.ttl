@@ -34,7 +34,7 @@
         rr:objectMap [
             rr:parentTriplesMap :Procedure
         ]
-    ].hasAssertionForMembers
+    ].
 
 :Catalogue
     rml:logicalSource :OBSERVATION_DATA;
