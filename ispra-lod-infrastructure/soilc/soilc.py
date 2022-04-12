@@ -45,12 +45,17 @@ def unit_entity (row):
         return None
 
 def __istat_normaliser(istat, length):
-    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
+    csv_file = "data/place/v2/dirtydata/metropolitan_cities.csv"
+    df_mc = pd.read_csv(csv_file, delimiter=';')
+
     while len(istat) < length:
         istat = str(0) + istat
-        
-    if istat in metropolitan_cities:
-        istat = str(2) + istat[1:]
+    try:
+        if (int(istat) in df_mc['PROV_CODE'].values):
+            istat = (str(df_mc['MC_CODE'][df_mc['PROV_CODE']==int(istat)].values[0]))
+    except:
+        return istat
+
     return istat
 
 def istat_normaliser(df):
