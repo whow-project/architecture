@@ -1,5 +1,6 @@
 import os
 import json
+import pandas as pd
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib.parser import StringInputSource
 #from load_delete import toLoad_toDelete
@@ -19,6 +20,15 @@ def metropolitan_city(istat):
         out = "province/" + istat
     
     return out
+
+def metropolitan_city_code_2(istat):
+    csv_file = "data/place/v2/dirtydata/metropolitan_cities.csv"
+    df_mc = pd.read_csv(csv_file, delimiter=';')
+    mc_value = istat
+    if (int(istat) in df_mc['PROV_CODE'].values):
+        mc_value = (str(df_mc['MC_CODE'][df_mc['PROV_CODE']==int(istat)].values[0]))
+
+    return mc_value
         
 def metropolitan_city_type(istat):
     metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
@@ -84,6 +94,7 @@ def placeRDF(config_file_path : str, bool_upload : bool):
     rml_converter.register_function("metropolitan_city", metropolitan_city)
     rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
     rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
+    rml_converter.register_function("metropolitan_city_code_2", metropolitan_city_code_2)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
     #toLoad_toDelete(g, "provinces", "places")
@@ -106,6 +117,7 @@ def placeRDF(config_file_path : str, bool_upload : bool):
     rml_converter.register_function("metropolitan_city", metropolitan_city)
     rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
     rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
+    rml_converter.register_function("metropolitan_city_code_2", metropolitan_city_code_2)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")
