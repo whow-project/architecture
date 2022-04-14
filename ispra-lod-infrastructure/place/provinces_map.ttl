@@ -10,6 +10,7 @@
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix onto-clv: <https://w3id.org/italia/onto/CLV/> .
+@prefix prov: <https://www.w3.org/ns/prov#> .
 
 
 
@@ -30,14 +31,14 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_%eval:metropolitan_city_code_2({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
     rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "%eval:metropolitan_city_code_2({COD_PROV})% (Istat)";
+      rr:template "%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')% (Istat)";
       rr:language "it"
       ]
     ];
@@ -45,7 +46,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-     rr:template "%eval:metropolitan_city_code_2({COD_PROV})% (Istat)";
+     rr:template "%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')% (Istat)";
       rr:language "en"
       ]
     ];
@@ -60,7 +61,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rr:template "%eval:metropolitan_city_code_2({COD_PROV})%"
+      rr:template "%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%"
       ]
     ];
 
@@ -147,7 +148,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type({COD_PROV})%/00201_%eval:metropolitan_city_code_2({COD_PROV})%";
+    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
   ];
 
   rr:predicateObjectMap [
@@ -168,7 +169,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:istat;
     rr:objectMap [
-      rr:template "%eval:metropolitan_city_code_2({COD_PROV})%";
+      rr:template "%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
       rr:datatype xsd:string
     ]
   ];
@@ -222,7 +223,6 @@
         rr:constant "3";
     ]
   ];
-  
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:lastUpdate;
@@ -235,7 +235,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ontology/place/%eval:metropolitan_city_type({COD_PROV})%"
+    rr:template "https://dati.isprambiente.it/ontology/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%"
   ].
    
  <#Regions>
@@ -301,3 +301,31 @@ rr:predicateObjectMap [
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/place/country/1"
   ].
+
+#=================
+#PROVINCES REPLACED BY METROPOLITAN CITIES
+<#MetropolitanCitiesCSV>
+  rml:source "place/input/csv/metropolitan_cities.csv";
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+ <#MetropolitanCities>
+  rml:logicalSource <#MetropolitanCitiesCSV>;
+
+  rr:subjectMap [
+    rr:template "https://dati.isprambiente.it/ld/place/metropolitancity/00201_{MC_CODE}";
+  ];
+
+  rr:predicateObjectMap [
+  rr:predicate prov:wasDerivedFrom;
+  rr:objectMap [
+    rr:parentTriplesMap <#MetropolitanCityOrigin>
+  ]
+].
+
+<#MetropolitanCityOrigin>
+rml:logicalSource <#MetropolitanCitiesCSV>;
+
+rr:subjectMap [
+  rr:template "https://dati.isprambiente.it/ld/place/province/00201_{PROV_CODE}"
+].

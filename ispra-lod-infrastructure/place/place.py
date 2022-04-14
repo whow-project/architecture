@@ -21,7 +21,10 @@ def metropolitan_city(istat):
     
     return out
 
-def metropolitan_city_code_2(istat):
+def metropolitan_city_code_2(istat, year):
+    if int(year) < 2015:
+        return istat
+
     csv_file = "data/place/v2/dirtydata/metropolitan_cities.csv"
     df_mc = pd.read_csv(csv_file, delimiter=';')
     mc_value = istat
@@ -30,11 +33,15 @@ def metropolitan_city_code_2(istat):
 
     return mc_value
         
-def metropolitan_city_type(istat):
-    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
+def metropolitan_city_type(istat, year):
+    if int(year) < 2015:
+        return "Province"
+
+    csv_file = "data/place/v2/dirtydata/metropolitan_cities.csv"
+    df_mc = pd.read_csv(csv_file, delimiter=';')
         
     out = None
-    if istat in metropolitan_cities:
+    if (int(istat) in df_mc['PROV_CODE'].values):
         out = "MetropolitanCity"
     else:
         out = "Province"
