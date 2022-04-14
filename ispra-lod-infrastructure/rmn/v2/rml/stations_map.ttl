@@ -50,10 +50,9 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    #rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/{CODE_PLACE}_resources";
     rr:template "https://dati.isprambiente.it/ld/rmn/collection/00201_{CODE_PLACE}";
-#    rr:class ispra-top:Collection
-  ] ;
+    rr:class ispra-top:Collection
+  ];
 
   rr:predicateObjectMap [
         rr:predicate rdfs:label;
@@ -188,7 +187,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{CODE_PLACE}_platforms";
-    rr:class ispra-top:PlatformCollection
+    rr:class inspire-mf:PlatformCollection
   ];
 
   rr:predicateObjectMap [

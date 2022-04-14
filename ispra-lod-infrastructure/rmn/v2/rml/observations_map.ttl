@@ -41,7 +41,7 @@
     rr:subjectMap [
 
 	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}";
-#	rr:class inspire-mf:ObservationCollection
+	rr:class inspire-mf:ObservationCollection
     ] .
 
     
