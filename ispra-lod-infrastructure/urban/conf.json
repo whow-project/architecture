@@ -12,6 +12,29 @@
     "passwd": "password",
 	"year": {{year}},
 	"mappings": [
+    {
+            "rml": "indicators_mapV2.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Citta metropolitana_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta metropolitana_{{year}}.csv')"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'IdOST_Origine'"
+                }
+            ]
+        },
 		{
             "rml": "indicators_mapV2.ttl",
             "data": [
