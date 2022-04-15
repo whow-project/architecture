@@ -9,7 +9,7 @@ import vstroke
 #import virtuoso
 import gzip, tarfile
 from builtins import staticmethod
-from paramiko import SSHClient, AutoAddPolicy
+from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from scp import SCPClient
 import multiprocessing as mp
 import time, traceback
@@ -53,9 +53,19 @@ class KnowledgeGraphLoader():
         ssh.set_missing_host_key_policy(AutoAddPolicy())
         ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
 
-        scp = SCPClient(ssh.get_transport())
+        sftp = SFTPClient.from_transport(ssh.get_transport())
+        try:
+            sftp.chdir(folder)  # Test if remote_path exists
+        except IOError:
+            sftp.mkdir(folder)  # Create remote_path
+            sftp.chdir(folder)
         print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
+        #sftp.put(file,'.')
+        #sftp.close()
+
+        scp = SCPClient(ssh.get_transport())
         scp.put(file,folder)
+        scp.close()
 
 
     def toLoad_toDelete_2 (self, new_graph, name, dataset):

@@ -131,19 +131,21 @@ def placeRDF(config_file_path : str, bool_upload : bool):
     file_tripleM, file_loadM, file_deleteM = loader.toLoad_toDelete_2(g, "municipalities", "place")
 
     if bool_upload:
-        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleR), os.path.join(str(dest_path),str(file_tripleR)))
-        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleP), os.path.join(str(dest_path),str(file_tripleP)))
-        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleM), os.path.join(str(dest_path),str(file_tripleM)))
+        #summary triples
+        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleR), os.path.join(str(dest_path),str(file_tripleR.replace(file_tripleR.split('/')[-1],''))))
+        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleP), os.path.join(str(dest_path),str(file_tripleP.replace(file_tripleP.split('/')[-1],''))))
+        loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_tripleM), os.path.join(str(dest_path),str(file_tripleM.replace(file_tripleM.split('/')[-1],''))))
 
+        #to load and to delete triples
         if os.path.exists(file_loadR):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadR), os.path.join(str(dest_path), str(file_loadR)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadR), os.path.join(str(dest_path),str(file_loadR.replace(file_loadR.split('/')[-1],''))))
         if os.path.exists(file_loadP):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadP), os.path.join(str(dest_path), str(file_loadP)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadP), os.path.join(str(dest_path),str(file_loadP.replace(file_loadP.split('/')[-1],''))))
         if os.path.exists(file_loadM):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadM), os.path.join(str(dest_path), str(file_loadM)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadM), os.path.join(str(dest_path),str(file_loadM.replace(file_loadM.split('/')[-1],''))))
         if os.path.exists(file_deleteR):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteR), os.path.join(str(dest_path), str(file_deleteR)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteR), os.path.join(str(dest_path),str(file_deleteR.replace(file_deleteR.split('/')[-1],''))))
         if os.path.exists(file_deleteP):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteP), os.path.join(str(dest_path), str(file_deleteP)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteP), os.path.join(str(dest_path),str(file_deleteP.replace(file_deleteP.split('/')[-1],''))))
         if os.path.exists(file_deleteM):
-            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteM), os.path.join(str(dest_path), str(file_deleteM)))
+            loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteM), os.path.join(str(dest_path),str(file_deleteM.replace(file_deleteM.split('/')[-1],''))))

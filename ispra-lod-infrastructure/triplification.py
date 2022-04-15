@@ -351,11 +351,11 @@ class TriplificationManager():
             file_triple, file_load, file_delete = self.__kg_loader.toLoad_toDelete_2(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
 
         if bool_upload:
-            self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple)))
+            self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple.replace(file_triple.split('/')[-1],''))))
             if os.path.exists(file_load):
-                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path), str(file_load)))
+                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path),str(file_load.replace(file_load.split('/')[-1],''))))
             if os.path.exists(file_delete):
-                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path), str(file_delete)))
+                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path),str(file_delete.replace(file_delete.split('/')[-1],''))))
            
         
 
