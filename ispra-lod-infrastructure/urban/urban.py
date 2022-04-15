@@ -92,10 +92,9 @@ def get_value(indicator_value):
     
 
 def place_type(istat):
-    metropolitan_cities = ["001", "010", "015", "027", "037", "048", "058", "063", "072", "080", "082", "083", "087", "092"]
     
     if len(istat) == 3:
-        if istat in metropolitan_cities:
+        if istat.startswith("2"):
             _type = "metropolitancity"
         else:
             _type = "province"
