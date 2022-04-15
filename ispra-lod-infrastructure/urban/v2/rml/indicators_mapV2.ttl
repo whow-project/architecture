@@ -46,14 +46,14 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/urban/collection/00201_%eval:place_id('{ {{COD_PLACE}} }')%";
+        rr:template "https://dati.isprambiente.it/ld/urban/collection/00201_%eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
         rr:class ispra-top:Collection
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse di aree urbane associate al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Collezione di risorse di aree urbane associate al luogo con codice ISTAT %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "it"
         ]
     ];
@@ -61,13 +61,13 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Resources collection of urban areas associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Resources collection of urban areas associated with the place with ISTAT code %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "en"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasLocation;
+        rr:predicate ispra-top:isCollectionOf;
         rr:objectMap [
             rr:parentTriplesMap :Place
         ]
@@ -107,14 +107,14 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_id('{ {{COD_PLACE}} }')%";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
         rr:class indicators:IndicatorCollection
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori di aree urbane associati al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Indicatori di aree urbane associati al luogo con codice ISTAT %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "it"
         ]
     ];
@@ -122,7 +122,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicators of urban areas associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Indicators of urban areas associated with the place with ISTAT code %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "en"
         ]
     ];
@@ -138,7 +138,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/%eval:place_type('{ {{COD_PLACE}} }')%/00201_%eval:place_id('{ {{COD_PLACE}} }')%"
+        rr:template "https://dati.isprambiente.it/ld/place/%eval:place_typeeval:place_id('{ {{COD_PLACE}} }')%/00201_%eval:place_ideval:place_id('{ {{COD_PLACE}} }')%"
     ].
 
 :Year
@@ -165,7 +165,7 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_id('{ {{COD_PLACE}} }')%_{{indicator}}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_ideval:place_id('{ {{COD_PLACE}} }')%_{{indicator}}";
         rr:class indicators:IndicatorCollection
     ];
 
@@ -194,7 +194,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori {{indicator}} associati al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Indicatori {{indicator}} associati al luogo con codice ISTAT %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "it"
         ]
     ];
@@ -202,7 +202,7 @@
      rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{indicator}} indicators associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "{{indicator}} indicators associated with the place with ISTAT code %eval:place_ideval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "en"
         ]
     ] .
@@ -293,14 +293,14 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/00201_%eval:place_id('{ {{COD_PLACE}} }')%_{{indicator|lower}}_{{YEAR}}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/00201_%eval:place_ideval:place_id('{ {{COD_PLACE}} }')%_{{indicator|lower}}_{{YEAR}}";
         rr:class indicators:Indicator
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatore {{indicator}} associato al luogo con codice ISTAT %eval:place_id('{ {{COD_PLACE}} }')% per l'anno {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:template "Indicatore {{indicator}} associato al luogo con codice ISTAT %eval:place_ideval:place_id('{ {{COD_PLACE}} }')% per l'anno {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
             rr:language "it"
         ]
     ];
@@ -308,7 +308,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicator {{indicator}} associated with the place with ISTAT code %eval:place_id('{ {{COD_PLACE}} }')% for year {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:template "Indicator {{indicator}} associated with the place with ISTAT code %eval:place_ideval:place_id('{ {{COD_PLACE}} }')% for year {{YEAR}}: %eval:get_value('{ {{indicator}} }')% %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
             rr:language "en"
         ]
     ];
