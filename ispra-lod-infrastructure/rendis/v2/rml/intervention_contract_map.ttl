@@ -7,6 +7,7 @@
 @prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -534,7 +535,8 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary"
+        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
+        rr:class inspire-mf:ProcedureCollection
     ];
 
     rr:predicateObjectMap [

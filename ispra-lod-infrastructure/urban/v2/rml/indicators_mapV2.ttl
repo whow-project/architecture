@@ -8,6 +8,7 @@
 @prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
 @prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -108,7 +109,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_id('{ {{COD_PLACE}} }')%";
-        rr:class indicators:IndicatorCollection
+        rr:class inspire-mf:IndicatorCollection
     ];
 
     rr:predicateObjectMap [
@@ -166,7 +167,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_%eval:place_id('{ {{COD_PLACE}} }')%_{{indicator}}";
-        rr:class indicators:IndicatorCollection
+        rr:class inspire-mf:IndicatorCollection
     ];
 
     rr:predicateObjectMap [
