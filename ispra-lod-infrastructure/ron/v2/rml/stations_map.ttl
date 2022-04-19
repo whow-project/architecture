@@ -159,7 +159,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{CODE_PLACE}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/00201_{CODE_PLACE}";
     rr:class inspire-mf:PlatformCollection
   ];
 
