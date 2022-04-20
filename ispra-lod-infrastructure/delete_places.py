@@ -12,7 +12,7 @@ def print_delete(str_graph, graph_toDel, graph_update, cat):
 
     print ('Parsing toDel graph ...')
     for s, p, o in graph_toDel:
-        if (s, None, None) in graph_update:
+        if (s, p, None) in graph_update:
             delG.add((s, p, o))
 
     sql_file = 'del_list_' + cat + '.sql'        
