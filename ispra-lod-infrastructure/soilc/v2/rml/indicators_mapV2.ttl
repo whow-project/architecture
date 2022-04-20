@@ -148,7 +148,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/{ {{COD_PLACE}} }_{{indicator|lower}}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }_{{indicator|lower}}";
         rr:class inspire-mf:IndicatorCollection
     ];
 
