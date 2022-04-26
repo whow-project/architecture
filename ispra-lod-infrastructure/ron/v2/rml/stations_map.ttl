@@ -611,7 +611,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-        rr:template "Modelo di piattaforma denominato {{dataset.upper()}}{MODEL} basato su {MANUFACTURER} - {MODEL_NAME}";
+        rr:template "Modello di piattaforma denominato {{dataset.upper()}}{MODEL} basato su {MANUFACTURER} - {MODEL_NAME}";
 		rr:language "it"
       ]
     ];
