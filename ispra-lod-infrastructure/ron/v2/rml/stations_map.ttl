@@ -204,7 +204,9 @@
     rr:predicateObjectMap [
       rr:predicate inspire-mf:hasPlatformType;
       rr:objectMap [
-        rr:template :StationType
+        #rr:parentTriplesMap :StationType
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}";
+        rr:termType rr:IRI
       ]
     ];
 
