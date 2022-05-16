@@ -99,7 +99,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori di consumo del suolo associati a: { {{NOME_PLACE}} }";
+            rr:template "Collezione degli indicatori di consumo del suolo associati a: { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -107,7 +107,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicators of soil consumption associated with: { {{NOME_PLACE}} }";
+            rr:template "Collection of soil consumption indicators associated with: { {{NOME_PLACE}} }";
             rr:language "en"
         ]
     ];

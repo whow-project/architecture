@@ -173,7 +173,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogue of the measure stations located in {PLACE_NAME}.";
+      rr:template "Catalogue of the RON measure stations located in {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
@@ -181,7 +181,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogo delle stazioni di misurazione localizzate a {PLACE_NAME}.";
+      rr:template "Catalogo delle stazioni di misurazione RON localizzate a {PLACE_NAME}.";
       rr:language "it"
     ]
   ];

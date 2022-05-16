@@ -200,7 +200,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogue of the measure stations located in {PLACE_NAME}.";
+      rr:template "Catalogue of the {{dataset|upper}} measure stations located at {PLACE_NAME}.";
       rr:language "en"
     ]
   ];

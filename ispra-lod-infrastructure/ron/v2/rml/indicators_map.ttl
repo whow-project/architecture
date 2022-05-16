@@ -102,7 +102,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione degli indicatori {{dataset|upper}} di {PLACE_NAME}";
+            rr:template "Collezione degli indicatori {{dataset|upper}} associati a {PLACE_NAME}";
             rr:language "en"
         ]
     ];
@@ -110,7 +110,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collection of {{dataset|upper}} indicators in {PLACE_NAME}";
+            rr:template "Collection of {{dataset|upper}} indicators associated with {PLACE_NAME}";
             rr:language "en"
         ]
     ].

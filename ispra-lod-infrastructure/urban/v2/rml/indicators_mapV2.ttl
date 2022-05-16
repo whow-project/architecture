@@ -115,7 +115,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori di aree urbane associati al luogo con codice ISTAT  %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Collezione degli indicatori di aree urbane associati al luogo con codice ISTAT  %eval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "it"
         ]
     ];
@@ -123,7 +123,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicators of urban areas associated with the place with ISTAT code  %eval:place_id('{ {{COD_PLACE}} }')%";
+            rr:template "Collection of urban areas indicators associated with the place with ISTAT code  %eval:place_id('{ {{COD_PLACE}} }')%";
             rr:language "en"
         ]
     ];
