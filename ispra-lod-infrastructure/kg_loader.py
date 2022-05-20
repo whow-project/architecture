@@ -11,6 +11,7 @@ import gzip, tarfile
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from scp import SCPClient
+from subprocess import Popen, PIPE, STDOUT
 import multiprocessing as mp
 import time, traceback
 
@@ -60,12 +61,59 @@ class KnowledgeGraphLoader():
             sftp.mkdir(folder)  # Create remote_path
             sftp.chdir(folder)
         print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
-        #sftp.put(file,'.')
-        #sftp.close()
 
         scp = SCPClient(ssh.get_transport())
         scp.put(file,folder)
         scp.close()
+
+    
+    def sparql_bulk_load(self,ipaddr,file_str,folder,name_dataset):
+
+        sql_file = 'upload_graph_' + name_dataset + '.sql'
+        file_toload = folder + '/' + file_str
+        str_graph = 'https://dati.isprambiente.it/ld/' + name_dataset + '/'
+
+        # create sql file
+        with open(sql_file, 'w') as sql_out:
+            print("DELETE FROM LOAD_LIST;", file=sql_out)
+            print("LD_ADD('" + file_toload + "', '" + str_graph + "');", file=sql_out)
+            print("RDF_LOADER_RUN();", file=sql_out)
+            print("CHECKPOINT;", file=sql_out)
+            print("COMMIT WORK;", file=sql_out)
+            print("CHECKPOINT;", file=sql_out)
+
+        # bulk load of triples
+        print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
+        timeout_s = 10
+        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+        p = Popen([command], shell=True)
+        p.wait()
+        p.terminate()
+        p.wait()
+
+
+    def sparql_delete(self,ipaddr,file_str,name_dataset):
+
+        sql_file = 'del_graph_' + name_dataset + '.sql'
+        str_graph = 'https://dati.isprambiente.it/ld/' + name_dataset + '/'
+
+        with gzip.open(file_str, 'r') as f:
+            read_f = f.read()
+
+        with open(sql_file, 'w') as sql_del:
+            print("DELETE FROM LOAD_LIST;", file=sql_del)
+            for dd in (read_f.splitlines()):
+                if dd: print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> { ' + dd + '} } ;', file=sql_del)
+            print("RDF_LOADER_RUN();", file=sql_del)
+            print("CHECKPOINT;", file=sql_del)
+            print("COMMIT WORK;", file=sql_del)
+            print("CHECKPOINT;", file=sql_del)
+
+        # deletion of triples
+        print ('deleting triples from', str_graph, '...')
+        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + sql_file
+        p = Popen(['/bin/bash', '-i', '-c', command])
+        p.terminate()
 
 
     def toLoad_toDelete_2 (self, new_graph, name, dataset):

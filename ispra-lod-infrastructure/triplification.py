@@ -338,7 +338,7 @@ class TriplificationManager():
         
         
     #def do_triplification(self):
-    def do_triplification(self, bool_upload):
+    def do_triplification(self, bool_upload, bool_update):
         try:
             result = self.__triplifier.triplify()
         except MissingDataFolderException as e:
@@ -350,12 +350,21 @@ class TriplificationManager():
             #self.__kg_loader.toLoad_toDelete(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
             file_triple, file_load, file_delete = self.__kg_loader.toLoad_toDelete_2(result.get_graph(), rdf_output_configuration.get_rdf_file_name(), result.get_mapping_configuration().get_dataset().lower())
 
-        if bool_upload:
-            self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple.replace(file_triple.split('/')[-1],''))))
-            if os.path.exists(file_load):
-                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path),str(file_load.replace(file_load.split('/')[-1],''))))
-            if os.path.exists(file_delete):
-                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path),str(file_delete.replace(file_delete.split('/')[-1],''))))
+
+            dataset_name = str(result.get_mapping_configuration().get_dataset().lower())
+
+            if bool_upload:
+                self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple.replace(file_triple.split('/')[-1],''))))
+                if os.path.exists(file_load):
+                    self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path),str(file_load.replace(file_load.split('/')[-1],''))))
+                if os.path.exists(file_delete):
+                    self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path),str(file_delete.replace(file_delete.split('/')[-1],''))))
+
+            if bool_update:
+                if os.path.exists(file_load):
+                    self.__kg_loader.sparql_bulk_load(str(dest_ip),str(file_load),str(dest_path),dataset_name)
+                if os.path.exists(file_delete):
+                    self.__kg_loader.sparql_delete(str(dest_ip),str(file_delete),dataset_name)
            
         
 
