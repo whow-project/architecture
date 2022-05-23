@@ -11,7 +11,7 @@ import gzip, tarfile
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from scp import SCPClient
-from subprocess import Popen, PIPE, STDOUT
+from subprocess import run, Popen, PIPE, STDOUT
 import multiprocessing as mp
 import time, traceback
 
@@ -86,10 +86,7 @@ class KnowledgeGraphLoader():
         print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
         timeout_s = 10
         command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-        p = Popen([command], shell=True)
-        p.wait()
-        p.terminate()
-        p.wait()
+        run([command], shell=True)
 
 
     def sparql_delete(self,ipaddr,file_str,name_dataset):
@@ -111,9 +108,8 @@ class KnowledgeGraphLoader():
 
         # deletion of triples
         print ('deleting triples from', str_graph, '...')
-        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + sql_file
-        p = Popen(['/bin/bash', '-i', '-c', command])
-        p.terminate()
+        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+        run([command], shell=True)
 
 
     def toLoad_toDelete_2 (self, new_graph, name, dataset):

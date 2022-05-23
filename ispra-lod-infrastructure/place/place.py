@@ -2,7 +2,7 @@ import os
 import json
 import gzip
 import pandas as pd
-from subprocess import Popen
+from subprocess import Popen, run
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib import Graph
 from rdflib.parser import StringInputSource
@@ -76,9 +76,12 @@ def print_delete(file_toDel, file_update, cat):
         str_triple_todel = f.read()
     graph_toDel.parse(data=str_triple_todel, format='nt11')
 
+    sql_file = 'del_list_' + cat + '.sql'
+
     if not len(graph_toDel):
-        print ('No triples to delete for ' + cat + '!')
-        exit()
+        return sql_file
+    #    print ('No triples to delete for ' + cat + '!')
+    #    return 0
 
     print ('Reading updated triples ...')
     with gzip.open(file_update, 'rb') as f:
@@ -90,8 +93,6 @@ def print_delete(file_toDel, file_update, cat):
     for s, p, o in graph_toDel:
         if (s, p, None) in graph_update:
             delG.add((s, p, o))
-
-    sql_file = 'del_list_' + cat + '.sql'        
 
     with open(sql_file, 'w') as sql_del:
         print("DELETE FROM LOAD_LIST;", file=sql_del)
@@ -208,17 +209,17 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
             loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),"place")
 
         if os.path.exists(file_deleteR):
+            print ('deleting regions ...')
             file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
             command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delR
-            p = Popen(['/bin/bash', '-i', '-c', command])
-            p.terminate()
+            run([command], shell=True)
         if os.path.exists(file_deleteP):
+            print ('deleting provinces ...')
             file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
             command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delP
-            p = Popen(['/bin/bash', '-i', '-c', command])
-            p.terminate()
+            run([command], shell=True)
         if os.path.exists(file_deleteM):
+            print ('deleting municipalities ...')
             file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
             command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delM
-            p = Popen(['/bin/bash', '-i', '-c', command])
-            p.terminate()
+            run([command], shell=True)
