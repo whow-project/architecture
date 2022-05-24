@@ -138,7 +138,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
 #    rr:objectMap [
-#      rr:template "Catalogue of %eval:measures_collection_title(*)% resources in #{PLACE_NAME}";
+#      rr:template "Collection of %eval:measures_collection_title(*)% resources in #{PLACE_NAME}";
 #      rr:language "en"
 #    ]
 #  ];
@@ -146,7 +146,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
 #    rr:objectMap [
-#      rr:template "Catalogo delle risorse di tipo %eval:measures_collection_title(*)% di #{PLACE_NAME}";
+#      rr:template "Collezione delle risorse di tipo %eval:measures_collection_title(*)% di #{PLACE_NAME}";
 #      rr:language "it"
 #    ]
 #  ].
@@ -200,7 +200,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogue of the {{dataset|upper}} measure stations located at {PLACE_NAME}.";
+      rr:template "Collection of the {{dataset|upper}} measure stations located at {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
@@ -208,7 +208,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogo delle stazioni di misurazione {{dataset|upper}} localizzate a {PLACE_NAME}.";
+      rr:template "Collezione delle stazioni di misurazione {{dataset|upper}} localizzate a {PLACE_NAME}.";
       rr:language "it"
     ]
   ];
