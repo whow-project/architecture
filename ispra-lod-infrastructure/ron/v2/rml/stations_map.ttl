@@ -80,7 +80,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
 #    rr:objectMap [
-#      rr:template "Catalogue of {{dataset.upper()}} resources in {PLACE_NAME}";
+#      rr:template "Collection of {{dataset.upper()}} resources in {PLACE_NAME}";
 #      rr:language "en"
 #    ]
 #  ];
@@ -88,7 +88,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
 #    rr:objectMap [
-#      rr:template "Catalogo delle risorse {{dataset.upper()}} di {PLACE_NAME}";
+#      rr:template "Collezione delle risorse {{dataset.upper()}} di {PLACE_NAME}";
 #      rr:language "it"
 #    ]
 #  ] .
@@ -104,7 +104,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{{dataset.upper()}} observations catalogue of {PLACE_NAME}";
+      rr:template "{{dataset.upper()}} observations collection of {PLACE_NAME}";
       rr:language "en"
     ]
   ];
@@ -112,7 +112,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogo delle osservazioni {{dataset.upper()}} fatte a {PLACE_NAME}";
+      rr:template "Collezione delle osservazioni {{dataset.upper()}} fatte a {PLACE_NAME}";
       rr:language "it"
     ]
   ];
@@ -173,7 +173,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogue of the RON measure stations located in {PLACE_NAME}.";
+      rr:template "Collection of the RON measure stations located in {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
@@ -181,7 +181,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Catalogo delle stazioni di misurazione RON localizzate a {PLACE_NAME}.";
+      rr:template "Collezione delle stazioni di misurazione RON localizzate a {PLACE_NAME}.";
       rr:language "it"
     ]
   ];

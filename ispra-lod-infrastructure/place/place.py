@@ -1,7 +1,10 @@
 import os
 import json
+import gzip
 import pandas as pd
+from subprocess import Popen, run
 from jinja2 import Environment, FileSystemLoader, Template
+from rdflib import Graph
 from rdflib.parser import StringInputSource
 #from load_delete import toLoad_toDelete
 from kg_loader import KnowledgeGraphLoader
@@ -58,7 +61,52 @@ def metropolitan_city_code(istat):
 
     return out
 
-def placeRDF(config_file_path : str, bool_upload : bool):
+
+def print_delete(file_toDel, file_update, cat):
+
+    delG = Graph()
+
+    str_graph = 'https://dati.isprambiente.it/ld/place/'
+
+    graph_toDel = Graph()
+    graph_update = Graph()
+
+    print ('Reading toDel triples ...')
+    with gzip.open(file_toDel, 'rb') as f:
+        str_triple_todel = f.read()
+    graph_toDel.parse(data=str_triple_todel, format='nt11')
+
+    sql_file = 'del_list_' + cat + '.sql'
+
+    if not len(graph_toDel):
+        return sql_file
+    #    print ('No triples to delete for ' + cat + '!')
+    #    return 0
+
+    print ('Reading updated triples ...')
+    with gzip.open(file_update, 'rb') as f:
+        str_triple_update = f.read()
+    graph_update.parse(data=str_triple_update, format='nt11')
+
+
+    print ('Parsing toDel graph ...')
+    for s, p, o in graph_toDel:
+        if (s, p, None) in graph_update:
+            delG.add((s, p, o))
+
+    with open(sql_file, 'w') as sql_del:
+        print("DELETE FROM LOAD_LIST;", file=sql_del)
+        for dd in (delG.serialize(format='nt11').splitlines()):
+            if dd: print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> { ' + dd + '} } ;', file=sql_del)
+        print("RDF_LOADER_RUN();", file=sql_del)
+        print("CHECKPOINT;", file=sql_del)
+        print("COMMIT WORK;", file=sql_del)
+        print("CHECKPOINT;", file=sql_del)
+
+    return sql_file
+
+
+def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     file_loader = FileSystemLoader('.')
     env = Environment(loader=file_loader)
 
@@ -143,9 +191,35 @@ def placeRDF(config_file_path : str, bool_upload : bool):
             loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadP), os.path.join(str(dest_path),str(file_loadP.replace(file_loadP.split('/')[-1],''))))
         if os.path.exists(file_loadM):
             loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_loadM), os.path.join(str(dest_path),str(file_loadM.replace(file_loadM.split('/')[-1],''))))
+
         if os.path.exists(file_deleteR):
             loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteR), os.path.join(str(dest_path),str(file_deleteR.replace(file_deleteR.split('/')[-1],''))))
         if os.path.exists(file_deleteP):
             loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteP), os.path.join(str(dest_path),str(file_deleteP.replace(file_deleteP.split('/')[-1],''))))
         if os.path.exists(file_deleteM):
             loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_deleteM), os.path.join(str(dest_path),str(file_deleteM.replace(file_deleteM.split('/')[-1],''))))
+
+
+    if bool_update:
+        if os.path.exists(file_loadR):
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadR),str(dest_path),"place")
+        if os.path.exists(file_loadP):
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadP),str(dest_path),"place")
+        if os.path.exists(file_loadM):
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),"place")
+
+        if os.path.exists(file_deleteR):
+            print ('deleting regions ...')
+            file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
+            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delR
+            run([command], shell=True)
+        if os.path.exists(file_deleteP):
+            print ('deleting provinces ...')
+            file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
+            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delP
+            run([command], shell=True)
+        if os.path.exists(file_deleteM):
+            print ('deleting municipalities ...')
+            file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
+            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delM
+            run([command], shell=True)

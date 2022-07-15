@@ -19,7 +19,7 @@ def process(arg_parser: Namespace):
     if args.place:
         #place_maker("data/istat/Limiti01012015.zip")
         print("Preprocessing Complete")
-        placeRDF(args.json_config, args.upload)
+        placeRDF(args.json_config, args.upload, args.update)
         print("Place Complete")
     elif args.measures:
         print("Processing measures...")
@@ -63,7 +63,7 @@ def process(arg_parser: Namespace):
         '''
         triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader(), args.json_config)
         #triplification_manager.do_triplification()
-        triplification_manager.do_triplification(args.upload)
+        triplification_manager.do_triplification(args.upload, args.update)
 
 
 if __name__ == "__main__":
@@ -101,8 +101,9 @@ if __name__ == "__main__":
     
     arg_parser.add_argument("-c", "--config", dest="json_config", required=False, help="Path to JSON configuration file.")
 
-    arg_parser.add_argument("--upload", help="upload the output files on the test server", action="store_true")
+    arg_parser.add_argument("--upload", help="upload the output files on the server", action="store_true")
 
+    arg_parser.add_argument("--update", help="update the virtuoso store on the server", action="store_true")
 
     args = arg_parser.parse_args()
     
