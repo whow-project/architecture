@@ -155,8 +155,8 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/code/{STAT_CODE}";
-    rr:class ispra-top:Code
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
+    rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
