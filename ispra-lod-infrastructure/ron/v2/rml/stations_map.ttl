@@ -937,7 +937,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/concept/{HULL_TYPE}";
-        rr:class inspire-mf:Concept
+        rr:class ispra-top:Concept
     ];
 
     rr:predicateObjectMap [
@@ -1043,7 +1043,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/concept/{MOORING_TYPE}";
-        rr:class inspire-mf:Concept
+        rr:class ispra-top:Concept
     ];
 
     rr:predicateObjectMap [
