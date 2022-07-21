@@ -33,7 +33,7 @@
   rml:logicalSource :CODE_2_PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/code/{STAT_CODE}";
+    rr:template "https://dati.isprambiente.it/ld/common/uniqueidentifier/{STAT_CODE}";
   ];
 
   rr:predicateObjectMap [
