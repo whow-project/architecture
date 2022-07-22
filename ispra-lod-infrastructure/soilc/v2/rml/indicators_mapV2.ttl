@@ -190,7 +190,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/00201_{ {{COD_PLACE}} }_{{indicator|lower}}_{{YEAR}}";
-        rr:class indicators:Indicator
+        rr:class inspire-mf:Indicator
     ];
 
     rr:predicateObjectMap [

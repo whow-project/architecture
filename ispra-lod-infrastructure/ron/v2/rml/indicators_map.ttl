@@ -246,7 +246,8 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%";
-        rr:class indicators:Indicator
+        rr:class inspire-mf:Indicator
+
     ];
 
     rr:predicateObjectMap [
