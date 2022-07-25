@@ -1206,7 +1206,7 @@
 
      rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/rendis/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
-        rr:class measures:Indicator
+        rr:class inspire-mf:Indicator
       ];
 
      rr:predicateObjectMap [
