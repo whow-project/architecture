@@ -46,7 +46,7 @@
   
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
-    rr:class rendis:LotStep
+    rr:class rendis:ImplementationPlanAction
   ];
 
   rr:predicateObjectMap [
