@@ -1564,7 +1564,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/common/method/{LEVELLING_EN}";
-    rr:class ispra-top:Method
+    rr:class inspire-mf:Procedure
   ];
 
   rr:predicateObjectMap [
