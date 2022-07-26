@@ -420,7 +420,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
-    rr:class inspire-mf:Network
+    rr:class inspire-mf:MonitoringNetwork
   ];
 
   rr:predicateObjectMap [
