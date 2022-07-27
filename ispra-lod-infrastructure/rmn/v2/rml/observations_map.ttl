@@ -63,7 +63,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasValidation;
+        rr:predicate inspire-mf:hasValidationLevel;
         rr:objectMap [
             rr:parentTriplesMap :Obs_validation
         ]
