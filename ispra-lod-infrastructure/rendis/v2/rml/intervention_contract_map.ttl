@@ -1226,7 +1226,7 @@
      ];
 
     rr:predicateObjectMap [
-      rr:predicate measures:isIndicatorOf;
+      rr:predicate inspire-mf:isIndicatorOf;
       rr:objectMap [
         rr:parentTriplesMap :Lot
       ]
