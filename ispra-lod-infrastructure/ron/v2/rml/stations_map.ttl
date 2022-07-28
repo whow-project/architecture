@@ -132,6 +132,13 @@
     rr:class ispra-top:UniqueIdentifier
   ];
 
+    rr:predicateObjectMap [
+    rr:predicate ispra-top:identifier;
+    rr:objectMap [
+      rml:reference "STAT_CODE";
+    ]
+  ];
+
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
@@ -145,13 +152,6 @@
     rr:objectMap [
       rml:reference "STAT_CODE";
       rr:language "it"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:code;
-    rr:objectMap [
-      rml:reference "STAT_CODE";
     ]
   ].
 
