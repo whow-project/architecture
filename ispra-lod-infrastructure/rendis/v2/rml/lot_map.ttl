@@ -126,7 +126,7 @@
   ] ;
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasFinalImplementationStep;
+    rr:predicate rendis:hasFinalImplementationPlanStep;
     rr:objectMap [
       rr:parentTriplesMap :ImplementationPlanStepLast;
       rr:joinCondition [
