@@ -115,7 +115,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasInitialImplementationStep;
+    rr:predicate rendis:hasInitialImplementationPlanStep;
     rr:objectMap [
       rr:parentTriplesMap :ImplementationPlanStepFirst;
       rr:joinCondition [
