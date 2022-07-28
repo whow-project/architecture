@@ -41,36 +41,36 @@
   crml:separator ";".
 
 
-:LotStep
-  rml:logicalSource :CSV;
-  
-  rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
-    rr:class rendis:ImplementationPlanAction
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rml:reference "documento"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:time;
-    rr:objectMap [
-      rml:reference "data";
-      rr:datatype xsd:dateTime
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rendis:hasStepType;
-    rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/iterstep/{id_passo}";
-      rr:termType rr:IRI
-    ]
-  ].
+#:LotStep
+#  rml:logicalSource :CSV;
+#  
+#  rr:subjectMap [
+#    rr:template "https://dati.isprambiente.it/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
+#    rr:class rendis:ImplementationPlanAction
+#  ];
+#
+#  rr:predicateObjectMap [
+#    rr:predicate rdfs:label;
+#    rr:objectMap [
+#      rml:reference "documento"
+#    ]
+#  ];
+#
+#  rr:predicateObjectMap [
+#    rr:predicate ispra-top:time;
+#    rr:objectMap [
+#      rml:reference "data";
+#      rr:datatype xsd:dateTime
+#    ]
+#  ];
+#
+#  rr:predicateObjectMap [
+#    rr:predicate rendis:hasStepType;
+#    rr:objectMap [
+#      rr:template "https://dati.isprambiente.it/ld/rendis/iterstep/{id_passo}";
+#      rr:termType rr:IRI
+#    ]
+#  ].
 
 :StepType_Entity
   rml:logicalSource :passi_CSV;
