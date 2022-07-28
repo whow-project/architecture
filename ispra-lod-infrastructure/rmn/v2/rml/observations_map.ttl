@@ -192,7 +192,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:startDate;
+        rr:predicate ispra-top:startTime;
         rr:objectMap [
             rml:reference "START";
             rr:datatype xsd:dateTime
@@ -200,7 +200,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:endDate;
+        rr:predicate ispra-top:endTime;
         rr:objectMap [
             rml:reference "END";
             rr:datatype xsd:dateTime
