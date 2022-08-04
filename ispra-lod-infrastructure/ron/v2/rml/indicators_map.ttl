@@ -43,31 +43,8 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_%eval:cod_place(*)%";
-        rr:class ispra-top:Collection
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Collezione di risorse RON associate a: {PLACE_NAME}";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "RON resources collection associated with: {PLACE_NAME}";
-            rr:language "en"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:isCollectionOf;
-        rr:objectMap [
-            rr:parentTriplesMap :Place
-        ]
-    ] .
+        #rr:class ispra-top:Collection
+    ].
 
 #    rr:predicateObjectMap [
 #        rr:predicate ispra-top:isMemberOf;
@@ -102,7 +79,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione degli indicatori {{dataset|upper}} associati a {PLACE_NAME}";
+            rr:template "Collezione degli indicatori {{dataset|upper}} di {PLACE_NAME}";
             rr:language "it"
         ]
     ];
@@ -110,7 +87,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collection of {{dataset|upper}} indicators associated with {PLACE_NAME}";
+            rr:template "{{dataset|upper}} indicators collection of {PLACE_NAME}";
             rr:language "en"
         ]
     ].
@@ -398,5 +375,5 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%"
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%"
     ].

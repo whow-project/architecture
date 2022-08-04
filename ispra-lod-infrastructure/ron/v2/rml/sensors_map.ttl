@@ -425,7 +425,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_averaging_period_{PERIOD}{PERIOD_UNIT}";
+        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_averaging_period_%eval:replace('-', '', '{PERIOD}')%{PERIOD_UNIT}";
         	rr:class inspire-mf:SystemCapability
     ];
         

@@ -16,7 +16,7 @@
 
 
 <#CSV_DATA>
-    rml:source "{{ csv_data }}" ;
+    rml:source "{{ observation_data }}" ;
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 

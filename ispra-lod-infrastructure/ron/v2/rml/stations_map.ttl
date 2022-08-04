@@ -12,6 +12,7 @@
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix time: <http://www.w3.org/2006/time#> .
 
 
 :CSV_STATIONS
@@ -35,9 +36,9 @@
     crml:separator ";".
 
 :CSV_STATION_MODELS
-  rml:source "{{ csv_station_models }}" ;
-  rml:referenceFormulation ql:CSV;
-  crml:separator ";".
+    rml:source "{{ csv_station_models }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
 
 :Place
   rml:logicalSource :CSV_STATIONS;
@@ -57,7 +58,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse RON associate a: {PLACE_NAME}";
+            rr:template "Collezione delle risorse RON di {PLACE_NAME}";
             rr:language "it"
         ]
     ];
@@ -65,7 +66,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "RON resources collection associated with: {PLACE_NAME}";
+            rr:template "RON resources collection of {PLACE_NAME}";
             rr:language "en"
         ]
     ];
@@ -80,7 +81,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rdfs:label;
 #    rr:objectMap [
-#      rr:template "Collection of {{dataset.upper()}} resources in {PLACE_NAME}";
+#      rr:template "{{dataset.upper()}} resources collection of {PLACE_NAME}";
 #      rr:language "en"
 #    ]
 #  ];
@@ -98,23 +99,7 @@
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}";
-    rr:class inspire-mf:ObservationCollection
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:template "{{dataset.upper()}} observations collection of {PLACE_NAME}";
-      rr:language "en"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:template "Collezione delle osservazioni {{dataset.upper()}} fatte a {PLACE_NAME}";
-      rr:language "it"
-    ]
+#    rr:class inspire-mf:ObservationCollection
   ];
 
   rr:predicateObjectMap [
@@ -159,7 +144,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/00201_{CODE_PLACE}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{STAT_CODE}";
     rr:class inspire-mf:PlatformCollection
   ];
 
@@ -173,7 +158,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collection of the RON measure stations located in {PLACE_NAME}.";
+      rr:template "Collection of the RON measure stations of {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
@@ -181,7 +166,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di misurazione RON localizzate a {PLACE_NAME}.";
+      rr:template "Collezione delle stazioni di misurazione RON di {PLACE_NAME}.";
       rr:language "it"
     ]
   ];
@@ -258,6 +243,13 @@
     ]
   ];
 
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:operationalStatus;
+    rr:objectMap [
+        rr:template "{STAT_STATUS}"
+        ]
+    ];
+
 #  rr:predicateObjectMap [
 #    rr:predicate inspire-mf:hosts;
 #    rr:objectMap [
@@ -282,7 +274,7 @@
   rr:predicateObjectMap [
     rr:predicate inspire-mf:isPlatformOf;
     rr:objectMap [
-      rr:parentTriplesMap :Network
+      rr:parentTriplesMap :NETWORK
     ]
   ];
 
@@ -416,7 +408,7 @@
 #  ].
 
 :NETWORK
-  rml:logicalSource :CSV_STATIONS;
+  rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
@@ -440,11 +432,28 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate inspire-mf:hasPlatform;
+    rr:predicate time:hasBeginning;
     rr:objectMap [
-      rr:parentTriplesMap :Station
-    ]
-  ].
+        rml:reference "BEGINNING";
+        rr:datatype xsd:gYear
+        ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate time:hasEnd;
+    rr:objectMap [
+        rml:reference "END";
+        rr:datatype xsd:gYear
+        ]
+    ].
+
+
+#  rr:predicateObjectMap [
+#    rr:predicate inspire-mf:hasPlatform;
+#    rr:objectMap [
+#      rr:parentTriplesMap :Station
+#    ]
+#  ].
 
 #:NETWORK_INSPIRE
 #  rml:logicalSource :CSV_STATIONS;
@@ -458,8 +467,8 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
-    rr:class inspire-mf:FeatureOfInterest
+    rr:template "https://dati.isprambiente.it/ld/place/sea/seaarea_{PLACE_NAME}_{NETWORK}";
+    rr:class ispra-place:Sea
   ];
 
   rr:predicateObjectMap [
@@ -490,7 +499,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Area di mare vicino la stazione {{dataset|upper}} di {PLACE_NAME}.";
+      rr:template "Area di mare vicino la stazione {{dataset|upper}} di {PLACE_NAME}";
       rr:language "it"
     ]
   ];
@@ -498,7 +507,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}} station.";
+      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}} station";
       rr:language "en"
     ]
   ].
@@ -515,7 +524,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}";	
+    rr:template "https://dati.isprambiente.it/ld/place/geometry/seaarea_{PLACE_NAME}_{NETWORK}";	
     rr:class ispra-place:Geometry
   ];
 

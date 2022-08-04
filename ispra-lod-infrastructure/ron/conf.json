@@ -3,8 +3,8 @@
 	"graph_iri": "https://dati.isprambiente.it/ld/ron/",
 	"rdf_dump_file_name": "ron_static",
 	"rdf_dump_file_serialisation": "ntriples",
-        "data_folder": "data/ron/v2/data",
-        "dirty_data_folder": "data/ron/v2/dirtydata",
+    "data_folder": "data/ron/v2/data",
+    "dirty_data_folder": "data/ron/v2/dirtydata",
 	"rml_folder": "data/ron/v2/rml",
    "dest_address": "11.111.111.11",
    "dest_folder": "/path/to/folder",
@@ -79,7 +79,7 @@
             ]
          },
          {
-            "rml":"observations_map.ttl",
+            "rml":"observations_mapV3.ttl",
             "data":[
                {
                   "id":"observation_data",
