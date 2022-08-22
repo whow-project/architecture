@@ -240,7 +240,7 @@
     rr:predicateObjectMap [
     	rr:predicate ispra-top:isPartOf;
     	rr:objectMap [
-      		rr:parentTriplesMap :StationCollection;
+        rr:parentTriplesMap :StationCollection;
       	]
   	];
         
@@ -265,7 +265,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_EN} part of the {{dataset.upper()}}-{NETWORK} network located near by {PLACE_NAME}";
+      rr:template "{STAT_TYPE_EN} part of the {{dataset.upper()}}-{NETWORK} network located near {PLACE_NAME}";
       rr:language "en"
     ]
   ];
@@ -273,8 +273,15 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_IT} parte della rete {{dataset.upper()}}-{NETWORK} localizzata in prossimità di {PLACE_NAME}";
+      rr:template "{STAT_TYPE_IT} parte della rete {{dataset.upper()}}-{NETWORK} localizzato in prossimità di {PLACE_NAME}";
       rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:operationalStatus;
+    rr:objectMap [
+      rr:template "{STAT_STATUS}"
     ]
   ];
 
@@ -307,7 +314,7 @@
   ];
   
   rr:predicateObjectMap [
-    rr:predicate ispra-top:isPartOf;
+    rr:predicate inspire-mf:isPlatformOf;
     rr:objectMap [
       rr:parentTriplesMap :NETWORK
     ]
@@ -501,7 +508,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Area di mare vicino la stazione {{dataset|upper}} di {PLACE_NAME}.";
+      rr:template "Area di mare vicino la stazione {{dataset|upper}}-{NETWORK} di {PLACE_NAME}.";
       rr:language "it"
     ]
   ];
@@ -509,7 +516,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}} station.";
+      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}}-{NETWORK} station.";
       rr:language "en"
     ]
   ].
@@ -619,7 +626,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-        rr:template "Modelo di piattaforma {MODEL} della rete {{dataset.upper()}}{NETWORK}";
+        rr:template "Modello di piattaforma {MODEL} della rete {{dataset.upper()}}-{NETWORK}";
 	rr:language "it"
       ]
     ];

@@ -223,7 +223,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_EN} part of the {{dataset.upper()}}-{NETWORK} network located near by {PLACE_NAME}";
+      rr:template "{STAT_TYPE_EN} part of the {{dataset.upper()}}-{NETWORK} network located near {PLACE_NAME}";
       rr:language "en"
     ]
   ];
