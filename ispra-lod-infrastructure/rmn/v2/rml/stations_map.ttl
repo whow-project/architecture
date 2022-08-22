@@ -57,7 +57,7 @@
   rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse RMN associate a: {PLACE_NAME}";
+            rr:template "Collezione delle risorse RMN di {PLACE_NAME}";
             rr:language "it"
         ]
     ];
@@ -65,7 +65,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "RMN resources collection associated with: {PLACE_NAME}";
+            rr:template "RMN resources collection of {PLACE_NAME}";
             rr:language "en"
         ]
     ];
@@ -115,7 +115,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle osservazioni {{dataset.upper()}} fatte a {PLACE_NAME}";
+      rr:template "Collezione delle osservazioni {{dataset.upper()}} di {PLACE_NAME}";
       rr:language "it"
     ]
   ];
@@ -200,7 +200,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collection of the {{dataset|upper}} measure stations located at {PLACE_NAME}.";
+      rr:template "Collection of the {{dataset|upper}} measure stations of {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
@@ -208,7 +208,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di misurazione {{dataset|upper}} localizzate a {PLACE_NAME}.";
+      rr:template "Collezione delle stazioni di misurazione {{dataset|upper}} di {PLACE_NAME}.";
       rr:language "it"
     ]
   ];
