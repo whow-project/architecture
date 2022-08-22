@@ -499,7 +499,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Area di mare vicino la stazione {{dataset|upper}} {NETWORK} di {PLACE_NAME}";
+      rr:template "Area di mare vicino la stazione {{dataset|upper}}-{NETWORK} di {PLACE_NAME}";
       rr:language "it"
     ]
   ];
@@ -507,7 +507,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}} {NETWORK} station";
+      rr:template "Sea area near {PLACE_NAME} {{dataset|upper}}-{NETWORK} station";
       rr:language "en"
     ]
   ].
