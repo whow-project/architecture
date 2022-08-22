@@ -158,7 +158,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collection of the RON measure stations of {PLACE_NAME}.";
+      rr:template "Collection of the RON measurement stations of {PLACE_NAME}.";
       rr:language "en"
     ]
   ];
