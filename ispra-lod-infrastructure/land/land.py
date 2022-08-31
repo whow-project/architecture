@@ -108,38 +108,6 @@ def get_value(indicator_value, iri=False):
     return value
 
 
-def place_code(istat, field):
-
-    length = 0
-    istat = str(istat)
-    field = str(field)
-
-    if field == "IdOST_Origine":
-        _length = len(istat)
-        if _length > 3 and _length < 6:
-            length = 6
-
-    elif field == "PRO_COM":
-        length = 6
-    elif field == "COD_PROV":
-        length = 3
-    elif field == "COD_REG":
-        length = 2
-    elif field == "COD":
-        length = 1
-        
-    else:
-        return None
-   
-    while len(istat) < length:
-        istat = str(0) + istat
-
-    if field == "COD_PROV" and istat in metropolitan_cities:
-            istat.replace("0","2",1)
-  
-    return "%s"%(istat)
-
-
 def place_type(istat, field):
 
     istat = str(istat)
@@ -177,37 +145,6 @@ def place_type(istat, field):
         return None
 
     return "%s"%(type)
-
-
-def place_id(istat, field, istat_only):
-    
-    length = 0
-    if field == "PRO_COM" or field == "IdOST_Origine":
-        length = 6
-        type = "municipality"
-    elif field == "COD_PROV":
-        length = 3
-        if istat.startswith("2"):
-            type = "metropolitancity"
-        else:
-            type = "province"
-    elif field == "COD_REG":
-        length = 2
-        type = "region"
-    elif field == "COD":
-        length = 1
-        type = "country"
-        
-    else:
-        return None
-        
-    while len(istat) < length:
-        istat = str(0) + istat
-        
-    if istat_only:
-        return istat
-    else:
-        return "%s/%s"%(type, istat)
 
 
 def label_it(dset):
