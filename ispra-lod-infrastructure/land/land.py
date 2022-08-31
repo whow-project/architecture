@@ -183,8 +183,6 @@ class LandTriplifier(Triplifier):
             'indicator_entity': indicator_entity,
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
-            'place_id': place_id,
-            'place_code': place_code,
             'place_type': place_type,
             'label_it': label_it,
             'label_en': label_en,
