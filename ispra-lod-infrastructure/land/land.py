@@ -51,7 +51,7 @@ def __istat_normaliser(istat, length):
     while len(istat) < length:
         istat = str(0) + istat
     try:
-        if (int(istat) in df_mc['PROV_CODE'].values):
+        if (length == 3 and int(istat) in df_mc['PROV_CODE'].values):
             istat = (str(df_mc['MC_CODE'][df_mc['PROV_CODE']==int(istat)].values[0]))
     except:
         return istat
@@ -132,7 +132,7 @@ def place_type(istat, field):
     elif field == "PRO_COM":
         type = "municipality"
     elif field == "COD_PROV":
-        if self.place_code(istat,field).startswith("2"):
+        if istat.startswith("2"):
             type = "metropolitancity"
         else:
             type = "province"

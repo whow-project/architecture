@@ -47,7 +47,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/00201_{ {{COD_PLACE}} }%";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/00201_{ {{COD_PLACE}} }";
         rr:class ispra-top:Collection
     ];
 
@@ -55,7 +55,6 @@
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Collezione di risorse di %eval:label_it('{{dataset}}')% associate a: { {{NOME_PLACE}} }";
-#        rr:template "Collezione di risorse di {{ label_it }} associate a: { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -64,7 +63,6 @@
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: { {{NOME_PLACE}} }";
-#            rr:template "Resources collection of {{ label_en }} associated with: { {{NOME_PLACE}} }";
             rr:language "en"
         ]
     ];
@@ -94,7 +92,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }%";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }";
         rr:class inspire-mf:IndicatorCollection
     ];
 
@@ -125,7 +123,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%/00201_{ {{COD_PLACE}} }%"
+        rr:template "https://dati.isprambiente.it/ld/place/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%/00201_{ {{COD_PLACE}} }"
     ].
 
 :Year
@@ -150,7 +148,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }%_{{indicator|lower}}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }_{{indicator|lower}}";
         rr:class inspire-mf:IndicatorCollection
     ];
 
