@@ -50,13 +50,11 @@ def process(arg_parser: Namespace):
         land_key = "soilc"
         for year in args.soil:
             print(year)
-            #triplifiers.append(SoilcTriplifier(year))
             triplifiers.append(LandTriplifier(land_key,year))
     elif args.urban:
         land_key = "urban"
         for year in args.urban:
             print(year)
-            #triplifiers.append(UrbanTriplifier(year))
             triplifiers.append(LandTriplifier(land_key,year))
 
     for triplifier in triplifiers:
