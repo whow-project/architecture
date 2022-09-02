@@ -50,6 +50,7 @@ def __istat_normaliser(istat, length):
 
     while len(istat) < length:
         istat = str(0) + istat
+
     try:
         if (length == 3 and int(istat) in df_mc['PROV_CODE'].values):
             istat = (str(df_mc['MC_CODE'][df_mc['PROV_CODE']==int(istat)].values[0]))
@@ -60,7 +61,8 @@ def __istat_normaliser(istat, length):
 
 def istat_normaliser(df):
     
-    fields_length_dict = {"PRO_COM": 6, 
+    fields_length_dict = {"IdOST_Origine": 6,
+                          "PRO_COM": 6, 
                           "COD_PROV": 3, 
                           "COD_REG": 2, 
                           "Nazione": 1}
@@ -212,8 +214,8 @@ class LandTriplifier(Triplifier):
             sep = df._engine.data.dialect.delimiter
             df.close()
             df = pd.read_csv(os.path.join(self._data_path, file), sep=sep)
-            df_istat = istat_normaliser(df)
-            if 'soilc' in str(self._data_path):
+            if ('soilc' in self._data_path or 'Comuni' in file):
+                df_istat = istat_normaliser(df)
                 df_istat.to_csv(os.path.join(self._data_path, file), sep=sep, index=None)
             
         df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
