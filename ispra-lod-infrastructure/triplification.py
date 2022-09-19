@@ -102,8 +102,9 @@ class RDFOutputConfiguration():
 
 class MappingConfiguration():
     
-    def __init__(self, dataset : str, rml_folder : str, dest_address : str, dest_folder : str, username : str, passwd : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
+    def __init__(self, dataset : str, graph_iri : str, rml_folder : str, dest_address : str, dest_folder : str, username : str, passwd : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
         self.__dataset = dataset
+        self.__graph_iri = graph_iri
         self.__rml_folder = rml_folder
         self.__dest_address = dest_address
         self.__dest_folder = dest_folder
@@ -117,6 +118,9 @@ class MappingConfiguration():
         
     def get_dataset(self):
         return self.__dataset
+
+    def get_graph_iri(self):
+        return self.__graph_iri
     
     def get_rml_folder(self):
         return self.__rml_folder
@@ -175,6 +179,7 @@ class MappingConfiguration():
         mapping_conf = json.loads(json_conf)
                 
         if "dataset" in mapping_conf \
+            and "graph_iri" in mapping_conf \
             and "data_folder" in mapping_conf \
             and "dirty_data_folder" in mapping_conf \
             and "rml_folder" in mapping_conf \
@@ -184,7 +189,8 @@ class MappingConfiguration():
             and "rdf_dump_file_serialisation" in mapping_conf:
             
             dataset = mapping_conf["dataset"]
-            
+            graph_iri = mapping_conf["graph_iri"]
+
             rml_path = mapping_conf["rml_folder"]
             global dest_ip
             dest_ip = mapping_conf["dest_address"]
@@ -249,7 +255,7 @@ class MappingConfiguration():
                 
                 maps.append(Mapping(rml_file, input_files, variables))
             
-            mapping_configuration = MappingConfiguration(dataset, rml_path, dest_ip, dest_path, user_str, pass_str, data_path, dirty_data_path, maps, rdf_output_configuration, year)
+            mapping_configuration = MappingConfiguration(dataset, graph_iri, rml_path, dest_ip, dest_path, user_str, pass_str, data_path, dirty_data_path, maps, rdf_output_configuration, year)
         else:
             raise MalfofmedConfigJsonException()
         
@@ -290,6 +296,7 @@ class Triplifier(ABC):
         print(f'The triplifier {type(self)} is using the configuration provided in {self._mapping_conf}.')
         mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
         
+        self._graph_iri = mapping_configuration.get_graph_iri()
         self._rml_path = mapping_configuration.get_rml_folder()
         self._dest_ip = mapping_configuration.get_dest_address()
         self._dest_path = mapping_configuration.get_dest_folder()
@@ -352,6 +359,8 @@ class TriplificationManager():
 
 
             dataset_name = str(result.get_mapping_configuration().get_dataset().lower())
+            graph_name = str(result.get_mapping_configuration().get_graph_iri().lower())
+            
 
             if bool_upload:
                 self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple.replace(file_triple.split('/')[-1],''))))
@@ -362,9 +371,9 @@ class TriplificationManager():
 
             if bool_update:
                 if os.path.exists(file_load):
-                    self.__kg_loader.sparql_bulk_load(str(dest_ip),str(file_load),str(dest_path),dataset_name)
+                    self.__kg_loader.sparql_bulk_load(str(dest_ip),str(file_load),str(dest_path),graph_name)
                 if os.path.exists(file_delete):
-                    self.__kg_loader.sparql_delete(str(dest_ip),str(file_delete),dataset_name)
+                    self.__kg_loader.sparql_delete(str(dest_ip),str(file_delete),graph_name)
            
         
 

@@ -1,0 +1,200 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/records_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix dsw: <http://purl.org/dsw/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/identifier/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+:CSV_ORG
+    rml:source "{{ csv_org }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:Organism
+    rml:logicalSource :CSV_ORG;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/org/00103_{ {{COD_EVNV}} }";
+        rr:class dwc:Organism;
+        rr:class dcterms:PhysicalResource;
+        rr:class ispra-top:Entity
+        ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUniqueIdentifier;
+        rr:objectMap [
+            rr:parentTriplesMap :UniqueIdentifier
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:identifier;
+        rr:objectMap [
+            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/org/00103_{ {{COD_EVNV}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "All'esemplare viene aggiunto/sostituito/rimosso il marcaggio { {{COD_EVNV}} } ";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Tag { {{COD_EVNV}} } is added/replaced/removed from the specimen";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Esemplare { {{COD_EVNV}} } ";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "The Specimen { {{COD_EVNV}} } ";
+            rr:language "en"
+        ]
+    ] .
+
+
+:UniqueIdentifier
+    rml:logicalSource :CSV_ORG;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00103_{ {{COD_EVNV}} }";
+        rr:class ispra-top:UniqueIdentifier
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "EURING ID { {{COD_EVNV}} }";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "EURING ID { {{COD_EVNV}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Codice EPE univoco - { {{COD_EVNV}} }  - pseudonimo del numero di anello distribuito dal Centro Nazionale di Inanellamento ISPRA (EURING IAB)";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "EPE unique code - { {{COD_EVNV}} } - pseudonym of the ring number distributed by the ISPRA National Ringing Scheme (EURING IAB)";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{ {{COD_EVNV}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+:IdentifierSchema
+    rml:logicalSource :CSV_ORG;
+
+    rr:subjectMap [
+        rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00103";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "Schema identificativi pseudonimi EURING IAB";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "EURING IAB pseudonym identifiers schema";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:constant "Schema di identificativi univoci dei codici EPE (pseudonimi dei numeri di anello distribuiti dal Centro Nazionale di Inanellamento ISPRA - EURING IAB)";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:constant "Unique identifiers schema of EPE codes (pseudonym of ring number distributed by the ISPRA National Ringing Scheme - EURING IAB)";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "03"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+:Ispra
+
+    rml:logicalSource :CSV_ORG;
+
+    rr:subjectMap [
+        rr:constant "https://dati.isprambiente.it/ld/common/organisation/001"
+        ].

@@ -9,6 +9,7 @@ from rendis.rendisV2 import RendisTriplifier
 from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
 from urban.urban import UrbanTriplifier
+from euring.epe import EpeTriplifier
 
 
 def process(arg_parser: Namespace):
@@ -52,6 +53,11 @@ def process(arg_parser: Namespace):
         for year in args.urban:
             print(year)
             triplifiers.append(UrbanTriplifier(year))
+    
+    elif args.epe:
+        for year in args.epe:
+            print (year)
+            triplifiers.append(EpeTriplifier(year))
 
     for triplifier in triplifiers:
         
@@ -84,6 +90,10 @@ if __name__ == "__main__":
     arg_parser.add_argument("-u", "--urb", dest="urban", nargs='+',
                             default=False,
                             help="Urban area Conversion")
+
+    arg_parser.add_argument("-e", "--epe", dest="epe", nargs='+',
+                            default=False,
+                            help="Epe Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,

@@ -1,0 +1,67 @@
+{
+	"dataset": "euring",
+	"graph_iri": "https://dati.isprambiente.it/ld/euring/obs/",
+	"rdf_dump_file_name": "epe_{{year}}",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "data/euring/v2/data",
+	"dirty_data_folder": "data/euring/v2/dirtydata",
+	"rml_folder": "data/euring/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+	"year": {{year}},
+	"mappings": [
+	{
+			"rml": "records_map.ttl",
+            "data": [
+                {
+                    "id": "csv_token",
+                    "file": "epe_token_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "COD_EVNV",
+                    "value": "'IDESEMPLARE'"
+                },
+                {
+                    "id": "COD_ID",
+                    "value": "'IDSPECIE'"
+                },
+                {
+                    "id": "COD_CENTROID",
+                    "value": "'IDTOPONIMO'"
+                },
+                {
+                    "id": "NAME_CENTROID",
+                    "value": "'NOMETOPONIMO'"
+                },
+                {
+                    "id": "LAT_CENTROID",
+                    "value": "'LATITUDEWGS84'"
+                },
+                {
+                    "id": "LON_CENTROID",
+                    "value": "'LONGITUDEWGS84'"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'YEAR'"
+                },
+                {
+                    "id": "MONTH",
+                    "value": "'MONTH'"
+                },
+                {
+                    "id": "DAY",
+                    "value": "'DAY'"
+                },
+                {
+                    "id": "BOOL_REC",
+                    "value": "'RINGINGRECOVERIES'"
+                }
+            ]
+	}
+    ]
+}
