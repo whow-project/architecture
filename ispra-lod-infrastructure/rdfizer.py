@@ -9,12 +9,14 @@ from rendis.rendisV2 import RendisTriplifier
 from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
 from urban.urban import UrbanTriplifier
+from land.land import LandTriplifier
 
 
 def process(arg_parser: Namespace):
     
     
     triplifiers = []
+    land_key = ""
     
     if args.place:
         #place_maker("data/istat/Limiti01012015.zip")
@@ -43,15 +45,17 @@ def process(arg_parser: Namespace):
             
     elif args.rendis:
         triplifiers.append(RendisTriplifier())
-               
+
     elif args.soil:
+        land_key = "soilc"
         for year in args.soil:
             print(year)
-            triplifiers.append(SoilcTriplifier(year))
+            triplifiers.append(LandTriplifier(land_key,year))
     elif args.urban:
+        land_key = "urban"
         for year in args.urban:
             print(year)
-            triplifiers.append(UrbanTriplifier(year))
+            triplifiers.append(LandTriplifier(land_key,year))
 
     for triplifier in triplifiers:
         
