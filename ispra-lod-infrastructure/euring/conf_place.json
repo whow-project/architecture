@@ -1,0 +1,46 @@
+{
+    "dataset": "euring",
+	"graph_iri": "https://dati.isprambiente.it/ld/euring/place/",
+	"rdf_dump_file_name": "epe_place",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "data/euring/v2/data",
+	"dirty_data_folder": "data/euring/v2/dirtydata",
+	"rml_folder": "data/euring/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+	"mappings": [
+	{
+			"rml": "place_map.ttl",
+            "data": [
+                {
+                    "id": "csv_grid",
+                    "file": "epe_grid_places_istat.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "COD_CENTROID",
+                    "value": "'IDTOPONIMO'"
+                },
+                {
+                    "id": "NAME_CENTROID",
+                    "value": "'NOMETOPONIMO'"
+                },
+                {
+                    "id": "LAT_CENTROID",
+                    "value": "'LATITUDEWGS84'"
+                },
+                {
+                    "id": "LON_CENTROID",
+                    "value": "'LONGITUDEWGS84'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'cod_com_istat'"
+                }
+            ]
+	}
+    ]
+}

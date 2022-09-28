@@ -1,0 +1,284 @@
+@prefix : <https://dati.isprambiente.it/ld/rml/records_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix dsw: <http://purl.org/dsw/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix dcterms: <http://purl.org/dc/terms/identifier/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+:CSV_GRID
+    rml:source "{{ csv_grid }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:Place
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/place/{{dataset}}/00102_{ {{COD_CENTROID}} }";
+        rr:class dcterms:Location;
+        rr:class ispra-top:Location
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Toponimo { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Toponym { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:coordinateUncertaintyInMeters;
+        rr:objectMap [
+            rr:template "2000";
+            rr:datatype xsd:int
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:geodeticDatum;
+        rr:objectMap [
+            rr:template "EPSG:4326"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:countryCode;
+        rr:objectMap [
+            rr:template "Italy"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:continent;
+        rr:objectMap [
+            rr:template "EU"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:locality;
+        rr:objectMap [
+            rr:template "{ {{NAME_CENTROID}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:lat;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LAT_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:lon;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LON_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:decimalLatitude;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LAT_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:decimalLongitude;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LON_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasMunicipality;
+        rr:objectMap [
+            rr:parentTriplesMap :Municipality
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasGeometry;
+        rr:objectMap [
+            rr:parentTriplesMap :Geometry
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUniqueIdentifier;
+        rr:objectMap [
+            rr:parentTriplesMap :UniqueIdentifier
+        ]
+    ].
+
+
+:Geometry
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/00102_{ {{COD_CENTROID}} }";
+        rr:class ispra-place:Geometry
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:geometry;
+        rr:objectMap [
+            rr:template "POINT(%eval:round_coord('{ {{LON_CENTROID}} }')% %eval:round_coord('{ {{LAT_CENTROID}} }')%)";
+            rr:datatype geosparql:wktLiteral
+        ]
+    ].
+
+
+:UniqueIdentifier
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00102_{ {{COD_CENTROID}} }";
+        rr:class ispra-top:UniqueIdentifier
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Toponimo EPE ID { {{COD_CENTROID}} }";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "EPE toponym ID { {{COD_CENTROID}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Codice toponimo EPE univoco - { {{COD_CENTROID}} }";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "EPE toponym unique code - { {{COD_CENTROID}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{ {{COD_CENTROID}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+:IdentifierSchema
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00102";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "Schema identificativi pseudonimi griglie EPE";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "EPE toponym pseudonym identifiers schema";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:constant "Schema di identificativi univoci delle griglie EPE";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:constant "Unique identifiers schema of EPE toponyms";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "02"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+:Municipality
+
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{ {{COD_PLACE}} }"
+        ].
+
+
+:Ispra
+
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:constant "https://dati.isprambiente.it/ld/common/organisation/001"
+        ].

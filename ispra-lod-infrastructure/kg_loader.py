@@ -67,11 +67,11 @@ class KnowledgeGraphLoader():
         scp.close()
 
     
-    def sparql_bulk_load(self,ipaddr,file_str,folder,name_dataset):
+    def sparql_bulk_load(self,ipaddr,file_str,folder,graph_iri):
 
-        sql_file = 'upload_graph_' + name_dataset + '.sql'
+        sql_file = 'upload_graph_' + graph_iri.split('/')[4] + '.sql'
         file_toload = folder + '/' + file_str
-        str_graph = 'https://dati.isprambiente.it/ld/' + name_dataset + '/'
+        str_graph = str(graph_iri)
 
         # create sql file
         with open(sql_file, 'w') as sql_out:
@@ -89,10 +89,10 @@ class KnowledgeGraphLoader():
         run([command], shell=True)
 
 
-    def sparql_delete(self,ipaddr,file_str,name_dataset):
+    def sparql_delete(self,ipaddr,file_str,graph_iri):
 
-        sql_file = 'del_graph_' + name_dataset + '.sql'
-        str_graph = 'https://dati.isprambiente.it/ld/' + name_dataset + '/'
+        sql_file = 'del_graph_' + graph_iri.split('/')[4] + '.sql'
+        str_graph = str(graph_iri)
 
         with gzip.open(file_str, 'r') as f:
             read_f = f.read()
