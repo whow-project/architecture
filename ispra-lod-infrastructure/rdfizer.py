@@ -10,12 +10,13 @@ from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
 from urban.urban import UrbanTriplifier
 from euring.epe import EpeTriplifier
-
+from land.land import LandTriplifier
 
 def process(arg_parser: Namespace):
     
     
     triplifiers = []
+    land_key = ""
     
     if args.place:
         #place_maker("data/istat/Limiti01012015.zip")
@@ -34,7 +35,7 @@ def process(arg_parser: Namespace):
         for dataset in datasets:
             if dataset == 'rmn':
                 triplifier = RMNTriplifier()
-            elif dataset == 'ron':
+            elif dataset == 'ron': Salone delle Fontane 
                 triplifier = RONTriplifier()
             else:
                 triplifier = None
@@ -44,15 +45,18 @@ def process(arg_parser: Namespace):
             
     elif args.rendis:
         triplifiers.append(RendisTriplifier())
-               
+
     elif args.soil:
+        land_key = "soilc"
         for year in args.soil:
             print(year)
-            triplifiers.append(SoilcTriplifier(year))
+            triplifiers.append(LandTriplifier(land_key,year))
+
     elif args.urban:
+        land_key = "urban"
         for year in args.urban:
             print(year)
-            triplifiers.append(UrbanTriplifier(year))
+            triplifiers.append(LandTriplifier(land_key,year))
     
     elif args.epe:
         for year in args.epe:
