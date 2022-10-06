@@ -1,11 +1,11 @@
 {
 	"dataset": "rendis",
-	"graph_iri": "https://dati.isprambiente.it/ld/rendis",
+	"graph_iri": "https://dati.isprambiente.it/ld/rendis/",
 	"rdf_dump_file_name": "rendis",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/rendis/v2/data",
 	"dirty_data_folder": "data/rendis/v2/dirtydata",
-	"rml_folder": "data/rendis/v2/rml_new",
+	"rml_folder": "data/rendis/v2/rml",
     "dest_address": "11.111.111.11",
     "dest_folder": "/path/to/folder",
     "username": "username",

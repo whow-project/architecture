@@ -1,6 +1,6 @@
 {
     "dataset": "urban",
-    "graph_iri": "https://dati.isprambiente.it/ld/urban",
+    "graph_iri": "https://dati.isprambiente.it/ld/urban/",
     "rdf_dump_file_name": "urban_{{year}}",
     "rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/urban/v2/data",

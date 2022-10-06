@@ -1,6 +1,6 @@
 {
     "dataset": "soilc",
-    "graph_iri": "https://dati.isprambiente.it/ld/soilc",
+    "graph_iri": "https://dati.isprambiente.it/ld/soilc/",
     "rdf_dump_file_name": "soilc_{{year}}",
     "rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/soilc/v2/data",
