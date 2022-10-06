@@ -35,7 +35,7 @@ def process(arg_parser: Namespace):
         for dataset in datasets:
             if dataset == 'rmn':
                 triplifier = RMNTriplifier()
-            elif dataset == 'ron': Salone delle Fontane 
+            elif dataset == 'ron': 
                 triplifier = RONTriplifier()
             else:
                 triplifier = None
