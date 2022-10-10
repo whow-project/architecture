@@ -10,9 +10,10 @@
     "dest_folder": "/path/to/folder",
     "username": "username",
     "passwd": "password",
+    "year": {{year}},
 	"mappings": [
 	{
-			"rml": "organism_map.ttl",
+			"rml": "organism_map_{{year}}.ttl",
             "data": [
                 {
                     "id": "csv_org",
