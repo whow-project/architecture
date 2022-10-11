@@ -33,7 +33,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{Campo}";
-        rr:class inspire-mf:Metric
+        rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
@@ -71,7 +71,7 @@
     
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{Broader_ID}";
-        rr:class inspire-mf:Metric
+        rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
