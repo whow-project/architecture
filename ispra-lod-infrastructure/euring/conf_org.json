@@ -1,7 +1,7 @@
 {
     "dataset": "euring",
     "graph_iri": "https://dati.isprambiente.it/ld/euring/org/",
-    "rdf_dump_file_name": "epe_organism",
+    "rdf_dump_file_name": "epe_organism_{{year}}",
     "rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/euring/v2/data",
     "dirty_data_folder": "data/euring/v2/dirtydata",
@@ -13,11 +13,11 @@
     "year": {{year}},
 	"mappings": [
 	{
-			"rml": "organism_map_{{year}}.ttl",
+			"rml": "organism_map.ttl",
             "data": [
                 {
                     "id": "csv_org",
-                    "file": "epe_organism_{{year}}.csv"
+                    "file": "organism_{{year}}.csv"
                 }
             ],
             "variables": [

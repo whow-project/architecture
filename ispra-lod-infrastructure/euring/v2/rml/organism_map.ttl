@@ -3,7 +3,6 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
@@ -21,7 +20,7 @@
     rml:logicalSource :CSV_ORG;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/org/00103_{ {{COD_EVNV}} }";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }";
         rr:class dwc:Organism;
         rr:class dcterms:PhysicalResource;
         rr:class ispra-top:Entity
@@ -34,12 +33,12 @@
         ]
     ];
 
-    rr:predicateObjectMap [
-        rr:predicate dcterms:identifier;
-        rr:objectMap [
-            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/org/00103_{ {{COD_EVNV}} }"
-        ]
-    ];
+#    rr:predicateObjectMap [
+#        rr:predicate dcterms:identifier;
+#        rr:objectMap [
+#            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
+#       ]
+#   ];
 
     rr:predicateObjectMap [
         rr:predicate dcterms:description;

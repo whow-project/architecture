@@ -22,7 +22,7 @@
     rml:logicalSource :CSV_GRID;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/{{dataset}}/00102_{ {{COD_CENTROID}} }";
+        rr:template "https://dati.isprambiente.it/ld/place/location/00102_{ {{COD_CENTROID}} }";
         rr:class dcterms:Location;
         rr:class ispra-top:Location
     ];
@@ -154,7 +154,7 @@
     rml:logicalSource :CSV_GRID;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00102_{ {{COD_CENTROID}} }";
+        rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00102_{ {{COD_CENTROID}} }";
         rr:class ispra-top:UniqueIdentifier
         ];
 
@@ -168,7 +168,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Toponimo EPE ID { {{COD_CENTROID}} }";
+            rr:template "Toponimo EURING ID { {{COD_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -176,7 +176,7 @@
      rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "EPE toponym ID { {{COD_CENTROID}} }";
+            rr:template "EURING toponym ID { {{COD_CENTROID}} }";
             rr:language "en"
         ]
     ];
@@ -184,7 +184,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Codice toponimo EPE univoco - { {{COD_CENTROID}} }";
+            rr:template "Codice toponimo EURING univoco - { {{COD_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -192,7 +192,7 @@
      rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "EPE toponym unique code - { {{COD_CENTROID}} }";
+            rr:template "EURING toponym unique code - { {{COD_CENTROID}} }";
             rr:language "en"
         ]
     ];
@@ -223,7 +223,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:constant "Schema identificativi pseudonimi griglie EPE";
+            rr:constant "Schema identificativi pseudonimi toponimi EURING";
             rr:language "it"
         ]
     ];
@@ -231,7 +231,7 @@
      rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:constant "EPE toponym pseudonym identifiers schema";
+            rr:constant "EURING toponym pseudonym identifiers schema";
             rr:language "en"
         ]
     ];

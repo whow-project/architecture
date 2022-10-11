@@ -5,6 +5,7 @@
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
 @prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
@@ -12,6 +13,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
 
 
 :CSV_TOKEN
@@ -55,8 +57,9 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/obs/00103_{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
-        rr:class dsw:Token
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observation/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:class dsw:Token;
+        rr:class inspire-mf:Observation
     ];
 
     rr:predicateObjectMap [
@@ -78,7 +81,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Marcatura o ritrovamento dell'esemplare { {{COD_EVNV}} } a seguito di cattura temporanea per l'inanellamento degli uccelli a scopo scientifico (art. 4, L. 157/92), nei pressi del toponimo { {{NAME_CENTROID}} } nell'elemento geografico { {{COD_CENTROID}} }";
+            rr:template "Marcatura o ritrovamento dell'esemplare { {{COD_EVNV}} } a seguito di cattura temporanea per l'inanellamento degli uccelli a scopo scientifico (art. 4, L. 157/92), nei pressi del toponimo { {{NAME_CENTROID}} } (elemento geografico { {{COD_CENTROID}} })";
             rr:language "it"
         ]
     ];
@@ -86,7 +89,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Marking or discovery of the specimen { {{COD_EVNV}} } following temporary trapping for bird ringing for scientific purposes (art. 4, L. 157/92) near the { {{NAME_CENTROID}} } toponym in the geographic element { {{COD_CENTROID}} }";
+            rr:template "Marking or discovery of the specimen { {{COD_EVNV}} } following temporary trapping for bird ringing for scientific purposes (art. 4, L. 157/92) near the { {{NAME_CENTROID}} } toponym (geographic element { {{COD_CENTROID}} })";
             rr:language "en"
         ]
     ];
@@ -169,7 +172,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/idn/00103_{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/identification/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
             rr:class dwc:Identification
     ];
 
@@ -239,7 +242,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/occ/00103_{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/occurrence/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
             rr:class dwc:Occurrence
     ];
 
@@ -254,7 +257,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "The specimen { {{COD_EVNV}} } - date { {{DAY}} }-{ {{MONTH}} }-{ {{YEAR}} } - place { {{NAME_CENTROID}} } ({ {{COD_CENTROID}} })";
+            rr:template  "The specimen { {{COD_EVNV}} } - date { {{YEAR}} }-{ {{MONTH}} }-{ {{DAY}} } - place { {{NAME_CENTROID}} } ({ {{COD_CENTROID}} })";
             rr:language "en"
         ]
     ];
@@ -270,7 +273,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Presence of the specimen { {{COD_EVNV}} } on { {{DAY}} }-{ {{MONTH}} }-{ {{YEAR}} } at { {{NAME_CENTROID}} } ({ {{COD_CENTROID}} })";
+            rr:template "Presence of the specimen { {{COD_EVNV}} } on { {{YEAR}} }-{ {{MONTH}} }-{ {{DAY}} } at { {{NAME_CENTROID}} } ({ {{COD_CENTROID}} })";
             rr:language "en"
         ]
     ];
@@ -301,14 +304,15 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/eve/%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
-            rr:class dwc:Event
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/event/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+            rr:class dwc:Event;
+            rr:class sem:Event
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "Evento griglia { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
+            rr:template  "Evento di cattura dell'esemplare { {{COD_EVNV}} } il { {{DAY}} }-{ {{MONTH}} }-{ {{YEAR}} } nel toponimo { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -316,7 +320,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "Event grid { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
+            rr:template  "Capture event of the specimen { {{COD_EVNV}} } on { {{YEAR}} }-{ {{MONTH}} }-{ {{DAY}} } in the toponym { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
             rr:language "en"
         ]
     ];
@@ -326,6 +330,13 @@
         rr:objectMap [
             rr:template "%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%";
             rr:datatype xsd:date
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate sem:eventType;
+        rr:objectMap [
+            rr:parentTriplesMap :Capture
         ]
     ];
 
@@ -342,7 +353,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/org/00103_{ {{COD_EVNV}} }"
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
         ].
 
 
@@ -360,8 +371,9 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-            rr:template "https://dati.isprambiente.it/ld/place/{{dataset}}/00102_{ {{COD_CENTROID}} }"
+            rr:template "https://dati.isprambiente.it/ld/place/location/00102_{ {{COD_CENTROID}} }"
         ].
+
 
 :Taxon
 
@@ -369,4 +381,13 @@
 
     rr:subjectMap [
             rr:template "https://dati.isprambiente.it/ld/{{dataset}}/taxon/%eval:format_euring('{ {{COD_ID}} }')%"
+        ].
+
+
+:Capture
+
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+            rr:template "https://dati.isprambiente.it/vocab/euring/capture/{ {{RECAPTURE}} }"
         ].

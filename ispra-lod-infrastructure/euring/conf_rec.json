@@ -1,7 +1,7 @@
 {
 	"dataset": "euring",
 	"graph_iri": "https://dati.isprambiente.it/ld/euring/obs/",
-	"rdf_dump_file_name": "epe_{{year}}",
+	"rdf_dump_file_name": "epe_observation_{{year}}",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/euring/v2/data",
 	"dirty_data_folder": "data/euring/v2/dirtydata",
@@ -58,7 +58,7 @@
                     "value": "'DAY'"
                 },
                 {
-                    "id": "BOOL_REC",
+                    "id": "RECAPTURE",
                     "value": "'RINGINGRECOVERIES'"
                 }
             ]

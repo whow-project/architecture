@@ -128,7 +128,6 @@ def get_value(indicator_value, iri=False):
     
     return value
 
-
 class EpeTriplifier(Triplifier):
     
     '''
@@ -151,7 +150,7 @@ class EpeTriplifier(Triplifier):
             'format_euring': format_euring,
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
-            'get_value': get_value
+            'get_value': get_value,
             }
         
         super().__init__('epe', functions_dictionary)
@@ -170,17 +169,15 @@ class EpeTriplifier(Triplifier):
         files = [ file for file in os.listdir(self._data_path) if file.endswith(".csv") ]
 
         for file in files:
-            print ("ISTAT ID normalizer for", file)
-            df = pd.read_csv(os.path.join(self._data_path, file), sep=None, engine='python', iterator=True)
-            sep = df._engine.data.dialect.delimiter
-            df.close()
-            df = pd.read_csv(os.path.join(self._data_path, file), sep=sep)
-            if ('soilc' in self._data_path or 'Comuni' in file):
+            if ('istat' in file):
+                print ("ISTAT ID normalizer for", file)
+                df = pd.read_csv(os.path.join(self._data_path, file), sep=None, engine='python', iterator=True)
+                sep = df._engine.data.dialect.delimiter
+                df.close()
+                df = pd.read_csv(os.path.join(self._data_path, file), sep=sep)
                 df_istat = istat_normaliser(df)
                 df_istat.to_csv(os.path.join(self._data_path, file), sep=sep, index=None)
-                del df_istat
-            
-            del df
+                del df_istat, df
         
         print("\t preprocessing completed.")
         
