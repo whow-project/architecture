@@ -128,10 +128,15 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     dest_path = mapping_conf["dest_folder"]
     user_str = mapping_conf["username"]
     pass_str = mapping_conf["passwd"]
+    graph_str = mapping_conf["graph_iri"]
 
+    print("Starting preprocessing ...")
+    utf8_converter = UTF8Converter('data/place/v2/dirtydata','data/place/v2/data')
+    utf8_converter.convert()
+    print("\t preprocessing completed.")
     
     #regions
-    template = env.get_template('place/regions_map.ttl')
+    template = env.get_template('data/place/v2/rml/regions_map.ttl')
     rml_mapping = template.render()
     
     rml_converter = RMLConverter()
@@ -142,7 +147,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     
 
     #provinces
-    template = env.get_template('place/provinces_map.ttl')
+    template = env.get_template('data/place/v2/rml/provinces_map.ttl')
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
@@ -155,17 +160,14 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     #toLoad_toDelete(g, "provinces", "places")
     file_tripleP, file_loadP, file_deleteP = loader.toLoad_toDelete_2(g, "provinces", "place")
 
-    #municipalities
-    utf8_converter = UTF8Converter('data/place/v2/dirtydata','data/place/v2/data')
-    utf8_converter.convert_single_file('comuni_soppressi.csv')
-    
+    #municipalities    
     with open("data/place/v2/data/comuni_soppressi.csv","rt") as f:
         lines = f.readlines()
     lines[0] = lines[0].replace(' ','_') #remove empty spaces from header
     with open("data/place/v2/data/comuni_soppressi.csv","wt") as ff:
         ff.writelines(lines)
 
-    template = env.get_template('place/municipalities_map.ttl')
+    template = env.get_template('data/place/v2/rml/municipalities_map.ttl')
     rml_mapping = template.render()
 
     rml_converter = RMLConverter()
@@ -202,11 +204,11 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
 
     if bool_update:
         if os.path.exists(file_loadR):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadR),str(dest_path),"place")
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadR),str(dest_path),graph_str)
         if os.path.exists(file_loadP):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadP),str(dest_path),"place")
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadP),str(dest_path),graph_str)
         if os.path.exists(file_loadM):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),"place")
+            loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),graph_str)
 
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
