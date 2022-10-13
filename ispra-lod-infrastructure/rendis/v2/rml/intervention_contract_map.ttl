@@ -1240,7 +1240,7 @@
      ];
 
      rr:predicateObjectMap [
-       rr:predicate ispra-top:hasParameter;
+       rr:predicate ispra-top:isParametrisedBy;
        rr:objectMap [
           rr:constant "https://dati.isprambiente.it/ld/rendis/parameter/{{ind|lower}}";
 	  rr:termType rr:IRI

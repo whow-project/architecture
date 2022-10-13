@@ -149,7 +149,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasParameter;
+        rr:predicate ispra-top:isParametrisedBy;
         rr:objectMap [
 	        rr:parentTriplesMap :Metric
         ]
