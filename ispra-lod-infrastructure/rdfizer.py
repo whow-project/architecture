@@ -16,13 +16,15 @@ def process(arg_parser: Namespace):
     
     
     triplifiers = []
-    land_key = ""
     
     if args.place:
-        #place_maker("data/istat/Limiti01012015.zip")
-        print("Preprocessing Complete")
-        placeRDF(args.json_config, args.upload, args.update)
+        for year in args.place:
+            print(year)
+            place_maker("data/istat/Limiti0101%s.zip" % year)
+            print("Preprocessing Complete")
+            placeRDF(args.json_config, args.upload, args.update)
         print("Place Complete")
+
     elif args.measures:
         print("Processing measures...")
         
@@ -79,8 +81,8 @@ def process(arg_parser: Namespace):
 if __name__ == "__main__":
     arg_parser = ArgumentParser("annual_run.py", description="This script runs ISPRA Data Conversion (annual)")
 
-    arg_parser.add_argument("-p", "--pl", dest="place", nargs='?',
-                            const=True, default=False,
+    arg_parser.add_argument("-p", "--pl", dest="place", nargs='+',
+                            default=False,
                             help="place Conversion")
 
     arg_parser.add_argument("-i", "--ind", dest="indicators", nargs='?',
