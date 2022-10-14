@@ -239,7 +239,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:constant "Schema di identificativi univoci delle griglie EPE";
+            rr:constant "Schema di identificativi univoci dei toponimi EPE";
             rr:language "it"
         ]
     ];
