@@ -137,7 +137,7 @@
     rml:logicalSource :CSV_GRID;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/00102_{ {{COD_CENTROID}} }";
+        rr:template "https://dati.isprambiente.it/ld/place/geometry/00102_{ {{COD_CENTROID}} }_point";
         rr:class ispra-place:Geometry
         ];
 
