@@ -39,7 +39,7 @@ class KnowledgeGraphLoader():
 
     def __init__(self, lock=None):
         self.__lock = lock
-        self.__connect()
+        #self.__connect()
         
     def add_all_triples_to_graph(self, g1, g2):
         for (s,p,o) in g2:
@@ -52,7 +52,12 @@ class KnowledgeGraphLoader():
         ssh = SSHClient()
         ssh.load_system_host_keys()
         ssh.set_missing_host_key_policy(AutoAddPolicy())
-        ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
+
+        try:
+            ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
+        except BlockingIOError:
+            print('Resource unaivailable, check your inputs in the config file!')
+            return 0
 
         sftp = SFTPClient.from_transport(ssh.get_transport())
         try:
@@ -69,7 +74,7 @@ class KnowledgeGraphLoader():
     
     def sparql_bulk_load(self,ipaddr,file_str,folder,graph_iri):
 
-        sql_file = 'upload_graph_' + graph_iri.split('/')[4] + '.sql'
+        sql_file = 'upload_graph_' + graph_iri.split('/')[-1] + '.sql'
         file_toload = folder + '/' + file_str
         str_graph = str(graph_iri)
 
