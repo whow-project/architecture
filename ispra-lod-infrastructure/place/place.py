@@ -4,9 +4,9 @@ import gzip
 import pandas as pd
 from subprocess import Popen, run
 from jinja2 import Environment, FileSystemLoader, Template
-from rdflib import Graph
+from rdflib import Graph, URIRef
+from rdflib.namespace import RDF
 from rdflib.parser import StringInputSource
-#from load_delete import toLoad_toDelete
 from kg_loader import KnowledgeGraphLoader
 from pyrml import TermUtils, RMLConverter
 from utf8_converter import UTF8Converter
@@ -133,7 +133,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     print("Starting preprocessing ...")
     utf8_converter = UTF8Converter('data/place/v2/dirtydata','data/place/v2/data')
     utf8_converter.convert()
-    print("\t preprocessing completed.")
+    print("\t preprocessing complete.")
     
     #regions
     template = env.get_template('data/place/v2/rml/regions_map.ttl')
@@ -156,6 +156,15 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
     rml_converter.register_function("metropolitan_city_code_2", metropolitan_city_code_2)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
+
+    #Fix rdf:type
+    print ('Fixing rdf:type ...')
+    for s, p, o in g.triples((None, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/province'))):
+        g.remove((s, p, o))
+        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/Province')))
+    for s, p, o in g.triples((None, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/metropolitancity'))):
+        g.remove((s, p, o))
+        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/Metropolitancity')))
 
     #toLoad_toDelete(g, "provinces", "places")
     file_tripleP, file_loadP, file_deleteP = loader.toLoad_toDelete_2(g, "provinces", "place")
@@ -213,15 +222,18 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
             file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
-            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delR
-            run([command], shell=True)
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
+            if os.path.exists(file_delR):
+                run([command], shell=True)
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
             file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
-            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delP
-            run([command], shell=True)
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
+            if os.path.exists(file_delP):
+                run([command], shell=True)
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
             file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
-            command = "isql-vt " + str(dest_ip)+":1111 " + "dba " + "dba " + "VERBOSE=OFF " + " 'EXEC=status()' " + file_delM
-            run([command], shell=True)
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
+            if os.path.exists(file_delM):
+                run([command], shell=True)
