@@ -1,12 +1,8 @@
 from rdflib import Graph
 from rdflib.store import Store
-#from SPARQLWrapper import SPARQLWrapper
 from rdflib.plugin import get as plugin
 import os, sys
 import configuration as conf
-import vstroke
-#from virtuoso.vsparql import Result
-#import virtuoso
 import gzip, tarfile
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
