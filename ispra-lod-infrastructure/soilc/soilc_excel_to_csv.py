@@ -1,4 +1,5 @@
 import os
+import sys
 import csv
 import pandas as pd
 from openpyxl import load_workbook, Workbook
@@ -18,15 +19,16 @@ def convert(file_in, folder_out):
             print("Exported %s"%file_out)
             
 def convert_pd(file_in, folder_out):
+    print ('Reading input file ...')
     df = pd.read_excel(file_in, None);
     for sheetname in df.keys():
+        print ('Creating', sheetname, '...')
         file_out = os.path.join(folder_out, sheetname + '.csv')
         df[sheetname].to_csv(file_out, sep=';', index=None)
             
 if __name__ == '__main__':
-    parent_folder = file_in = os.path.join('/', 'data')
-    file_in = os.path.join(parent_folder, 'consumo_suolo_2021_Com_Prov_Reg_It_1_1.xlsx')
-    folder_out = os.path.join(parent_folder, 'data_2021')
+    file_in = sys.argv[1]
+    folder_out = os.path.join('data', 'soilc', 'v2', 'dirtydata')
     
     if not os.path.exists(folder_out):
         os.makedirs(folder_out)
