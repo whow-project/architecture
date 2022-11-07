@@ -40,6 +40,22 @@
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 
+
+:DatasetISPRA
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
+            rr:class ispra-top:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ].
+
 :Place
   rml:logicalSource :CSV_STATIONS;
 
@@ -50,10 +66,17 @@
 :Catalogue
   rml:logicalSource :CSV_STATIONS;
 
-  rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_{CODE_PLACE}";
-    rr:class ispra-top:Collection
+    rr:subjectMap [
+        rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_{CODE_PLACE}";
+        rr:class ispra-top:Collection
   ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;

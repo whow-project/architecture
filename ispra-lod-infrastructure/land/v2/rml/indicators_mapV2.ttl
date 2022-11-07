@@ -52,6 +52,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Collezione di risorse di %eval:label_it('{{dataset}}')% associate a: { {{NOME_PLACE}} }";
