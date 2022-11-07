@@ -63,6 +63,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template  "Cattura dell'esemplare { {{COD_EVNV}} }, nei pressi di { {{NAME_CENTROID}} } ({ {{COD_CENTROID}} })";
