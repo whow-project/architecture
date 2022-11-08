@@ -4,6 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix metric: <https://dati.isprambiente.it/ontology/common/metric/> .
 @prefix time: <https://dati.isprambiente.it/ontology/common/time/> .
 @prefix mu: <https://dati.isprambiente.it/ontology/common/mu/> .
@@ -39,6 +40,22 @@
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:label_it('{{dataset}}')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:label_en('{{dataset}}')%";
+            rr:language "en"
         ]
     ].
 

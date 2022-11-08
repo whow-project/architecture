@@ -8,6 +8,7 @@
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -65,6 +66,14 @@
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template  "Rendis Dataset";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Repertorio Nazionale degli interventi per la Difesa del Suolo";
+            #rr:language "it"
         ]
     ].
 

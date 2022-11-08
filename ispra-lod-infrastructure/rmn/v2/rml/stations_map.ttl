@@ -6,6 +6,7 @@
 @prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -51,6 +52,22 @@
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:constant  "RMN Dataset";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Rete Mareografica Nazionale";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "National Tide Gauge Network";
+            rr:language "en"
         ]
     ].
 
