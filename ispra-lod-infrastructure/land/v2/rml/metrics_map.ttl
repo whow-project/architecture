@@ -52,12 +52,12 @@
         ]
     ];
     
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:hasUnitOfMeasure;
-        rr:objectMap [
-            rr:parentTriplesMap :MU
-        ]
-    ];
+#   rr:predicateObjectMap [
+#        rr:predicate ispra-top:hasUnitOfMeasure;
+#        rr:objectMap [
+#            rr:parentTriplesMap :MU
+#        ]
+#    ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasBroader;
