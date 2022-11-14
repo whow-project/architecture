@@ -1,8 +1,9 @@
-install webapp
-cd readers
-install fred
-cd ../core
-install workflows
+cd data_cleansing
+install cleansing
+cd ../mappers
+install pyrml_mapper
+cd ../triplestores
+install virtuoso
 cd ../web
 install webapp
 cd ..

@@ -7,6 +7,7 @@ import websockets
 @ComponentFactory("websocket-factory")
 @Property("_host", "server.host", "localhost")
 @Property("_port", "server.port", "8765")
+@Requires("_cleanser", "data-cleansing")
 @Requires("_rml_mapper", "rml-mapper")
 @Requires("_triplestore_manager", "triplestore-manager")
 @Instantiate("websocket-server")
@@ -21,7 +22,8 @@ class WebSocketServer(object):
             self._rml_mapper.map()
         elif path == '/triplestore_manager':
             self._triplestore_manager.load_graphs()
-            #self._triplestore_manager.query('SELECT * FROM LOAD_LIST')
+        elif path == '/data-cleansing':
+            self._cleanser.clean()
         
         await websocket.send('mapping completed')
     

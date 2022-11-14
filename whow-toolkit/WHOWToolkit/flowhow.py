@@ -34,7 +34,15 @@ async def communicate_with(path: str):
 def whow_flow():
     
     @task()
-    def rdf_map():
+    def clean():
+        
+        loop = asyncio.get_event_loop()
+        result = loop.run_until_complete(communicate_with('data-cleansing'))
+        
+        return result
+    
+    @task()
+    def rdf_map(input: str):
         
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(communicate_with('rml_mapper'))
@@ -51,8 +59,10 @@ def whow_flow():
     #load(rdf_map())
     
     # STEP 1
-    x = rdf_map()
+    clean_data = clean()
     # STEP 2
-    load(x)
+    rdf = rdf_map(clean_data)
+    # STEP 2
+    load(rdf)
     
 whow_flow()
