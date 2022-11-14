@@ -225,7 +225,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:lastUpdate;
+    rr:predicate ispra-top:atTime;
     rr:objectMap [
       rr:parentTriplesMap <#ProvinceYear>
     ]
