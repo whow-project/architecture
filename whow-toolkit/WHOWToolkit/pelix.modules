@@ -1,0 +1,9 @@
+install webapp
+cd readers
+install fred
+cd ../core
+install workflows
+cd ../web
+install webapp
+cd ..
+start 15 16 17 18
