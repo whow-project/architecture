@@ -219,12 +219,22 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
         if os.path.exists(file_loadM):
             loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),graph_str)
 
+        #Different function, to preserve dead entities
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
-            loader.sparql_delete(str(dest_ip),str(file_deleteR),graph_str)
+            file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
+            if os.path.exists(file_delR):
+                run([command], shell=True)
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
-            loader.sparql_delete(str(dest_ip),str(file_deleteP),graph_str)
+            file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
+            if os.path.exists(file_delP):
+                run([command], shell=True)
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
-            loader.sparql_delete(str(dest_ip),str(file_deleteM),graph_str)
+            file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
+            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
+            if os.path.exists(file_delM):
+                run([command], shell=True)
