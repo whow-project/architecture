@@ -1,0 +1,91 @@
+<https://w3id.org/whow/onto/hydrography/riverwaterbody/it03n0080600061lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/OGLIO SUBLACUALE" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polspuln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Lambro" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaeln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADAELN1LO: Lake ANNONE EST."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4sln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Mincio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsmoln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Lambro" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ch2ln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4mln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsmoln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POLSMOLN1LO: Lake MONTORFANO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsgaln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/poti2ln1in> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsgaln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POLSGALN1LO: Lake GANNA."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadprla1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln2lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/riverwaterbody/it03n0080600061lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/RiverWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ch2ln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Oglio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsgaln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polspuln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POLSPULN1LO: Lake PUSIANO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poticoln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTICOLN1LO: Lake COMABBIO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsalln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POLSALLN1LO: Lake ALSERIO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadsaln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADSALN1LO: Lake SARTIRANA."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpbla1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADPBLA1LO: Lake PALABIONE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadsaln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potivaln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadgaln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potighln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpula1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda prelacuale" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaoln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poti2ln1in> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTI2LN1IN: Lake MAGGIORE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poti2ln1in> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln3in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadgaln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADGALN1LO: Lake GARLATE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln1in> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTILULN1IN: Lake LUGANO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4mln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Mincio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4sln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POMI4SLN1LO: Lake MANTOVA SUPERIORE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potipiln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potipiln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln2in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln2lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POAD2LN2LO: Lake COMO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln3in> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadprla1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadprla1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADPRLA1LO: Lake POZZO DI RIVA."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2me2ln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POAD2ME2LN1LO: Lake DI MEZZOLA."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln2lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog2ln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POOG2LN1LO: Lake ISEO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potivaln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTIVALN1LO: Lake VARESE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potivaln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTIVALN1LO: Lake Varese."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsalln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Lambro" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2me2ln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polspuln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poticoln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsmoln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadgaln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpbla1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda prelacuale" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poticoln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaoln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpula1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADPULA1LO: Lake PALÙ."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/poti2ln1in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln2in> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTILULN2IN: Lake LUGANO ."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ce2ln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaeln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4iln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln3in> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTILULN3IN: Lake LUGANO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potipiln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTIPILN1LO: Lake DI PIANO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpbla1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog2ln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4sln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ce2ln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Oglio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln1in> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potighln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4mln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POMI4MLN1LO: Lake MANTOVA DI MEZZO."@en .
+<https://w3id.org/whow/onto/hydrography/riverwaterbody/it03n0080600061lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03N0080600061LO: River Guerna (Torrente)."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ch2ln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POOG3CH2LN1LO: Lake IDRO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog2ln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Oglio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2me2ln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda prelacuale" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln2in> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potiluln1in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaoln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POADAOLN1LO: Lake ANNONE OVEST."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poti2ln1in> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poog3ce2ln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POOG3CE2LN1LO: Lake ENDINE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poad2ln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POAD2LN1LO: Lake COMO."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03polsalln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4iln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POMI4ILN1LO: Lake MANTOVA INFERIORE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadpula1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadaeln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Adda" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potighln1lo> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody IT03POTIGHLN1LO: Lake GHIRLA."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03potivaln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Ticino" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/poti2ln1in> <http://www.w3.org/2000/01/rdf-schema#label> "Waterbody POTI2LN1IN: Lake MAGGIORE."@en .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03pomi4iln1lo> <https://w3id.org/whow/onto/hydrography/belongsToWaterBasin> "https://w3id.org/whow/onto/hydrography/waterbasin/Mincio" .
+<https://w3id.org/whow/onto/hydrography/lakewaterbody/it03poadsaln1lo> <http://www.w3.org/1999/02/22-rdf-syntax-ns#type> <https://w3id.org/whow/onto/hydrography/LakeWaterBody> .

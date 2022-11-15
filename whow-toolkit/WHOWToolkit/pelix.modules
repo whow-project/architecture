@@ -1,0 +1,10 @@
+cd data_cleansing
+install cleansing
+cd ../mappers
+install pyrml_mapper
+cd ../triplestores
+install virtuoso
+cd ../web
+install webapp
+cd ..
+start 15 16 17 18
