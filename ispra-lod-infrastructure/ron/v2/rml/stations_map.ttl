@@ -682,7 +682,7 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasQualifiedProperty;
+      rr:predicate ispra-top:hasSystemCapability;
       rr:objectMap [
         rr:parentTriplesMap :StructureMaterialQP        
 	  ]
@@ -697,14 +697,14 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasQualifiedProperty;
+      rr:predicate ispra-top:hasSystemCapability;
       rr:objectMap [
           rr:parentTriplesMap :StationDiameterQP
       ]
     ];
           
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasQualifiedProperty;
+      rr:predicate ispra-top:hasSystemCapability;
       rr:objectMap [
           rr:parentTriplesMap :MooringTypeQP
       ]
@@ -718,14 +718,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasQualifiedProperty;
+        rr:predicate ispra-top:hasSystemCapability;
         rr:objectMap [
             rr:parentTriplesMap :HullTypeQP
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasQualifiedProperty;
+        rr:predicate ispra-top:hasSystemCapability;
         rr:objectMap [
             rr:parentTriplesMap :PositioningSystemQP
         ]
@@ -769,8 +769,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -890,8 +890,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1117,8 +1117,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1157,8 +1157,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_diameter";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_diameter";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1319,8 +1319,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_material";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_material";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1477,8 +1477,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_levelling";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_levelling";
+        rr:class ispra-top:SystemCapability
     ];
         
     rr:predicateObjectMap [
