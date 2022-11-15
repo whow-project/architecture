@@ -1037,7 +1037,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/common/parameter/mooring";
-        rr:class inspire-mf:Parameter
+        rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
