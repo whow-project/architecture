@@ -6,7 +6,8 @@ from curses.ascii import RS
 
 
 @ComponentFactory("triplestore-factory")
-@Property('_graphs_folder', 'graphs.folder', '/graphs')
+@Property('_graphs_folder', 'graphs.folder', '/Users/andrea/git/whow-architecture/whow-toolkit/WHOWToolkit/docker/virtuoso/graphs/')
+@Property('_virtuoso_graphs_folder', 'graphs.virtuoso.folder', '/graphs')
 @Provides("triplestore-manager")
 @Instantiate("virtuoso-triplestore-manager")
 class VirtuosoTriplestoreManager(TriplestoreManager):
@@ -17,7 +18,9 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
         
         
     def load_graphs(self):
-        q = f"ld_dir_all('{self._graphs_folder}', '*.nt', 'data')"
+        q = f"ld_dir_all('{self._virtuoso_graphs_folder}', '*.nt', 'data')"
+        self.query(q)
+        q = f"ld_dir_all('{self._virtuoso_graphs_folder}', '*.tar.gz', 'data')"
         self.query(q)
         self.query('rdf_loader_run()')
         self.query('CHECKPOINT')

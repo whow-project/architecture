@@ -9,20 +9,22 @@ from rdflib import Graph
 from typing import List
 import asyncio
 import websockets
+import uuid
 
 os.environ["no_proxy"]="*"
 
-async def communicate_with(path: str):
+async def communicate_with(path: str, message = ''):
     async with websockets.connect(f"ws://localhost:8765/{path}") as websocket:
-        await websocket.send('data')
+        await websocket.send(message)
         
         print(f'Sent request to {path}')
         
-        await websocket.recv()
+        data = await websocket.recv()
+        #await data = websocket.recv()
         
         print(f'Received message of {path} completed')
         
-    return 'Done'
+    return data
 
 
 @dag(
@@ -47,13 +49,22 @@ def whow_flow():
         loop = asyncio.get_event_loop()
         result = loop.run_until_complete(communicate_with('rml_mapper'))
         
-        return result 
+        id = f'{uuid.uuid4()}.nt.tag.gz'
+        
+        with open(id, 'wb') as binary_file:
+            # Write bytes to file
+            binary_file.write(result)
+        
+        return id 
         
 
     @task()
-    def load(input: str):
-        loop = asyncio.get_event_loop()
-        result = loop.run_until_complete(communicate_with('triplestore_manager'))
+    def load(input):
+        
+        with open(input, "rb") as f:
+            ba = bytearray(f.read())
+            loop = asyncio.get_event_loop()
+            result = loop.run_until_complete(communicate_with('triplestore_manager', ba))
         
         return result
     #load(rdf_map())
