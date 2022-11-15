@@ -573,49 +573,9 @@
     ];
 
     rr:predicateObjectMap [
-	rr:predicate ispra-top:hasAssertionForMembers;
+	rr:predicate rendis:hasPrimaryMunicipalityOfIntervention;
         rr:objectMap [
-	    rr:parentTriplesMap :PlaceCollectionPOAssertion
-        ]
-    ] .
-
-:PlaceCollectionPOAssertion
-
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
-        rr:class ispra-top:PredicateObjectAssertion
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Asserzione Predicato-Oggetto per indicare che tutte le procedure della collezione hanno {_E_FROM_I_CI_Comune_primario} come comune di intervento primario.";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Predicate-Object Assertion for representing that all procedures belonging to the collection have {_E_FROM_I_CI_Comune_primario} has primary municipality of intervention.";
-            rr:language "en"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:withPredicate;
-        rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention";
-            rr:termType rr:IRI
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:withObject;
-        rr:objectMap [
-            rr:parentTriplesMap :Place
+	    rr:parentTriplesMap :Place
         ]
     ] .
 
