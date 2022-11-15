@@ -1639,8 +1639,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/qualifiedproperty/%eval:station_model_id(*, '{{dataset}}')%_deployment";
-        rr:class ispra-top:QualifiedProperty
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemdeployment/%eval:station_model_id(*, '{{dataset}}')%_deployment";
+        rr:class ispra-top:SystemDeployment
     ];
         
     rr:predicateObjectMap [
