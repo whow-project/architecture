@@ -4,7 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
+@prefix ispra-rnd: <https://dati.isprambiente.it/ontology/rendis/> .
 @prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
 @prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
 @prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
@@ -58,7 +58,7 @@
 :DatasetISPRA
     rml:logicalSource :CSV;
         rr:subjectMap [
-            rr:constant "https://dati.isprambiente.it/ld/rendis";
+            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}";
             rr:class ispra-top:Dataset
     ];
 
@@ -82,7 +82,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/uniqueidentifier/00104_{I_idIntervento}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00104_{I_idIntervento}";
     rr:class ispra-top:UniqueIdentifier
   ];
  
@@ -170,8 +170,8 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/procedure/{I_idIntervento}";
-    rr:class rendis:Procedure
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/procedure/{I_idIntervento}";
+    rr:class ispra-rnd:Procedure
   ];
 
   rr:predicateObjectMap [
@@ -190,7 +190,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasProcedureType;
+    rr:predicate ispra-rnd:hasProcedureType;
     rr:objectMap [
       rr:parentTriplesMap :ProcedureType;
       rr:joinCondition [
@@ -216,7 +216,7 @@
   ];
 
 #  rr:predicateObjectMap [
-#    rr:predicate rendis:hasInstabilityType;
+#    rr:predicate ispra-rnd:hasInstabilityType;
 #    rr:objectMap [
 #      rr:parentTriplesMap :InstabilityType
 #      rr:joinCondition [
@@ -227,7 +227,7 @@
 #  ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasFinancedAmount;
+    rr:predicate ispra-rnd:hasFinancedAmount;
     rr:objectMap [
       rr:parentTriplesMap :FinancedAmount
     ]
@@ -243,7 +243,7 @@
   ];
 
   rr:predicateObjectMap [
-      rr:predicate ispra-top:partOf;
+      rr:predicate ispra-top:isPartOf;
       rr:objectMap [
           rr:parentTriplesMap :DatasetISPRA;
       ]
@@ -251,21 +251,21 @@
 
   
 #  rr:predicateObjectMap [
-#    rr:predicate rendis:hasMunicipalityRoleInIntervention;
+#    rr:predicate ispra-rnd:hasMunicipalityRoleInIntervention;
 #    rr:objectMap [
 #      rr:parentTriplesMap :PrimaryMunicipalityRoleInIntervetion
 #    ]
 #  ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasPrimaryLocation;
+    rr:predicate ispra-rnd:hasPrimaryLocation;
     rr:objectMap [
       rr:parentTriplesMap :Place
     ]
   ];
 
 #  rr:predicateObjectMap [
-#    rr:predicate rendis:hasMunicipalityRoleInIntervention;
+#    rr:predicate ispra-rnd:hasMunicipalityRoleInIntervention;
 #    rr:objectMap [
 #      rr:parentTriplesMap :SecondaryMunicipalityRoleInIntervetion;
 #      rr:joinCondition [
@@ -276,7 +276,7 @@
 #  ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasAlternativeLocation;
+    rr:predicate ispra-rnd:hasAlternativeLocation;
     rr:objectMap [
       rr:parentTriplesMap :SecondaryPlace;
       rr:joinCondition [
@@ -308,7 +308,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasLegalBasis;
+    rr:predicate ispra-rnd:hasLegalBasis;
     rr:objectMap [
       rr:parentTriplesMap :Agreement
     ]
@@ -319,8 +319,8 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/amount/{_I_finanziamento intervento}_euro";
-	rr:class rendis:Amount
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/amount/{_I_finanziamento intervento}_euro";
+	rr:class ispra-rnd:Amount
     ];
 
 
@@ -342,9 +342,9 @@
 
 
    rr:predicateObjectMap [
-        rr:predicate rendis:hasCurrency;
+        rr:predicate ispra-rnd:hasCurrency;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
+            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
             rr:termType rr:IRI
         ] 
     ] .
@@ -355,8 +355,8 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
-	rr:class rendis:Currency
+        rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
+	rr:class ispra-rnd:Currency
     ];
 
     rr:predicateObjectMap [
@@ -396,8 +396,8 @@
 #     rml:logicalSource :INSTABILITY_TYPE_CSV;
 #     
 #     rr:subjectMap [
-#         rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{DISSESTO_EN}";
-# 	rr:class rendis:InstabilityType 
+#         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/instabilitytype/{DISSESTO_EN}";
+# 	rr:class ispra-rnd:InstabilityType 
 #     ];
 # 
 #     rr:predicateObjectMap [
@@ -437,7 +437,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/place/%eval:digest('{POINT}')%";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/place/%eval:digest('{POINT}')%";
 	rr:class ispra-top:Location 
     ];
 
@@ -458,7 +458,7 @@
 #    
 #    rr:subjectMap [
 #        rr:template "https://dati.isprambiente.it/ld/place/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
-#        rr:class rendis:MunicipalityRoleInIntervention
+#        rr:class ispra-rnd:MunicipalityRoleInIntervention
 #    ];
 #
 #    rr:predicateObjectMap [
@@ -478,7 +478,7 @@
 #    ];
 #
 #    rr:predicateObjectMap [
-#	rr:predicate rendis:ofPlace;
+#	rr:predicate ispra-rnd:ofPlace;
 #        rr:objectMap [
 #	    rr:parentTriplesMap :Place
 #        ]
@@ -488,7 +488,7 @@
 #    rr:predicateObjectMap [
 #	rr:predicate ispra-top:withRole;
 #        rr:objectMap [
-#	    rr:template "https://dati.isprambiente.it/ld/rendis/role/primary_municipality";
+#	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/role/primary_municipality";
 #        ]
 #    ] .
 
@@ -498,7 +498,7 @@
 #    
 #    rr:subjectMap [
 #        rr:template "https://dati.isprambiente.it/ld/place/municipalityroleinintervention/{id_intervento}_{cod_istat}";
-#        rr:class rendis:MunicipalityRoleInIntervention
+#        rr:class ispra-rnd:MunicipalityRoleInIntervention
 #    ];
 #
 #    rr:predicateObjectMap [
@@ -518,7 +518,7 @@
 #    ];
 #
 #    rr:predicateObjectMap [
-#	rr:predicate rendis:ofPlace;
+#	rr:predicate ispra-rnd:ofPlace;
 #        rr:objectMap [
 #	    rr:parentTriplesMap :SecondaryPlace
 #        ]
@@ -528,7 +528,7 @@
 #    rr:predicateObjectMap [
 #	rr:predicate ispra-top:withRole;
 #        rr:objectMap [
-#	    rr:template "https://dati.isprambiente.it/ld/rendis/role/secondary_municipality";
+#	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/role/secondary_municipality";
 #            rr:termType rr:IRI
 #        ]
 #    ] .
@@ -544,14 +544,14 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
         rr:class inspire-mf:ProcedureCollection
     ];
 
     rr:predicateObjectMap [
 	rr:predicate ispra-top:isPartOf;
         rr:objectMap [
-	    rr:template "https://dati.isprambiente.it/ld/rendis/collection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
+	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
             rr:termType rr:IRI
         ]
     ];
@@ -584,7 +584,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/{{dataset}}/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
         rr:class ispra-top:PredicateObjectAssertion
     ];
 
@@ -607,7 +607,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:withPredicate;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ontology/rendis/hasPrimaryMunicipalityOfIntervention";
+            rr:constant "https://dati.isprambiente.it/ontology/{{dataset}}/hasPrimaryMunicipalityOfIntervention";
             rr:termType rr:IRI
         ]
     ];
@@ -632,7 +632,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_proposing_institution";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_proposing_institution";
     rr:class ispra-top:AgentRole
   ];
 
@@ -663,7 +663,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:involvesRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/rendis/role/proposing_institution";
+      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/proposing_institution";
       rr:termType rr:IRI
     ]
   ] .
@@ -674,14 +674,14 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteProp}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteProp}";
     rr:class ispra-top:Organisation 
   ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasLocation;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/{ENTE_PROPONENTE_TYPE}/{E_FROM_I_idEnteProp}";
+      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{ENTE_PROPONENTE_TYPE}/{E_FROM_I_idEnteProp}";
       rr:termType rr:IRI
     ]
   ];
@@ -699,7 +699,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_basin_authority";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_basin_authority";
     rr:class ispra-top:AgentRole
   ];
 
@@ -730,7 +730,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/rendis/role/supervisory_authority";
+      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
     ]
   ] .
@@ -741,7 +741,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteAutBac}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutBac}";
     rr:class ispra-top:Organisation 
   ];
 
@@ -761,7 +761,7 @@
   crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_district_authority";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_district_authority";
     rr:class ispra-top:AgentRole
   ];
 
@@ -792,7 +792,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/rendis/role/supervisory_authority";
+      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
     ]
   ] .
@@ -804,7 +804,7 @@
   crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/organisation/{E_FROM_I_idEnteAutDis}";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutDis}";
     rr:class ispra-top:Organisation 
   ];
 
@@ -820,8 +820,8 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/legalact/{I_idIntervento}";
-    rr:class rendis:LegalAct
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/legalact/{I_idIntervento}";
+    rr:class ispra-rnd:LegalAct
   ];
 
   rr:predicateObjectMap [
@@ -860,8 +860,8 @@
     rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{I_idIntervento}_{L_idLotto}";
-    rr:class rendis:Lot
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/lot/{I_idIntervento}_{L_idLotto}";
+    rr:class ispra-rnd:Lot
   ];
 
   rr:predicateObjectMap [
@@ -910,22 +910,22 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasImplementationPlan;
+    rr:predicate ispra-rnd:hasImplementationPlan;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{L_idIter}";
+      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplan/{L_idIter}";
       rr:termType rr:IRI 
     ]
   ];
 
   rr:predicateObjectMap [
-      rr:predicate rendis:hasImplementationPlanExecution;
+      rr:predicate ispra-rnd:hasImplementationPlanExecution;
       rr:objectMap [
         rr:parentTriplesMap :ImplementationPlanExecution
       ]
     ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:isIncludedInProcedure;
+    rr:predicate ispra-rnd:isIncludedInProcedure;
     rr:objectMap [
       rr:parentTriplesMap :Intervention
     ]
@@ -936,8 +936,8 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanexecution/{I_idIntervento}_{L_idLotto}_{L_idIter}";
-    rr:class rendis:ImplementationPlanExecution
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanexecution/{I_idIntervento}_{L_idLotto}_{L_idIter}";
+    rr:class ispra-rnd:ImplementationPlanExecution
   ];
 
   rr:predicateObjectMap [
@@ -959,13 +959,13 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:satisfies;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{L_idIter}";
+      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplan/{L_idIter}";
       rr:termType rr:IRI 
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasImplementationPlanAction;
+    rr:predicate ispra-rnd:hasImplementationPlanAction;
     rr:objectMap [
       rr:parentTriplesMap :ImplementationPlanAction;
       rr:joinCondition [
@@ -984,8 +984,8 @@
   rml:logicalSource :LOT_STEP_CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanaction/{id_intervento}_{id_lotto}_{id_passo}";
-    rr:class rendis:ImplementationPlanAction
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanaction/{id_intervento}_{id_lotto}_{id_passo}";
+    rr:class ispra-rnd:ImplementationPlanAction
   ];
 
     rr:predicateObjectMap [
@@ -1007,7 +1007,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:satisfies;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanstep/{id_passo}";
       rr:termType rr:IRI 
     ]
   ] .
@@ -1017,8 +1017,8 @@
   rml:logicalSource :PROCEDURE_TYPE_CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/rendis/proceduretype/{ID}";
-     rr:class rendis:ProcedureType
+     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/proceduretype/{ID}";
+     rr:class ispra-rnd:ProcedureType
    ];
 
    rr:predicateObjectMap [
@@ -1043,7 +1043,7 @@
    rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/%eval:responsible_agent_role('{L_nominativoresp}', '{L_ruoloresp}')%";
+     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/%eval:responsible_agent_role('{L_nominativoresp}', '{L_ruoloresp}')%";
      rr:class ispra-top:AgentRole
    ];
 
@@ -1083,7 +1083,7 @@
    rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/rendis/agent/%eval:digest('{L_nominativoresp}')%";
+     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agent/%eval:digest('{L_nominativoresp}')%";
      rr:class ispra-top:Agent
    ];
 
@@ -1125,7 +1125,7 @@
   rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/rendis/geometry/%eval:digest('{POINT}')%";
+     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/%eval:digest('{POINT}')%";
      rr:class ispra-place:Geometry
    ];
   
@@ -1144,7 +1144,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/agentrole/{I_idIntervento}_actuator_institution";
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_actuator_institution";
     rr:class ispra-top:AgentRole
   ];
 
@@ -1175,7 +1175,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/rendis/role/actuator_institution";
+      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/actuator_institution";
       rr:termType rr:IRI
     ]
   ] .
@@ -1186,7 +1186,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/{ENTE_ATTUATORE_TYPE}/{E_FROM_L_idEnteAttuat}"
+    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{ENTE_ATTUATORE_TYPE}/{E_FROM_L_idEnteAttuat}"
   ];
 
   rr:predicateObjectMap [
@@ -1214,7 +1214,7 @@
     crml:condition "df['{{ind}}'].notnull()";
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
         rr:class inspire-mf:Indicator
       ];
 
@@ -1242,7 +1242,7 @@
     ];
 
      rr:predicateObjectMap [
-        rr:predicate rendis:hasAmount;;
+        rr:predicate ispra-rnd:hasAmount;;
         rr:objectMap [
            rr:parentTriplesMap :{{ind}}Amount
         ]
@@ -1251,7 +1251,7 @@
      rr:predicateObjectMap [
        rr:predicate ispra-top:isParametrisedBy;
        rr:objectMap [
-          rr:constant "https://dati.isprambiente.it/ld/rendis/parameter/{{ind|lower}}";
+          rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{ind|lower}}";
 	  rr:termType rr:IRI
        ]
      ] .
@@ -1261,8 +1261,8 @@
      rml:logicalSource :CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/amount/{ {{ind}} }_euro";
-        rr:class rendis:Amount
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/amount/{ {{ind}} }_euro";
+        rr:class ispra-rnd:Amount
       ];
 
      rr:predicateObjectMap [
@@ -1290,9 +1290,9 @@
      ];
 
      rr:predicateObjectMap [
-        rr:predicate rendis:hasCurrency;
+        rr:predicate ispra-rnd:hasCurrency;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ld/rendis/currency/euro";
+            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
             rr:termType rr:IRI
         ] 
      ] .
@@ -1304,7 +1304,7 @@
      rml:logicalSource :ECONOMIC_INDICATORS_CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/parameter/{ID}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{ID}";
         rr:class ispra-top:Parameter
       ];
 
@@ -1336,7 +1336,7 @@
      rml:logicalSource :LOT_CLASSIFICATIONS_CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/rendis/concept/{LABEL_EN}";
+        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/concept/{LABEL_EN}";
         rr:class ispra-top:Concept
       ];
 
