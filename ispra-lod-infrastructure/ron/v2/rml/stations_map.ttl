@@ -682,7 +682,7 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasSystemCapability;
+      rr:predicate inspire-mf:hasSystemCapability;
       rr:objectMap [
         rr:parentTriplesMap :StructureMaterialQP        
 	  ]
@@ -697,14 +697,14 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasSystemCapability;
+      rr:predicate inspire-mf:hasSystemCapability;
       rr:objectMap [
           rr:parentTriplesMap :StationDiameterQP
       ]
     ];
           
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasSystemCapability;
+      rr:predicate inspire-mf:hasSystemCapability;
       rr:objectMap [
           rr:parentTriplesMap :MooringTypeQP
       ]
@@ -718,14 +718,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasSystemCapability;
+        rr:predicate inspire-mf:hasSystemCapability;
         rr:objectMap [
             rr:parentTriplesMap :HullTypeQP
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasSystemCapability;
+        rr:predicate inspire-mf:hasSystemCapability;
         rr:objectMap [
             rr:parentTriplesMap :PositioningSystemQP
         ]
@@ -770,7 +770,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -891,7 +891,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1118,7 +1118,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1158,7 +1158,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_diameter";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1320,7 +1320,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_material";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1478,7 +1478,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_levelling";
-        rr:class ispra-top:SystemCapability
+        rr:class inspire-mf:SystemCapability
     ];
         
     rr:predicateObjectMap [
@@ -1640,7 +1640,7 @@
 
     rr:subjectMap [
         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemdeployment/%eval:station_model_id(*, '{{dataset}}')%_deployment";
-        rr:class ispra-top:SystemDeployment
+        rr:class inspire-mf:SystemDeployment
     ];
         
     rr:predicateObjectMap [
