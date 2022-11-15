@@ -138,7 +138,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     #regions
     template = env.get_template('data/place/v2/rml/regions_map.ttl')
     rml_mapping = template.render()
-    
+
     rml_converter = RMLConverter()
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
 
@@ -164,7 +164,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
         g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/Province')))
     for s, p, o in g.triples((None, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/metropolitancity'))):
         g.remove((s, p, o))
-        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/Metropolitancity')))
+        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/MetropolitanCity')))
 
     #toLoad_toDelete(g, "provinces", "places")
     file_tripleP, file_loadP, file_deleteP = loader.toLoad_toDelete_2(g, "provinces", "place")
@@ -221,19 +221,10 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
 
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
-            file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
-            if os.path.exists(file_delR):
-                run([command], shell=True)
+            loader.sparql_delete(str(dest_ip),str(file_deleteR),graph_str)
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
-            file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
-            if os.path.exists(file_delP):
-                run([command], shell=True)
+            loader.sparql_delete(str(dest_ip),str(file_deleteP),graph_str)
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
-            file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
-            if os.path.exists(file_delM):
-                run([command], shell=True)
+            loader.sparql_delete(str(dest_ip),str(file_deleteM),graph_str)
