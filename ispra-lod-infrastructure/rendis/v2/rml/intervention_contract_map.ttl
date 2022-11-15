@@ -65,7 +65,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "Rendis Dataset";
+            rr:template  "{{dataset.capitalize()}} Dataset";
         ]
     ];
 
@@ -138,7 +138,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:constant "Schema ISPRA identificativi interventi Rendis";
+      rr:constant "Schema ISPRA identificativi interventi {{dataset.capitalize()}}";
       rr:language "it"
       ]
     ];
@@ -146,7 +146,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:constant "ISPRA identifier schema of Rendis interventions";
+      rr:constant "ISPRA identifier schema of {{dataset.capitalize()}} interventions";
       rr:language "en"
       ]
     ];
@@ -559,7 +559,7 @@
   rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse Rendis associate a: {_E_FROM_I_CI_Comune_primario}";
+            rr:template "Collezione di risorse {{dataset.capitalize()}} associate a: {_E_FROM_I_CI_Comune_primario}";
             rr:language "it"
         ]
     ];
@@ -567,13 +567,13 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Rendis resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
+            rr:template "{{dataset.capitalize()}} resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
             rr:language "en"
         ]
     ];
 
     rr:predicateObjectMap [
-	rr:predicate rendis:hasPrimaryMunicipalityOfIntervention;
+	rr:predicate ispra-rnd:hasPrimaryMunicipalityOfIntervention;
         rr:objectMap [
 <<<<<<< HEAD
 	    rr:parentTriplesMap :PlaceCollectionPOAssertion
