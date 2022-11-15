@@ -13,8 +13,8 @@ import uuid
 
 os.environ["no_proxy"]="*"
 
-async def communicate_with(path: str, message = ''):
-    async with websockets.connect(f"ws://localhost:8765/{path}") as websocket:
+async def communicate_with(host: str, port: str, path: str, message = ''):
+    async with websockets.connect(f"ws://{host}:{port}/{path}") as websocket:
         await websocket.send(message)
         
         print(f'Sent request to {path}')
@@ -39,7 +39,7 @@ def whow_flow():
     def clean():
         
         loop = asyncio.get_event_loop()
-        result = loop.run_until_complete(communicate_with('data-cleansing'))
+        result = loop.run_until_complete(communicate_with('localhost', '8765', 'data-cleansing'))
         
         return result
     
@@ -47,7 +47,7 @@ def whow_flow():
     def rdf_map(input: str):
         
         loop = asyncio.get_event_loop()
-        result = loop.run_until_complete(communicate_with('rml_mapper'))
+        result = loop.run_until_complete(communicate_with('localhost', '8765', 'rml_mapper'))
         
         id = f'{uuid.uuid4()}.nt.tag.gz'
         
@@ -64,7 +64,7 @@ def whow_flow():
         with open(input, "rb") as f:
             ba = bytearray(f.read())
             loop = asyncio.get_event_loop()
-            result = loop.run_until_complete(communicate_with('triplestore_manager', ba))
+            result = loop.run_until_complete(communicate_with('localhost', '8765', 'triplestore_manager', ba))
         
         return result
     #load(rdf_map())
