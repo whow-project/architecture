@@ -575,7 +575,6 @@
     rr:predicateObjectMap [
 	rr:predicate ispra-rnd:hasPrimaryMunicipalityOfIntervention;
         rr:objectMap [
-<<<<<<< HEAD
 	    rr:parentTriplesMap :PlaceCollectionPOAssertion
         ]
     ] .
