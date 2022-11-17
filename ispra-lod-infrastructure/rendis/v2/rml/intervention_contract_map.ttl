@@ -618,7 +618,6 @@
             rr:parentTriplesMap :Place
 =======
 	    rr:parentTriplesMap :Place
->>>>>>> e17b25d39a6e881bb86cf1f71561d50d4d84728e
         ]
     ] .
 
