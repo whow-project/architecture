@@ -616,8 +616,6 @@
         rr:predicate ispra-top:withObject;
         rr:objectMap [
             rr:parentTriplesMap :Place
-=======
-	    rr:parentTriplesMap :Place
         ]
     ] .
 
