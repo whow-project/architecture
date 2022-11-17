@@ -342,7 +342,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_COM}";
+    rr:template "https://dati.isprambiente.it/ld/common/year/{YEAR_COM}";
     rr:class ispra-top:Year
   ];
   

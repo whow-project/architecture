@@ -282,7 +282,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/time/{YEAR_PROV}";
+    rr:template "https://dati.isprambiente.it/ld/common/year/{YEAR_PROV}";
     rr:class ispra-top:Year
   ];
   
