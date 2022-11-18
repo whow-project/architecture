@@ -301,14 +301,14 @@
   rr:predicateObjectMap [
     rr:predicate geo:long;
     rr:objectMap [
-      rr:template "{LONG}"
+      rr:template "%eval:round_coord({LONG})%"
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate geo:lat;
     rr:objectMap [
-      rr:template "{LAT}"
+      rr:template "%eval:round_coord({LAT})%"
     ]
   ];
   

@@ -109,7 +109,15 @@ class RONTriplifier(Triplifier):
         utf8_converter.convert()
         
         print("\t preprocessing completed.")
-        
+   
+    def round_coord(coord):
+        try:
+            value = str(round(float(coord),5))
+    
+        except ValueError:
+            value = str(coord)
+
+        return value
     
     def get_graph_iri(self):
         return 'https://dati.isprambiente.it/ld/ron'
