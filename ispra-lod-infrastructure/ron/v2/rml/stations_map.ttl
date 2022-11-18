@@ -14,6 +14,7 @@
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix time: <http://www.w3.org/2006/time#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 
 :CSV_STATIONS
@@ -298,14 +299,14 @@
 #];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-place:long;
+    rr:predicate geo:long;
     rr:objectMap [
       rr:template "{LONG}"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-place:lat;
+    rr:predicate geo:lat;
     rr:objectMap [
       rr:template "{LAT}"
     ]
