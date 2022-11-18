@@ -148,44 +148,6 @@
         ]
     ].
 
-:IndicatorsCollectionMetricYEAR
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicatorcollection/{STAT_CODE}_{METRIC}_{YEAR}";
-        rr:class inspire-mf:IndicatorCollection
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "{METRIC_DESCRIPTION_EN} in {PLACE_NAME} - Year {YEAR}";
-           rr:language "en"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "{METRIC_DESCRIPTION_IT} in {PLACE_NAME} - Anno {YEAR}";
-           rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
-        rr:objectMap [
-            rr:parentTriplesMap :IndicatorsCollectionMetric;
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:atTime;
-        rr:objectMap [
-            rr:parentTriplesMap :Year
-        ]
-    ].
-
 :Indicators
     rml:logicalSource :CSV;
 
@@ -214,9 +176,9 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
+        rr:predicate ispra-top:isMemberOf;
         rr:objectMap [
-            rr:parentTriplesMap :IndicatorsCollectionMetricYEAR
+            rr:parentTriplesMap :IndicatorsCollectionMetric
         ]
     ];
 
