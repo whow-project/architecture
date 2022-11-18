@@ -76,13 +76,13 @@ class Functions():
 
     @staticmethod
     def round_coord(coord):
-    try:
-        value = str(round(float(coord),5))
+        try:
+            value = str(round(float(coord),5))
     
-    except ValueError:
-        value = str(coord)
+        except ValueError:
+            value = str(coord)
 
-    return value
+        return value
     
     
 class RONTriplifier(Triplifier):
