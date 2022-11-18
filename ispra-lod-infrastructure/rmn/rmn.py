@@ -31,6 +31,16 @@ class Functions():
     @staticmethod
     def preserve_value(val):
         return val;
+
+    @staticmethod
+    def round_coord(coord):
+        try:
+            value = str(round(float(coord),5))
+    
+        except ValueError:
+            value = str(coord)
+
+        return value
         
     
 class RMNTriplifier(Triplifier):
@@ -48,6 +58,7 @@ class RMNTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
+            'round_coord': Functions.round_coord,
             'preserve_value': Functions.preserve_value
             }
         

@@ -339,16 +339,16 @@
 #];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-place:long;
+    rr:predicate geo:long;
     rr:objectMap [
-      rr:template "{LONG}"
+      rr:template "%eval:round_coord({LONG})%"
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-place:lat;
+    rr:predicate geo:lat;
     rr:objectMap [
-      rr:template "{LAT}"
+      rr:template "%eval:round_coord({LAT})%"
     ]
   ];
   
