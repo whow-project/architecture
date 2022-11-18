@@ -73,6 +73,17 @@ class Functions():
             return "0" + str(row["CODE_PLACE"])
         else:
             return str(row["CODE_PLACE"])
+
+    @staticmethod
+    def round_coord(coord):
+    try:
+        value = str(round(float(coord),5))
+    
+    except ValueError:
+        value = str(coord)
+
+    return value
+    
     
 class RONTriplifier(Triplifier):
     
@@ -111,15 +122,6 @@ class RONTriplifier(Triplifier):
         
         print("\t preprocessing completed.")
    
-    def round_coord(coord):
-        try:
-            value = str(round(float(coord),5))
-    
-        except ValueError:
-            value = str(coord)
-
-        return value
-    
     def get_graph_iri(self):
         return 'https://dati.isprambiente.it/ld/ron'
     
