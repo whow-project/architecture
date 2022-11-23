@@ -679,13 +679,6 @@
     ];
 
     rr:predicateObjectMap [
-      rr:predicate inspire-mf:hasPlatformType;
-      rr:objectMap [
-        rr:parentTriplesMap :StationType
-      ]
-    ];
-
-    rr:predicateObjectMap [
         rr:predicate inspire-mf:hasSystemCapability;
         rr:objectMap [
             rr:parentTriplesMap :StructureMaterialQP
