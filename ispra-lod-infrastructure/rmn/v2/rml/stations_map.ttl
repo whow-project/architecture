@@ -271,9 +271,11 @@
     rr:predicateObjectMap [
       rr:predicate inspire-mf:hasPlatformType;
       rr:objectMap [
-        #rr:parentTriplesMap :StationType
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}";
-        rr:termType rr:IRI
+        rr:parentTriplesMap :StationType;
+        rr:joinCondition [
+          rr:child "STAT_TYPE_EN";
+          rr:parent "TYPE_EN" 
+        ]
       ]
     ];
     
@@ -371,7 +373,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{TYPE_EN}";
+    rr:template "https://dati.isprambiente.it/ld/common/platformtype/{TYPE_EN}";
     rr:class inspire-mf:PlatformType
   ];
 
@@ -636,14 +638,6 @@
       rml:reference "GEONAMES";
       rr:termType rr:IRI
     ]
-  ].
-
-
-:StationModelType
-  rml:logicalSource :CSV_STATIONS;
-
-  rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}"
   ].
 
 :StationModelData
