@@ -26,7 +26,7 @@ class Functions():
         
     @staticmethod    
     def time_interval(row):
-        return UtilsFunctions.short_uuid(re.sub("[^0-9]", "", row["START"]) + "_" + re.sub("[^0-9]", "", row["END"]))
+        return re.sub("[^0-9]", "", row["START"]) + "_" + re.sub("[^0-9]", "", row["END"])
     
     @staticmethod
     def preserve_value(val):
