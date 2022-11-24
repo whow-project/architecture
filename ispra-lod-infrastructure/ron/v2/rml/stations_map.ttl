@@ -510,7 +510,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/sea/seaarea_{PLACE_NAME}_{NETWORK}";
+    rr:template "https://dati.isprambiente.it/ld/place/sea/seaarea_{PLACE_NAME}_{{dataset}}{NETWORK}";
     rr:class ispra-place:Sea
   ];
 
