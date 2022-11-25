@@ -8,7 +8,7 @@ from pyrml.pyrml import TermUtils, RMLConverter
 from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
-from utf8_converter import UTF8Converter
+from kg_loader import KnowledgeGraphLoader
 import pandas as pd
 
 
@@ -202,8 +202,7 @@ class LandTriplifier(Triplifier):
     def _dataset_initialisation(self) -> None:
         print("Starting preprocessing ...")
 
-        utf8_converter = UTF8Converter(self._dirty_data_path, self._data_path)
-        utf8_converter.convert()
+        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
         
 
         files = [ file for file in os.listdir(self._data_path) if file.endswith(".csv") and file.lower() != 'info.csv']

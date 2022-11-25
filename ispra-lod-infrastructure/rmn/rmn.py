@@ -2,10 +2,9 @@ from builtins import staticmethod
 import os
 import re
 import datetime as dt
+from kg_loader import KnowledgeGraphLoader
 from pyrml.pyrml import TermUtils
 from triplification import Triplifier
-from utf8_converter import UTF8Converter
-
 
 class Functions():
 
@@ -80,9 +79,8 @@ class RMNTriplifier(Triplifier):
     def _dataset_initialisation(self) -> None:
         print("RMN preprocessing...")
         
-        utf8_converter = UTF8Converter(self._dirty_data_path, self._data_path)
-        utf8_converter.convert()
-        
+        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+                
         print("\t preprocessing completed.")
         
     

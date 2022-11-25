@@ -8,6 +8,7 @@ from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from scp import SCPClient
 from subprocess import run, Popen, PIPE, STDOUT
+from utf8_converter import UTF8Converter
 import multiprocessing as mp
 import time, traceback
 
@@ -258,6 +259,11 @@ class KnowledgeGraphLoader():
             f.write(graph_string)
 
         return ret
+        
+    def convert_utf8(input_path, output_path):
+        utf8_converter = UTF8Converter(input_path, output_path)
+        utf8_converter.convert()
+
         
     def __save_graph(self, place, file_name, graph):
         if not os.path.exists(place):

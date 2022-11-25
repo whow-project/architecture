@@ -9,7 +9,6 @@ from rdflib.namespace import RDF
 from rdflib.parser import StringInputSource
 from kg_loader import KnowledgeGraphLoader
 from pyrml import TermUtils, RMLConverter
-from utf8_converter import UTF8Converter
 from typing import Dict
 
 
@@ -131,8 +130,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     graph_str = mapping_conf["graph_iri"]
 
     print("Starting preprocessing ...")
-    utf8_converter = UTF8Converter('data/place/v2/dirtydata','data/place/v2/data')
-    utf8_converter.convert()
+    KnowledgeGraphLoader.convert_utf8('data/place/v2/dirtydata','data/place/v2/data')
     print("\t preprocessing complete.")
     
     #regions
