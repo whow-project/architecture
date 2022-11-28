@@ -40,9 +40,6 @@ then
   echo "$0 dir from_charset to_charset"
   exit
 fi
-if [[ "$OSTYPE" =~ ^linux ]]; then
-   apt install dos2unix 
-fi
 for f in $1/*
 do
   if test -f $f
