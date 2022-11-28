@@ -75,20 +75,26 @@ class KnowledgeGraphLoader():
         file_toload = folder + '/' + file_str
         str_graph = str(graph_iri)
 
-        # create sql file
-        with open(sql_file, 'w') as sql_out:
-            print("DELETE FROM LOAD_LIST;", file=sql_out)
-            print("LD_ADD('" + file_toload + "', '" + str_graph + "');", file=sql_out)
-            print("RDF_LOADER_RUN();", file=sql_out)
-            print("CHECKPOINT;", file=sql_out)
-            print("COMMIT WORK;", file=sql_out)
-            print("CHECKPOINT;", file=sql_out)
+        with gzip.open(file_str, 'r') as f:
+            read_f = f.read()
 
-        # bulk load of triples
-        print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
-        timeout_s = 10
-        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-        run([command], shell=True)
+        if len(read_f) == 1:
+            print ('No triples to load!')
+        else:
+            # create sql file
+            with open(sql_file, 'w') as sql_out:
+                print("DELETE FROM LOAD_LIST;", file=sql_out)
+                print("LD_ADD('" + file_toload + "', '" + str_graph + "');", file=sql_out)
+                print("RDF_LOADER_RUN();", file=sql_out)
+                print("CHECKPOINT;", file=sql_out)
+                print("COMMIT WORK;", file=sql_out)
+                print("CHECKPOINT;", file=sql_out)
+
+            # bulk load of triples
+            print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
+            timeout_s = 10
+            command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            run([command], shell=True)
 
 
     def sparql_delete(self,ipaddr,file_str,graph_iri):
@@ -98,22 +104,25 @@ class KnowledgeGraphLoader():
 
         with gzip.open(file_str, 'r') as f:
             read_f = f.read()
+        
+        if len(read_f) == 1:
+            print ('No triples to delete!')
+        else:
+            with open(sql_file, 'w') as sql_del:
+                print("DELETE FROM LOAD_LIST;", file=sql_del)
+                print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
+                for dd in (read_f.splitlines()):
+                    if dd: print (dd.decode("utf-8"), file=sql_del)
+                print ('} } ;', file=sql_del)
+                print("RDF_LOADER_RUN();", file=sql_del)
+                print("CHECKPOINT;", file=sql_del)
+                print("COMMIT WORK;", file=sql_del)
+                print("CHECKPOINT;", file=sql_del)
 
-        with open(sql_file, 'w') as sql_del:
-            print("DELETE FROM LOAD_LIST;", file=sql_del)
-            print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
-            for dd in (read_f.splitlines()):
-                if dd: print (dd.decode("utf-8"), file=sql_del)
-            print ('} } ;', file=sql_del)
-            print("RDF_LOADER_RUN();", file=sql_del)
-            print("CHECKPOINT;", file=sql_del)
-            print("COMMIT WORK;", file=sql_del)
-            print("CHECKPOINT;", file=sql_del)
-
-        # deletion of triples
-        print ('deleting triples from', str_graph, '...')
-        command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-        run([command], shell=True)
+            # deletion of triples
+            print ('deleting triples from', str_graph, '...')
+            command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            run([command], shell=True)
 
 
     def toLoad_toDelete_2 (self, new_graph, name, dataset):
