@@ -51,7 +51,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}";
+		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}";
 		rr:class inspire-mf:Sensor 
 	];
 
@@ -717,7 +717,7 @@
 	rml:logicalSource :CSV_SENSOR_DEPICTIONS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}" 
+		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}" 
 	];
 
 	rr:predicateObjectMap [
