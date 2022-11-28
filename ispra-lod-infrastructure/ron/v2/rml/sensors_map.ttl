@@ -47,6 +47,7 @@
 
 	rr:subjectMap [
 		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}";
+        rr:class inspire-mf:Sensor
 	];
 
         rr:predicateObjectMap [
@@ -69,9 +70,12 @@
 	rr:predicateObjectMap [
 	    rr:predicate inspire-mf:hasSensorModel;
             rr:objectMap [
-                rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensormodel/{SENSOR_MODEL}";
-                rr:termType rr:IRI
-            ]
+            rr:parentTriplesMap :SensorModelData;
+			rr:joinCondition [
+				rr:child "SENSOR_MODEL"; 
+				rr:parent "ID"
+			]
+		]
 	];
 
         rr:predicateObjectMap [
@@ -938,6 +942,13 @@
     ];
 
     rr:predicateObjectMap [
+        	rr:predicate inspire-mf:hasManufacturer;
+        	rr:objectMap [
+            		rr:parentTriplesMap :Manufacturer
+        	]
+    	];
+
+    rr:predicateObjectMap [
 	rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
             rml:reference "WMO";
@@ -975,3 +986,30 @@
 	    rr:language "en"
         ]
     ] .
+
+    #===============================================================================
+#Manufacturer
+
+:Manufacturer
+	rml:logicalSource :CSV_SENSOR_MODELS;
+
+	rr:subjectMap [
+    		rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
+		rr:class ispra-top:Organisation
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "MANUFACTURER";
+			rr:language "en"
+		]
+	];
+
+	rr:predicateObjectMap [
+		rr:predicate rdfs:label;
+		rr:objectMap [
+			rml:reference "MANUFACTURER";
+			rr:language "it"
+		]
+	] .

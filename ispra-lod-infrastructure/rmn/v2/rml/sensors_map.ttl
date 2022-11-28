@@ -58,7 +58,7 @@
         rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "{SENS_TYPE_IT} posizionato nella piattaforma {STAT_CODE}";
+			rr:template "{SENS_TYPE_IT} ospitato dalla piattaforma {STAT_CODE}";
 			rr:language "it"
       		]
     	];
@@ -66,7 +66,7 @@
         rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "{SENS_TYPE_EN} placed on the platform {STAT_CODE}";
+			rr:template "{SENS_TYPE_EN} hosted by the platform {STAT_CODE}";
 			rr:language "en"
       		]
     	];
@@ -668,7 +668,7 @@
 	];
 
 	rr:predicateObjectMap [
-        	rr:predicate ispra-top:hasManufacturer;
+        	rr:predicate inspire-mf:hasManufacturer;
         	rr:objectMap [
             		rr:parentTriplesMap :Manufacturer
         	]
