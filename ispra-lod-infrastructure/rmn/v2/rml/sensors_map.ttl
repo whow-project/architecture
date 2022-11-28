@@ -89,6 +89,17 @@
 			]
 		]
 	];
+	
+    rr:predicateObjectMap [
+	rr:predicate inspire-mf:hasSensorType;
+	rr:objectMap [
+        rr:parentTriplesMap :SensorType;
+        rr:joinCondition [
+				rr:child "SENSOR_MODEL"; 
+				rr:parent "ID"
+			]
+	    ]
+    ];
 
 	rr:predicateObjectMap [
 		#rr:predicate inspire-mf:hasPeriod;
@@ -659,13 +670,6 @@
         		rml:reference "NAME"
 		]
     	];
-
-	rr:predicateObjectMap [
-		rr:predicate inspire-mf:hasSensorType;
-		rr:objectMap [
-			rr:parentTriplesMap :SensorType
-		]
-	];
 
 	rr:predicateObjectMap [
         	rr:predicate inspire-mf:hasManufacturer;
