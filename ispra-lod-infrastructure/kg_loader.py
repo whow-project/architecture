@@ -71,7 +71,7 @@ class KnowledgeGraphLoader():
     
     def sparql_bulk_load(self,ipaddr,file_str,folder,graph_iri):
 
-        sql_file = 'upload_graph_' + graph_iri.split('/')[-1] + '.sql'
+        sql_file = 'upload_graph_' + graph_iri.split('/')[-2] + '.sql'
         file_toload = folder + '/' + file_str
         str_graph = str(graph_iri)
 
