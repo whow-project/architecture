@@ -815,17 +815,17 @@
 #SENSOR TYPE
 
 :SensorType
-    rml:logicalSource :CSV_SENSOR_TYPES;
+    rml:logicalSource :CSV_SENSOR_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/sensortype/{SENS_TYPE_EN}";
+        rr:template "https://dati.isprambiente.it/ld/common/sensortype/{EN}";
 	rr:class inspire-mf:SensorType 
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rml:reference "SENS_TYPE_EN";
+            rml:reference "EN";
             rr:language "en"
         ]
     ];
@@ -833,21 +833,21 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rml:reference "SENS_TYPE_IT";
+            rml:reference "IT";
             rr:language "it"
         ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:specialises;
-        rr:objectMap [
-            rr:parentTriplesMap :SensorTypeBroader;
-            rr:joinCondition [
-                rr:child "TYPE_EN";
-                rr:parent "TYPE_EN"
-            ]
-        ]
     ].
+
+#    rr:predicateObjectMap [
+#        rr:predicate ispra-top:specialises;
+#        rr:objectMap [
+            #rr:parentTriplesMap :SensorTypeBroader;
+#            rr:joinCondition [
+#                rr:child "TYPE_EN";
+#                rr:parent "TYPE_EN"
+#            ]
+#        ]
+#    ].
 
 :SensorTypeBroader
     rml:logicalSource :CSV_SENSOR_SUPERTYPES;
@@ -916,18 +916,18 @@
             rml:reference "EN";
 	    rr:language "en"
         ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:specialises;
-        rr:objectMap [
-            rr:parentTriplesMap :SensorType;
-            rr:joinCondition [
-                rr:child "ID";
-                rr:parent "SENSOR_MODEL"
-            ]
-        ]
     ].
+
+#    rr:predicateObjectMap [
+#        rr:predicate ispra-top:specialises;
+#        rr:objectMap [
+#            rr:parentTriplesMap :SensorType;
+#            rr:joinCondition [
+#                rr:child "ID";
+#                rr:parent "SENSOR_MODEL"
+#            ]
+#        ]
+#    ].
 
 :SensorModelData
     rml:logicalSource :CSV_SENSOR_MODELS;
@@ -955,8 +955,9 @@
     rr:predicateObjectMap [
 	rr:predicate inspire-mf:hasSensorType;
 	rr:objectMap [
-	    rr:parentTriplesMap :SensorModelType
-	]
+	    #rr:parentTriplesMap :SensorModelType
+        rr:parentTriplesMap :SensorType
+	    ]
     ];
 
     rr:predicateObjectMap [
