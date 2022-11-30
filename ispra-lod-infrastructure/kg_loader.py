@@ -8,7 +8,6 @@ from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from scp import SCPClient
 from subprocess import run, Popen, PIPE, STDOUT
-from utf8_converter import UTF8Converter
 import multiprocessing as mp
 import time, traceback
 
