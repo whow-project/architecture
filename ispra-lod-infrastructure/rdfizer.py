@@ -6,9 +6,7 @@ from ron.ron import RONTriplifier
 from place.place_shp2csv import place_maker
 from place.place import placeRDF
 from rendis.rendisV2 import RendisTriplifier
-from soilc.soilc import SoilcTriplifier
 from triplification import TriplificationManager
-from urban.urban import UrbanTriplifier
 from euring.epe import EpeTriplifier
 from land.land import LandTriplifier
 
