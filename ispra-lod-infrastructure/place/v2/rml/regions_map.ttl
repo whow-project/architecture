@@ -235,6 +235,7 @@
     rr:predicate rdfs:label;
     rr:objectMap [
       rr:template "Italia";
+      rr:language "it";
       rr:datatype xsd:string
       ]
     ];
@@ -250,7 +251,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:istat;
     rr:objectMap [
-      rr:template "1";
+      rr:template "0";
       rr:datatype xsd:string
     ]
   ].
