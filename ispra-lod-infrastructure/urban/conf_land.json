@@ -1,6 +1,5 @@
 {
     "dataset": "urban",    
-    "tag": "aree urbane",
     "graph_iri": "https://dati.isprambiente.it/ld/urban/",
     "rdf_dump_file_name": "urban_{{year}}",
     "rdf_dump_file_serialisation": "ntriples",
