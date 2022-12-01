@@ -97,7 +97,7 @@ def print_delete(file_toDel, file_update, cat):
         print("DELETE FROM LOAD_LIST;", file=sql_del)
         print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
         for dd in (delG.serialize(format='nt11').splitlines()):
-            if dd: print (dd.decode("utf-8"), file=sql_del)
+            if dd: print (dd, file=sql_del)
         print ('} } ;', file=sql_del)
         print("RDF_LOADER_RUN();", file=sql_del)
         print("CHECKPOINT;", file=sql_del)
