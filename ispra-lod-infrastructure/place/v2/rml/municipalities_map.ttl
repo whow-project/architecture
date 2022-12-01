@@ -358,7 +358,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/country/00202_0"
+    rr:template "https://dati.isprambiente.it/ld/place/country/00201_0"
   ].
 
 #=================
