@@ -299,7 +299,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/country/1"
+    rr:template "https://dati.isprambiente.it/ld/place/country/00201_0"
   ].
 
 #=================
