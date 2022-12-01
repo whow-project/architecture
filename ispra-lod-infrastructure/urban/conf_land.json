@@ -1,5 +1,6 @@
 {
-    "dataset": "urban",
+    "dataset": "urban",    
+    "tag": "aree urbane",
     "graph_iri": "https://dati.isprambiente.it/ld/urban/",
     "rdf_dump_file_name": "urban_{{year}}",
     "rdf_dump_file_serialisation": "ntriples",
@@ -44,13 +45,13 @@
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Citta metropolitana_{{year}}.csv"
+                    "file": "Citta_metropolitana_{{year}}.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta metropolitana_{{year}}.csv', 1)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta_metropolitana_{{year}}.csv', 1)"
                 },
                 {
                     "id": "YEAR",
