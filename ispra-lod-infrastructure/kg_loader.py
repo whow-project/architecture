@@ -6,6 +6,7 @@ import configuration as conf
 import gzip, tarfile
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
+from utf8_converter import UTF8Converter
 from scp import SCPClient
 from subprocess import run, Popen, PIPE, STDOUT
 import multiprocessing as mp
@@ -270,12 +271,12 @@ class KnowledgeGraphLoader():
         
     def convert_utf8(input_path, output_path):
         #old method
-        #utf8_converter = UTF8Converter(input_path, output_path)
-        #utf8_converter.convert()
+        utf8_converter = UTF8Converter(input_path, output_path)
+        utf8_converter.convert()
 
         #new method
-        command = './utf8-converter.sh'
-        run([command, input_path, output_path])
+        #command = './utf8-converter.sh'
+        #run([command, input_path, output_path])
 
         
     def __save_graph(self, place, file_name, graph):
