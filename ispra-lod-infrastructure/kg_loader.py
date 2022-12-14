@@ -4,6 +4,7 @@ from rdflib.plugin import get as plugin
 import os, sys
 import configuration as conf
 import gzip, tarfile
+from utils import chunks
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from utf8_converter import UTF8Converter
@@ -101,6 +102,7 @@ class KnowledgeGraphLoader():
 
         sql_file = 'del_graph_' + graph_iri.split('/')[4] + '.sql'
         str_graph = str(graph_iri)
+        len_batch = 500
 
         with gzip.open(file_str, 'r') as f:
             read_f = f.read()
@@ -110,10 +112,12 @@ class KnowledgeGraphLoader():
         else:
             with open(sql_file, 'w') as sql_del:
                 print("DELETE FROM LOAD_LIST;", file=sql_del)
-                print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
-                for dd in (read_f.splitlines()):
-                    if dd: print (dd.decode("utf-8"), file=sql_del)
-                print ('} } ;', file=sql_del)
+                #Divide deletes in batches
+                for sublist in list(chunks(read_f.splitlines(),len_batch)):
+                    print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
+                    for dd in sublist:
+                        if dd: print (dd.decode("utf-8"), file=sql_del)
+                    print ('} } ;', file=sql_del)
                 print("RDF_LOADER_RUN();", file=sql_del)
                 print("CHECKPOINT;", file=sql_del)
                 print("COMMIT WORK;", file=sql_del)
