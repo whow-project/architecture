@@ -44,7 +44,7 @@
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Citta_metropolitana_{{year}}.csv"
+                    "file": "Citta metropolitana_{{year}}.csv"
                 }
             ],
             "variables": [
