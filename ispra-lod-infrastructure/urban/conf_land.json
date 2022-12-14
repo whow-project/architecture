@@ -50,7 +50,7 @@
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta_metropolitana_{{year}}.csv', 1)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta metropolitana_{{year}}.csv', 1)"
                 },
                 {
                     "id": "YEAR",
