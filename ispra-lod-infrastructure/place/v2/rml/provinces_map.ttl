@@ -2,8 +2,8 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -24,14 +24,14 @@
     rml:logicalSource <#ProvincesCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place";
+        rr:template "https://w3id.org/italia/env/ld/place";
     ].
 
 <#IstatCode>
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
+    rr:template "https://w3id.org/italia/env/ld/place/uniqueidentifier/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
     rr:class ispra-top:UniqueIdentifier
   ];
 
@@ -78,7 +78,7 @@
    rml:logicalSource <#ProvincesCSV>;
 
    rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00201";
+    rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00201";
     rr:class ispra-top:IdentifierSchema
   ];
 
@@ -117,7 +117,7 @@
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/place/organisation/002";
+    rr:constant "https://w3id.org/italia/env/ld/place/organisation/002";
     rr:class ispra-top:Organisation
   ];
 
@@ -148,7 +148,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
+    rr:template "https://w3id.org/italia/env/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_PROV}')%";
   ];
 
   rr:predicateObjectMap [
@@ -235,14 +235,14 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ontology/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%"
+    rr:template "https://w3id.org/italia/env/onto/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%"
   ].
    
  <#Regions>
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/region/00201_{COD_REG}"
+    rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}"
   ].
   
   
@@ -250,7 +250,7 @@
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/geometry/00201_{COD_PROV}_point";
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/00201_{COD_PROV}_point";
     rr:class ispra-place:Geometry
   ];
   
@@ -282,7 +282,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/year/{YEAR_PROV}";
+    rr:template "https://w3id.org/italia/env/ld/common/year/{YEAR_PROV}";
     rr:class ispra-top:Year
   ];
   
@@ -299,7 +299,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/country/00201_0"
+    rr:template "https://w3id.org/italia/env/ld/place/country/00201_0"
   ].
 
 #=================
@@ -313,7 +313,7 @@ rr:predicateObjectMap [
   rml:logicalSource <#MetropolitanCitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/metropolitancity/00201_{MC_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/place/metropolitancity/00201_{MC_CODE}";
   ];
 
   rr:predicateObjectMap [
@@ -327,5 +327,5 @@ rr:predicateObjectMap [
 rml:logicalSource <#MetropolitanCitiesCSV>;
 
 rr:subjectMap [
-  rr:template "https://dati.isprambiente.it/ld/place/province/00201_{PROV_CODE}"
+  rr:template "https://w3id.org/italia/env/ld/place/province/00201_{PROV_CODE}"
 ].

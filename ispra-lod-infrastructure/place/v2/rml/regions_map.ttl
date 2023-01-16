@@ -2,8 +2,8 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
@@ -23,7 +23,7 @@
     rml:logicalSource <#RegionsCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place";
+        rr:template "https://w3id.org/italia/env/ld/place";
         rr:class ispra-top:Dataset
     ];
 
@@ -38,7 +38,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_{COD_REG}";
+    rr:template "https://w3id.org/italia/env/ld/place/uniqueidentifier/00201_{COD_REG}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
@@ -86,7 +86,7 @@
    rml:logicalSource <#RegionsCSV>;
 
    rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00201";
+    rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00201";
     rr:class ispra-top:IdentifierSchema
   ];
 
@@ -126,7 +126,7 @@
   rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/place/organisation/002";
+    rr:constant "https://w3id.org/italia/env/ld/place/organisation/002";
     rr:class ispra-top:Organisation
   ];
 
@@ -158,7 +158,7 @@
   rml:logicalSource <#RegionsCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/region/00201_{COD_REG}";
+    rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}";
     rr:class ispra-place:Region
   ];
   
@@ -219,7 +219,7 @@
   rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/country/00201_0";
+    rr:template "https://w3id.org/italia/env/ld/place/country/00201_0";
     rr:class ispra-place:Country
   ];
 

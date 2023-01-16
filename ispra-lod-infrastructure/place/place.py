@@ -2,6 +2,7 @@ import os
 import json
 import gzip
 import pandas as pd
+from shapely.wkt import loads
 from subprocess import Popen, run
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib import Graph, URIRef
@@ -60,12 +61,31 @@ def metropolitan_city_code(istat):
 
     return out
 
+def get_long(shp_point):
+    pt_wkt = loads(str(shp_point))
+    try:
+        value = str(round(float(pt_wkt.x),5))
+    
+    except ValueError:
+        value = str(pt_wkt.x)
+
+    return value
+
+def get_lat(shp_point):
+    pt_wkt = loads(str(shp_point))
+    try:
+        value = str(round(float(pt_wkt.y),5))
+    
+    except ValueError:
+        value = str(pt_wkt.y)
+
+    return value
 
 def print_delete(file_toDel, file_update, cat):
 
     delG = Graph()
 
-    str_graph = 'https://dati.isprambiente.it/ld/place/'
+    str_graph = 'https://w3id.org/italia/env/ld/place/'
 
     graph_toDel = Graph()
     graph_update = Graph()
@@ -157,12 +177,12 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
 
     #Fix rdf:type
     print ('Fixing rdf:type ...')
-    for s, p, o in g.triples((None, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/province'))):
+    for s, p, o in g.triples((None, RDF.type, URIRef('https://w3id.org/italia/env/onto/place/province'))):
         g.remove((s, p, o))
-        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/Province')))
-    for s, p, o in g.triples((None, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/metropolitancity'))):
+        g.add((s, RDF.type, URIRef('https://w3id.org/italia/env/onto/place/Province')))
+    for s, p, o in g.triples((None, RDF.type, URIRef('https://w3id.org/italia/env/onto/place/metropolitancity'))):
         g.remove((s, p, o))
-        g.add((s, RDF.type, URIRef('https://dati.isprambiente.it/ontology/place/MetropolitanCity')))
+        g.add((s, RDF.type, URIRef('https://w3id.org/italia/env/onto/place/MetropolitanCity')))
 
     #toLoad_toDelete(g, "provinces", "places")
     file_tripleP, file_loadP, file_deleteP = loader.toLoad_toDelete_2(g, "provinces", "place")
@@ -182,6 +202,8 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     rml_converter.register_function("metropolitan_city_type", metropolitan_city_type)
     rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
     rml_converter.register_function("metropolitan_city_code_2", metropolitan_city_code_2)
+    rml_converter.register_function("get_long", get_long)
+    rml_converter.register_function("get_lat", get_long)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")

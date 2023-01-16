@@ -2,14 +2,15 @@
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix prov: <https://www.w3.org/ns/prov#> .
 @prefix onto-clv: <https://w3id.org/italia/onto/CLV/> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 
 
@@ -22,21 +23,21 @@
     rml:logicalSource <#CitiesCSV>;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place";
+        rr:template "https://w3id.org/italia/env/ld/place";
     ].
 
 <#Provinces>
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_COM}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_COM}')%";
+    rr:template "https://w3id.org/italia/env/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_COM}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_COM}')%";
   ].
    
  <#Regions>
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/region/00201_{COD_REG}"
+    rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}"
   ].
 
  
@@ -44,7 +45,7 @@
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/uniqueidentifier/00201_{PRO_COM_T}";
+    rr:template "https://w3id.org/italia/env/ld/place/uniqueidentifier/00201_{PRO_COM_T}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
@@ -91,7 +92,7 @@
    rml:logicalSource <#CitiesCSV>;
 
    rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00201";
+    rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00201";
     rr:class ispra-top:IdentifierSchema
   ];
 
@@ -131,7 +132,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/place/organisation/002";
+    rr:constant "https://w3id.org/italia/env/ld/place/organisation/002";
     rr:class ispra-top:Organisation
   ];
 
@@ -162,7 +163,7 @@
   rml:logicalSource <#CitiesCSV>;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{PRO_COM_T}";
+    rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{PRO_COM_T}";
     rr:class ispra-place:Municipality
   ];
 
@@ -244,6 +245,22 @@
       rr:parentTriplesMap <#CityPoint>
     ]
   ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+        rr:template "%eval:get_lat('{CENTROID_COM}')%";
+        rr:datatype xsd:decimal
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+        rr:template "%eval:get_long('{CENTROID_COM}')%";
+        rr:datatype xsd:decimal
+    ]
+  ];
   
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasGeometry;
@@ -277,7 +294,7 @@
    rml:logicalSource <#CitiesCSV>;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/place/geometry/00201_{PRO_COM_T}_point";
+     rr:template "https://w3id.org/italia/env/ld/place/geometry/00201_{PRO_COM_T}_point";
      rr:class ispra-place:Geometry
    ];
   
@@ -309,7 +326,7 @@
    rml:logicalSource <#CitiesCSV>;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/place/geometry/00201_{PRO_COM_T}_polygon";
+     rr:template "https://w3id.org/italia/env/ld/place/geometry/00201_{PRO_COM_T}_polygon";
      rr:class ispra-place:Geometry
    ];
   
@@ -342,7 +359,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/year/{YEAR_COM}";
+    rr:template "https://w3id.org/italia/env/ld/common/year/{YEAR_COM}";
     rr:class ispra-top:Year
   ];
   
@@ -358,7 +375,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/country/00201_0"
+    rr:template "https://w3id.org/italia/env/ld/place/country/00201_0"
   ].
 
 #=================
@@ -372,7 +389,7 @@
   rml:logicalSource <#DeadCitiesCSV>;
 
   rr:subjectMap [
-  rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{Codice_del_Comune_associato_alla_variazione}"
+  rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{Codice_del_Comune_associato_alla_variazione}"
 ];
 
   rr:predicateObjectMap [
@@ -386,5 +403,5 @@
 rml:logicalSource <#DeadCitiesCSV>;
 
 rr:subjectMap [
-  rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{Codice_Comune}"
+  rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{Codice_Comune}"
 ].
