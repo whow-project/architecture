@@ -1,11 +1,11 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/records_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/records_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
-@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
@@ -25,7 +25,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}";
             rr:class ispra-top:Dataset
     ];
 
@@ -57,7 +57,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observation/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observation/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
         rr:class dsw:Token;
         rr:class inspire-mf:Observation
     ];
@@ -179,7 +179,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/identification/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/identification/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
             rr:class dwc:Identification
     ];
 
@@ -249,7 +249,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/occurrence/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/occurrence/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
             rr:class dwc:Occurrence
     ];
 
@@ -311,7 +311,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/event/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/event/{ {{COD_EVNV}} }_%eval:format_date('{ {{DAY}} }', '{ {{MONTH}} }', '{ {{YEAR}} }')%_{ {{COD_CENTROID}} }";
             rr:class dwc:Event;
             rr:class sem:Event
     ];
@@ -360,7 +360,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
         ].
 
 
@@ -369,7 +369,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-        rr:constant "https://dati.isprambiente.it/ld/common/organisation/001"
+        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
         ].
 
 
@@ -378,7 +378,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-            rr:template "https://dati.isprambiente.it/ld/place/location/00102_{ {{COD_CENTROID}} }"
+            rr:template "https://w3id.org/italia/env/ld/place/location/00102_{ {{COD_CENTROID}} }"
         ].
 
 
@@ -387,7 +387,7 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/taxon/%eval:format_euring('{ {{COD_ID}} }')%"
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/taxon/%eval:format_euring('{ {{COD_ID}} }')%"
         ].
 
 
@@ -396,5 +396,5 @@
     rml:logicalSource :CSV_TOKEN;
 
     rr:subjectMap [
-            rr:template "https://dati.isprambiente.it/vocab/euring/capture/{ {{RECAPTURE}} }"
+            rr:template "https://w3id.org/italia/env/vocab/euring/capture/{ {{RECAPTURE}} }"
         ].

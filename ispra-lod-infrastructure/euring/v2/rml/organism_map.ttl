@@ -1,9 +1,9 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/records_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/records_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix dsw: <http://purl.org/dsw/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
@@ -20,7 +20,7 @@
     rml:logicalSource :CSV_ORG;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }";
         rr:class dwc:Organism;
         rr:class dcterms:PhysicalResource;
         rr:class ispra-top:Entity
@@ -36,7 +36,7 @@
 #    rr:predicateObjectMap [
 #        rr:predicate dcterms:identifier;
 #        rr:objectMap [
-#            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
+#            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organism/00103_{ {{COD_EVNV}} }"
 #       ]
 #   ];
 
@@ -77,7 +77,7 @@
     rml:logicalSource :CSV_ORG;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00103_{ {{COD_EVNV}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00103_{ {{COD_EVNV}} }";
         rr:class ispra-top:UniqueIdentifier
         ];
 
@@ -139,7 +139,7 @@
     rml:logicalSource :CSV_ORG;
 
     rr:subjectMap [
-        rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00103";
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00103";
         rr:class ispra-top:IdentifierSchema
         ];
 
@@ -195,5 +195,5 @@
     rml:logicalSource :CSV_ORG;
 
     rr:subjectMap [
-        rr:constant "https://dati.isprambiente.it/ld/common/organisation/001"
+        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
         ].
