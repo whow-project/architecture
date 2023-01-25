@@ -4,7 +4,7 @@ import clevercsv
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib.parser import StringInputSource
 
-from pyrml.pyrml import TermUtils, RMLConverter
+from pyrml import TermUtils, RMLConverter
 from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
@@ -16,31 +16,31 @@ UNIT_OF_MEASURES = None
 
 def metric (metric):
     if row["METRIC"] and isinstance(row["METRIC"], str):
-        return "https://dati.isprambiente.it/ld/common/metric/" + row["METRIC"].lower()
+        return "https://w3id.org/italia/env/ld/common/metric/" + row["METRIC"].lower()
     else:
         return None
 
 def broader_metric (row):
     if row["BROADER"] and isinstance(row["BROADER"], str):
-        return "https://dati.isprambiente.it/ld/common/metric/" + row["BROADER"].lower()
+        return "https://w3id.org/italia/env/ld/common/metric/" + row["BROADER"].lower()
     else:
         return None
 
 def indicator_entity (row, dataset):
     if row["METRIC"] and isinstance(row["METRIC"], str):
-        return "https://dati.isprambiente.it/ld/" + dataset + "/" + row["COD_PLACE"] + "_" + row["METRIC"].lower()+ "_" + row["YEAR"]
+        return "https://w3id.org/italia/env/ld/" + dataset + "/" + row["COD_PLACE"] + "_" + row["METRIC"].lower()+ "_" + row["YEAR"]
     else:
         return None
 
 def indicator_collection_entity (row, dataset):
     if row["METRIC"] and isinstance(row["METRIC"], str):
-        return "https://dati.isprambiente.it/ld/" + dataset + "/" + row["COD_PLACE"] + "_" + row["METRIC"].lower()
+        return "https://w3id.org/italia/env/ld/" + dataset + "/" + row["COD_PLACE"] + "_" + row["METRIC"].lower()
     else:
         return None
 
 def unit_entity (row):
     if row["UNIT_URI"] and isinstance(row["UNIT_URI"], str):
-        return "https://dati.isprambiente.it/ld/common/unitofmeasure/" + row["UNIT_URI"].lower()
+        return "https://w3id.org/italia/env/ld/common/unitofmeasure/" + row["UNIT_URI"].lower()
     else:
         return None
 
@@ -244,5 +244,5 @@ class LandTriplifier(Triplifier):
         
     
     def get_graph_iri(self):
-        return 'https://dati.isprambiente.it/ld/' + key_name
+        return 'https://w3id.org/italia/env/ld/' + key_name
     
