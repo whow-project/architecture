@@ -63,7 +63,7 @@ def istat_normaliser(df):
     
     fields_length_dict = {"IdOST_Origine": 6,
                           "PRO_COM": 6, 
-                          "COD_PROV": 3, 
+                          "COD_PRO": 3, 
                           "COD_REG": 2, 
                           "Nazione": 1}
     
