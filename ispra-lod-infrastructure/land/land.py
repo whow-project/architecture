@@ -133,7 +133,7 @@ def place_type(istat, field):
 
     elif field == "PRO_COM":
         type = "municipality"
-    elif field == "COD_PROV":
+    elif field == "COD_PRO":
         if istat.startswith("2"):
             type = "metropolitancity"
         else:
