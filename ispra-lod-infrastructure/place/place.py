@@ -203,7 +203,7 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     rml_converter.register_function("metropolitan_city_code", metropolitan_city_code)
     rml_converter.register_function("metropolitan_city_code_2", metropolitan_city_code_2)
     rml_converter.register_function("get_long", get_long)
-    rml_converter.register_function("get_lat", get_long)
+    rml_converter.register_function("get_lat", get_lat)
     g = rml_converter.convert(StringInputSource(rml_mapping.encode('utf-8')))
     
     #toLoad_toDelete(g, "municipalities", "places")
