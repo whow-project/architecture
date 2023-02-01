@@ -1,16 +1,16 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/lot_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/lot_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix rendis: <https://w3id.org/italia/env/onto/rendis/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix indicators: <https://w3id.org/italia/env/onto/indicators/> .
 
 
 
@@ -45,7 +45,7 @@
 #  rml:logicalSource :CSV;
 #  
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
+#    rr:template "https://w3id.org/italia/env/ld/rendis/lotstep/{id_intervento}_{id_lotto}_{id_passo}";
 #    rr:class rendis:ImplementationPlanAction
 #  ];
 #
@@ -67,7 +67,7 @@
 #  rr:predicateObjectMap [
 #    rr:predicate rendis:hasStepType;
 #    rr:objectMap [
-#      rr:template "https://dati.isprambiente.it/ld/rendis/iterstep/{id_passo}";
+#      rr:template "https://w3id.org/italia/env/ld/rendis/iterstep/{id_passo}";
 #      rr:termType rr:IRI
 #    ]
 #  ].
@@ -76,7 +76,7 @@
   rml:logicalSource :passi_CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplanstep/{id_passo}";
     rr:class rendis:ImplementationPlanStep
   ];
 
@@ -93,7 +93,7 @@
   rml:logicalSource :iter_type_CSV;
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{id_iter}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplan/{id_iter}";
     rr:class rendis:ImplementationPlan
   ];
   
@@ -142,7 +142,7 @@
   rml:logicalSource :alignem_CSV;
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplan/{id_iter}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplan/{id_iter}";
   ];
 
   rr:predicateObjectMap [
@@ -157,7 +157,7 @@
   rml:logicalSource :alignem_CSV;
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplanstep/{id_passo}";
   ];
 
   rr:predicateObjectMap [
@@ -172,7 +172,7 @@
   rml:logicalSource :iter_passi_first_last_CSV;
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{first}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplanstep/{first}";
   ] .
 
 :ImplementationPlanStepLast
@@ -180,7 +180,7 @@
   rml:logicalSource :iter_passi_first_last_CSV;
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{last}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplanstep/{last}";
   ] .
 
 
@@ -191,5 +191,5 @@
   crml:condition "df['id_passo_prec'].notnull()";
       
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/implementationplanstep/{id_passo_prec}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/implementationplanstep/{id_passo_prec}";
   ] .

@@ -3,8 +3,7 @@ import os, csv
 import clevercsv
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib.parser import StringInputSource
-
-from pyrml.pyrml import TermUtils, RMLConverter
+from pyrml import TermUtils, RMLConverter
 from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
@@ -175,7 +174,7 @@ class RendisTriplifier(Triplifier):
                     label_ente_proponente = ""
                     if ente_proponente.startswith("Comune - "):
                         ente_proponente_type = "municipality"
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Municipality"
+                        ente_proponente_type_uri = "https://w3id.org/italia/env/onto/place/Municipality"
                         #ente_proponente = ente_proponente.replace("Comune - ", "")
                     elif ente_proponente.startswith("Provincia - "):
                     
@@ -183,18 +182,18 @@ class RendisTriplifier(Triplifier):
                         
                         if ente_proponente_id in metropolitan_cities:
                             ente_proponente_type = "metropolitancity"
-                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/MetropolitanCity"
+                            ente_proponente_type_uri = "https://w3id.org/italia/env/onto/place/MetropolitanCity"
                         else:
                             ente_proponente_type = "province"
-                            ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Province"
+                            ente_proponente_type_uri = "https://w3id.org/italia/env/onto/place/Province"
                     elif ente_proponente.startswith("Regione - "):
                     
                         ente_proponente_type = "region"
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/place/Region"
+                        ente_proponente_type_uri = "https://w3id.org/italia/env/onto/place/Region"
                     else:
                         ente_proponente_type = "organisation"
                         label_ente_proponente = ente_proponente
-                        ente_proponente_type_uri = "https://dati.isprambiente.it/ontology/top/Organisation"
+                        ente_proponente_type_uri = "https://w3id.org/italia/env/onto/top/Organisation"
                         
                     row.update({"ENTE_PROPONENTE_LABEL": label_ente_proponente})
                     row.update({"ENTE_PROPONENTE_TYPE": ente_proponente_type})
@@ -208,7 +207,7 @@ class RendisTriplifier(Triplifier):
                     label_ente_attuatore = ""
                     if ente_attuatore.startswith("Comune - "):
                         ente_attuatore_type = "municipality"
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Municipality"
+                        ente_attuatore_type_uri = "https://w3id.org/italia/env/onto/place/Municipality"
                         
                     elif ente_attuatore.startswith("Provincia - "):
                     
@@ -216,18 +215,18 @@ class RendisTriplifier(Triplifier):
                         
                         if ente_attuatore_id in metropolitan_cities:
                             ente_attuatore_type = "metropolitancity"
-                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/MetropolitanCity"
+                            ente_attuatore_type_uri = "https://w3id.org/italia/env/onto/place/MetropolitanCity"
                         else:
                             ente_attuatore_type = "province"
-                            ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Province"
+                            ente_attuatore_type_uri = "https://w3id.org/italia/env/onto/place/Province"
                     elif ente_attuatore.startswith("Regione - "):
                     
                         ente_attuatore_type = "region"
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/place/Region"
+                        ente_attuatore_type_uri = "https://w3id.org/italia/env/onto/place/Region"
                     else:
                         ente_attuatore_type = "organisation"
                         label_ente_attuatore = ente_proponente
-                        ente_attuatore_type_uri = "https://dati.isprambiente.it/ontology/top/Organisation"
+                        ente_attuatore_type_uri = "https://w3id.org/italia/env/onto/top/Organisation"
                         
                     row.update({"ENTE_ATTUATORE_LABEL": label_ente_attuatore})
                     row.update({"ENTE_ATTUATORE_TYPE": ente_attuatore_type})
@@ -253,14 +252,14 @@ class RendisTriplifier(Triplifier):
                         row["D_gazzettaUfficiale"] = ''
                         
                     if row["L_QE_incongruenzaFin"] == 't':
-                        row["L_QE_incongruenzaFin"] = 'https://dati.isprambiente.it/ld/rendis/concept/financially_incongruent'
+                        row["L_QE_incongruenzaFin"] = 'https://w3id.org/italia/env/ld/rendis/concept/financially_incongruent'
                     else:
-                        row["L_QE_incongruenzaFin"] = 'https://dati.isprambiente.it/ld/rendis/concept/financially_congruent'
+                        row["L_QE_incongruenzaFin"] = 'https://w3id.org/italia/env/ld/rendis/concept/financially_congruent'
                         
                     if row["L_QE_incongruenzaProg"] == 't':
-                        row["L_QE_incongruenzaProg"] = 'https://dati.isprambiente.it/ld/rendis/concept/projectually_incongruent'
+                        row["L_QE_incongruenzaProg"] = 'https://w3id.org/italia/env/ld/rendis/concept/projectually_incongruent'
                     else:
-                        row["L_QE_incongruenzaProg"] = 'https://dati.isprambiente.it/ld/rendis/concept/projectually_congruent'
+                        row["L_QE_incongruenzaProg"] = 'https://w3id.org/italia/env/ld/rendis/concept/projectually_congruent'
                         
                     '''
                     row.update({"TIPO_DISSESTO_IT": row["_FROM_I_Tipo_dissesto"]})
@@ -380,6 +379,6 @@ def responsible_agent_role(resp, role):
     
 def responsible_role(role):
     if role and role != '':
-        return 'https://dati.isprambiente.it/ld/rendis/role/' + UtilsFunctions.digest(role);
+        return 'https://w3id.org/italia/env/ld/rendis/role/' + UtilsFunctions.digest(role);
     else:
-        return 'https://dati.isprambiente.it/ld/rendis/role/responsible';
+        return 'https://w3id.org/italia/env/ld/rendis/role/responsible';

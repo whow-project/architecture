@@ -1,19 +1,19 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/intervention_contract_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/intervention_contract_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-rnd: <https://dati.isprambiente.it/ontology/rendis/> .
-@prefix measures: <https://dati.isprambiente.it/ontology/measures/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
-@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-rnd: <https://w3id.org/italia/env/onto/rendis/> .
+@prefix measures: <https://w3id.org/italia/env/onto/measures/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix indicators: <https://w3id.org/italia/env/onto/indicators/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
@@ -58,7 +58,7 @@
 :DatasetISPRA
     rml:logicalSource :CSV;
         rr:subjectMap [
-            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}";
+            rr:constant "https://w3id.org/italia/env/ld/{{dataset}}";
             rr:class ispra-top:Dataset
     ];
 
@@ -82,7 +82,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/00104_{I_idIntervento}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00104_{I_idIntervento}";
     rr:class ispra-top:UniqueIdentifier
   ];
  
@@ -120,7 +120,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasCreator;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/common/organisation/001";
+      rr:constant "https://w3id.org/italia/env/ld/common/organisation/001";
       rr:termType rr:IRI
     ]
   ].
@@ -131,7 +131,7 @@
    rml:logicalSource :CSV;
 
    rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/identifierschema/00104";
+    rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00104";
     rr:class ispra-top:IdentifierSchema
   ];
 
@@ -161,7 +161,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/common/organisation/001";
+      rr:constant "https://w3id.org/italia/env/ld/common/organisation/001";
       ]
     ] .
 
@@ -170,7 +170,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/procedure/{I_idIntervento}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/procedure/{I_idIntervento}";
     rr:class ispra-rnd:Procedure
   ];
 
@@ -319,7 +319,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/amount/{_I_finanziamento intervento}_euro";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/amount/{_I_finanziamento intervento}_euro";
 	rr:class ispra-rnd:Amount
     ];
 
@@ -344,7 +344,7 @@
    rr:predicateObjectMap [
         rr:predicate ispra-rnd:hasCurrency;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
+            rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/currency/euro";
             rr:termType rr:IRI
         ] 
     ] .
@@ -355,7 +355,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
+        rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/currency/euro";
 	rr:class ispra-rnd:Currency
     ];
 
@@ -396,7 +396,7 @@
 #     rml:logicalSource :INSTABILITY_TYPE_CSV;
 #     
 #     rr:subjectMap [
-#         rr:template "https://dati.isprambiente.it/ld/{{dataset}}/instabilitytype/{DISSESTO_EN}";
+#         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/instabilitytype/{DISSESTO_EN}";
 # 	rr:class ispra-rnd:InstabilityType 
 #     ];
 # 
@@ -437,7 +437,7 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/place/%eval:digest('{POINT}')%";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/place/%eval:digest('{POINT}')%";
 	rr:class ispra-top:Location 
     ];
 
@@ -457,7 +457,7 @@
 #    rml:logicalSource :CSV;
 #    
 #    rr:subjectMap [
-#        rr:template "https://dati.isprambiente.it/ld/place/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
+#        rr:template "https://w3id.org/italia/env/ld/place/municipalityroleinintervention/{I_idIntervento}_{CI_FROM_I_CI_ISTATComPrimario}";
 #        rr:class ispra-rnd:MunicipalityRoleInIntervention
 #    ];
 #
@@ -488,7 +488,7 @@
 #    rr:predicateObjectMap [
 #	rr:predicate ispra-top:withRole;
 #        rr:objectMap [
-#	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/role/primary_municipality";
+#	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/role/primary_municipality";
 #        ]
 #    ] .
 
@@ -497,7 +497,7 @@
 #    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
 #    
 #    rr:subjectMap [
-#        rr:template "https://dati.isprambiente.it/ld/place/municipalityroleinintervention/{id_intervento}_{cod_istat}";
+#        rr:template "https://w3id.org/italia/env/ld/place/municipalityroleinintervention/{id_intervento}_{cod_istat}";
 #        rr:class ispra-rnd:MunicipalityRoleInIntervention
 #    ];
 #
@@ -528,7 +528,7 @@
 #    rr:predicateObjectMap [
 #	rr:predicate ispra-top:withRole;
 #        rr:objectMap [
-#	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/role/secondary_municipality";
+#	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/role/secondary_municipality";
 #            rr:termType rr:IRI
 #        ]
 #    ] .
@@ -537,21 +537,21 @@
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}"
+        rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}"
     ].
 
 :PlaceCollection
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
         rr:class inspire-mf:ProcedureCollection
     ];
 
     rr:predicateObjectMap [
 	rr:predicate ispra-top:isPartOf;
         rr:objectMap [
-	    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/collection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
+	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
             rr:termType rr:IRI
         ]
     ];
@@ -584,7 +584,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://dati.isprambiente.it/ontology/{{dataset}}/hasPrimaryMunicipalityOfIntervention', 'https://dati.isprambiente.it/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention', 'https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
         rr:class ispra-top:PredicateObjectAssertion
     ];
 
@@ -607,7 +607,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:withPredicate;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ontology/{{dataset}}/hasPrimaryMunicipalityOfIntervention";
+            rr:constant "https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention";
             rr:termType rr:IRI
         ]
     ];
@@ -624,7 +624,7 @@
     rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
     
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{cod_istat}"
+        rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{cod_istat}"
     ].
 
 :ProposingAgentRole
@@ -632,7 +632,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_proposing_institution";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agentrole/{I_idIntervento}_proposing_institution";
     rr:class ispra-top:AgentRole
   ];
 
@@ -663,7 +663,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:involvesRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/proposing_institution";
+      rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/proposing_institution";
       rr:termType rr:IRI
     ]
   ] .
@@ -674,14 +674,14 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteProp}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organisation/{E_FROM_I_idEnteProp}";
     rr:class ispra-top:Organisation 
   ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasLocation;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{ENTE_PROPONENTE_TYPE}/{E_FROM_I_idEnteProp}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/{ENTE_PROPONENTE_TYPE}/{E_FROM_I_idEnteProp}";
       rr:termType rr:IRI
     ]
   ];
@@ -699,7 +699,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_basin_authority";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agentrole/{I_idIntervento}_basin_authority";
     rr:class ispra-top:AgentRole
   ];
 
@@ -730,7 +730,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/supervisory_authority";
+      rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
     ]
   ] .
@@ -741,7 +741,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutBac}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutBac}";
     rr:class ispra-top:Organisation 
   ];
 
@@ -761,7 +761,7 @@
   crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_district_authority";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agentrole/{I_idIntervento}_district_authority";
     rr:class ispra-top:AgentRole
   ];
 
@@ -792,7 +792,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/supervisory_authority";
+      rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
     ]
   ] .
@@ -804,7 +804,7 @@
   crml:condition "df['E_FROM_I_idEnteAutDis'].notnull()";
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutDis}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organisation/{E_FROM_I_idEnteAutDis}";
     rr:class ispra-top:Organisation 
   ];
 
@@ -820,7 +820,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/legalact/{I_idIntervento}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/legalact/{I_idIntervento}";
     rr:class ispra-rnd:LegalAct
   ];
 
@@ -860,7 +860,7 @@
     rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/lot/{I_idIntervento}_{L_idLotto}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/lot/{I_idIntervento}_{L_idLotto}";
     rr:class ispra-rnd:Lot
   ];
 
@@ -912,7 +912,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-rnd:hasImplementationPlan;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplan/{L_idIter}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/implementationplan/{L_idIter}";
       rr:termType rr:IRI 
     ]
   ];
@@ -936,7 +936,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanexecution/{I_idIntervento}_{L_idLotto}_{L_idIter}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/implementationplanexecution/{I_idIntervento}_{L_idLotto}_{L_idIter}";
     rr:class ispra-rnd:ImplementationPlanExecution
   ];
 
@@ -959,7 +959,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:satisfies;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplan/{L_idIter}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/implementationplan/{L_idIter}";
       rr:termType rr:IRI 
     ]
   ];
@@ -984,7 +984,7 @@
   rml:logicalSource :LOT_STEP_CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanaction/{id_intervento}_{id_lotto}_{id_passo}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/implementationplanaction/{id_intervento}_{id_lotto}_{id_passo}";
     rr:class ispra-rnd:ImplementationPlanAction
   ];
 
@@ -1007,7 +1007,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:satisfies;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/{{dataset}}/implementationplanstep/{id_passo}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/implementationplanstep/{id_passo}";
       rr:termType rr:IRI 
     ]
   ] .
@@ -1017,7 +1017,7 @@
   rml:logicalSource :PROCEDURE_TYPE_CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/proceduretype/{ID}";
+     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/proceduretype/{ID}";
      rr:class ispra-rnd:ProcedureType
    ];
 
@@ -1043,7 +1043,7 @@
    rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/%eval:responsible_agent_role('{L_nominativoresp}', '{L_ruoloresp}')%";
+     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agentrole/%eval:responsible_agent_role('{L_nominativoresp}', '{L_ruoloresp}')%";
      rr:class ispra-top:AgentRole
    ];
 
@@ -1083,7 +1083,7 @@
    rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agent/%eval:digest('{L_nominativoresp}')%";
+     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agent/%eval:digest('{L_nominativoresp}')%";
      rr:class ispra-top:Agent
    ];
 
@@ -1125,7 +1125,7 @@
   rml:logicalSource :CSV;
   
    rr:subjectMap [
-     rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/%eval:digest('{POINT}')%";
+     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:digest('{POINT}')%";
      rr:class ispra-place:Geometry
    ];
   
@@ -1144,7 +1144,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/agentrole/{I_idIntervento}_actuator_institution";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/agentrole/{I_idIntervento}_actuator_institution";
     rr:class ispra-top:AgentRole
   ];
 
@@ -1175,7 +1175,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:withRole;
     rr:objectMap [
-      rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/role/actuator_institution";
+      rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/actuator_institution";
       rr:termType rr:IRI
     ]
   ] .
@@ -1186,7 +1186,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/{ENTE_ATTUATORE_TYPE}/{E_FROM_L_idEnteAttuat}"
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/{ENTE_ATTUATORE_TYPE}/{E_FROM_L_idEnteAttuat}"
   ];
 
   rr:predicateObjectMap [
@@ -1214,7 +1214,7 @@
     crml:condition "df['{{ind}}'].notnull()";
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/{I_idIntervento}_{L_idLotto}_{{ind|lower}}";
         rr:class inspire-mf:Indicator
       ];
 
@@ -1251,7 +1251,7 @@
      rr:predicateObjectMap [
        rr:predicate ispra-top:isParametrisedBy;
        rr:objectMap [
-          rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{{ind|lower}}";
+          rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{{ind|lower}}";
 	  rr:termType rr:IRI
        ]
      ] .
@@ -1261,7 +1261,7 @@
      rml:logicalSource :CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/amount/{ {{ind}} }_euro";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/amount/{ {{ind}} }_euro";
         rr:class ispra-rnd:Amount
       ];
 
@@ -1292,7 +1292,7 @@
      rr:predicateObjectMap [
         rr:predicate ispra-rnd:hasCurrency;
         rr:objectMap [
-            rr:constant "https://dati.isprambiente.it/ld/{{dataset}}/currency/euro";
+            rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/currency/euro";
             rr:termType rr:IRI
         ] 
      ] .
@@ -1304,7 +1304,7 @@
      rml:logicalSource :ECONOMIC_INDICATORS_CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/parameter/{ID}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ID}";
         rr:class ispra-top:Parameter
       ];
 
@@ -1336,7 +1336,7 @@
      rml:logicalSource :LOT_CLASSIFICATIONS_CSV;
 
      rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/concept/{LABEL_EN}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/concept/{LABEL_EN}";
         rr:class ispra-top:Concept
       ];
 

@@ -1,16 +1,16 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/vocabs_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/vocabs_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix rendis: <https://dati.isprambiente.it/ontology/rendis/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix rendis: <https://w3id.org/italia/env/onto/rendis/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
-@prefix indicators: <https://dati.isprambiente.it/ontology/indicators/> .
+@prefix indicators: <https://w3id.org/italia/env/onto/indicators/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 
@@ -61,7 +61,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lithology/{id_intervento}_{id_lotto}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/lithology/{id_intervento}_{id_lotto}";
     rr:class rendis:Lithology
   ];
 
@@ -84,7 +84,7 @@
   rr:predicateObjectMap [
     rr:predicate rendis:hasLithologyType;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/lithologytype/{cod_litologia}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/lithologytype/{cod_litologia}";
       rr:termType rr:IRI 
     ]
   ];
@@ -92,7 +92,7 @@
   rr:predicateObjectMap [
     rr:predicate rendis:isLithologyOf;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
     ]
   ] .
@@ -102,7 +102,7 @@
   rml:logicalSource :lithology_type;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lithologytype/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/lithologytype/{ID}";
     rr:class rendis:Lithology
   ];
 
@@ -128,7 +128,7 @@
   rml:logicalSource :CSV;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
   ];
 
   rr:predicateObjectMap [
@@ -151,7 +151,7 @@
   rml:logicalSource :instability_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
   ];
 
   rr:predicateObjectMap [
@@ -165,7 +165,7 @@
 #  rml:logicalSource :repair_csv;
 #  
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/rendis/contract/{id_intervento}_{id_lotto}";
+#    rr:template "https://w3id.org/italia/env/ld/rendis/contract/{id_intervento}_{id_lotto}";
 #  ];
 #
 #  rr:predicateObjectMap [
@@ -181,7 +181,7 @@
   rml:logicalSource :instability_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/procedure/{id_intervento}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/procedure/{id_intervento}";
   ];
 
   rr:predicateObjectMap [
@@ -200,7 +200,7 @@
   rml:logicalSource :instability_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/instability/{id_intervento}_{id_lotto}_{cod_dissesto}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/instability/{id_intervento}_{id_lotto}_{cod_dissesto}";
     rr:class rendis:Instability
   ];
 
@@ -223,7 +223,7 @@
   rr:predicateObjectMap [
     rr:predicate rendis:isInstabilityOf;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
     ]
   ];
@@ -232,7 +232,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasInstabilityType;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{cod_dissesto}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{cod_dissesto}";
       rr:termType rr:IRI
     ]
   ].
@@ -242,7 +242,7 @@
   rml:logicalSource :instability_types_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{ID}";
     rr:class rendis:InstabilityType
   ];
 
@@ -266,7 +266,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:specialises;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{TIPO_ID}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{TIPO_ID}";
       rr:termType rr:IRI
     ]
   ];
@@ -274,7 +274,7 @@
   rr:predicateObjectMap [
     rr:predicate owl:sameAs;
     rr:objectMap [
-      rr:template "http://dati.isprambiente.it/id/skos/ihi/instabilitytype/{ID}";
+      rr:template "http://w3id.org/italia/env/id/skos/ihi/instabilitytype/{ID}";
       rr:termType rr:IRI
     ]
   ] .
@@ -284,7 +284,7 @@
   rml:logicalSource :instability_super_types_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{ID}";
     rr:class rendis:InstabilityType
   ];
 
@@ -326,7 +326,7 @@
   rml:logicalSource :instability_types_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/instabilitytype/{TIPO_ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{TIPO_ID}";
   ] .
 
 
@@ -334,7 +334,7 @@
   rml:logicalSource :repair_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/repairworkexecution/{id_intervento}_{id_lotto}_{cod_sistemazione}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/repairworkexecution/{id_intervento}_{id_lotto}_{cod_sistemazione}";
     rr:class rendis:RepairWorkExecution
   ];
 
@@ -357,7 +357,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:satisfies;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{cod_sistemazione}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{cod_sistemazione}";
       rr:termType rr:IRI
     ]
   ];
@@ -365,7 +365,7 @@
   rr:predicateObjectMap [
     rr:predicate rendis:isRepairWorkExecutionOf;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/lot/{id_intervento}_{id_lotto}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
     ]
   ] .
@@ -375,7 +375,7 @@
   rml:logicalSource :repair_types_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{ID}";
     rr:class rendis:RepairWork
   ];
 
@@ -398,7 +398,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:specialises;
     rr:objectMap [
-      rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{TIPO_ID}";
+      rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{TIPO_ID}";
       rr:termType rr:IRI
     ]
   ] .
@@ -408,7 +408,7 @@
   rml:logicalSource :repair_super_types_csv;
   
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/rendis/repairwork/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{ID}";
     rr:class rendis:RepairWork
   ];
 
