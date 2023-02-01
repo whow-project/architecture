@@ -1,11 +1,11 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/sensors_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/sensors_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
-@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -35,7 +35,7 @@
 #	rml:logicalSource :CSV_SENSORS;
 #
 #	rr:subjectMap [
-#		rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_#{CODE_PLACE}"
+#		rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_#{CODE_PLACE}"
 #	].
 
 
@@ -43,7 +43,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_tide_gauge";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_tide_gauge";
 	].
 
 
@@ -51,7 +51,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}";
 		rr:class inspire-mf:Sensor 
 	];
 
@@ -140,7 +140,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_sampling_frequency_{SENSOR_SAMPLING_FREQUENCY}_hz";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_sampling_frequency_{SENSOR_SAMPLING_FREQUENCY}_hz";
         	rr:class inspire-mf:SystemCapability
     ];
         
@@ -180,7 +180,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-    		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling_frequency";
+    		rr:template "https://w3id.org/italia/env/ld/common/parameter/sampling_frequency";
     		rr:class ispra-top:Parameter
   	];
 
@@ -235,7 +235,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/common/value/{SENSOR_SAMPLING_FREQUENCY}_hz";
+		rr:template "https://w3id.org/italia/env/ld/common/value/{SENSOR_SAMPLING_FREQUENCY}_hz";
 		rr:class ispra-top:Value
 	];
 
@@ -278,7 +278,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_averaging_period_{PERIOD}{PERIOD_UNIT}";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_averaging_period_{PERIOD}{PERIOD_UNIT}";
         	rr:class inspire-mf:SystemCapability
     ];
         
@@ -318,7 +318,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-    		rr:template "https://dati.isprambiente.it/ld/common/parameter/sampling";
+    		rr:template "https://w3id.org/italia/env/ld/common/parameter/sampling";
     		rr:class ispra-top:Parameter
   	];
 
@@ -360,7 +360,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/common/value/p{PERIOD}{PERIOD_UNIT}";
+		rr:template "https://w3id.org/italia/env/ld/common/value/p{PERIOD}{PERIOD_UNIT}";
 		rr:class ispra-top:Value
 	];
 
@@ -403,7 +403,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemdeployment/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_measurement_height_%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemdeployment/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}{SENS_ID}_measurement_height_%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
         	rr:class inspire-mf:SystemDeployment
     ];
         
@@ -443,7 +443,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-    		rr:template "https://dati.isprambiente.it/ld/common/parameter/measurement_height";
+    		rr:template "https://w3id.org/italia/env/ld/common/parameter/measurement_height";
     		rr:class ispra-top:Parameter
   	];
 
@@ -468,7 +468,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/common/value/%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
+		rr:template "https://w3id.org/italia/env/ld/common/value/%eval:preserve_value({MEASUREMENT_HEIGHT})%_m";
 		rr:class ispra-top:Value
 	];
 
@@ -513,7 +513,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{PERIOD_UNIT_LABEL_EN}";
+		rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{PERIOD_UNIT_LABEL_EN}";
 		rr:class ispra-top:UnitOfMeasure
     ];
 
@@ -539,7 +539,7 @@
     rml:logicalSource :CSV_SENSORS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/meter";
         rr:class ispra-top:UnitOfMeasure
     ];
 
@@ -564,7 +564,7 @@
     rml:logicalSource :CSV_SENSORS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/hertz";
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/hertz";
         rr:class ispra-top:UnitOfMeasure
     ];
 
@@ -593,7 +593,7 @@
 	rml:logicalSource :CSV_SENSOR_MODELS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/common/sensortype/{EN}";
+        	rr:template "https://w3id.org/italia/env/ld/common/sensortype/{EN}";
 		rr:class inspire-mf:SensorType 
     	];
 
@@ -643,7 +643,7 @@
 	rml:logicalSource :CSV_SENSOR_MODELS;
 
 	rr:subjectMap [
-        	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensormodel/{ID}";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensormodel/{ID}";
 	        rr:class inspire-mf:SensorModel
     	];
 
@@ -693,7 +693,7 @@
 	rml:logicalSource :CSV_SENSOR_MODELS;
 
 	rr:subjectMap [
-    		rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
+    		rr:template "https://w3id.org/italia/env/ld/common/organisation/{MANUFACTURER}";
 		rr:class ispra-top:Organisation
 	];
 
@@ -721,7 +721,7 @@
 	rml:logicalSource :CSV_SENSOR_DEPICTIONS;
 
 	rr:subjectMap [
-		rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}" 
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}" 
 	];
 
 	rr:predicateObjectMap [

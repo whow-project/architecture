@@ -1,11 +1,11 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/observations_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/observations_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
-@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -25,7 +25,7 @@
     rml:logicalSource :OBSERVATION_DATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE}"
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE}"
     ];
 
     rr:predicateObjectMap [
@@ -40,7 +40,7 @@
 
     rr:subjectMap [
 
-	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}";
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}";
 	rr:class inspire-mf:ObservationCollection
     ] .
 
@@ -50,7 +50,7 @@
     rml:logicalSource :OBSERVATION_DATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}_{TYPE}_{PERIOD}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}_{TYPE}_{PERIOD}";
         rr:class inspire-mf:ObservationCollection
     ];
 
@@ -103,7 +103,7 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:hasFeatureOfInterest;
         rr:objectMap [
-            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
             rr:termType rr:IRI
         ]
     ];
@@ -126,7 +126,7 @@
     rml:logicalSource :OBSERVATION_DATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/validationlevel/{VALIDATION}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/validationlevel/{VALIDATION}";
         rr:class inspire-mf:ValidationLevel
     ];
 
@@ -150,7 +150,7 @@
     rml:logicalSource :OBSERVATION_DATA;
 
     rr:subjectMap [
-	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_{PERIOD}";
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_{PERIOD}";
         rr:class ispra-top:Media;
     ];
 
@@ -172,7 +172,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasDataSchema;
         rr:objectMap [
-            rr:template "https://dati.isprambiente.it/ld/{{dataset}}/dataschema/{TYPE}";
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataschema/{TYPE}";
             rr:termType rr:IRI
         ]
     ].
@@ -181,7 +181,7 @@
     rml:logicalSource :OBSERVATION_DATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/timeinterval/%eval:time_interval(*)%";
+        rr:template "https://w3id.org/italia/env/ld/common/timeinterval/%eval:time_interval(*)%";
         rr:class ispra-top:TimeInterval
     ];
 
@@ -224,7 +224,7 @@
     rml:logicalSource :CSV_SCHEMATA;
 
     rr:subjectMap [
-	rr:template "https://dati.isprambiente.it/ld/{{dataset}}/dataschema/{SCHEMA}";
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataschema/{SCHEMA}";
         rr:class ispra-top:DataSchema
     ];
 
@@ -258,7 +258,7 @@
     rml:logicalSource :CSV_SCHEMATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/schemaattribute/{SCHEMA}_{COL_NUMBER}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/schemaattribute/{SCHEMA}_{COL_NUMBER}";
         rr:class ispra-top:SchemaAttribute
     ];
 
@@ -300,7 +300,7 @@
     rml:logicalSource :CSV_SCHEMATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/observationparameter/{PARAMETER}";
+        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{PARAMETER}";
         rr:class inspire-mf:ObservationParameter
     ];
     
@@ -347,7 +347,7 @@
     rml:logicalSource :CSV_SCHEMATA;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/{UNIT_OF_MEASURE}";
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{UNIT_OF_MEASURE}";
         rr:class ispra-top:UnitOfMeasure
     ];
   

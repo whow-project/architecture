@@ -1,11 +1,11 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/stations_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/stations_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
-@prefix inspire-mf: <https://dati.isprambiente.it/ontology/inspire-mf/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -47,7 +47,7 @@
     rml:logicalSource :CSV_STATIONS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}";
             rr:class ispra-top:Dataset
     ];
 
@@ -78,14 +78,14 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/municipality/00201_{CODE_PLACE}"
+    rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{CODE_PLACE}"
   ].
 
 :Catalogue
   rml:logicalSource :CSV_STATIONS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/ron/collection/00201_{CODE_PLACE}";
+        rr:template "https://w3id.org/italia/env/ld/ron/collection/00201_{CODE_PLACE}";
         rr:class ispra-top:Collection
   ];
 
@@ -139,7 +139,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/observationcollection/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}";
 #    rr:class inspire-mf:ObservationCollection
   ];
 
@@ -154,7 +154,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
@@ -185,7 +185,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformcollection/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/{STAT_CODE}";
     rr:class inspire-mf:PlatformCollection
   ];
 
@@ -223,7 +223,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
     rr:class inspire-mf:Platform
   ];
 
@@ -332,7 +332,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/platformtype/{TYPE_EN}";
+    rr:template "https://w3id.org/italia/env/ld/common/platformtype/{TYPE_EN}";
 	rr:class inspire-mf:PlatformType
   ];
 
@@ -384,7 +384,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/geometry/{STAT_CODE}_{STAT_TYPE_EN}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/{STAT_CODE}_{STAT_TYPE_EN}";
     rr:class ispra-place:Geometry
   ];
 
@@ -437,7 +437,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:constant "https://dati.isprambiente.it/ld/common/geometrytype/point";
+    rr:constant "https://w3id.org/italia/env/ld/common/geometrytype/point";
     rr:class ispra-place:GeometryType
   ].
 
@@ -446,7 +446,7 @@
 #  rml:logicalSource :CSV_STATIONS;
 #
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/nodestation/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
+#    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/nodestation/{STAT_CODE}_{NETWORK}_{STAT_TYPE_EN}";
 #    rr:class inspire:MonitoringFacility
 #  ].
 
@@ -454,7 +454,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/network/{NETWORK}";
     rr:class inspire-mf:MonitoringNetwork
   ];
 
@@ -502,7 +502,7 @@
 #  rml:logicalSource :CSV_STATIONS;
 #
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/network/{NETWORK}";
+#    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/network/{NETWORK}";
 #    rr:class inspire:MonitoringNetwork
 #  ].
 
@@ -510,7 +510,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/sea/seaarea_{PLACE_NAME}_{{dataset}}{NETWORK}";
+    rr:template "https://w3id.org/italia/env/ld/place/sea/seaarea_{PLACE_NAME}_{{dataset}}{NETWORK}";
     rr:class ispra-place:Sea
   ];
 
@@ -559,7 +559,7 @@
 #  rml:logicalSource :CSV_STATIONS;
 #
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+#    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
 #    rr:class inspire:MonitoringFeature
 #  ].
 
@@ -567,7 +567,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/geometry/seaarea_{PLACE_NAME}_{NETWORK}";	
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/seaarea_{PLACE_NAME}_{NETWORK}";	
     rr:class ispra-place:Geometry
   ];
 
@@ -604,7 +604,7 @@
   rml:logicalSource :CSV_SEAS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/sea/{EN}";
+    rr:template "https://w3id.org/italia/env/ld/place/sea/{EN}";
     rr:class ispra-place:Sea
   ];
 
@@ -643,7 +643,7 @@
 #  rml:logicalSource :CSV_STATIONS;
 #
 #  rr:subjectMap [
-#    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}"
+#    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformtype/{STAT_TYPE_EN}"
 #  ].
 
 :StationModelData
@@ -757,7 +757,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_positioning_system";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -797,7 +797,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/parameter/positioning_system";
+        rr:template "https://w3id.org/italia/env/ld/common/parameter/positioning_system";
         rr:class ispra-top:Parameter
     ];
 
@@ -852,7 +852,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/platformattribute/{POSITIONING_SYSTEM}";
+        rr:template "https://w3id.org/italia/env/ld/common/platformattribute/{POSITIONING_SYSTEM}";
         rr:class ispra-top:PlatformAttribute
     ];
 
@@ -878,7 +878,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_hull_type";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -918,7 +918,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/parameter/hull";
+        rr:template "https://w3id.org/italia/env/ld/common/parameter/hull";
         rr:class ispra-top:Parameter
     ];
 
@@ -973,7 +973,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/concept/{HULL_TYPE}";
+        rr:template "https://w3id.org/italia/env/ld/common/concept/{HULL_TYPE}";
         rr:class ispra-top:Concept
     ];
 
@@ -998,7 +998,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/organisation/{MANUFACTURER}";
+    rr:template "https://w3id.org/italia/env/ld/common/organisation/{MANUFACTURER}";
     rr:class ispra-top:Organisation
   ];
 
@@ -1024,7 +1024,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/parameter/mooring";
+        rr:template "https://w3id.org/italia/env/ld/common/parameter/mooring";
         rr:class ispra-top:Parameter
     ];
 
@@ -1079,7 +1079,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/concept/{MOORING_TYPE}";
+        rr:template "https://w3id.org/italia/env/ld/common/concept/{MOORING_TYPE}";
         rr:class ispra-top:Concept
     ];
 
@@ -1105,7 +1105,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_mooring_type";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -1145,7 +1145,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_diameter";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_diameter";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -1185,7 +1185,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/parameter/diameter";
+    rr:template "https://w3id.org/italia/env/ld/common/parameter/diameter";
     rr:class ispra-top:Parameter
   ];
 
@@ -1240,7 +1240,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/value/{DIAMETER}-meters";
+    rr:template "https://w3id.org/italia/env/ld/common/value/{DIAMETER}-meters";
         rr:class ispra-top:Value
     ];
 
@@ -1281,7 +1281,7 @@
 #    rml:logicalSource <#CSV_STATION>;
 #
 #    rr:subjectMap [
-#        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/stationmodel/%eval:mobile_sensor('{MOBILE}')%";
+#        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/stationmodel/%eval:mobile_sensor('{MOBILE}')%";
 #        rr:class inspire-mf:StationModelType
 #    ];
 #
@@ -1307,7 +1307,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_material";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_material";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -1346,7 +1346,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/parameter/material";
+    rr:template "https://w3id.org/italia/env/ld/common/parameter/material";
     rr:class ispra-top:Parameter
   ];
 
@@ -1401,7 +1401,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/material/{STRUCTURE_EN}";
+        rr:template "https://w3id.org/italia/env/ld/common/material/{STRUCTURE_EN}";
 	rr:class ispra-top:Material
     ];
 
@@ -1439,7 +1439,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/common/unitofmeasure/meter";
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/meter";
         rr:class ispra-top:UnitOfMeasure
     ];
 
@@ -1465,7 +1465,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_levelling";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/%eval:station_model_id(*, '{{dataset}}')%_levelling";
         rr:class inspire-mf:SystemCapability
     ];
         
@@ -1512,7 +1512,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/year/{TIME}";
+    rr:template "https://w3id.org/italia/env/ld/common/year/{TIME}";
     rr:class ispra-top:Year
   ];
 
@@ -1545,7 +1545,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/parameter/levelling";
+    rr:template "https://w3id.org/italia/env/ld/common/parameter/levelling";
     rr:class ispra-top:Parameter
   ];
 
@@ -1600,7 +1600,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/method/{LEVELLING_EN}";
+    rr:template "https://w3id.org/italia/env/ld/common/method/{LEVELLING_EN}";
     rr:class inspire-mf:Procedure
   ];
 
@@ -1627,7 +1627,7 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://dati.isprambiente.it/ld/{{dataset}}/systemdeployment/%eval:station_model_id(*, '{{dataset}}')%_deployment";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemdeployment/%eval:station_model_id(*, '{{dataset}}')%_deployment";
         rr:class inspire-mf:SystemDeployment
     ];
         
@@ -1667,7 +1667,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/parameter/deployment";
+    rr:template "https://w3id.org/italia/env/ld/common/parameter/deployment";
     rr:class ispra-top:Parameter
   ];
 
@@ -1722,7 +1722,7 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/place/place/{LOCATION_EN}";
+    rr:template "https://w3id.org/italia/env/ld/place/place/{LOCATION_EN}";
     rr:class ispra-top:Location
   ];
 

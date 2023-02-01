@@ -1,10 +1,10 @@
-@prefix : <https://dati.isprambiente.it/ld/rml/code_providers_map.ttl#> .
+@prefix : <https://w3id.org/italia/env/ld/rml/code_providers_map.ttl#> .
 @prefix rr: <http://www.w3.org/ns/r2rml#> .
 @prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
-@prefix ispra-place: <https://dati.isprambiente.it/ontology/place/> .
-@prefix ispra-top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -33,7 +33,7 @@
   rml:logicalSource :CODE_2_PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
   ];
 
   rr:predicateObjectMap [
@@ -74,7 +74,7 @@
   rml:logicalSource :PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://dati.isprambiente.it/ld/common/organisation/{ID}";
+    rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID}";
     rr:class ispra-top:Organisation
   ];
 

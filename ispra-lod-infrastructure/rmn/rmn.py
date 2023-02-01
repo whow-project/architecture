@@ -3,7 +3,7 @@ import os
 import re
 import datetime as dt
 from kg_loader import KnowledgeGraphLoader
-from pyrml.pyrml import TermUtils
+from pyrml import TermUtils
 from triplification import Triplifier
 
 class Functions():
@@ -14,7 +14,7 @@ class Functions():
 
     @staticmethod
     def station_model_uri(row, dataset):
-        return "https://dati.isprambiente.it/ld/" + dataset + "/platformmodel/" + Functions.station_model_id(row, dataset)
+        return "https://w3id.org/italia/env/ld/" + dataset + "/platformmodel/" + Functions.station_model_id(row, dataset)
     
     @staticmethod
     def station_model_id(row, dataset):
@@ -85,5 +85,5 @@ class RMNTriplifier(Triplifier):
         
     
     def get_graph_iri(self):
-        return 'https://dati.isprambiente.it/ld/rmn'
+        return 'https://w3id.org/italia/env/ld/rmn'
     
