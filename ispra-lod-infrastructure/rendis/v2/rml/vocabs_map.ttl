@@ -4,7 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
-@prefix rendis: <https://w3id.org/italia/env/onto/rendis/> .
+@prefix ispra-rnd: <https://w3id.org/italia/env/onto/rendis/> .
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
@@ -62,7 +62,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/lithology/{id_intervento}_{id_lotto}";
-    rr:class rendis:Lithology
+    rr:class ispra-rnd:Lithology
   ];
 
   rr:predicateObjectMap [
@@ -82,7 +82,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasLithologyType;
+    rr:predicate ispra-rnd:hasLithologyType;
     rr:objectMap [
       rr:template "https://w3id.org/italia/env/ld/rendis/lithologytype/{cod_litologia}";
       rr:termType rr:IRI 
@@ -90,7 +90,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:isLithologyOf;
+    rr:predicate ispra-rnd:isLithologyOf;
     rr:objectMap [
       rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
@@ -103,7 +103,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/lithologytype/{ID}";
-    rr:class rendis:Lithology
+    rr:class ispra-rnd:Lithology
   ];
 
   rr:predicateObjectMap [
@@ -132,14 +132,14 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:hasLithology;
+    rr:predicate ispra-rnd:hasLithology;
     rr:objectMap [
       rr:parentTriplesMap :Litology
     ]
   ] .
   
 #  rr:predicateObjectMap [
-#   rr:predicate rendis:hasInstabilityRelatedTo;
+#   rr:predicate ispra-rnd:hasInstabilityRelatedTo;
 #    rr:objectMap [
 #      rr:parentTriplesMap :Instability
 #    ]
@@ -155,7 +155,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:addressesInstability;
+    rr:predicate ispra-rnd:addressesInstability;
     rr:objectMap [
       rr:parentTriplesMap :Instability
     ]
@@ -169,7 +169,7 @@
 #  ];
 #
 #  rr:predicateObjectMap [
-#    rr:predicate rendis:hasRepairWork;
+#    rr:predicate ispra-rnd:hasRepairWork;
 #    rr:objectMap [
 #      rr:parentTriplesMap :Repair
 #    ]
@@ -185,7 +185,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:addressesInstabilityType;
+    rr:predicate ispra-rnd:addressesInstabilityType;
     rr:objectMap [
       rr:parentTriplesMap :InstabilitySuperTypeJoinIntervention;
       rr:joinCondition [
@@ -201,7 +201,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/instability/{id_intervento}_{id_lotto}_{cod_dissesto}";
-    rr:class rendis:Instability
+    rr:class ispra-rnd:Instability
   ];
 
   rr:predicateObjectMap [
@@ -221,7 +221,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:isInstabilityOf;
+    rr:predicate ispra-rnd:isInstabilityOf;
     rr:objectMap [
       rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
@@ -243,7 +243,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{ID}";
-    rr:class rendis:InstabilityType
+    rr:class ispra-rnd:InstabilityType
   ];
 
 
@@ -285,7 +285,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{ID}";
-    rr:class rendis:InstabilityType
+    rr:class ispra-rnd:InstabilityType
   ];
 
 
@@ -335,7 +335,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/repairworkexecution/{id_intervento}_{id_lotto}_{cod_sistemazione}";
-    rr:class rendis:RepairWorkExecution
+    rr:class ispra-rnd:RepairWorkExecution
   ];
 
   rr:predicateObjectMap [
@@ -363,7 +363,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate rendis:isRepairWorkExecutionOf;
+    rr:predicate ispra-rnd:isRepairWorkExecutionOf;
     rr:objectMap [
       rr:template "https://w3id.org/italia/env/ld/rendis/lot/{id_intervento}_{id_lotto}";
       rr:termType rr:IRI
@@ -376,7 +376,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{ID}";
-    rr:class rendis:RepairWork
+    rr:class ispra-rnd:RepairWork
   ];
 
   rr:predicateObjectMap [
@@ -409,7 +409,7 @@
   
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/rendis/repairwork/{ID}";
-    rr:class rendis:RepairWork
+    rr:class ispra-rnd:RepairWork
   ];
 
   rr:predicateObjectMap [
