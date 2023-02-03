@@ -526,7 +526,7 @@
 #
 #
 #    rr:predicateObjectMap [
-#	rr:predicate ispra-top:involvesRole;procedurecolle
+#	rr:predicate ispra-top:involvesRole;
 #        rr:objectMap [
 #	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/role/secondary_municipality";
 #            rr:termType rr:IRI
