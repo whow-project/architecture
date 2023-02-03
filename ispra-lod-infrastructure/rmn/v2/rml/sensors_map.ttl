@@ -726,7 +726,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate foaf:hasDepiction;
+		rr:predicate foaf:depiction;
 		rr:objectMap [
 			rml:reference "DEPICTION";
 			rr:termType rr:IRI

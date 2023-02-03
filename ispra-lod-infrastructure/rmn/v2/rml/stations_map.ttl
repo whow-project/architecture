@@ -702,7 +702,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate foaf:hasDepiction;
+        rr:predicate foaf:depiction;
         rr:objectMap [
             rr:parentTriplesMap :StationModelIMG
         ]
