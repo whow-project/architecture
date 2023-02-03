@@ -230,7 +230,7 @@
   
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasInstabilityType;
+    rr:predicate ispra-rnd:hasInstabilityType;
     rr:objectMap [
       rr:template "https://w3id.org/italia/env/ld/rendis/instabilitytype/{cod_dissesto}";
       rr:termType rr:IRI

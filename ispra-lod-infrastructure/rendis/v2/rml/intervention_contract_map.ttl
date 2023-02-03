@@ -234,7 +234,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasReference;
+    rr:predicate dcterms:isReferencedBy;
     rr:objectMap [
       rml:reference "_URL_scheda_int";
       rr:termType rr:IRI	
@@ -486,7 +486,7 @@
 #
 #
 #    rr:predicateObjectMap [
-#	rr:predicate ispra-top:withRole;
+#	rr:predicate ispra-top:involvesRole;
 #        rr:objectMap [
 #	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/role/primary_municipality";
 #        ]
@@ -526,7 +526,7 @@
 #
 #
 #    rr:predicateObjectMap [
-#	rr:predicate ispra-top:withRole;
+#	rr:predicate ispra-top:involvesRole;procedurecolle
 #        rr:objectMap [
 #	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/role/secondary_municipality";
 #            rr:termType rr:IRI
@@ -545,7 +545,7 @@
     
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
-        rr:class inspire-mf:ProcedureCollection
+        rr:class ispra-rnd:ProcedureCollection
     ];
 
     rr:predicateObjectMap [
@@ -720,7 +720,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:ofAgent;
+    rr:predicate ispra-top:involvesAgent;
     rr:objectMap [
       rr:parentTriplesMap :BasinAuthority
     ]
@@ -728,7 +728,7 @@
 
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:withRole;
+    rr:predicate ispra-top:involvesRole;
     rr:objectMap [
       rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
@@ -782,7 +782,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:ofAgent;
+    rr:predicate ispra-top:involvesAgent;
     rr:objectMap [
       rr:parentTriplesMap :DistrictAuthority
     ]
@@ -790,7 +790,7 @@
 
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:withRole;
+    rr:predicate ispra-top:involvesRole;
     rr:objectMap [
       rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/supervisory_authority";
       rr:termType rr:IRI
@@ -849,7 +849,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasReference;
+    rr:predicate dcterms:isReferencedBy;
     rr:objectMap [
 	rml:reference "ID_URL_scheda_intervento_decreto";
 	rr:termType rr:IRI
@@ -902,7 +902,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasReference;
+    rr:predicate dcterms:isReferencedBy;
     rr:objectMap [
       rml:reference "_URL_scheda_lotto";
       rr:termType rr:IRI
@@ -1064,14 +1064,14 @@
    ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:ofAgent;
+    rr:predicate ispra-top:involvesAgent;
     rr:objectMap [
       rr:parentTriplesMap :ResponsibleAgent
     ]
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:withRole;
+    rr:predicate ispra-top:involvesRole;
     rr:objectMap [
       rr:parentTriplesMap :ResponsibleRole
     ]
@@ -1130,7 +1130,7 @@
    ];
   
    rr:predicateObjectMap [
-     rr:predicate ispra-place:serialization;
+     rr:predicate ispra-place:geometry;
      rr:objectMap [
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral
@@ -1165,7 +1165,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:ofAgent;
+    rr:predicate ispra-top:involvesAgent;
     rr:objectMap [
       rr:parentTriplesMap :ActuatorAgent
     ]
@@ -1173,7 +1173,7 @@
 
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:withRole;
+    rr:predicate ispra-top:involvesRole;
     rr:objectMap [
       rr:constant "https://w3id.org/italia/env/ld/{{dataset}}/role/actuator_institution";
       rr:termType rr:IRI

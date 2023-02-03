@@ -106,7 +106,7 @@
 #    ];
 
 #    rr:predicateObjectMap [
-#        rr:predicate ispra-top:partOf;
+#        rr:predicate ispra-top:isPartOf;
 #        rr:objectMap [
 #            rr:parentTriplesMap :DatasetISPRA
 #        ]

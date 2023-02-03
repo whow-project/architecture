@@ -14,6 +14,7 @@
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 
 :CSV_STATIONS
@@ -321,7 +322,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:operationalStatus;
+    rr:predicate inspire-mf:hasOperationalStatus;
     rr:objectMap [
       rr:template "{STAT_STATUS}"
     ]
@@ -694,14 +695,14 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasReference;
+        rr:predicate dcterms:isReferencedBy;
         rr:objectMap [
             rr:parentTriplesMap :StationModelPDF
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasDepiction;
+        rr:predicate foaf:hasDepiction;
         rr:objectMap [
             rr:parentTriplesMap :StationModelIMG
         ]

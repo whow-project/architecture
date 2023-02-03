@@ -9,7 +9,6 @@
 @prefix mu: <https://w3id.org/italia/env/onto/common/mu/> .
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
-@prefix measures: <https://w3id.org/italia/env/onto/measures/> .
 @prefix indicators: <https://w3id.org/italia/env/onto/indicators/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
@@ -191,7 +190,7 @@
 
 
     rr:predicateObjectMap [
-        rr:predicate measures:hasSource;
+        rr:predicate ispra-top:hasSource;
         rr:objectMap [
             rr:parentTriplesMap :ObservationSource
         ]

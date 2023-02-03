@@ -12,6 +12,7 @@
 @prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 
 :CSV_SENSORS
@@ -725,7 +726,7 @@
 	];
 
 	rr:predicateObjectMap [
-		rr:predicate ispra-top:hasDepiction;
+		rr:predicate foaf:hasDepiction;
 		rr:objectMap [
 			rml:reference "DEPICTION";
 			rr:termType rr:IRI

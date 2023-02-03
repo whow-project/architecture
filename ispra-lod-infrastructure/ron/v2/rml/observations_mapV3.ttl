@@ -13,6 +13,7 @@
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix inspire: <https://w3id.org/italia/env/onto/inspire/> .
 @prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
 
 <#CSV_DATA>
@@ -28,7 +29,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate inspire-mf:implements;
+        rr:predicate inspire-mf:implementsProcedure;
         rr:objectMap [
             rr:parentTriplesMap <#Procedure>
         ]
@@ -106,7 +107,7 @@
     ];
 
     rr:predicateObjectMap [
-    rr:predicate ispra-top:lastUpdate;
+    rr:predicate dcterms:modified;
     rr:objectMap [
           rr:template "%eval:getYearMonth({MODIFIED})%";
           rr:datatype xsd:gYearMonth
@@ -188,7 +189,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasURI;
+        rr:predicate ispra-top:hasDownloadURL;
         rr:objectMap [
             rml:reference "DATA";
             rr:termType rr:IRI
@@ -317,7 +318,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasDataSchemaAttribute;
+        rr:predicate ispra-top:hasSchemaAttribute;
         rr:objectMap [
             rr:parentTriplesMap <#Column>;
         ]
