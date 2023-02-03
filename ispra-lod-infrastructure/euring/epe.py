@@ -3,7 +3,7 @@ import clevercsv
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib.parser import StringInputSource
 from kg_loader import KnowledgeGraphLoader
-from pyrml.pyrml import TermUtils, RMLConverter
+from pyrml import TermUtils, RMLConverter
 from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
