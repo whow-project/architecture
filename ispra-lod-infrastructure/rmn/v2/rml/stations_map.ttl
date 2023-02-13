@@ -669,7 +669,7 @@
 
     rr:subjectMap [
       #rr:template "%eval:station_model_uri(*, '{{dataset}}')%";
-      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformmodel/{MODEL}_{NETWORK}_{TYPE_EN}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformmodel/%eval:station_model_id(*, '{{dataset}}')%";
       rr:class inspire-mf:PlatformModel
     ];
       
