@@ -265,6 +265,61 @@
     #        ];
 
 
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasSystemCapability;
+      rr:objectMap [
+        rr:parentTriplesMap :StructureMaterialQP;
+        rr:joinCondition [
+           rr:child "STAT_MODEL";
+           rr:parent "MODEL"
+         ]
+	  ]
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasSystemCapability;
+      rr:objectMap [
+          rr:parentTriplesMap :StationDiameterQP;
+        rr:joinCondition [
+           rr:child "STAT_MODEL";
+           rr:parent "MODEL"
+         ]
+      ]
+    ];
+          
+    rr:predicateObjectMap [
+      rr:predicate inspire-mf:hasSystemCapability;
+      rr:objectMap [
+          rr:parentTriplesMap :MooringTypeQP;
+        rr:joinCondition [
+           rr:child "STAT_MODEL";
+           rr:parent "MODEL"
+         ]
+      ]
+    ]; 
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasSystemCapability;
+        rr:objectMap [
+            rr:parentTriplesMap :HullTypeQP;
+        rr:joinCondition [
+           rr:child "STAT_MODEL";
+           rr:parent "MODEL"
+         ]
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasSystemCapability;
+        rr:objectMap [
+            rr:parentTriplesMap :PositioningSystemQP;
+        rr:joinCondition [
+           rr:child "STAT_MODEL";
+           rr:parent "MODEL"
+         ]
+        ]
+    ];
+
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
@@ -359,7 +414,7 @@
     rr:objectMap [
       rr:parentTriplesMap :StationTypeWMO;
       rr:joinCondition [
-	rr:child "MODEL";
+	    rr:child "MODEL";
         rr:parent "MODEL"
       ]
     ]
@@ -677,41 +732,6 @@
       rr:objectMap [
         rml:reference "MODEL_NAME"
       ]
-    ];
-
-    rr:predicateObjectMap [
-      rr:predicate inspire-mf:hasSystemCapability;
-      rr:objectMap [
-        rr:parentTriplesMap :StructureMaterialQP        
-	  ]
-    ];
-
-    rr:predicateObjectMap [
-      rr:predicate inspire-mf:hasSystemCapability;
-      rr:objectMap [
-          rr:parentTriplesMap :StationDiameterQP
-      ]
-    ];
-          
-    rr:predicateObjectMap [
-      rr:predicate inspire-mf:hasSystemCapability;
-      rr:objectMap [
-          rr:parentTriplesMap :MooringTypeQP
-      ]
-    ]; 
-
-    rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasSystemCapability;
-        rr:objectMap [
-            rr:parentTriplesMap :HullTypeQP
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasSystemCapability;
-        rr:objectMap [
-            rr:parentTriplesMap :PositioningSystemQP
-        ]
     ];
 
     rr:predicateObjectMap [

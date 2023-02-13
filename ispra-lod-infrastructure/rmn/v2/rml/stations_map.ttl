@@ -305,6 +305,29 @@
     #            ]
     #        ];
 
+
+ rr:predicateObjectMap [
+    rr:predicate inspire-mf:hasSystemCapability;
+        rr:objectMap [
+          rr:parentTriplesMap :StructureMaterialQP;
+	        rr:joinCondition [
+              rr:child "STAT_CODE";
+              rr:parent "MODEL" 
+            ]
+        ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate inspire-mf:hasSystemCapability;
+        rr:objectMap [
+            rr:parentTriplesMap :LevellingQP;
+	        rr:joinCondition [
+              rr:child "STAT_CODE";
+              rr:parent "MODEL" 
+            ]
+        ]
+    ];
+
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
@@ -671,20 +694,6 @@
       rr:objectMap [
         rml:reference "MODEL_NAME"
       ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasSystemCapability;
-        rr:objectMap [
-            rr:parentTriplesMap :StructureMaterialQP
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasSystemCapability;
-        rr:objectMap [
-            rr:parentTriplesMap :LevellingQP
-        ]
     ];
 
     rr:predicateObjectMap [
