@@ -18,8 +18,11 @@ class Functions():
     
     @staticmethod
     def station_model_id(row, dataset):
-        if "STAT_CODE" in row and dataset == 'rmn':
-            return TermUtils.irify(row["STAT_CODE"]) + "_" + TermUtils.irify(row["NETWORK"]) + "_" + TermUtils.irify(row["TYPE_EN"])
+        if dataset == 'rmn':
+            if "STAT_CODE" in row: 
+                return TermUtils.irify(row["STAT_CODE"]) + "_" + TermUtils.irify(row["NETWORK"]) + "_" + TermUtils.irify(row["TYPE_EN"])
+            elif "MODEL" in row:
+                return TermUtils.irify(row["MODEL"]) + "_" + TermUtils.irify(row["NETWORK"]) + "_" + TermUtils.irify(row["TYPE_EN"])
         else:
             return TermUtils.irify(row["MODEL"]) + "_" + TermUtils.irify(row["TYPE_EN"])
         
