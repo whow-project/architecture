@@ -117,7 +117,7 @@ def print_delete(file_toDel, file_update, cat):
         print("DELETE FROM LOAD_LIST;", file=sql_del)
         for dd in (delG.serialize(format='nt11').splitlines()):
             if dd: print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> { ' + dd + '} } ;', file=sql_del)
-        print("RDF_LOADER_RUN();", file=sql_del)
+        #print("RDF_LOADER_RUN();", file=sql_del)
         print("CHECKPOINT;", file=sql_del)
         print("COMMIT WORK;", file=sql_del)
         print("CHECKPOINT;", file=sql_del)
@@ -243,18 +243,18 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
             file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
+            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
             if os.path.exists(file_delR):
                 run([command], shell=True)
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
             file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
+            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
             if os.path.exists(file_delP):
                 run([command], shell=True)
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
             file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
-            command = "isql-vt " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
+            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
             if os.path.exists(file_delM):
                 run([command], shell=True)

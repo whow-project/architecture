@@ -86,7 +86,7 @@ class KnowledgeGraphLoader():
             with open(sql_file, 'w') as sql_out:
                 print("DELETE FROM LOAD_LIST;", file=sql_out)
                 print("LD_ADD('" + file_toload + "', '" + str_graph + "');", file=sql_out)
-                print("RDF_LOADER_RUN();", file=sql_out)
+                print("RDF_LOADER_RUN(log_enable=>3);", file=sql_out)
                 print("CHECKPOINT;", file=sql_out)
                 print("COMMIT WORK;", file=sql_out)
                 print("CHECKPOINT;", file=sql_out)
@@ -94,7 +94,8 @@ class KnowledgeGraphLoader():
             # bulk load of triples
             print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
             timeout_s = 10
-            command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            command = "isql.8.3 " + ipaddr+":1111 " + "dba " + "dba " + sql_file
             run([command], shell=True)
 
 
@@ -118,14 +119,15 @@ class KnowledgeGraphLoader():
                     for dd in sublist:
                         if dd: print (dd.decode("utf-8"), file=sql_del)
                     print ('} } ;', file=sql_del)
-                print("RDF_LOADER_RUN();", file=sql_del)
+                #print("RDF_LOADER_RUN();", file=sql_del)
                 print("CHECKPOINT;", file=sql_del)
                 print("COMMIT WORK;", file=sql_del)
                 print("CHECKPOINT;", file=sql_del)
 
             # deletion of triples
             print ('deleting triples from', str_graph, '...')
-            command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            command = "isql.8.3  " + ipaddr+":1111 " + "dba " + "dba " + sql_file
             run([command], shell=True)
 
 
