@@ -1423,8 +1423,8 @@
     rml:logicalSource :CSV_STATION_MODELS;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/material/{STRUCTURE_EN}";
-	rr:class ispra-top:Material
+        rr:template "https://w3id.org/italia/env/ld/common/concept/{STRUCTURE_EN}";
+	rr:class ispra-top:Concept
     ];
 
     rr:predicateObjectMap [
