@@ -1196,7 +1196,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:isClassifiedBy;
+      rr:predicate ispra-top:hasValue;
       rr:objectMap [
         rr:parentTriplesMap :StationDiameter
       ]
