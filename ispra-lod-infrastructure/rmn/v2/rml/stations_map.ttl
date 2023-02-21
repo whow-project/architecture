@@ -231,12 +231,12 @@
     rr:class inspire-mf:PlatformCollection
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:hasLocation;
-    rr:objectMap [
-      rr:parentTriplesMap :#Place
-    ]
-  ];
+#  rr:predicateObjectMap [
+#    rr:predicate ispra-top:hasLocation;
+#    rr:objectMap [
+#      rr:parentTriplesMap :#Place
+#    ]
+#  ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
@@ -387,7 +387,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasLocation;
+    rr:predicate ispra-place:hasFeature;
     rr:objectMap [
       rr:parentTriplesMap :Feature
     ]
@@ -543,7 +543,7 @@
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/place/sea/seaarea_{PLACE_NAME}_{{dataset}}{NETWORK}";
-    rr:class ispra-place:Sea
+    rr:class ispra-place:Feature
   ];
 
   rr:predicateObjectMap [

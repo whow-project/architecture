@@ -24,7 +24,7 @@
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/place/location/00102_{ {{COD_CENTROID}} }";
         rr:class dcterms:Location;
-        rr:class ispra-top:Location
+        rr:class ispra-place:Feature
     ];
 
     rr:predicateObjectMap [

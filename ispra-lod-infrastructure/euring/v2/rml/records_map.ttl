@@ -110,7 +110,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasLocation;
+        rr:predicate ispra-place:hasFeature;
         rr:objectMap [
             rr:parentTriplesMap :Place
         ]
