@@ -279,6 +279,17 @@
         ]
       ]
     ];
+        
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasSystemDeployment;
+        rr:objectMap [
+            rr:parentTriplesMap :DeploymentQP;
+        rr:joinCondition [
+          rr:child "STAT_TYPE_EN";
+          rr:parent "TYPE_EN" 
+        ]
+      ]
+    ];
     
     rr:predicateObjectMap [
     	rr:predicate ispra-top:isPartOf;
@@ -697,13 +708,6 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate inspire-mf:hasSystemDeployment;
-        rr:objectMap [
-            rr:parentTriplesMap :DeploymentQP
-        ]
-    ];
-
-    rr:predicateObjectMap [
         rr:predicate dcterms:isReferencedBy;
         rr:objectMap [
             rr:parentTriplesMap :StationModelPDF
@@ -1061,7 +1065,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :DeploymentValue
       ]
@@ -1110,8 +1114,8 @@
   rml:logicalSource :CSV_STATION_MODELS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/place/{LOCATION_EN}";
-    rr:class ispra-top:Location
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/concept/{LOCATION_EN}";
+    rr:class ispra-top:Concept
   ];
 
   rr:predicateObjectMap [
