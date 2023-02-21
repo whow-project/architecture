@@ -209,7 +209,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasLocation;
+    rr:predicate ispra-place:hasFeature;
     rr:objectMap [
       rr:parentTriplesMap :InterventionPlace
     ]
@@ -438,7 +438,7 @@
     
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/place/%eval:digest('{POINT}')%";
-	rr:class ispra-top:Location 
+	rr:class ispra-place:Feature 
     ];
 
     rr:predicateObjectMap [
@@ -881,7 +881,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasLocation;
+    rr:predicate ispra-place:hasFeature;
     rr:objectMap [
       rr:parentTriplesMap :InterventionPlace
     ]
