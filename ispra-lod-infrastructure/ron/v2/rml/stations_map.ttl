@@ -808,7 +808,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :PositioningSystemValue
       ]
@@ -929,7 +929,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :HullTypeValue
       ]
@@ -1156,7 +1156,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :StationMooringType
       ]
@@ -1196,7 +1196,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :StationDiameter
       ]
@@ -1358,7 +1358,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :StructureMaterialValue
       ]
@@ -1516,7 +1516,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :LevellingValue
       ]
@@ -1678,7 +1678,7 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
         rr:parentTriplesMap :DeploymentValue
       ]
