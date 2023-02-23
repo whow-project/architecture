@@ -1,6 +1,7 @@
 import os, csv
 
 import clevercsv
+from shapely.wkt import loads
 from jinja2 import Environment, FileSystemLoader, Template
 from rdflib.parser import StringInputSource
 from pyrml import TermUtils, RMLConverter
@@ -21,6 +22,8 @@ class RendisTriplifier(Triplifier):
     def __init__(self):
         
         functions_dictionary = {
+            'get_lat': get_lat,
+            'get_long': get_long,
             'lower_case': lower_case,
             'broader_entity': broader_entity,
             'boolean': boolean,
@@ -156,11 +159,14 @@ class RendisTriplifier(Triplifier):
                         coordinates = coordinates.replace("[", "(").replace("]", ")")
                         coordinates = re.sub(r"(\d+\.\d+),(\d+\.\d+)", r"\1 \2", coordinates)
                         coordinates = coordinates.replace("[", "(").replace("]", ")")
-                        if "," in coordinates:
-                            row["POINT"] = "MULTIPOINT"+ coordinates
+                        if not coordinates:
+                            row["POINT"] = ''
                         else:
-                            coordinates = coordinates.replace("((", "(").replace("))", ")")
-                            row["POINT"] = "POINT"+ coordinates
+                            if "," in coordinates:
+                                row["POINT"] = "MULTIPOINT"+ coordinates
+                            else:
+                                coordinates = coordinates.replace("((", "(").replace("))", ")")
+                                row["POINT"] = "POINT"+ coordinates
                             
                         
                     for a in affid_data:
@@ -280,6 +286,40 @@ class RendisTriplifier(Triplifier):
                         writer.writerow(x)
         
 
+def get_long(shp_point):
+    try:
+        pt_wkt = loads(str(shp_point))
+    except:
+        return
+
+    if 'MULTI' in str(pt_wkt):
+        value = str(round(float(pt_wkt.geoms[0].x),5))
+    else:
+        try:
+            value = str(round(float(pt_wkt.x),5))
+        
+        except ValueError:
+            value = str(pt_wkt.x)
+
+    return value
+
+def get_lat(shp_point):
+    try:
+        pt_wkt = loads(str(shp_point))
+    except:
+        return
+
+    if 'MULTI' in str(pt_wkt):
+        value = str(round(float(pt_wkt.geoms[0].y),5))
+    else:
+        try:
+            value = str(round(float(pt_wkt.y),5))
+        
+        except ValueError:
+            value = str(pt_wkt.y)
+
+    return value
+
 
 def lower_case(row, key) -> str:
     if row[key] and isinstance(row[key], str):
@@ -350,7 +390,10 @@ def rendis_preprocess():
                     coordinate = row["_LG_G_pos_json"].replace('"', "").replace('{type:MultiPoint,coordinates:', "").replace('}', "")
                     coordinate = coordinate.replace("[", "(").replace("]", ")")
                     coordinate = re.sub("(\d+\.\d+),(\d+\.\d+)", coordinate, "\1 \2")
-                    row["POINT"] = "MULTIPOINT"+ coordinate
+                    if not coordinate:
+                        row["POINT"] = ''
+                    else:
+                        row["POINT"] = "MULTIPOINT"+ coordinate
 
 
                 for a in affid_data:

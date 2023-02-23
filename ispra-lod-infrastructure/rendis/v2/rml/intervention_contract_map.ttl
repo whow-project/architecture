@@ -16,6 +16,7 @@
 @prefix indicators: <https://w3id.org/italia/env/onto/indicators/> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 
 
 
@@ -435,6 +436,8 @@
 
 :InterventionPlace
     rml:logicalSource :CSV;
+
+      crml:condition "df['POINT'].notnull()";
     
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/place/%eval:digest('{POINT}')%";
@@ -445,6 +448,22 @@
 	rr:predicate rdfs:label;
 	rml:reference "I_localita"
     ];
+
+    rr:predicateObjectMap [
+      rr:predicate geo:lat;
+      rr:objectMap [
+        rr:template "%eval:get_lat('{POINT}')%";
+        rr:datatype xsd:decimal
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+        rr:template "%eval:get_long('{POINT}')%";
+        rr:datatype xsd:decimal
+    ]
+  ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-place:hasGeometry;
