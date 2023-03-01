@@ -68,21 +68,21 @@
         rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_%eval:cod_place(*)%"
     ].
 
-:Year
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/year/{YEAR}";
-        rr:class ispra-top:Year
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:year;
-        rr:objectMap [
-            rml:reference "YEAR";
-            rr:datatype xsd:gYear
-        ]
-    ].
+#:Year
+#    rml:logicalSource :CSV;
+#
+#    rr:subjectMap [
+#        rr:template "https://w3id.org/italia/env/ld/common/year/{YEAR}";
+#        rr:class ispra-top:Year
+#    ];
+#
+#    rr:predicateObjectMap [
+#        rr:predicate ispra-top:year;
+#        rr:objectMap [
+#            rml:reference "YEAR";
+#            rr:datatype xsd:gYear
+#        ]
+#    ].
 
 :Metric
     rml:logicalSource :CSV;
