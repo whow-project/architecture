@@ -956,7 +956,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:value;
+    rr:predicate ispra-top:year;
     rr:objectMap [
       rml:reference "TIME";
       rr:datatype xsd:gYear
