@@ -60,7 +60,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasCreator;
+    rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
       rr:parentTriplesMap :Provider;
       rr:joinCondition [
