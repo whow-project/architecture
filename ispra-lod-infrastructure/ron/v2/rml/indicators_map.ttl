@@ -80,7 +80,7 @@
         rr:predicate ispra-top:year;
         rr:objectMap [
             rml:reference "YEAR";
-            rr:datatype xsd:Year
+            rr:datatype xsd:gYear
         ]
     ].
 
