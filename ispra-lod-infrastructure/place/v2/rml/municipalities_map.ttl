@@ -132,7 +132,7 @@
   rml:logicalSource <#CitiesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://w3id.org/italia/env/ld/place/organisation/002";
+    rr:constant "https://w3id.org/italia/env/ld/common/organisation/002";
     rr:class ispra-top:Organisation
   ];
 

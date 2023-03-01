@@ -117,32 +117,8 @@
   rml:logicalSource <#ProvincesCSV>;
 
   rr:subjectMap [
-    rr:constant "https://w3id.org/italia/env/ld/place/organisation/002";
-    rr:class ispra-top:Organisation
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:constant "Istituto nazionale di statistica ";
-      rr:language "it"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:constant "Italian National Institute of Statistics";
-      rr:language "en"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:acronym;
-    rr:objectMap [
-      rr:constant "ISTAT"
-      ]
-    ] .
+    rr:constant "https://w3id.org/italia/env/ld/common/organisation/002"
+    ].
 
 <#Provinces>
   rml:logicalSource <#ProvincesCSV>;
