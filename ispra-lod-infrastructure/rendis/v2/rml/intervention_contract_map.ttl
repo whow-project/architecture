@@ -119,7 +119,7 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:hasCreator;
+    rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
       rr:constant "https://w3id.org/italia/env/ld/common/organisation/001";
       rr:termType rr:IRI
