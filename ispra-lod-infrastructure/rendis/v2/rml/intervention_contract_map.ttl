@@ -162,18 +162,10 @@
   rr:predicateObjectMap [
         rr:predicate ispra-top:isIssuedBy;
         rr:objectMap [
-            rr:parentTriplesMap :Ispra
-        ]
-    ].
-
-
-:Ispra
-
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
-        ].
+          rr:constant "https://w3id.org/italia/env/ld/common/organisation/001";
+          rr:termType rr:IRI
+    ]
+  ].
 
 
 :Intervention
