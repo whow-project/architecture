@@ -152,19 +152,28 @@
       ]
     ];
 
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:identifier;
-    rr:objectMap [
-      rml:constant "04"
-      ]
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "04"
+        ]
     ];
 
   rr:predicateObjectMap [
-    rr:predicate ispra-top:isIssuedBy;
-    rr:objectMap [
-      rr:constant "https://w3id.org/italia/env/ld/common/organisation/001";
-      ]
-    ] .
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+:Ispra
+
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
+        ].
 
 
 :Intervention
