@@ -155,32 +155,8 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
-    rr:class ispra-top:UniqueIdentifier
-  ];
-
-    rr:predicateObjectMap [
-    rr:predicate ispra-top:identifier;
-    rr:objectMap [
-      rml:reference "STAT_CODE";
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:template "STAT_CODE";
-      rr:language "en"
-    ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rml:reference "STAT_CODE";
-      rr:language "it"
-    ]
-  ].
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00301_{STAT_CODE}"
+    ].
 
 :StationCollection
   rml:logicalSource :CSV_STATIONS;

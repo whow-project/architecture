@@ -33,7 +33,7 @@
   rml:logicalSource :CODE_2_PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/common/uniqueidentifier/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00301_{STAT_CODE}";
   ];
 
   rr:predicateObjectMap [
@@ -60,12 +60,61 @@
   ];
 
   rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+  rr:predicateObjectMap [
     rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
       rr:parentTriplesMap :Provider;
       rr:joinCondition [
         rr:child "PROVIDER";
         rr:parent "ID"
+      ] 
+    ]
+  ].
+
+  :IdentifierSchema
+    rml:logicalSource :CODE_2_PROVIDERS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00301";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "Schema WMO identificativi boe della Rete Ondametrica Nazionale";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "WMO identifier schema of wave buoys belonging to the Italian National Wave Buoy Network";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "01"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+          rr:parentTriplesMap :Provider;
+          rr:joinCondition [
+            rr:child "PROVIDER";
+            rr:parent "ID"
       ] 
     ]
   ].

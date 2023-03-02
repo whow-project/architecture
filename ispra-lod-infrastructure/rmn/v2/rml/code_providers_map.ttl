@@ -33,7 +33,7 @@
   rml:logicalSource :CODE_2_PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00105_{STAT_CODE}";
   ];
 
   rr:predicateObjectMap [
@@ -53,6 +53,13 @@
   ];
 
   rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+  rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
       rml:reference "STAT_CODE"
@@ -66,6 +73,49 @@
       rr:joinCondition [
         rr:child "PROVIDER";
         rr:parent "ID"
+      ] 
+    ]
+  ].
+
+:IdentifierSchema
+
+    rml:logicalSource :CODE_2_PROVIDERS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00105";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "Schema ISPRA identificativi mareografi della Rete Mareografica Nazionale";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:constant "ISPRA identifier schema of tide gauges belonging to the National Tide Gauge Network.";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "05"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Provider;
+            rr:joinCondition [
+            rr:child "PROVIDER";
+            rr:parent "ID"
       ] 
     ]
   ].
