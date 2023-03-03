@@ -1143,6 +1143,8 @@
 
 :Geometry
   rml:logicalSource :CSV;
+
+  crml:condition "df['POINT'].notnull()";
   
    rr:subjectMap [
      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:digest('{POINT}')%";
