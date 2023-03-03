@@ -54,7 +54,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasIdentifierSchema;
     rr:objectMap [
-      rr:parentTriplesMap <#IstatIdentifierSchema>
+      rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00201";
+      rr:termType rr:IRI
       ]
     ];
 
@@ -68,57 +69,11 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isIssuedBy;
     rr:objectMap [
-      rr:parentTriplesMap <#IstatOrg>
+      rr:constant "https://w3id.org/italia/env/ld/common/organisation/002";
+      rr:termType rr:IRI
       ]
     ] . 
 
-
- <#IstatIdentifierSchema>
-
-   rml:logicalSource <#ProvincesCSV>;
-
-   rr:subjectMap [
-    rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00201";
-    rr:class ispra-top:IdentifierSchema
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:constant "Schema ISTAT identificativi enti amministrativi italiani";
-      rr:language "it"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rr:constant "ISTAT identifier schema of Italian administrative entities";
-      rr:language "en"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:identifier;
-    rr:objectMap [
-      rr:constant "01"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate ispra-top:isIssuedBy;
-    rr:objectMap [
-      rr:parentTriplesMap <#IstatOrg>
-      ]
-    ] .
-
- <#IstatOrg>
-
-  rml:logicalSource <#ProvincesCSV>;
-
-  rr:subjectMap [
-    rr:constant "https://w3id.org/italia/env/ld/common/organisation/002"
-    ].
 
 <#Provinces>
   rml:logicalSource <#ProvincesCSV>;
