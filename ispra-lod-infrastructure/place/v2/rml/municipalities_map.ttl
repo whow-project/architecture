@@ -115,7 +115,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rml:constant "01"
+      rr:constant "01"
       ]
     ];
 
