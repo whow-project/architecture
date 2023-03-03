@@ -82,7 +82,7 @@
     rml:logicalSource :CODE_2_PROVIDERS;
 
     rr:subjectMap [
-        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00301";
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/20101";
         rr:class ispra-top:IdentifierSchema
         ];
 
@@ -112,7 +112,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isIssuedBy;
         rr:objectMap [
-          rr:parentTriplesMap :Provider;
+          rr:parentTriplesMap :WMO;
           rr:joinCondition [
             rr:child "PROVIDER";
             rr:parent "ID"
@@ -120,7 +120,7 @@
     ]
   ].
 
-:Provider
+:WMO
   rml:logicalSource :PROVIDERS;
 
   rr:subjectMap [
