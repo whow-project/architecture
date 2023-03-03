@@ -14,6 +14,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
 
 
 :CSV_TOKEN
@@ -63,7 +64,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
+        rr:predicate ispra-top:isMemberOf;
         rr:objectMap [
             rr:parentTriplesMap :DatasetISPRA
         ]
@@ -112,7 +113,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-place:hasFeature;
         rr:objectMap [
-            rr:parentTriplesMap :Place
+            rr:parentTriplesMap :GeoFeature
         ]
     ];
 
@@ -380,6 +381,70 @@
     rr:subjectMap [
             rr:template "https://w3id.org/italia/env/ld/place/location/00102_{ {{COD_CENTROID}} }"
         ].
+
+:GeoFeature
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/place/%eval:digest('{ {{LON_CENTROID}} }{ {{LAT_CENTROID}} }')%";
+	    rr:class ispra-place:Feature 
+    ];
+
+        rr:predicateObjectMap [
+        rr:predicate geo:lat;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LAT_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:long;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LON_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasGeometry;
+	    rr:objectMap [
+	        rr:parentTriplesMap :Geometry
+	    ]
+    ] .
+
+
+:Geometry
+  rml:logicalSource :CSV_TOKEN;
+  
+   rr:subjectMap [
+     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:digest('{ {{LON_CENTROID}} }{ {{LAT_CENTROID}} }')%";
+     rr:class ispra-place:Geometry
+   ];
+  
+   rr:predicateObjectMap [
+     rr:predicate ispra-place:geometry;
+     rr:objectMap [
+    rr:template "%eval:get_point('{ {{LON_CENTROID}} }', '{ {{LAT_CENTROID}} }')%";
+    rr:datatype geosparql:wktLiteral
+     ]
+   ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:lat;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LAT_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:long;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LON_CENTROID}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ].
 
 
 :Taxon

@@ -78,6 +78,9 @@ def round_coord(coord):
 
     return value
 
+def get_point(long, lat):
+    return 'POINT('+str(long)+' '+str(lat)+')'
+
 
 def format_date(dd, mm, yy):
 
@@ -149,6 +152,8 @@ class EpeTriplifier(Triplifier):
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
             'get_value': get_value,
+            'get_point': get_point,
+            'digest': UtilsFunctions.short_uuid
             }
         
         super().__init__('epe', functions_dictionary)
