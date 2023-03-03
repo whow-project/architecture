@@ -33,7 +33,7 @@
   rml:logicalSource :CODE_2_PROVIDERS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00301_{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/20101_{STAT_CODE}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
