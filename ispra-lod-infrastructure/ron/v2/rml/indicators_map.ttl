@@ -297,7 +297,8 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:time;
         rr:objectMap [
-            rml:reference "PERIOD"
+            rml:reference "PERIOD";
+            rr:datatype xsd:gYearMonth
         ]
     ].
 
