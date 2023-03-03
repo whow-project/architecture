@@ -123,7 +123,7 @@
 
  <#IstatOrg>
 
-  rml:logicalSource <#CitiesCSV>;
+  rml:logicalSource <#RegionsCSV>;
 
   rr:subjectMap [
     rr:constant "https://w3id.org/italia/env/ld/common/organisation/002";
