@@ -1155,7 +1155,23 @@
        rml:reference "POINT";
        rr:datatype geosparql:wktLiteral
      ]
-   ].
+   ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+      rr:objectMap [
+        rr:template "%eval:get_lat('{POINT}')%";
+        rr:datatype xsd:decimal
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+      rr:objectMap [
+        rr:template "%eval:get_long('{POINT}')%";
+        rr:datatype xsd:decimal
+    ]
+  ].
 
 
 
