@@ -1,0 +1,411 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/records_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix dsw: <http://purl.org/dsw/> .
+@prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
+@prefix dwciri: <http://rs.tdwg.org/dwc/iri/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix sem: <http://semanticweb.cs.vu.nl/2009/11/sem/> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+
+
+:CSV_TOKEN
+    rml:source "{{ csv_token }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:CSV_GRID
+    rml:source "{{ csv_grid }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+
+:Observation
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observation/{IDESEMPLARE}_%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%_{IDTOPONIMO}";
+        rr:class dsw:Token;
+        rr:class inspire-mf:Observation
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Cattura dell'esemplare {IDESEMPLARE} in data {DAY}-{MONTH}-{YEAR}, nei pressi di {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Capture of the specimen {IDESEMPLARE} on {YEAR}-{MONTH}-{DAY}, near {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Marcatura o ritrovamento dell'esemplare {IDESEMPLARE} a seguito di cattura temporanea per l'inanellamento degli uccelli a scopo scientifico (art. 4, L. 157/92), in data {DAY}-{MONTH}-{YEAR}, nei pressi del toponimo {NOMETOPONIMO} (elemento geografico {IDTOPONIMO})";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Marking or discovery of the specimen {IDESEMPLARE} following temporary trapping for bird ringing for scientific purposes (art. 4, L. 157/92), on {YEAR}-{MONTH}-{DAY}, near the {NOMETOPONIMO} toponym (geographic element {IDTOPONIMO})";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:created;
+        rr:objectMap [
+            rr:template "%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%";
+            rr:datatype xsd:date
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            rr:parentTriplesMap :GeoCollection
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:locality;
+        rr:objectMap [
+            rr:template "{NOMETOPONIMO}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:countryCode;
+        rr:objectMap [
+            rr:template "Italy"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:continent;
+        rr:objectMap [
+            rr:template "EU"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:derivedFrom;
+        rr:objectMap [
+            rr:parentTriplesMap :Organism
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:evidenceFor;
+        rr:objectMap [
+            rr:parentTriplesMap :Occurrence
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:isBasisForId;
+        rr:objectMap [
+            rr:parentTriplesMap :Identification
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:lat;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{LATITUDEWGS84}')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:long;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{LONGITUDEWGS84}')%";
+            rr:datatype xsd:decimal
+        ]
+    ].
+    
+
+:Identification
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/identification/{IDESEMPLARE}_%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%_{IDTOPONIMO}";
+            rr:class dwc:Identification
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Esemplare {IDESEMPLARE} - specie/sottospecie %eval:format_euring('{IDSPECIE}')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "The specimen {IDESEMPLARE} - species/subspecies %eval:format_euring('{IDSPECIE}')%";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Riconoscimento dell'esemplare {IDESEMPLARE} come appartenente alla specie/sottospecie %eval:format_euring('{IDSPECIE}')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Recognition of the specimen {IDESEMPLARE} as belonging to the species/subspecies %eval:format_euring('{IDSPECIE}')%";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:identifies;
+        rr:objectMap [
+            rr:parentTriplesMap :Organism
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:dateIdentified;
+        rr:objectMap [
+            rr:template "%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%";
+            rr:datatype xsd:date
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwciri:toTaxon;
+        rr:objectMap [
+            rr:parentTriplesMap :Taxon
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwciri:identifiedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+:Occurrence
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/occurrence/{IDESEMPLARE}_%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%_{IDTOPONIMO}";
+            rr:class dwc:Occurrence
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Esemplare {IDESEMPLARE} - data {DAY}-{MONTH}-{YEAR} - luogo {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "The specimen {IDESEMPLARE} - date {YEAR}-{MONTH}-{DAY} - place {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Presenza dell'esemplare {IDESEMPLARE} il {DAY}-{MONTH}-{YEAR} a {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Presence of the specimen {IDESEMPLARE} on {YEAR}-{MONTH}-{DAY} at {NOMETOPONIMO} ({IDTOPONIMO})";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwciri:recordedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:occurrenceOf;
+        rr:objectMap [
+            rr:parentTriplesMap :Organism
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dsw:atEvent;
+        rr:objectMap [
+            rr:parentTriplesMap :Event
+        ]
+    ].
+
+
+:Event
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/event/{IDESEMPLARE}_%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%_{IDTOPONIMO}";
+            rr:class dwc:Event;
+            rr:class sem:Event
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Evento di cattura dell'esemplare {IDESEMPLARE} il {DAY}-{MONTH}-{YEAR} nel toponimo {IDTOPONIMO} - {NOMETOPONIMO}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "Capture event of the specimen {IDESEMPLARE} on {YEAR}-{MONTH}-{DAY} in the toponym {IDTOPONIMO} - {NOMETOPONIMO}";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:eventDate;
+        rr:objectMap [
+            rr:template "%eval:format_date('{DAY}', '{MONTH}', '{YEAR}')%";
+            rr:datatype xsd:date
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate sem:eventType;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/vocab/euring/capture_types/{RINGINGRECOVERIES}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dwc:locatedAt;
+        rr:objectMap [
+            rr:parentTriplesMap :Place
+        ]
+    ].
+
+
+:Organism
+
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/organism/00103_{IDESEMPLARE}"
+        ].
+
+
+:Ispra
+
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
+        ].
+
+
+:Place
+
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/location/00102_{IDTOPONIMO}"
+        ].
+
+:GeoCollection
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/00102_{IDTOPONIMO}";
+	    rr:class inspire-mf:ObservationCollection 
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione delle osservazioni {{dataset|upper}} nel toponimo {IDTOPONIMO} - {NOMETOPONIMO}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{{dataset|upper}} observations collection lying in the toponym {IDTOPONIMO} - {NOMETOPONIMO}";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00102_{IDTOPONIMO}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCollection;
+            rr:joinCondition [
+              rr:child "IDTOPONIMO";
+              rr:parent "IDTOPONIMO" 
+        ]
+      ]
+    ].
+
+
+:MainCollection
+    rml:logicalSource :CSV_GRID;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{cod_com_istat}"
+      ].
+
+
+:Taxon
+
+    rml:logicalSource :CSV_TOKEN;
+
+    rr:subjectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/taxon/%eval:format_euring('{IDSPECIE}')%"
+        ].

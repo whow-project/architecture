@@ -12,56 +12,18 @@
     "passwd": "password",
 	"year": {{year}},
 	"mappings": [
-	{
-			"rml": "records_map.ttl",
+	    {
+			"rml": "records_mapV2.ttl",
             "data": [
                 {
                     "id": "csv_token",
                     "file": "epe_token_{{year}}.csv"
-                }
-            ],
-            "variables": [
-                {
-                    "id": "COD_EVNV",
-                    "value": "'IDESEMPLARE'"
                 },
                 {
-                    "id": "COD_ID",
-                    "value": "'IDSPECIE'"
-                },
-                {
-                    "id": "COD_CENTROID",
-                    "value": "'IDTOPONIMO'"
-                },
-                {
-                    "id": "NAME_CENTROID",
-                    "value": "'NOMETOPONIMO'"
-                },
-                {
-                    "id": "LAT_CENTROID",
-                    "value": "'LATITUDEWGS84'"
-                },
-                {
-                    "id": "LON_CENTROID",
-                    "value": "'LONGITUDEWGS84'"
-                },
-                {
-                    "id": "YEAR",
-                    "value": "'YEAR'"
-                },
-                {
-                    "id": "MONTH",
-                    "value": "'MONTH'"
-                },
-                {
-                    "id": "DAY",
-                    "value": "'DAY'"
-                },
-                {
-                    "id": "RECAPTURE",
-                    "value": "'RINGINGRECOVERIES'"
+                    "id": "csv_grid",
+                    "file": "epe_grid_places_istat.csv"
                 }
             ]
-	}
+	    }
     ]
 }
