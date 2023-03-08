@@ -611,7 +611,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rrr:template "{{dataset|upper}} resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
+          rr:template "{{dataset|upper}} resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
           rr:language "en"
         ]
     ];
