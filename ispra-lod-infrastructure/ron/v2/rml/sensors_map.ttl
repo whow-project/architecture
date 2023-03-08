@@ -39,7 +39,7 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{STAT_MODEL}_fixed_buoy";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_fixed_buoy";
 	].
 
 :Sensor
