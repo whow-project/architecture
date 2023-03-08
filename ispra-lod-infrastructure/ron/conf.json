@@ -1,6 +1,6 @@
 {
 	"dataset": "ron",
-	"graph_iri": "https://w3id.org/italia/ld/ron/",
+	"graph_iri": "https://w3id.org/italia/env/ld/ron/",
 	"rdf_dump_file_name": "ron_static",
 	"rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/ron/v2/data",

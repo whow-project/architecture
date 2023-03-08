@@ -1,6 +1,6 @@
 {
 	"dataset": "euring",
-	"graph_iri": "https://w3id.org/italia/ld/euring/obs/",
+	"graph_iri": "https://w3id.org/italia/env/ld/euring/obs/",
 	"rdf_dump_file_name": "epe_observation_{{year}}",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/euring/v2/data",

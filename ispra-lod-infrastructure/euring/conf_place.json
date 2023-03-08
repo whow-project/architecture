@@ -1,6 +1,6 @@
 {
     "dataset": "euring",
-	"graph_iri": "https://w3id.org/italia/ld/euring/place/",
+	"graph_iri": "https://w3id.org/italia/env/ld/euring/place/",
 	"rdf_dump_file_name": "epe_place",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/euring/v2/data",

@@ -1,6 +1,6 @@
 {
 	"dataset": "rendis",
-	"graph_iri": "https://w3id.org/italia/ld/rendis/",
+	"graph_iri": "https://w3id.org/italia/env/ld/rendis/",
 	"rdf_dump_file_name": "rendis",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/rendis/v2/data",
