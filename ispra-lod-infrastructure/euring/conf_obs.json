@@ -13,7 +13,7 @@
 	"year": {{year}},
 	"mappings": [
 	    {
-			"rml": "records_mapV2.ttl",
+			"rml": "observation_map.ttl",
             "data": [
                 {
                     "id": "csv_token",
