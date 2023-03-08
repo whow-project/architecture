@@ -86,7 +86,8 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:hasValidationLevel;
         rr:objectMap [
-            rr:parentTriplesMap <#Obs_validation>
+            rr:template "https://w3id.org/italia/env/vocab/observations/certainty/{VALIDATION}";
+            rr:termType rr:IRI
         ]
     ];
 
@@ -148,30 +149,6 @@
             rr:parentTriplesMap <#Catalogue>
         ]
     ] .
-
-<#Obs_validation>
-    rml:logicalSource <#CSV_DATA>;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/validationlevel/{VALIDATION}";
-        rr:class inspire-mf:ValidationLevel
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Livello di validazione {VALIDATION}";
-            rr:language "it"
-        ]
-    ]; 
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Validation level {VALIDATION}";
-            rr:language "en"
-        ]
-    ].
 
 <#Obs_csvSCHEMA>
     rml:logicalSource <#CSV_DATA>;
