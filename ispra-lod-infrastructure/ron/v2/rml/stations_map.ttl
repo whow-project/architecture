@@ -216,7 +216,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
+        rr:predicate ispra-top:isMemberOf;
         rr:objectMap [
             rr:parentTriplesMap :StationCollection;
         ]

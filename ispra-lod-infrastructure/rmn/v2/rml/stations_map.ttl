@@ -203,7 +203,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/{CODE_PLACE}_platforms";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/{STAT_CODE}";
     rr:class inspire-mf:PlatformCollection
   ];
 
@@ -268,7 +268,7 @@
     ];
     
     rr:predicateObjectMap [
-    	rr:predicate ispra-top:isPartOf;
+    	rr:predicate ispra-top:isMemberOf;
     	rr:objectMap [
         rr:parentTriplesMap :StationCollection;
       	]
