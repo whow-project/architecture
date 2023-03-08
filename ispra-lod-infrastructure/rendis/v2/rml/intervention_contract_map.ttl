@@ -593,7 +593,7 @@
 
 :MainCollection
 
-  rml:logicalSource :CSV
+  rml:logicalSource :CSV;
 
     rr:subjectMap [
       rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
