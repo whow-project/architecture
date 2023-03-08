@@ -334,7 +334,8 @@
   rr:predicateObjectMap [
     rr:predicate inspire-mf:hasOperationalStatus;
     rr:objectMap [
-      rr:template "https://w3id.org/italia/env/vocab/platforms/operational_status/{STAT_STATUS}"
+      rr:template "https://w3id.org/italia/env/vocab/platforms/operational_status/{STAT_STATUS}";
+      rr:termType rr:IRI
     ]
   ];
 
