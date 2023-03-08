@@ -1,6 +1,6 @@
 {
 	"dataset": "rmn",
-	"graph_iri": "https://dati.isprambiente.it/ld/rmn/",
+	"graph_iri": "https://w3id.org/italia/ld/rmn/",
 	"rdf_dump_file_name": "rmn_dump",
 	"rdf_dump_file_serialisation": "ntriples",
 	"data_folder": "data/rmn/v2/data",

@@ -1,6 +1,6 @@
 {
 	"dataset": "place",
-	"graph_iri": "https://dati.isprambiente.it/ld/place/",
+	"graph_iri": "https://w3id.org/italia/ld/place/",
         "dirty_data_folder": "data/place/v2/dirtydata",
         "dest_address": "11.111.111.11",
         "dest_folder": "/path/to/folder",
