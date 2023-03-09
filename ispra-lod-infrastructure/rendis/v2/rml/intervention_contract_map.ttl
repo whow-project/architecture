@@ -206,7 +206,18 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isMemberOf;
     rr:objectMap [
-      rr:parentTriplesMap :ProcedureCollection
+      rr:parentTriplesMap :PrimaryProcedureCollection
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isMemberOf;
+    rr:objectMap [
+      rr:parentTriplesMap :SecondaryProcedureCollection;
+      rr:joinCondition [
+       rr:child "I_idIntervento";
+       rr:parent "id_intervento"  
+     ]
     ]
   ];
 
@@ -252,12 +263,12 @@
 #    ]
 #  ];
 
-  rr:predicateObjectMap [
-    rr:predicate ispra-rnd:hasPrimaryLocation;
-    rr:objectMap [
-      rr:parentTriplesMap :Place
-    ]
-  ];
+# rr:predicateObjectMap [
+#   rr:predicate ispra-rnd:hasPrimaryLocation;
+#   rr:objectMap [
+#     rr:parentTriplesMap :PrimaryPlace
+#   ]
+# ];
 
 #  rr:predicateObjectMap [
 #    rr:predicate ispra-rnd:hasMunicipalityRoleInIntervention;
@@ -270,16 +281,16 @@
 #    ]
 #  ];
 
-  rr:predicateObjectMap [
-    rr:predicate ispra-rnd:hasAlternativeLocation;
-    rr:objectMap [
-      rr:parentTriplesMap :SecondaryPlace;
-      rr:joinCondition [
-        rr:child "I_idIntervento";
-        rr:parent "id_intervento"  
-      ]
-    ]
-  ];
+# rr:predicateObjectMap [
+#   rr:predicate ispra-rnd:hasAlternativeLocation;
+#   rr:objectMap [
+#     rr:parentTriplesMap :SecondaryPlace;
+#     rr:joinCondition [
+#       rr:child "I_idIntervento";
+#       rr:parent "id_intervento"  
+#     ]
+#   ]
+# ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasAgentRole;
@@ -493,7 +504,7 @@
 #    rr:predicateObjectMap [
 #	rr:predicate ispra-rnd:ofPlace;
 #        rr:objectMap [
-#	    rr:parentTriplesMap :Place
+#	    rr:parentTriplesMap :PrimaryPlace
 #        ]
 #    ];
 #
@@ -546,32 +557,32 @@
 #        ]
 #    ] .
 
-:Place
-    rml:logicalSource :CSV;
+# :PrimaryPlace
+#     rml:logicalSource :CSV;
     
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}"
-    ].
+#     rr:subjectMap [
+#         rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}"
+#     ].
 
-:ProcedureCollection
+:PrimaryProcedureCollection
     rml:logicalSource :CSV;
     
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/procedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}_primary";
-        rr:class ispra-rnd:ProcedureCollection
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/primarylocprocedurecollection/00201_{CI_FROM_I_CI_ISTATComPrimario}";
+        rr:class ispra-rnd:PrimaryLocProcedureCollection
     ];
 
     rr:predicateObjectMap [
 	rr:predicate ispra-top:isPartOf;
         rr:objectMap [
-          rr:parentTriplesMap :MainCollection
+          rr:parentTriplesMap :MainPrimaryCollection;
         ]
     ];
 
   rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di procedure {{dataset.capitalize()}} associate a: {_E_FROM_I_CI_Comune_primario}";
+            rr:template "Collezione di procedure amministrative {{dataset.capitalize()}} che hanno come comune primario d'intervento {_E_FROM_I_CI_Comune_primario}";
             rr:language "it"
         ]
     ];
@@ -579,19 +590,58 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{dataset.capitalize()}} procedures collection associated with: {_E_FROM_I_CI_Comune_primario}";
+            rr:template "{{dataset.capitalize()}} administrative procedures collection having {_E_FROM_I_CI_Comune_primario} as primary municipality of intervention";
             rr:language "en"
+        ]
+    ].
+
+#    rr:predicateObjectMap [
+#	rr:predicate ispra-rnd:hasPrimaryMunicipalityOfIntervention;
+#        rr:objectMap [
+#	    rr:parentTriplesMap :PrimaryPlaceCollectionPOAssertion
+#        ]
+#    ] .
+
+
+# :SecondaryPlace
+#     rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
+    
+#     rr:subjectMap [
+#         rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{cod_istat}"
+#     ].
+
+:SecondaryProcedureCollection
+    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
+    
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/alternativelocprocedurecollection/00201_{cod_istat}";
+        rr:class ispra-rnd:AlternativeLocProcedureCollection
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+          rr:parentTriplesMap :MainSecondaryCollection
+        ]
+    ];
+
+  rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione di procedure amministrative {{dataset.capitalize()}} che hanno come comune secondario d'intervento il comune con codice ISTAT {cod_istat}";
+            rr:language "it"
         ]
     ];
 
     rr:predicateObjectMap [
-	rr:predicate ispra-rnd:hasPrimaryMunicipalityOfIntervention;
+        rr:predicate rdfs:label;
         rr:objectMap [
-	    rr:parentTriplesMap :PlaceCollectionPOAssertion
+            rr:template "{{dataset.capitalize()}} administrative procedures collection having the municipality with ISTAT code {cod_istat} as secondary municipality of intervention";
+            rr:language "en"
         ]
-    ] .
+    ].
 
-:MainCollection
+:MainPrimaryCollection
 
   rml:logicalSource :CSV;
 
@@ -603,7 +653,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Collezione di risorse {{dataset|upper}} associate a: {_E_FROM_I_CI_Comune_primario}";
+          rr:template "Collezione di risorse {{dataset|upper}} associate al comune con codice ISTAT {CI_FROM_I_CI_ISTATComPrimario}";
           rr:language "it"
         ]
     ];
@@ -611,7 +661,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "{{dataset|upper}} resources collection associated with: {_E_FROM_I_CI_Comune_primario}";
+          rr:template "{{dataset|upper}} resources collection associated with the municipality having ISTAT code {CI_FROM_I_CI_ISTATComPrimario}";
           rr:language "en"
         ]
     ];
@@ -632,53 +682,86 @@
     ].
 
 
-:PlaceCollectionPOAssertion
+:MainSecondaryCollection
 
-    rml:logicalSource :CSV;
+  rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention', 'https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
-        rr:class ispra-top:PredicateObjectAssertion
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{cod_istat}";
+      rr:class ispra-top:Collection
     ];
 
     rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Asserzione Predicato-Oggetto per indicare che tutte le procedure della collezione hanno {_E_FROM_I_CI_Comune_primario} come comune di intervento primario.";
-            rr:language "it"
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "Collezione di risorse {{dataset|upper}} associate al comune con codice ISTAT {cod_istat}";
+          rr:language "it"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Predicate-Object Assertion for representing that all procedures belonging to the collection have {_E_FROM_I_CI_Comune_primario} has primary municipality of intervention.";
-            rr:language "en"
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "{{dataset|upper}} resources collection associated with the municipality having ISTAT code {cod_istat}";
+          rr:language "en"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:withPredicate;
-        rr:objectMap [
-            rr:constant "https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention";
-            rr:termType rr:IRI
-        ]
-    ];
+      rr:predicate ispra-top:isPartOf;
+      rr:objectMap [
+          rr:parentTriplesMap :DatasetISPRA;
+      ]
+  ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:withObject;
-        rr:objectMap [
-            rr:parentTriplesMap :Place
+      rr:predicate ispra-top:isCollectionOf;
+      rr:objectMap [
+          rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{cod_istat}";
+          rr:termType rr:IRI
         ]
-    ] .
-
-
-:SecondaryPlace
-    rml:logicalSource :COMUNI_SECONDARI_INTERVENTI_CSV;
-    
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{cod_istat}"
     ].
+
+
+# :PrimaryPlaceCollectionPOAssertion
+
+#     rml:logicalSource :CSV;
+
+#     rr:subjectMap [
+#         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/predicateobjectassertion/%eval:po_assertion_uuid('https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention', 'https://w3id.org/italia/env/ld/place/municipality/00201_{CI_FROM_I_CI_ISTATComPrimario}')%";
+#         rr:class ispra-top:PredicateObjectAssertion
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Asserzione Predicato-Oggetto per indicare che tutte le procedure della collezione hanno {_E_FROM_I_CI_Comune_primario} come comune di intervento primario.";
+#             rr:language "it"
+#         ]
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Predicate-Object Assertion for representing that all procedures belonging to the collection have {_E_FROM_I_CI_Comune_primario} has primary municipality of intervention.";
+#             rr:language "en"
+#         ]
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate ispra-top:withPredicate;
+#         rr:objectMap [
+#             rr:constant "https://w3id.org/italia/env/onto/{{dataset}}/hasPrimaryMunicipalityOfIntervention";
+#             rr:termType rr:IRI
+#         ]
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate ispra-top:withObject;
+#         rr:objectMap [
+#             rr:parentTriplesMap :PrimaryPlace
+#         ]
+#     ] .
 
 :ProposingAgentRole
 
