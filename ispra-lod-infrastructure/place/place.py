@@ -85,7 +85,7 @@ def print_delete(file_toDel, file_update, cat):
 
     delG = Graph()
 
-    str_graph = 'https://dati.isprambiente.it/ld/place/'
+    str_graph = 'https://w3id.org/italia/env/ld/place/'
 
     graph_toDel = Graph()
     graph_update = Graph()
