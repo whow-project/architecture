@@ -54,7 +54,7 @@
     rml:logicalSource :CSV_GRID;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place/location/00102_{ {{COD_CENTROID}} }";
+        rr:template "https://w3id.org/italia/env/ld/place/feature/00102_{ {{COD_CENTROID}} }";
         rr:class dcterms:Location;
         rr:class ispra-place:Feature
     ];
@@ -159,9 +159,16 @@
         ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCollection
+        ]
+    ];   
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione dei toponimi {{dataset|upper}} con identificativo { {{COD_CENTROID}} }";
+            rr:template "Collezione di risorse {{dataset|upper}} associate al toponimo con identificativo { {{COD_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -169,7 +176,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{dataset|upper}} toponym collection with ID { {{COD_CENTROID}} }";
+            rr:template "{{dataset|upper}} resources collection associated to the toponym with ID { {{COD_CENTROID}} }";
             rr:language "en"
         ]
     ].
