@@ -1,0 +1,25 @@
+PREFIX ispra: <http://dati.isprambiente.it/ontology/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX odi: <http://datiopen.istat.it/odi/ontologia/territorio/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+SELECT DISTINCT (REPLACE(STR(?model), 'http://dati.isprambiente.it/id/ron/buoyModel-', '') AS ?MODEL) (SUBSTR(STR(?BEGINNING), 3) AS ?NETWORK) ?BEGINNING ?END ?TYPE_EN ?STRUCTURE_EN (STRBEFORE(?manufacturer, ' - ') AS ?MANUFACTURER) (STRAFTER(?manufacturer, ' - ') AS ?MODEL_NAME) ?HULL_TYPE (STR(?DIAMETER) AS ?DIAMETER) ?MOORING_TYPE ?POSITIONING_SYSTEM ?PDF ?IMAGE
+WHERE{
+?station dct:isPartOf ?net;
+         dc:type ?TYPE_EN;
+         ispra:hasModel ?model .
+?net time:hasBeginning ?BEGINNING .
+?model a ispra:Model;
+       ispra:structure ?STRUCTURE_EN;
+       ispra:manufacturer ?manufacturer;
+       ispra:hullType ?HULL_TYPE;
+       ispra:diameter ?DIAMETER;
+       ispra:mooringType ?MOORING_TYPE;
+       ispra:positioningSystem ?POSITIONING_SYSTEM;
+       foaf:depiction ?IMAGE .
+FILTER(REGEX(STR(?net), '^http://dati.isprambiente.it/id/buoy/ron/'))
+OPTIONAL{ ?net time:hasEnd ?END }
+OPTIONAL{ ?model dct:isReferencedBy ?PDF }
+}

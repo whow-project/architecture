@@ -1,0 +1,20 @@
+PREFIX ispra: <http://dati.isprambiente.it/ontology/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+SELECT ?TYPE_EN ?SENS_TYPE_EN ?SENSOR_MODEL
+WHERE{
+{{
+SELECT DISTINCT (REPLACE(STR(?TYPE), 'http://dati.isprambiente.it/ontology/core#', '') AS ?T_EN) (STR(?SENS_TYPE_EN) AS ?SENS_TYPE_EN) (STR(?SENSOR_MODEL) AS ?SENSOR_MODEL)
+WHERE{
+   ?sensor a ?TYPE ;
+      ispra:sensorModel ?SENSOR_MODEL;
+      dc:type ?SENS_TYPE_EN;
+      ispra:placedOn ?station .
+   ?TYPE rdfs:subClassOf ispra:Instrument .
+   ?station dct:isPartOf ?NETWORK
+   FILTER(REGEX(STR(?NETWORK), '^http://dati.isprambiente.it/id/buoy/ron/ron-'))
+}
+ORDER BY ?sensor
+}}
+BIND(IF(?T_EN=?SENS_TYPE_EN, '', ?T_EN) AS ?TYPE_EN)
+}

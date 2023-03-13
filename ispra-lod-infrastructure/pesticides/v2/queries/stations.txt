@@ -1,0 +1,27 @@
+PREFIX ispra: <http://dati.isprambiente.it/ontology/core#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX time: <http://www.w3.org/2006/time#>
+PREFIX dcat: <http://www.w3.org/ns/dcat#>
+PREFIX odi: <http://datiopen.istat.it/odi/ontologia/territorio/>
+PREFIX gn: <http://www.geonames.org/ontology#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX dc: <http://purl.org/dc/elements/1.1/>
+PREFIX geo: <http://www.w3.org/2003/01/geo/wgs84_pos#>
+SELECT DISTINCT (STR(?PLACE_NAME) AS ?PLACE_NAME) (STR(?CODE_PLACE) AS ?CODE_PLACE) (REPLACE(STR(?STAT_MODEL), 'http://dati.isprambiente.it/id/ron/buoyModel-', '') AS ?STAT_MODEL_EN) (SUBSTR(?NETWORK, 3) AS ?NETWORK) (STR(?STAT_CODE) AS ?STAT_CODE) (STR(?STAT_TYPE) AS ?STAT_TYPE) (REPLACE(STR(?STAT_STATUS), 'http://dati.isprambiente.it/id/skos/operationalStatus/', '') AS ?STAT_STATUS) (STR(?SEA_IT) AS ?SEA_IT) ?SEA_GN (STR(?LAT) AS ?LAT) (STR(?LONG) AS ?LONG) (LCASE(REPLACE(?PLACE_NAME, ' ', '-')) AS ?PLACE_URI)
+WHERE{
+?station a ispra:MeasureStation;
+         gn:nearbyFeature ?feature;
+         ispra:code ?STAT_CODE;
+         dc:type ?STAT_TYPE;
+         ispra:operationalStatus ?STAT_STATUS;
+         gn:locatedIn ?sea;
+         geo:lat ?LAT;
+         geo:long ?LONG;
+         dct:isPartOf/time:hasBeginning ?NETWORK;
+         ispra:hasModel ?STAT_MODEL .
+?sea rdfs:label ?SEA_IT;
+     owl:sameAs ?SEA_GN .
+?feature rdfs:label ?PLACE_NAME;
+         odi:haCodIstat ?CODE_PLACE
+FILTER(REGEX(STR(?station), '^http://dati.isprambiente.it/id/buoy/ron/'))
+}
