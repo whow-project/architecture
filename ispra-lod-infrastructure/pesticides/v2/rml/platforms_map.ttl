@@ -172,7 +172,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{CODE_ID}_{YEAR}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{CODE_ID}";
     rr:class inspire-mf:Platform
   ];
 
@@ -186,7 +186,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Pesticides sampling platform with ID {CODE_ID}, year {YEAR}";
+      rr:template "Pesticides sampling platform with ID {CODE_ID}";
       rr:language "en"
     ]
   ];
@@ -194,7 +194,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Piattaforma di campionamento pesticidi con ID {CODE_ID}, nell'anno {YEAR}";
+      rr:template "Piattaforma di campionamento pesticidi con ID {CODE_ID}";
       rr:language "it"
     ]
   ];
