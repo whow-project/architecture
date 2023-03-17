@@ -75,6 +75,28 @@ class Functions():
             return "0" + str(row["CODE_PLACE"])
         else:
             return str(row["CODE_PLACE"])
+        
+    @staticmethod
+    def coord_uri(coord):
+        coord_str = str(coord)
+
+        try:
+            coord_int = coord_str.split('.')[0]
+            coord_dec = coord_str.split('.')[1]
+        except IndexError:
+            return coord.replace('.', '')
+
+        coord_int = coord_int.zfill(2)
+        coord_dec = coord_dec.ljust(6, '0')
+
+        return coord_int+coord_dec
+    
+    @staticmethod
+    def get_point(long,lat):
+        long = float(long)
+        lat = float(lat)
+
+        return ('POINT(%s %s)' % (long, lat))
 
     @staticmethod
     def round_coord(coord):
@@ -85,6 +107,10 @@ class Functions():
             value = str(coord)
 
         return value
+    
+    @staticmethod
+    def capitalize(s):
+        return str(s).capitalize()
 
     @staticmethod
     def getYearMonth(date):
@@ -105,7 +131,7 @@ class PesticidesTriplifier(Triplifier):
          - self._rml_path -> the path to the RML mapping files
          - self._data_path -> the path to CSV data files.
     '''
-    def __init__(self):
+    def __init__(self, year : int):
         
         functions_dictionary = {
             'measures_collection_title': Functions.measures_collection_title,
@@ -120,11 +146,17 @@ class PesticidesTriplifier(Triplifier):
             'get_unit_of_measure_wmo': Functions.get_unit_of_measure_wmo,
             'replace': Functions.replace,
             'cod_place': Functions.cod_place,
-            'po_assertion_uuid': UtilsFunctions.po_assertion_uuid
+            'coord_uri': Functions.coord_uri,
+            'get_point': Functions.get_point,
+            'capitalize': Functions.capitalize,
+            'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
+            'digest': UtilsFunctions.short_uuid
             }
         
         super().__init__('pesticides', functions_dictionary)
         self._dirty_data_path = os.path.join('pesticides', 'v2', 'dirtydata')
+
+        self._conf_vars.update({"year": year})
         
         
     def _dataset_initialisation(self) -> None:

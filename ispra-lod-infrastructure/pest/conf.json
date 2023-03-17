@@ -1,0 +1,79 @@
+{
+	"dataset": "pest",
+	"graph_iri": "https://w3id.org/italia/env/ld/pest/",
+	"rdf_dump_file_name": "pest_{{year}}",
+	"rdf_dump_file_serialisation": "ntriples",
+   "data_folder": "data/pest/v2/data",
+   "dirty_data_folder": "data/pest/v2/dirtydata",
+	"rml_folder": "data/pest/v2/rml",
+  "dest_address": "11.111.111.11",
+  "dest_folder": "/path/to/folder",
+  "username": "username",
+  "passwd": "password",
+  "year": {{year}},
+	"mappings":[
+         {
+            "rml":"platforms_map.ttl",
+            "data":[
+               {
+                  "id":"csv_stations",
+                  "file":"stazioni_fixed.csv"
+               }
+            ],
+            "variables": [
+              {
+                "id": "indicators",
+                "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_fixed.csv', 18)"
+              },
+              {
+                "id": "YEAR",
+                "value": "'anno'"
+              },
+              {
+                "id": "STAT_TYPE",
+                "value": "'tipo_staz'"
+              },
+              {
+                "id": "REG_ID",
+                "value": "'codice_regione'"
+              },
+              {
+                "id": "STAT_CODE",
+                "value": "'cod_staz'"
+              },
+              {
+                "id": "STAT_KEY",
+                "value": "'keystaz'"
+              },
+              {
+                "id": "PLACE_CODE",
+                "value": "'codice_comune'"
+              },
+              {
+                "id": "PLACE_NAME",
+                "value": "'comune'"
+              },
+              {
+                "id": "LOC_NAME",
+                "value": "'localita'"
+              },
+              {
+                "id": "BASIN",
+                "value": "'bacinofmt'"
+              },
+              {
+                "id": "WBODY",
+                "value": "'corpoidricofmt'"
+              },
+              {
+                "id": "LONG",
+                "value": "'long'"
+              },
+              {
+                "id": "LAT",
+                "value": "'lat'"
+              }
+            ]
+         }
+	]
+}
