@@ -556,6 +556,13 @@
           rr:language "en"
       ]
   ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:identifier;
+      rr:objectMap [
+          rr:template "{{indicator}}"
+      ]
+  ];
       
   rr:predicateObjectMap [
       rr:predicate ispra-top:isMemberOf;
