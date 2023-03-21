@@ -525,7 +525,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "{{STAT_TYPE}} }{{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+          rr:template "{ {{STAT_TYPE}} } {{indicator}} indicators associated with the station { {{STAT_KEY}} }";
           rr:language "en"
       ]
   ] .
