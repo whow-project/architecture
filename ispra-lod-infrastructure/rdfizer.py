@@ -31,7 +31,7 @@ def process(arg_parser: Namespace):
             print("Found specific dataset: %s"%(args.dataset))
             datasets = [args.dataset]
         else:
-            datasets = ['ron', 'rmn', 'pest']
+            datasets = ['ron', 'rmn']
         
         for dataset in datasets:
             if dataset == 'rmn':
