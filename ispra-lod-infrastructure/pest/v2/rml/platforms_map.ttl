@@ -105,7 +105,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{ {{YEAR}} }";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{{YEAR}}";
   ].
 
 
@@ -297,22 +297,6 @@
   ];
 
   rr:predicateObjectMap [
-    rr:predicate dcterms:description;
-    rr:objectMap [
-        rr:template "Stazione di campionamento pesticidi avente ID { {{STAT_KEY}} }, posta in località %eval:capitalize('{ {{LOC_NAME}} }')% (comune di %eval:capitalize('{ {{PLACE_NAME}} }')%)";
-        rr:language "it"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate dcterms:description;
-    rr:objectMap [
-        rr:template "Pesticides sampling station having ID { {{STAT_KEY}} }, placed at the location %eval:capitalize('{ {{LOC_NAME}} }')% (municipality of %eval:capitalize('{ {{PLACE_NAME}} }')%)";
-        rr:language "en"
-      ]
-    ];
-
-  rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
       rr:parentTriplesMap :IspraCode
@@ -345,9 +329,24 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{ {{STAT_KEY}} }_{ {{YEAR}} }";
+    rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{ {{STAT_KEY}} }_{{YEAR}}";
     rr:class ispra-place:Feature
   ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LONG}} }')%"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LAT}} }')%"
+    ]
+  ];
+  
 
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasGeometry;
@@ -363,10 +362,11 @@
     ]
   ];
 
+
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Pesticides sampling point associated with station { {{STAT_KEY}} }, year { {{YEAR}} }";
+      rr:template "Pesticides sampling point corresponding to station { {{STAT_KEY}} }, year {{YEAR}}";
       rr:language "en"
     ]
   ];
@@ -374,7 +374,23 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Punto di campionamento pesticidi associato alla stazione { {{STAT_KEY}} }, nell'anno { {{YEAR}} }";
+      rr:template "Punto di campionamento pesticidi corrispondente alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "Pesticides sampling point associated with station { {{STAT_KEY}} }, year {{YEAR}}, placed at the location %eval:capitalize('{ {{LOC_NAME}} }')% (municipality of %eval:capitalize('{ {{PLACE_NAME}} }')%)";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "Punto di campionamento pesticidi associato alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}, posto in località %eval:capitalize('{ {{LOC_NAME}} }')% (comune di %eval:capitalize('{ {{PLACE_NAME}} }')%)";
       rr:language "it"
     ]
   ].
@@ -388,19 +404,21 @@
     rr:class ispra-place:Geometry
   ];
 
-  #   rr:predicateObjectMap [
-  #   rr:predicate geo:long;
-  #   rr:objectMap [
-  #     rr:template "%eval:round_coord('{ {{LONG}} }')%"
-  #   ]
-  # ];
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:template "Punto di coordinate { {{LONG}} }, { {{LAT}} }";
+      rr:language "it"
+    ]
+  ];
 
-  # rr:predicateObjectMap [
-  #   rr:predicate geo:lat;
-  #   rr:objectMap [
-  #     rr:template "%eval:round_coord('{ {{LAT}} }')%"
-  #   ]
-  # ];
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:template "Point with coordinates { {{LONG}} }, { {{LAT}} }";
+      rr:language "en"
+    ]
+  ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
@@ -409,6 +427,7 @@
       rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
     ]
   ].
+
 
 :FeatureOfInterest
   rml:logicalSource :CSV_STATIONS;
@@ -421,7 +440,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "Bacino { {{BASIN}} }, corpo idrico { {{WBODY}} }";
+      rml:template "Bacino { {{BASIN}} }, corpo idrico { {{WBODY}} }";
       rr:language "it"
     ]
   ];
@@ -429,7 +448,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:reference "Basin { {{BASIN}} }, water body { {{WBODY}} }";
+      rml:template "Basin { {{BASIN}} }, water body { {{WBODY}} }";
       rr:language "en"
     ]
   ];
@@ -455,14 +474,14 @@
     rml:logicalSource :CSV_STATIONS;
 
     rr:subjectMap [
-        rr:constant "https://w3id.org/italia/env/ld/common/year/{ {{YEAR}} }";
+        rr:constant "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
         rr:class ispra-top:Year
     ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:year;
         rr:objectMap [
-            rr:constant "{ {{YEAR}} }";
+            rr:constant "{{YEAR}}";
             rr:datatype xsd:gYear
         ]
     ].
@@ -518,14 +537,14 @@
   crml:condition "df['{{indicator}}'].notnull()";
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE|lower}} }{{indicator|lower}}_{ {{YEAR}} }";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE|lower}} }{{indicator|lower}}_{{YEAR}}";
         rr:class inspire-mf:Indicator
   ];
 
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicatore {{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno { {{YEAR}} }";
+          rr:template "Indicatore {{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}";
           rr:language "it"
       ]
   ];
@@ -533,7 +552,7 @@
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicator {{indicator}} associated with station { {{STAT_KEY}} } for year { {{YEAR}} }";
+          rr:template "Indicator {{indicator}} associated with station { {{STAT_KEY}} } for year {{YEAR}}";
           rr:language "en"
       ]
   ];
