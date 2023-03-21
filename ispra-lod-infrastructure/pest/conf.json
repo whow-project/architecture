@@ -17,7 +17,7 @@
             "data":[
                {
                   "id":"csv_stations",
-                  "file":"stazioni_fixed.csv"
+                  "file":"stazioni_fixed_{{year}}.csv"
                }
             ],
             "variables": [
@@ -27,7 +27,7 @@
               },
               {
                 "id": "YEAR",
-                "value": "'anno'"
+                "value": "'{{year}}'"
               },
               {
                 "id": "STAT_TYPE",
