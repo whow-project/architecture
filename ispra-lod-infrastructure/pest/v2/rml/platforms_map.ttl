@@ -407,7 +407,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:template "Punto di coordinate { {{LONG}} }, { {{LAT}} }";
+      rr:template "Punto di coordinate { {{LONG}} }, { {{LAT}} }";
       rr:language "it"
     ]
   ];
@@ -415,7 +415,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:template "Point with coordinates { {{LONG}} }, { {{LAT}} }";
+      rr:template "Point with coordinates { {{LONG}} }, { {{LAT}} }";
       rr:language "en"
     ]
   ];
@@ -440,7 +440,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:template "Bacino { {{BASIN}} }, corpo idrico { {{WBODY}} }";
+      rr:template "Bacino { {{BASIN}} }, corpo idrico { {{WBODY}} }";
       rr:language "it"
     ]
   ];
@@ -448,7 +448,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rml:template "Basin { {{BASIN}} }, water body { {{WBODY}} }";
+      rr:template "Basin { {{BASIN}} }, water body { {{WBODY}} }";
       rr:language "en"
     ]
   ];
