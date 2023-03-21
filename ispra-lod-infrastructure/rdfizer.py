@@ -9,6 +9,7 @@ from rendis.rendisV2 import RendisTriplifier
 from triplification import TriplificationManager
 from euring.epe import EpeTriplifier
 from land.land import LandTriplifier
+from pest.pesticides import PesticidesTriplifier
 
 def process(arg_parser: Namespace):
     
@@ -30,7 +31,7 @@ def process(arg_parser: Namespace):
             print("Found specific dataset: %s"%(args.dataset))
             datasets = [args.dataset]
         else:
-            datasets = ['ron', 'rmn']
+            datasets = ['ron', 'rmn', 'pest']
         
         for dataset in datasets:
             if dataset == 'rmn':
@@ -45,6 +46,11 @@ def process(arg_parser: Namespace):
             
     elif args.rendis:
         triplifiers.append(RendisTriplifier())
+
+    elif args.pest:
+        for year in args.pest:
+            print (year)
+            triplifiers.append(PesticidesTriplifier(year))
 
     elif args.soil:
         land_key = "soilc"
@@ -98,6 +104,10 @@ if __name__ == "__main__":
     arg_parser.add_argument("-e", "--epe", dest="epe", nargs='+',
                             default=False,
                             help="Epe Conversion")
+    
+    arg_parser.add_argument("-pe", "--pest", dest="pest", nargs='+',
+                            default=False,
+                            help="Pesticides Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,
