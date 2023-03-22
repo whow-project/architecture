@@ -1,10 +1,15 @@
 from builtins import staticmethod
 import os
 import re
+import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
+
+
+UNIT_OF_MEASURES = None
+
 
 class Functions():
 
@@ -111,6 +116,10 @@ class Functions():
     @staticmethod
     def capitalize(s):
         return str(s).capitalize()
+    
+    @staticmethod
+    def lower(s):
+        return str(s).lower()
 
     @staticmethod
     def getYearMonth(date):
@@ -123,6 +132,19 @@ class Functions():
 
         return result
     
+    @staticmethod
+    def get_unit_of_measure(metric, lang, iri=False):
+
+        if iri:
+            return TermUtils.irify(UNIT_OF_MEASURES[metric]["Unit_EN"].lower())
+        elif lang == 'symbol':
+            return UNIT_OF_MEASURES[metric]["Unit"]
+        elif lang == 'it':
+            return UNIT_OF_MEASURES[metric]["Unit_IT"]
+        else:
+            return UNIT_OF_MEASURES[metric]["Unit_EN"]
+    
+
 class PesticidesTriplifier(Triplifier):
     
     '''
@@ -149,6 +171,8 @@ class PesticidesTriplifier(Triplifier):
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
             'capitalize': Functions.capitalize,
+            'lower': Functions.lower,
+            'get_unit_of_measure': Functions.get_unit_of_measure,
             'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
             'digest': UtilsFunctions.short_uuid
             }
@@ -163,6 +187,15 @@ class PesticidesTriplifier(Triplifier):
         print("Pesticides preprocessing...")
         
         KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+
+        df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=None, engine='python', iterator=True)
+        sep = df._engine.data.dialect.delimiter
+        df.close()
+
+        global UNIT_OF_MEASURES
+
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        UNIT_OF_MEASURES = units_df.to_dict(orient="index")
         
         print("\t preprocessing completed.")
    
