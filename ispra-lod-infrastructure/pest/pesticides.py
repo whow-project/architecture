@@ -8,7 +8,8 @@ from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
 
 
-UNIT_OF_MEASURES = None
+UNIT_OF_MEASURES_STAZ = None
+UNIT_OF_MEASURES_IND = None
 
 
 class Functions():
@@ -116,10 +117,6 @@ class Functions():
     @staticmethod
     def capitalize(s):
         return str(s).capitalize()
-    
-    @staticmethod
-    def lower(s):
-        return str(s).lower()
 
     @staticmethod
     def getYearMonth(date):
@@ -131,18 +128,32 @@ class Functions():
         result = (format(result.year, '04d') + '-' + format(result.month, '02d'))
 
         return result
-    
+
+
     @staticmethod
-    def get_unit_of_measure(metric, lang, iri=False):
+    def get_unit_of_measure_staz(metric, lang, iri=False):
 
         if iri:
-            return TermUtils.irify(UNIT_OF_MEASURES[metric]["Unit_EN"].lower())
+            return TermUtils.irify(UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"].lower())
         elif lang == 'symbol':
-            return UNIT_OF_MEASURES[metric]["Unit"]
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit"]
         elif lang == 'it':
-            return UNIT_OF_MEASURES[metric]["Unit_IT"]
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit_IT"]
         else:
-            return UNIT_OF_MEASURES[metric]["Unit_EN"]
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"]
+        
+
+    @staticmethod
+    def get_unit_of_measure_ind(metric, lang, iri=False):
+
+        if iri:
+            return TermUtils.irify(UNIT_OF_MEASURES_IND[metric]["Unit_EN"].lower())
+        elif lang == 'symbol':
+            return UNIT_OF_MEASURES_IND[metric]["Unit"]
+        elif lang == 'it':
+            return UNIT_OF_MEASURES_IND[metric]["Unit_IT"]
+        else:
+            return UNIT_OF_MEASURES_IND[metric]["Unit_EN"]
     
 
 class PesticidesTriplifier(Triplifier):
@@ -171,8 +182,8 @@ class PesticidesTriplifier(Triplifier):
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
             'capitalize': Functions.capitalize,
-            'lower': Functions.lower,
-            'get_unit_of_measure': Functions.get_unit_of_measure,
+            'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
+            'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
             'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
             'digest': UtilsFunctions.short_uuid
             }
@@ -192,10 +203,16 @@ class PesticidesTriplifier(Triplifier):
         sep = df._engine.data.dialect.delimiter
         df.close()
 
-        global UNIT_OF_MEASURES
+        global UNIT_OF_MEASURES_STAZ
 
         units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
-        UNIT_OF_MEASURES = units_df.to_dict(orient="index")
+        UNIT_OF_MEASURES_STAZ = units_df.to_dict(orient="index")
+        del units_df
+
+        global UNIT_OF_MEASURES_IND
+        
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        UNIT_OF_MEASURES_IND = units_df.to_dict(orient="index")
         
         print("\t preprocessing completed.")
    

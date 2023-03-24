@@ -17,13 +17,13 @@
             "data":[
                {
                   "id":"csv_stations",
-                  "file":"stazioni_fixed_{{year}}.csv"
+                  "file":"stazioni_{{year}}.csv"
                }
             ],
             "variables": [
               {
                 "id": "indicators",
-                "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_fixed.csv', 18)"
+                "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_{{year}}.csv', 21)"
               },
               {
                 "id": "YEAR",
@@ -74,6 +74,49 @@
                 "value": "'lat'"
               }
             ]
-         }
+         },
+         {
+          "rml":"indicators_map.ttl",
+          "data":[
+             {
+                "id":"csv_indicators",
+                "file":"stazioni_sostanze_{{year}}.csv"
+             }
+          ],
+          "variables": [
+            {
+              "id": "indicators",
+              "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_sostanze_{{year}}.csv', 12)"
+            },
+            {
+              "id": "YEAR",
+              "value": "'{{year}}'"
+            },
+            {
+              "id": "STAT_TYPE",
+              "value": "'tipo_stazione'"
+            },
+            {
+              "id": "STAT_KEY",
+              "value": "'keystaz'"
+            },
+            {
+              "id": "PLACE_CODE",
+              "value": "'codice_comune'"
+            },
+            {
+              "id": "PLACE_NAME",
+              "value": "'comune'"
+            },
+            {
+              "id": "CAS_CODE",
+              "value": "'CAS'"
+            },
+            {
+              "id": "CAS_NAME",
+              "value": "'sostanza'"
+            }
+          ]
+       }
 	]
 }

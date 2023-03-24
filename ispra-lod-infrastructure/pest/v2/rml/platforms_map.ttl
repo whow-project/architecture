@@ -55,12 +55,6 @@
         ]
     ].
 
-:Place
-  rml:logicalSource :CSV_STATIONS;
-
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{ {{PLACE_CODE}} }"
-  ].
 
 :Catalogue
   rml:logicalSource :CSV_STATIONS;
@@ -80,7 +74,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione delle risorse di Pesticidi di %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Collezione delle risorse di Pesticidi associati a: %eval:capitalize('{ {{PLACE_NAME}} }')%";
             rr:language "it"
         ]
     ];
@@ -88,7 +82,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Pesticides resources collection of %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Pesticides resources collection associated with: %eval:capitalize('{ {{PLACE_NAME}} }')%";
             rr:language "en"
         ]
     ];
@@ -96,7 +90,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isCollectionOf;
     rr:objectMap [
-      rr:parentTriplesMap :Place
+      rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{ {{PLACE_CODE}} }";
+      rr:termType rr:IRI
     ]
 ] .
 
@@ -245,7 +240,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collection of the pesticides sampling stations of %eval:capitalize('{ {{PLACE_NAME}} }')%";
+      rr:template "Collection of the pesticides sampling stations associated with: %eval:capitalize('{ {{PLACE_NAME}} }')%";
       rr:language "en"
     ]
   ];
@@ -253,7 +248,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di campionamento pesticidi di %eval:capitalize('{ {{PLACE_NAME}} }')%";
+      rr:template "Collezione delle stazioni di campionamento pesticidi associati a: %eval:capitalize('{ {{PLACE_NAME}} }')%";
       rr:language "it"
     ]
   ];
@@ -494,7 +489,7 @@
   crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00106_{ {{STAT_KEY}} }_%eval:lower('{ {{STAT_TYPE}} }')%{{indicator|lower}}";
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}";
       rr:class inspire-mf:IndicatorCollection
   ];
 
@@ -509,7 +504,7 @@
   rr:predicateObjectMap [
       rr:predicate ispra-top:isParametrisedBy;
       rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/%eval:lower('{ {{STAT_TYPE}} }')%{{indicator|lower}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}";
         rr:termType rr:IRI
       ]
   ];
@@ -517,7 +512,7 @@
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicatori %eval:lower('{ {{STAT_TYPE}} }')%{{indicator}} associati alla stazione { {{STAT_KEY}} }";
+          rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} associati alla stazione { {{STAT_KEY}} }";
           rr:language "it"
       ]
   ];
@@ -525,26 +520,26 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "%eval:lower('{ {{STAT_TYPE}} }')% {{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+          rr:template "{ {{STAT_TYPE}} } {{indicator}} indicators associated with the station { {{STAT_KEY}} }";
           rr:language "en"
       ]
   ] .
 
 
-:Stationindicator{{indicator}}
+:Stationindicators{{indicator}}
   rml:logicalSource :CSV_STATIONS;
 
   crml:condition "df['{{indicator}}'].notnull()";
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{ {{STAT_KEY}} }_%eval:lower('{ {{STAT_TYPE}} }')%{{indicator|lower}}_{{YEAR}}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}_{{YEAR}}";
         rr:class inspire-mf:Indicator
   ];
 
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicatore %eval:lower('{ {{STAT_TYPE}} }')%{{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}";
+          rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
           rr:language "it"
       ]
   ];
@@ -552,7 +547,7 @@
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicator %eval:lower('{ {{STAT_TYPE}} }')%{{indicator}} associated with station { {{STAT_KEY}} } for year {{YEAR}}";
+          rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
           rr:language "en"
       ]
   ];
@@ -560,7 +555,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
       rr:objectMap [
-          rr:template "%eval:lower('{ {{STAT_TYPE}} }')%{{indicator}}"
+          rr:template "{ {{STAT_TYPE}} }{{indicator}}"
       ]
   ];
       
@@ -571,12 +566,10 @@
       ]
   ];
 
-###QUI VA MESSO :Value###
   rr:predicateObjectMap [
       rr:predicate ispra-top:hasValue;
       rr:objectMap [
-          rr:template "{ {{indicator}} }"
-          #rr:parentTriplesMap :Value
+          rr:parentTriplesMap :Value
       ]
   ];
   
@@ -588,46 +581,46 @@
   ].
 
 
-  # :Value{{indicator}}
-  #   rml:logicalSource :CSV_STATIONS;
+  :Value{{indicator}}
+    rml:logicalSource :CSV_STATIONS;
     
-  #   crml:condition "df['{{indicator}}'].notnull()";
+    crml:condition "df['{{indicator}}'].notnull()";
 
-  #   rr:subjectMap [
-  #       rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}}', 'en', True)%";
-  #       rr:class ispra-top:Value
-  #   ];
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en', True)%";
+        rr:class ispra-top:Value
+    ];
     
-  #   rr:predicateObjectMap [
-  #       rr:predicate rdfs:label;
-  #       rr:objectMap [
-  #           rr:template "%eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}} %eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}}', 'symbol')%";
-  #           rr:language "en"
-  #       ]
-  #   ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:language "en"
+        ]
+    ];
     
-  #   rr:predicateObjectMap [
-  #       rr:predicate rdfs:label;
-  #       rr:objectMap [
-  #           rr:template "%eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}} %eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}}', 'symbol')%";
-  #           rr:language "it"
-  #       ]
-  #   ];
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:language "it"
+        ]
+    ];
     
-  #   rr:predicateObjectMap [
-  #       rr:predicate ispra-top:value;
-  #       rr:objectMap [
-  #           rr:template "{ {{indicator}} }"
-  #       ]
-  #   ];
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:value;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }"
+        ]
+    ];
     
-  #   rr:predicateObjectMap [
-  #       rr:predicate ispra-top:hasUnitOfMeasure;
-  #       rr:objectMap [
-  #           rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/%eval:get_unit_of_measure(eval:lower('{ {{STAT_TYPE}} }')'{{indicator}}', 'en', True)%";
-  #           rr:termType rr:IRI
-  #       ]
-  #   ] .
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en', True)%";
+            rr:termType rr:IRI
+        ]
+    ] .
 
 {%endfor%}
 
