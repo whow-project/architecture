@@ -23,7 +23,7 @@
     rml:logicalSource <#CitiesCSV>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
     ].
 
 <#Provinces>

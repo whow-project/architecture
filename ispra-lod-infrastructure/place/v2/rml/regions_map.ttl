@@ -23,14 +23,13 @@
     rml:logicalSource <#RegionsCSV>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place";
-        rr:class ispra-top:Dataset
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template  "place Dataset";
+            rr:template  "{{dataset|capitalize}} Dataset";
         ]
     ].
 
