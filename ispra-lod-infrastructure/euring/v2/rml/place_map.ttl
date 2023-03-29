@@ -187,7 +187,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione delle risorse {{dataset|upper}} associate al luogo con codice ISTAT { {{COD_PLACE}} }";
+            rr:template "Collezione di risorse {{dataset|upper}} associate al luogo con codice ISTAT { {{COD_PLACE}} }";
             rr:language "it"
         ]
     ];
