@@ -120,12 +120,6 @@
         ]
     ];
 
-#    rr:predicateObjectMap [
-#        rr:predicate ispra-place:hasMunicipality;
-#        rr:objectMap [
-#            rr:parentTriplesMap :Municipality
-#        ]
-#    ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-place:hasGeometry;
@@ -135,16 +129,16 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isMemberOf;
+        rr:predicate ispra-top:isCollectionOf;
         rr:objectMap [
-         rr:parentTriplesMap :PlaceCollection
+        rr:parentTriplesMap :PlaceCollection
         ]
     ];
-    
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasUniqueIdentifier;
         rr:objectMap [
+
             rr:parentTriplesMap :UniqueIdentifier
         ]
     ].
@@ -159,16 +153,9 @@
         ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
-        rr:objectMap [
-            rr:parentTriplesMap :MainCollection
-        ]
-    ];   
-
-    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse {{dataset|upper}} associate al toponimo con identificativo { {{COD_CENTROID}} }";
+            rr:template "Collezione di risorse {{dataset|upper}} associate al toponimo { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -176,7 +163,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{dataset|upper}} resources collection associated to the toponym with ID { {{COD_CENTROID}} }";
+            rr:template "{{dataset|upper}} resources collection associated with the toponym { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
             rr:language "en"
         ]
     ].
