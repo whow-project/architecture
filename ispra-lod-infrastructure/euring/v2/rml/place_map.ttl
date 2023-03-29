@@ -129,13 +129,6 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isCollectionOf;
-        rr:objectMap [
-        rr:parentTriplesMap :PlaceCollection
-        ]
-    ];
-
-    rr:predicateObjectMap [
         rr:predicate ispra-top:hasUniqueIdentifier;
         rr:objectMap [
 
@@ -153,9 +146,16 @@
         ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:isCollectionOf;
+        rr:objectMap [
+        rr:parentTriplesMap :Place
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse {{dataset|upper}} associate al toponimo { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
+            rr:template "Collezione delle risorse {{dataset|upper}} associate al toponimo { {{COD_CENTROID}} } - { {{NAME_CENTROID}} }";
             rr:language "it"
         ]
     ];
@@ -187,7 +187,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse {{dataset|upper}} associate al luogo con codice ISTAT { {{COD_PLACE}} }";
+            rr:template "Collezione delle risorse {{dataset|upper}} associate al luogo con codice ISTAT { {{COD_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -215,6 +215,22 @@
         rr:template "https://w3id.org/italia/env/ld/place/geometry/00102_{ {{COD_CENTROID}} }_point";
         rr:class ispra-place:Geometry
         ];
+
+    rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+        rr:template "Punto di coordinate { {{LONG_CENTROID}} }, { {{LAT_CENTROID}} }";
+        rr:language "it"
+    ]
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+        rr:template "Point with coordinates { {{LONG_CENTROID}} }, { {{LAT_CENTROID}} }";
+        rr:language "en"
+    ]
+    ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-place:geometry;

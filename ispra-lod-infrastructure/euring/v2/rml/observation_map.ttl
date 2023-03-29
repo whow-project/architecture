@@ -319,7 +319,8 @@
     rr:predicateObjectMap [
         rr:predicate dwc:locatedAt;
         rr:objectMap [
-            rr:parentTriplesMap :Place
+            rr:template "https://w3id.org/italia/env/ld/place/feature/00102_{IDTOPONIMO}";
+            rr:termType rr:IRI
         ]
     ].
 
@@ -342,13 +343,6 @@
         ].
 
 
-:Place
-
-    rml:logicalSource :CSV_TOKEN;
-
-    rr:subjectMap [
-            rr:template "https://w3id.org/italia/env/ld/place/location/00102_{IDTOPONIMO}"
-        ].
 
 :GeoCollection
     rml:logicalSource :CSV_TOKEN;
