@@ -77,7 +77,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isParametrisedBy;
         rr:objectMap [
-	        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}";
+	        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }";
 	        rr:termType rr:IRI
         ]
     ];
