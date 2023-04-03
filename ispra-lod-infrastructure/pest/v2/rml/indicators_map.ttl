@@ -127,7 +127,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicator {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associated with the station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:template "Indicator { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associated with the station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
             rr:language "en"
         ]
     ];
