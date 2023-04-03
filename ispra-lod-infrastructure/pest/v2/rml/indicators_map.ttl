@@ -76,6 +76,14 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:parametrises;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{ {{CAS_CODE}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Parametro { {{STAT_TYPE}} }{{indicator|lower}} associato alla sostanza { {{CAS_CODE}} }";
