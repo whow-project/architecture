@@ -83,6 +83,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} }"
+      ]
+  ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} associati alla stazione { {{STAT_KEY}} }";
@@ -147,13 +154,6 @@
             rr:parentTriplesMap :IndicatorsCollectionMetric{{indicator}}
         ]
     ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:identifier;
-            rr:objectMap [
-            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} }"
-      ]
-  ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasValue;
