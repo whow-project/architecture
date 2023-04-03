@@ -58,6 +58,39 @@
 
 
 {% for indicator in indicators %}
+:Parameter{{indicator}}
+
+    rml:logicalSource :CSV_INDICATORS;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }";
+        rr:class ispra-top:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasBroader;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Parametro { {{STAT_TYPE}} }{{indicator|lower}} associato alla sostanza { {{CAS_CODE}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Parameter { {{STAT_TYPE}} }{{indicator|lower}} associated with the substance { {{CAS_CODE}} }";
+            rr:language "en"
+        ]
+    ].
+
 :IndicatorsCollectionMetric{{indicator}}
     
     rml:logicalSource :CSV_INDICATORS;
@@ -77,8 +110,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isParametrisedBy;
         rr:objectMap [
-	        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }";
-	        rr:termType rr:IRI
+            rr:parentTriplesMap :Parameter{{indicator}}
         ]
     ];
 
@@ -183,7 +215,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{indicator}} }%eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
             rr:language "en"
         ]
     ];

@@ -594,7 +594,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{indicator}} }%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
             rr:language "en"
         ]
     ];
