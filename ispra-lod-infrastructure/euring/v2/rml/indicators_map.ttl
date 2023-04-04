@@ -139,6 +139,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{{indicator}}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rr:template "Indicatori {{indicator}} associati a: { {{NOME_PLACE}} }";
