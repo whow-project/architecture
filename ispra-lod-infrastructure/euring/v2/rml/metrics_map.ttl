@@ -71,6 +71,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{Campo}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:hasBroader;
         rr:objectMap [
             rr:parentTriplesMap :BroaderMetric
@@ -85,6 +92,13 @@
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{Broader_ID}";
         rr:class ispra-top:Parameter
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "Broader_ID"
+        ]
     ];
 
     rr:predicateObjectMap [
