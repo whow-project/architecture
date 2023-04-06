@@ -73,7 +73,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
         rr:objectMap [
-            rr:template "{Campo}"
+            rr:template "{{dataset}}_{Campo}"
         ]
     ];
 
@@ -97,7 +97,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
         rr:objectMap [
-            rr:template "{Broader_ID}"
+            rr:template "{{dataset}}_{Broader_ID}"
         ]
     ];
 
