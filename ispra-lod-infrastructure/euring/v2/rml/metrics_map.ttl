@@ -4,6 +4,7 @@
 @prefix rml: <http://semweb.mmlab.be/ns/rml#> .
 @prefix ql: <http://semweb.mmlab.be/ns/ql#> .
 @prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix metric: <https://w3id.org/italia/env/onto/common/metric/> .
 @prefix time: <https://w3id.org/italia/env/onto/common/time/> .
 @prefix mu: <https://w3id.org/italia/env/onto/common/mu/> .
@@ -39,7 +40,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{Descrizione}";
+            rr:template "{Descrizione_breve}";
             rr:language "it"
         ]
     ];
@@ -47,17 +48,27 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{Description}";
+            rr:template "{Brief_description}";
             rr:language "en"
         ]
     ];
     
-#   rr:predicateObjectMap [
-#        rr:predicate ispra-top:hasUnitOfMeasure;
-#        rr:objectMap [
-#            rr:parentTriplesMap :MU
-#        ]
-#    ];
+
+        rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "{Descrizione}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "{Description}";
+            rr:language "en"
+        ]
+    ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasBroader;
