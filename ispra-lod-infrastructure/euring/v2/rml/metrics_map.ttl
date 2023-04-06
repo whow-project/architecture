@@ -97,7 +97,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
         rr:objectMap [
-            rr:template "Broader_ID"
+            rr:template "{Broader_ID}"
         ]
     ];
 
