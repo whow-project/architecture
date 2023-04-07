@@ -132,7 +132,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} associati alla stazione { {{STAT_KEY}} }";
+            rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associati alla stazione { {{STAT_KEY}} }";
             rr:language "it"
         ]
     ];
@@ -140,7 +140,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{STAT_TYPE}} } {{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } indicators associated with the station { {{STAT_KEY}} }";
             rr:language "en"
         ]
     ].
