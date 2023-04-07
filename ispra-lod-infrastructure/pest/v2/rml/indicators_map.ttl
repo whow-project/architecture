@@ -86,7 +86,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro { {{STAT_TYPE}} }{{indicator|lower}} associato alla sostanza { {{CAS_CODE}} }";
+            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato alla sostanza { {{CAS_CODE}} }";
             rr:language "it"
         ]
     ];
@@ -94,7 +94,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parameter { {{STAT_TYPE}} }{{indicator|lower}} associated with the substance { {{CAS_CODE}} }";
+            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with the substance { {{CAS_CODE}} }";
             rr:language "en"
         ]
     ].
