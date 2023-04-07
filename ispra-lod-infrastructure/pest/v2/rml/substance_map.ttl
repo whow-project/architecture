@@ -13,3 +13,33 @@
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 
+:SubstanceEntity
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{cod_ragg}";
+        rr:class inspire-mf:FeatureOfInterest
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:capitalize('{nome_ragg}')%' - raggruppamento";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:capitalize('{nome_ragg_en}')% - group";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isClassifiedBy;
+        rr:objectMap [
+            rr:template "{cod_cas}"
+        ]
+    ].
