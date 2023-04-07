@@ -125,40 +125,6 @@
                 "id": "csv_file",
                 "file": "Descrizione_campiPesticidiStazioni.csv"
             }
-          ],
-          "variables": [
-            {
-              "id": "FIELD",
-              "value": "'Campo'"
-            },
-            {
-              "id": "DESC_IT",
-              "value": "'Descrizione'"
-            },
-            {
-              "id": "DESC_EN",
-              "value": "'Description'"
-            },
-            {
-              "id": "BROAD_ID",
-              "value": "'Broader_ID'"
-            },
-            {
-              "id": "TYPE_IT",
-              "value": "'Tipo'"
-            },
-            {
-              "id": "TYPE_EN",
-              "value": "'Type'"
-            },
-            {
-              "id": "UNIT_EN",
-              "value": "'Unit_EN'"
-            },
-            {
-              "id": "UNIT_IT",
-              "value": "'Unit_IT'"
-            }
           ]
         },
         {
@@ -167,40 +133,6 @@
              {
                  "id": "csv_file",
                  "file": "Descrizione_campiPesticidiStazioniSostanze.csv"
-             }
-           ],
-           "variables": [
-             {
-               "id": "FIELD",
-               "value": "'Campo'"
-             },
-             {
-               "id": "DESC_IT",
-               "value": "'Descrizione'"
-             },
-             {
-               "id": "DESC_EN",
-               "value": "'Description'"
-             },
-             {
-               "id": "BROAD_ID",
-               "value": "'Broader_ID'"
-             },
-             {
-               "id": "TYPE_IT",
-               "value": "'Tipo'"
-             },
-             {
-               "id": "TYPE_EN",
-               "value": "'Type'"
-             },
-             {
-               "id": "UNIT_EN",
-               "value": "'Unit_EN'"
-             },
-             {
-               "id": "UNIT_IT",
-               "value": "'Unit_IT'"
              }
            ]
          }

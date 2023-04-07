@@ -28,14 +28,14 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{FIELD}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{Campo}";
         rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{DESC_IT}} }";
+            rr:template "{Descrizione}";
             rr:language "it"
         ]
     ];
@@ -43,7 +43,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{DESC_EN}} }";
+            rr:template "{Description}";
             rr:language "en"
         ]
     ];
@@ -61,14 +61,14 @@
     crml:condition "df['Broader_ID'].notnull()";
     
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{BROAD_ID}} }";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{Broader_ID}";
         rr:class ispra-top:Parameter
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{TYPE_IT}} }";
+            rr:template "{Tipo}";
             rr:language "it"
         ]
     ];
@@ -76,7 +76,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{TYPE_EN}} }";
+            rr:template "{Type}";
             rr:language "en"
         ]
     ].
@@ -87,14 +87,14 @@
     crml:condition "df['Unit_EN'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{ {{UNIT_EN}} }";
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{Unit_EN}";
         rr:class ispra-top:UnitOfMeasure
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{UNIT_EN}} }";
+            rr:template "{Unit_EN}";
             rr:language "en"
         ]
     ];
@@ -102,7 +102,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{UNIT_IT}} }";
+            rr:template "{Unit_IT}";
             rr:language "it"
         ]
     ];
@@ -110,6 +110,6 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:symbol;
         rr:objectMap [
-            rml:reference "{ {{UNIT_EN}} }"
+            rml:reference "{Unit_EN}"
         ]
     ] .
