@@ -75,6 +75,14 @@
         ]
     ];
 
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} }"
+      ]
+  ];
+
     rr:predicateObjectMap [
         rr:predicate ispra-top:parametrises;
         rr:objectMap [
@@ -121,13 +129,6 @@
             rr:parentTriplesMap :Parameter{{indicator}}
         ]
     ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:identifier;
-            rr:objectMap [
-            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} }"
-      ]
-  ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
