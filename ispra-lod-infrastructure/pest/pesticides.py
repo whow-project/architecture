@@ -114,9 +114,17 @@ class Functions():
 
         return value
     
+
     @staticmethod
     def capitalize(s):
         return str(s).capitalize()
+    
+
+    @staticmethod
+    def replace(find, rep, string):
+        s = string.replace(find, rep)
+        return s 
+    
 
     @staticmethod
     def getYearMonth(date):
@@ -129,6 +137,11 @@ class Functions():
 
         return result
 
+    @staticmethod
+    def get_cas_codes(code, n):
+        list_codes = str(code).split('-')
+
+        return list_codes[int(n)]
 
     @staticmethod
     def get_unit_of_measure_staz(metric, lang, iri=False):
@@ -182,6 +195,8 @@ class PesticidesTriplifier(Triplifier):
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
             'capitalize': Functions.capitalize,
+            'replace': Functions.replace,
+            'get_cas_codes': Functions.get_cas_codes,
             'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
             'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
             'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
