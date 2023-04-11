@@ -40,6 +40,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
-            rr:template "{cod_cas}"
+            rr:template "https://semscout.istc.cnr.it/whow/lodview/controlled-vocabulary/chemical-substances/cas-%eval:get_cas_codes('{cod_cas}', 0)%-%eval:get_cas_codes('{cod_cas}', 1)%-%eval:get_cas_codes('{cod_cas}', 2)%";
+            rr:termType rr:IRI
         ]
     ].
