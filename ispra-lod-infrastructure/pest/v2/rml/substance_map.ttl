@@ -24,7 +24,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:capitalize('{nome_ragg}')%' - raggruppamento";
+            rr:template "%eval:title('{nome_ragg}')%'";
             rr:language "it"
         ]
     ];
@@ -32,7 +32,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:capitalize('{nome_ragg_en}')% - group";
+            rr:template "%eval:title('{nome_ragg_en}')%";
             rr:language "en"
         ]
     ];
@@ -40,7 +40,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
-            rr:template "https://semscout.istc.cnr.it/whow/lodview/controlled-vocabulary/chemical-substances/cas-%eval:get_cas_codes('{cod_cas}', 0)%-%eval:get_cas_codes('{cod_cas}', 1)%-%eval:get_cas_codes('{cod_cas}', 2)%";
+            rr:template "https://w3id.org/whow/controlled-vocabulary/chemical-substances/cas-%eval:get_cas_codes('{cod_cas}', 0)%-%eval:get_cas_codes('{cod_cas}', 1)%-%eval:get_cas_codes('{cod_cas}', 2)%";
             rr:termType rr:IRI
         ]
     ].

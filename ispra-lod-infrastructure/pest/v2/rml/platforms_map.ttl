@@ -42,7 +42,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Dataset Nazionale della concentrazione di pesticidi nelle acque italiane";
+            rr:template "Dataset Nazionale della concentrazione di %eval:label_it('{{dataset}}')% nelle acque italiane";
             rr:language "it"
         ]
     ];
@@ -50,7 +50,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "National dataset of pesticides concentration in Italian waters";
+            rr:template "National dataset of %eval:label_en('{{dataset}}')% concentration in Italian waters";
             rr:language "en"
         ]
     ].
@@ -74,7 +74,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione delle risorse di Pesticidi associati a: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
             rr:language "it"
         ]
     ];
@@ -82,7 +82,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Pesticides resources collection associated with: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: %eval:title('{ {{PLACE_NAME}} }')%";
             rr:language "en"
         ]
     ];
@@ -122,7 +122,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Pesticides sampling station ID { {{STAT_KEY}} }";
+            rr:template "%eval:label_en('{{dataset}}')% sampling station ID { {{STAT_KEY}} }";
             rr:language "en"
         ]
     ];
@@ -130,7 +130,7 @@
      rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Identificativo stazione di campionamento pesticidi { {{STAT_KEY}} }";
+            rr:template "Identificativo stazione di campionamento %eval:label_it('{{dataset}}')% { {{STAT_KEY}} }";
             rr:language "it"
         ]
     ];
@@ -138,7 +138,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Codice univoco stazione di campionamento pesticidi - { {{STAT_KEY}} } - composto dal codice regione ({ {{REG_ID}}}), dalla tipologia stazione ({ {{STAT_TYPE}} }) e dall'ID regionale della stazione ({ {{STAT_CODE}}})";
+            rr:template "Codice univoco stazione di campionamento %eval:label_it('{{dataset}}')% - { {{STAT_KEY}} } - composto dal codice regione ({ {{REG_ID}}}), dalla tipologia stazione ({ {{STAT_TYPE}} }) e dall'ID regionale della stazione ({ {{STAT_CODE}}})";
             rr:language "it"
         ]
     ];
@@ -154,7 +154,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
         rr:objectMap [
-            rr:template "{ {{STAT_KEY}} }"
+            rr:template "{{dataset}}_{ {{STAT_KEY}} }"
         ]
     ];
 
@@ -177,7 +177,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:constant "Schema identificativi stazioni di campionamento pesticidi";
+            rr:template "Schema identificativi stazioni di campionamento %eval:label_it('{{dataset}}')%";
             rr:language "it"
         ]
     ];
@@ -185,7 +185,7 @@
      rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:constant "Pesticides sampling stations identifiers schema";
+            rr:template "%eval:label_en('{{dataset}}')% sampling stations identifiers schema";
             rr:language "en"
         ]
     ];
@@ -193,7 +193,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:constant "Schema di identificativi univoci delle stazioni di campionamento pesticidi gestite da ISPRA";
+            rr:template "Schema di identificativi univoci delle stazioni di campionamento %eval:label_it('{{dataset}}')% gestite da ISPRA";
             rr:language "it"
         ]
     ];
@@ -201,7 +201,7 @@
      rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:constant "Unique identifiers schema of pesticides sampling stations managed by ISPRA";
+            rr:template "Unique identifiers schema of %eval:label_en('{{dataset}}')% sampling stations managed by ISPRA";
             rr:language "en"
         ]
     ];
@@ -240,7 +240,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collection of the pesticides sampling stations associated with: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+      rr:template "Collection of the %eval:label_en('{{dataset}}')% sampling stations associated with: %eval:title('{ {{PLACE_NAME}} }')%";
       rr:language "en"
     ]
   ];
@@ -248,7 +248,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di campionamento pesticidi associati a: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+      rr:template "Collezione delle stazioni di campionamento %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
       rr:language "it"
     ]
   ];
@@ -278,7 +278,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Pesticides sampling station with ID { {{STAT_KEY}} }";
+      rr:template "%eval:label_en('{{dataset}}')% sampling station with ID { {{STAT_KEY}} }";
       rr:language "en"
     ]
   ];
@@ -286,7 +286,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Stazione di campionamento pesticidi con ID { {{STAT_KEY}} }";
+      rr:template "Stazione di campionamento %eval:label_it('{{dataset}}')% con ID { {{STAT_KEY}} }";
       rr:language "it"
     ]
   ];
@@ -361,7 +361,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Pesticides sampling point corresponding to station { {{STAT_KEY}} }, year {{YEAR}}";
+      rr:template "%eval:label_en('{{dataset}}')% sampling point corresponding to station { {{STAT_KEY}} }, year {{YEAR}}";
       rr:language "en"
     ]
   ];
@@ -369,7 +369,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Punto di campionamento pesticidi corrispondente alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% corrispondente alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
       rr:language "it"
     ]
   ];
@@ -377,7 +377,7 @@
   rr:predicateObjectMap [
     rr:predicate dcterms:description;
     rr:objectMap [
-      rr:template "Pesticides sampling point associated with station { {{STAT_KEY}} }, year {{YEAR}}, placed at the location %eval:capitalize('{ {{LOC_NAME}} }')% (municipality of %eval:capitalize('{ {{PLACE_NAME}} }')%)";
+      rr:template "%eval:label_en('{{dataset}}')% sampling point associated with station { {{STAT_KEY}} }, year {{YEAR}}, placed at the location %eval:title('{ {{LOC_NAME}} }')% (municipality of %eval:title('{ {{PLACE_NAME}} }')%)";
       rr:language "en"
     ]
   ];
@@ -385,7 +385,7 @@
   rr:predicateObjectMap [
     rr:predicate dcterms:description;
     rr:objectMap [
-      rr:template "Punto di campionamento pesticidi associato alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}, posto in località %eval:capitalize('{ {{LOC_NAME}} }')% (comune di %eval:capitalize('{ {{PLACE_NAME}} }')%)";
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}, posto in località %eval:title('{ {{LOC_NAME}} }')% (comune di %eval:title('{ {{PLACE_NAME}} }')%)";
       rr:language "it"
     ]
   ].
@@ -512,7 +512,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
       rr:objectMap [
-          rr:template "{ {{STAT_TYPE}} }{{indicator}}"
+          rr:template "{{dataset}}_{ {{STAT_TYPE}} }{{indicator}}"
       ]
   ];
 
@@ -527,7 +527,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "{ {{STAT_TYPE}} } {{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+          rr:template "{ {{STAT_TYPE}} }{{indicator}} indicators associated with the station { {{STAT_KEY}} }";
           rr:language "en"
       ]
   ] .

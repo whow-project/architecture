@@ -35,7 +35,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione degli indicatori di Pesticidi associati a: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Collezione degli indicatori di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
             rr:language "it"
         ]
     ];
@@ -43,7 +43,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collection of the pesticides indicators associated with: %eval:capitalize('{ {{PLACE_NAME}} }')%";
+            rr:template "Collection of the %eval:label_en('{{dataset}}')% indicators associated with: %eval:title('{ {{PLACE_NAME}} }')%";
             rr:language "en"
         ]
     ];
@@ -94,7 +94,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato alla sostanza { {{CAS_CODE}} }";
+            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato a: %eval:lower('{ {{CAS_NAME_IT}} }')%";
             rr:language "it"
         ]
     ];
@@ -102,7 +102,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with the substance { {{CAS_CODE}} }";
+            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with: %eval:lower('{ {{CAS_NAME_EN}} }')%";
             rr:language "en"
         ]
     ].
@@ -176,7 +176,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato alla sostanza { {{CAS_CODE}} } ({ {{CAS_NAME}} }), per la stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+            rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato a: %eval:lower('{ {{CAS_NAME_IT}} }')%', per la stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
             rr:language "it"
         ]
     ];
@@ -184,7 +184,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with the substance { {{CAS_CODE}} } ({ {{CAS_NAME}} }), for the station { {{STAT_KEY}} }, in the year {{YEAR}}";
+            rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with: %eval:lower('{ {{CAS_NAME_EN}} }')%', for the station { {{STAT_KEY}} }, in the year {{YEAR}}";
             rr:language "en"
         ]
     ];
@@ -202,6 +202,14 @@
             rr:parentTriplesMap :Value{{indicator}}
         ]
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasSource;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+            rr:termType rr:IRI
+        ]
+    ];    
     
     rr:predicateObjectMap [
         rr:predicate ispra-top:atTime;

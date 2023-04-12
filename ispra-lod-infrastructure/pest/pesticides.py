@@ -4,6 +4,7 @@ import re
 import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
+from utils import label_en, label_it, round_coord, title, lower, replace, getYearMonth
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
 
@@ -71,11 +72,6 @@ class Functions():
             return None
         
     @staticmethod
-    def replace(find, rep, string):
-        s = string.replace(find, rep)
-        return s
-    
-    @staticmethod
     def cod_place(row):
         if len(str(row["CODE_PLACE"])) == 5:
             return "0" + str(row["CODE_PLACE"])
@@ -102,40 +98,8 @@ class Functions():
         long = float(long)
         lat = float(lat)
 
-        return ('POINT(%s %s)' % (long, lat))
+        return ('POINT(%s %s)' % (long, lat))    
 
-    @staticmethod
-    def round_coord(coord):
-        try:
-            value = str(round(float(coord),5))
-    
-        except ValueError:
-            value = str(coord)
-
-        return value
-    
-
-    @staticmethod
-    def capitalize(s):
-        return str(s).capitalize()
-    
-
-    @staticmethod
-    def replace(find, rep, string):
-        s = string.replace(find, rep)
-        return s 
-    
-
-    @staticmethod
-    def getYearMonth(date):
-        try:
-            result = dt.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
-        except ValueError:
-            result = dt.datetime(1300,1,1)
-
-        result = (format(result.year, '04d') + '-' + format(result.month, '02d'))
-
-        return result
 
     @staticmethod
     def get_cas_codes(code, n):
@@ -184,18 +148,20 @@ class PesticidesTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
-            'round_coord': Functions.round_coord,
-            'getYearMonth': Functions.getYearMonth,
+            'round_coord': round_coord,
+            'getYearMonth': getYearMonth,
             'preserve_value': Functions.preserve_value,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
             'get_unit_of_measure_wmo': Functions.get_unit_of_measure_wmo,
-            'replace': Functions.replace,
             'cod_place': Functions.cod_place,
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
-            'capitalize': Functions.capitalize,
-            'replace': Functions.replace,
+            'title': title,
+            'lower': lower,
+            'label_it': label_it,
+            'label_en': label_en,
+            'replace': replace,
             'get_cas_codes': Functions.get_cas_codes,
             'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
             'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
