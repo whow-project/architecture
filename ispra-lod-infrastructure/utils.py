@@ -42,8 +42,14 @@ def round_coord(coord):
 def capitalize(s):
     return str(s).capitalize()
 
+def upper(s):
+    return str(s).upper()
+
 def lower(s):
     return str(s).lower()
+
+def title(s):
+    return str(s).title()
 
 def replace(find, rep, string):
     s = string.replace(find, rep)
