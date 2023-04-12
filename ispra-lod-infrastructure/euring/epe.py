@@ -8,6 +8,7 @@ from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
 import pandas as pd
+from utils import round_coord
 
 
 UNIT_OF_MEASURES = None
@@ -70,16 +71,6 @@ def istat_normaliser(df):
         
     return df
 
-
-def round_coord(coord):
-
-    try:
-        value = str(round(float(coord),5))
-    
-    except ValueError:
-        value = str(coord)
-
-    return value
 
 def get_point(long, lat):
     return 'POINT('+str(long)+' '+str(lat)+')'

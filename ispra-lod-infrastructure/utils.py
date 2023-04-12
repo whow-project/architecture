@@ -1,4 +1,5 @@
 ###Useful functions###
+import datetime as dt
 
 def chunks(lst, n):
     """Yield successive n-sized chunks from lst."""
@@ -28,3 +29,33 @@ def label_en(dset):
         return str("pesticides")
     else:
         return None
+
+def round_coord(coord):
+    try:
+        value = str(round(float(coord),5))
+
+    except ValueError:
+        value = str(coord)
+
+    return value
+
+def capitalize(s):
+    return str(s).capitalize()
+
+def lower(s):
+    return str(s).lower()
+
+def replace(find, rep, string):
+    s = string.replace(find, rep)
+    return s 
+
+@staticmethod
+def getYearMonth(date):
+    try:
+        result = dt.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
+    except ValueError:
+        result = dt.datetime(1300,1,1)
+
+    result = (format(result.year, '04d') + '-' + format(result.month, '02d'))
+
+    return result

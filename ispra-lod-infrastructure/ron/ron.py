@@ -5,6 +5,7 @@ import datetime as dt
 from pyrml import TermUtils
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
+from utils import round_coord, getYearMonth
 
 class Functions():
 
@@ -76,26 +77,6 @@ class Functions():
         else:
             return str(row["CODE_PLACE"])
 
-    @staticmethod
-    def round_coord(coord):
-        try:
-            value = str(round(float(coord),5))
-    
-        except ValueError:
-            value = str(coord)
-
-        return value
-
-    @staticmethod
-    def getYearMonth(date):
-        try:
-            result = dt.datetime.strptime(date, '%Y-%m-%dT%H:%M:%SZ')
-        except ValueError:
-            result = dt.datetime(1300,1,1)
-
-        result = (format(result.year, '04d') + '-' + format(result.month, '02d'))
-
-        return result
     
 class RONTriplifier(Triplifier):
     
@@ -112,8 +93,8 @@ class RONTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
-            'round_coord': Functions.round_coord,
-            'getYearMonth': Functions.getYearMonth,
+            'round_coord': round_coord,
+            'getYearMonth': getYearMonth,
             'preserve_value': Functions.preserve_value,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
