@@ -101,7 +101,7 @@ class KnowledgeGraphLoader():
 
     def sparql_delete(self,ipaddr,file_str,graph_iri):
 
-        sql_file = 'del_graph_' + graph_iri.split('/')[4] + '.sql'
+        sql_file = 'del_graph_' + graph_iri.split('/')[-2] + '.sql'
         str_graph = str(graph_iri)
         len_batch = 500
 
