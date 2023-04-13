@@ -8,7 +8,7 @@ from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
 import pandas as pd
-from utils import round_coord
+from utils import Utils
 
 
 UNIT_OF_MEASURES = None
@@ -170,7 +170,7 @@ class EpeTriplifier(Triplifier):
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
             'istat_normaliser': istat_normaliser,
-            'round_coord': round_coord,
+            'round_coord': Utils.round_coord,
             'format_date': format_date,
             'format_euring': format_euring,
             'get_unit_of_measure': get_unit_of_measure,

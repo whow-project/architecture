@@ -10,7 +10,7 @@ from typing import Dict, Callable
 import re
 from kg_loader import KnowledgeGraphLoader
 import pandas as pd
-from utils import label_en, label_it
+from utils import Utils
 
 
 UNIT_OF_MEASURES = None
@@ -167,8 +167,8 @@ class LandTriplifier(Triplifier):
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
             'place_type': place_type,
-            'label_it': label_it,
-            'label_en': label_en,
+            'label_it': Utils.label_it,
+            'label_en': Utils.label_en,
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
             'get_value': get_value

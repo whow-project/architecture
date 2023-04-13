@@ -5,7 +5,7 @@ import datetime as dt
 from pyrml import TermUtils
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
-from utils import round_coord, getYearMonth
+from utils import Utils
 
 class Functions():
 
@@ -93,8 +93,8 @@ class RONTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
-            'round_coord': round_coord,
-            'getYearMonth': getYearMonth,
+            'round_coord': Utils.round_coord,
+            'getYearMonth': Utils.getYearMonth,
             'preserve_value': Functions.preserve_value,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
