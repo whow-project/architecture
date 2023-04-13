@@ -94,7 +94,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato a: %eval:lower('{ {{CAS_NAME_IT}} }')%";
+            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato a: %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
             rr:language "it"
         ]
     ];
@@ -102,7 +102,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with: %eval:lower('{ {{CAS_NAME_EN}} }')%";
+            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with: %eval:capitalize('{ {{CAS_NAME_EN}} }')%";
             rr:language "en"
         ]
     ].

@@ -4,7 +4,7 @@ import re
 import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
-from utils import label_en, label_it, round_coord, title, lower, replace, getYearMonth
+from utils import label_en, label_it, round_coord, title, lower, upper, capitalize, replace, getYearMonth
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
 
@@ -158,7 +158,9 @@ class PesticidesTriplifier(Triplifier):
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
             'title': title,
+            'capitalize': capitalize,
             'lower': lower,
+            'upper': upper,
             'label_it': label_it,
             'label_en': label_en,
             'replace': replace,
