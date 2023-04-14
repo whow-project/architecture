@@ -61,7 +61,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Rete Ondametrica Nazionale";
+            rr:template "%eval:label_it('{{dataset}}')%";
             rr:language "it"
         ]
     ];
@@ -69,7 +69,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "National Wave Buoy Network";
+            rr:template "%eval:label_en('{{dataset}}')%";
             rr:language "en"
         ]
     ].

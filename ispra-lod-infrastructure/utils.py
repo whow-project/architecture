@@ -10,7 +10,7 @@ class Utils:
 
 
     def label_it(dset):
-        dset = str(dset)
+        dset = str(dset.lower())
         if (dset == "soilc"):
             return str("consumo del suolo")
             #return TermUtils.irify("consumo del suolo")
@@ -18,17 +18,25 @@ class Utils:
             return str("aree urbane")
         elif (dset == "pest"):
             return str("pesticidi")
+        elif (dset=="rmn"):
+            return str("Rete Mareografica Nazionale")
+        elif (dset=="ron"):
+            return str("Rete Ondametrica Nazionale")
         else:
             return None
 
     def label_en(dset):
-        dset = str(dset)
+        dset = str(dset.lower())
         if (dset == "soilc"):
             return str("soil consumption")
         elif (dset == "urban"):
             return str("urban areas")
         elif (dset == "pest"):
             return str("pesticides")
+        elif (dset=="rmn"):
+            return str("National Tide Gauge Network")
+        elif (dset=="ron"):
+            return str("National Wave Buoy Network")
         else:
             return None
 

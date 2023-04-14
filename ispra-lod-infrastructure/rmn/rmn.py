@@ -54,6 +54,8 @@ class RMNTriplifier(Triplifier):
             'time_interval': Functions.time_interval,
             'round_coord': Utils.round_coord,
             'getYearMonth': Utils.getYearMonth,
+            'label_it': Utils.label_it,
+            'label_en': Utils.label_en,
             'preserve_value': Functions.preserve_value
             }
         

@@ -60,7 +60,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Rete Mareografica Nazionale";
+            rr:template "%eval:label_it('{{dataset}}')%";
             rr:language "it"
         ]
     ];
@@ -68,7 +68,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "National Tide Gauge Network";
+            rr:template "%eval:label_en('{{dataset}}')%";
             rr:language "en"
         ]
     ].
