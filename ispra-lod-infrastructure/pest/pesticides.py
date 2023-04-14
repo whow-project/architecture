@@ -4,7 +4,7 @@ import re
 import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
-from utils import label_en, label_it, round_coord, title, lower, upper, capitalize, replace, getYearMonth
+from utils import Utils
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
 
@@ -148,8 +148,8 @@ class PesticidesTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
-            'round_coord': round_coord,
-            'getYearMonth': getYearMonth,
+            'round_coord': Utils.round_coord,
+            'getYearMonth': Utils.getYearMonth,
             'preserve_value': Functions.preserve_value,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
@@ -157,13 +157,13 @@ class PesticidesTriplifier(Triplifier):
             'cod_place': Functions.cod_place,
             'coord_uri': Functions.coord_uri,
             'get_point': Functions.get_point,
-            'title': title,
-            'capitalize': capitalize,
-            'lower': lower,
-            'upper': upper,
-            'label_it': label_it,
-            'label_en': label_en,
-            'replace': replace,
+            'title': Utils.title,
+            'capitalize': Utils.capitalize,
+            'lower': Utils.lower,
+            'upper': Utils.upper,
+            'label_it': Utils.label_it,
+            'label_en': Utils.label_en,
+            'replace': Utils.replace,
             'get_cas_codes': Functions.get_cas_codes,
             'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
             'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
