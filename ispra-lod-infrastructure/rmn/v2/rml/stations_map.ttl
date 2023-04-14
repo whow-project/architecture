@@ -46,14 +46,14 @@
     rml:logicalSource :CSV_STATIONS;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/rmn";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
             rr:class ispra-top:Dataset
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:constant  "RMN Dataset";
+            rr:constant  "{{dataset.upper()}} Dataset";
         ]
     ];
 
