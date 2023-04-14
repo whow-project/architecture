@@ -200,6 +200,9 @@ class KnowledgeGraphLoader():
         
         with gzip.open(kg_path, 'wt') as f:
             f.write(graph_string)
+        kg_path_wtime = kg_path.replace('.nt.gz', '_'+str(time.time())+'.nt.gz')
+        with gzip.open(kg_path_wtime, 'wt') as f:
+            f.write(graph_string)
 
         return kg_path, (os.path.join(kg_folder, name.lower(), "load.nt.gz")), (os.path.join(kg_folder, name.lower(), "delete.nt.gz"))
 
