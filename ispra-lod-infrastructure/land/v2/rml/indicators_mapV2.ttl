@@ -32,7 +32,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
             rr:class ispra-top:Dataset
     ];
 
