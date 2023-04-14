@@ -11,8 +11,6 @@
 @prefix onto-clv: <https://w3id.org/italia/onto/CLV/> .
 
 
-
-
 <#RegionsCSV>
   rml:source "data/place/v2/data/regions.csv" ;
   rml:referenceFormulation ql:CSV;
@@ -23,7 +21,7 @@
     rml:logicalSource <#RegionsCSV>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place/dataset";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
             rr:class ispra-top:Dataset
     ];
 
