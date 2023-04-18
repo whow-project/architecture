@@ -164,6 +164,7 @@ class PesticidesTriplifier(Triplifier):
             'label_it': Utils.label_it,
             'label_en': Utils.label_en,
             'replace': Utils.replace,
+            'identity': Utils.identity,
             'get_cas_codes': Functions.get_cas_codes,
             'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
             'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,

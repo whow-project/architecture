@@ -24,7 +24,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:title('{nome_ragg}')%'";
+            rr:template "%eval:title('{nome_ragg}')%";
             rr:language "it"
         ]
     ];

@@ -70,7 +70,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasBroader;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}";
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }%eval:identity('{{indicator|lower}}')%";
             rr:termType rr:IRI
         ]
     ];
