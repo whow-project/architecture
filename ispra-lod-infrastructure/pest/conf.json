@@ -23,7 +23,7 @@
        "variables": [
          {
            "id": "indicators",
-           "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_{{year}}.csv', 21)"
+           "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_{{year}}.csv', 19)"
          },
          {
            "id": "YEAR",
@@ -86,7 +86,7 @@
      "variables": [
        {
          "id": "indicators",
-         "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_sostanze_{{year}}.csv', 12)"
+         "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_sostanze_{{year}}.csv', 11)"
        },
        {
          "id": "YEAR",
