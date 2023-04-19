@@ -11,9 +11,9 @@ def split_pest_by_year(csv_file):
 
     
     for yy in (range(1900, 2022)):
-        print ('Processing year', yy, '...')
         df_years = df_csv_large[df_csv_large[year_cols[0]] == yy]
         if (not(df_years.empty)):
+            print ('Processing year', yy, '...')
             df_years.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + str(yy) + '.csv', index=None, sep=';')
         del df_years
 
