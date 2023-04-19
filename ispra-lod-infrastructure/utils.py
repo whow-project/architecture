@@ -3,6 +3,12 @@ import datetime as dt
 
 class Utils:
 
+    def identity(s):
+        '''
+        Returns same string through urification    
+        '''
+        return s
+    
     def chunks(lst, n):
         """Yield successive n-sized chunks from lst."""
         for i in range(0, len(lst), n):
