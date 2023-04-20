@@ -52,6 +52,7 @@
             rr:language "en"
         ]
     ];
+    
 
         rr:predicateObjectMap [
         rr:predicate dcterms:description;
@@ -68,13 +69,13 @@
             rr:language "en"
         ]
     ];
-    
+
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
-            rr:objectMap [
+        rr:objectMap [
             rr:template "{{dataset}}_{Campo}"
-      ]
-  ];
+        ]
+    ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasBroader;
@@ -95,10 +96,10 @@
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
-            rr:objectMap [
+        rr:objectMap [
             rr:template "{{dataset}}_{Broader_ID}"
-      ]
-  ];
+        ]
+    ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
@@ -144,29 +145,5 @@
         rr:predicate ispra-top:symbol;
         rr:objectMap [
             rml:reference "Unit_EN"
-        ]
-    ] .
-
-:MU_sameAs
-    rml:logicalSource :CSV_mu_sameAs;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{EN}";
-        rr:class ispra-top:UnitOfMeasure
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate owl:sameAs;
-        rr:objectMap [
-            rml:reference "DBPEDIA";
-            rr:termType rr:IRI
-        ]
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate owl:sameAs;
-        rr:objectMap [
-            rml:reference "WIKIDATA";
-            rr:termType rr:IRI
         ]
     ] .

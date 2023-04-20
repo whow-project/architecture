@@ -19,28 +19,7 @@
   rml:referenceFormulation ql:CSV;
   crml:separator "\t".
 
-<#DatasetISPRA>
-    rml:logicalSource <#CitiesCSV>;
 
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place";
-    ].
-
-<#Provinces>
-  rml:logicalSource <#CitiesCSV>;
-  
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_COM}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_COM}')%";
-  ].
-   
- <#Regions>
-  rml:logicalSource <#CitiesCSV>;
-  
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}"
-  ].
-
- 
  <#IstatCode>
   rml:logicalSource <#CitiesCSV>;
   
@@ -151,21 +130,24 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasCountry;
     rr:objectMap [
-      rr:parentTriplesMap <#Nation>
+      rr:template "https://w3id.org/italia/env/ld/place/country/00201_0";
+      rr:termType rr:IRI
     ]
   ];
   
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasRegion;
     rr:objectMap [
-      rr:parentTriplesMap <#Regions>
+      rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}";
+      rr:termType rr:IRI
     ]
   ];
   
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasDirectHigherRank;
     rr:objectMap [
-      rr:parentTriplesMap <#Provinces>
+      rr:template "https://w3id.org/italia/env/ld/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_COM}')%/00201_%eval:metropolitan_city_code_2('{COD_PROV}','{YEAR_COM}')%";
+      rr:termType rr:IRI
     ]
   ];
   
@@ -202,7 +184,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isMemberOf;
     rr:objectMap [
-        rr:parentTriplesMap <#DatasetISPRA>;
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+        rr:termType rr:IRI
     ]
   ];
 
@@ -301,12 +284,6 @@
     ]
   ].
 
- <#Nation>
-  rml:logicalSource <#CitiesCSV>;
-
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/country/00201_0"
-  ].
 
 #=================
 #CITIES NO LONGER EXISTING

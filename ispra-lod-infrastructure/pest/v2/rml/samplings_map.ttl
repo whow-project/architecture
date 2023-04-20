@@ -1,0 +1,131 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/samplings_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+
+
+<#CSV_DATA>
+    rml:source "{{ csv_stations }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+
+<#Sampler>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{ {{STAT_KEY}} }";
+        rr:class inspire-mf:Sampler
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "%eval:label_en('{{dataset}}')% sampler associated with station { {{STAT_KEY}} }";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Campionatore di %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isHostedBy;
+        rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{ {{STAT_KEY}} }";
+        rr:termType rr:IRI
+        ]
+    ].
+
+
+<#SamplingCollection>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingcollection/00201_{ {{PLACE_CODE}} }";
+        rr:class inspire-mf:SamplingCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Collection of the %eval:label_en('{{dataset}}')% samplings associated with: %eval:title('{ {{PLACE_NAME}} }')%";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Collezione dei campionamenti di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{ {{PLACE_CODE}} }";
+        rr:termType rr:IRI
+        ]
+    ] .
+
+
+<#SamplingSeries>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+        rr:class inspire-mf:SamplingSeries
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "%eval:label_en('{{dataset}}')% sampling series of station { {{STAT_KEY}} }, year {{YEAR}}";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Serie di campionamenti di %eval:label_it('{{dataset}}')% della stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasFeatureOfInterest;
+        rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:digest('{ {{BASIN}} }{ {{WBODY}} }')%";
+        rr:termType rr:IRI
+        ]
+    ]; 
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isSamplingSeriesMadeBySampler;
+        rr:objectMap [
+        rr:parentTriplesMap <#Sampler>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#SamplingCollection>
+        ]
+    ].

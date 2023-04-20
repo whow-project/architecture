@@ -4,7 +4,7 @@ from rdflib.plugin import get as plugin
 import os, sys
 import configuration as conf
 import gzip, tarfile
-from utils import chunks
+from utils import Utils
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
 from utf8_converter import UTF8Converter
@@ -101,7 +101,7 @@ class KnowledgeGraphLoader():
 
     def sparql_delete(self,ipaddr,file_str,graph_iri):
 
-        sql_file = 'del_graph_' + graph_iri.split('/')[4] + '.sql'
+        sql_file = 'del_graph_' + graph_iri.split('/')[-2] + '.sql'
         str_graph = str(graph_iri)
         len_batch = 500
 
@@ -114,7 +114,7 @@ class KnowledgeGraphLoader():
             with open(sql_file, 'w') as sql_del:
                 print("DELETE FROM LOAD_LIST;", file=sql_del)
                 #Divide deletes in batches
-                for sublist in list(chunks(read_f.splitlines(),len_batch)):
+                for sublist in list(Utils.chunks(read_f.splitlines(),len_batch)):
                     print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
                     for dd in sublist:
                         if dd: print (dd.decode("utf-8"), file=sql_del)
@@ -199,6 +199,9 @@ class KnowledgeGraphLoader():
         graph_string = new_graph.serialize(format="nt11")
         
         with gzip.open(kg_path, 'wt') as f:
+            f.write(graph_string)
+        kg_path_wtime = kg_path.replace('.nt.gz', '_'+str(time.time())+'.nt.gz')
+        with gzip.open(kg_path_wtime, 'wt') as f:
             f.write(graph_string)
 
         return kg_path, (os.path.join(kg_folder, name.lower(), "load.nt.gz")), (os.path.join(kg_folder, name.lower(), "delete.nt.gz"))

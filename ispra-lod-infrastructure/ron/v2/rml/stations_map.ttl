@@ -48,8 +48,7 @@
     rml:logicalSource :CSV_STATIONS;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}";
-            rr:class ispra-top:Dataset
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
     ];
 
     rr:predicateObjectMap [
@@ -62,7 +61,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "Rete Ondametrica Nazionale";
+            rr:template "%eval:label_it('{{dataset}}')%";
             rr:language "it"
         ]
     ];
@@ -70,7 +69,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "National Wave Buoy Network";
+            rr:template "%eval:label_en('{{dataset}}')%";
             rr:language "en"
         ]
     ].

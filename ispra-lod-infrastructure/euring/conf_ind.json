@@ -1,0 +1,53 @@
+{
+	"dataset": "euring",
+	"graph_iri": "https://w3id.org/italia/env/ld/euring/ind/",
+	"rdf_dump_file_name": "epe_indicator_{{year}}",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "data/euring/v2/data",
+	"dirty_data_folder": "data/euring/v2/dirtydata",
+	"rml_folder": "data/euring/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+	"year": {{year}},
+	"mappings": [
+		{
+            "rml": "indicators_map.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Regioni_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/euring/v2/dirtydata/Regioni_{{year}}.csv', 1)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD_REG'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nome_Regione'"
+                }
+            ]
+        },
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Descrizione_campi.csv"
+                }
+            ]
+        }
+
+	]
+}

@@ -1,0 +1,46 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/substance_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+:CSV
+    rml:source "{{ csv_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+:SubstanceEntity
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{cod_ragg}";
+        rr:class inspire-mf:FeatureOfInterest
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:title('{nome_ragg}')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:title('{nome_ragg_en}')%";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isClassifiedBy;
+        rr:objectMap [
+            rr:template "https://w3id.org/whow/controlled-vocabulary/chemical-substances/cas-%eval:get_cas_codes('{cod_cas}', 0)%-%eval:get_cas_codes('{cod_cas}', 1)%-%eval:get_cas_codes('{cod_cas}', 2)%";
+            rr:termType rr:IRI
+        ]
+    ].

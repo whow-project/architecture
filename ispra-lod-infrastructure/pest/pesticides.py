@@ -1,11 +1,17 @@
 from builtins import staticmethod
 import os
 import re
+import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
+from utils import Utils
 from triplification import Triplifier, UtilsFunctions
 from kg_loader import KnowledgeGraphLoader
-from utils import Utils
+
+
+UNIT_OF_MEASURES_STAZ = None
+UNIT_OF_MEASURES_IND = None
+
 
 class Functions():
 
@@ -66,19 +72,68 @@ class Functions():
             return None
         
     @staticmethod
-    def replace(find, rep, string):
-        s = string.replace(find, rep)
-        return s
-    
-    @staticmethod
     def cod_place(row):
         if len(str(row["CODE_PLACE"])) == 5:
             return "0" + str(row["CODE_PLACE"])
         else:
             return str(row["CODE_PLACE"])
+        
+    @staticmethod
+    def coord_uri(coord):
+        coord_str = str(coord)
 
+        try:
+            coord_int = coord_str.split('.')[0]
+            coord_dec = coord_str.split('.')[1]
+        except IndexError:
+            return coord.replace('.', '')
+
+        coord_int = coord_int.zfill(2)
+        coord_dec = coord_dec.ljust(6, '0')
+
+        return coord_int+coord_dec
     
-class RONTriplifier(Triplifier):
+    @staticmethod
+    def get_point(long,lat):
+        long = float(long)
+        lat = float(lat)
+
+        return ('POINT(%s %s)' % (long, lat))    
+
+
+    @staticmethod
+    def get_cas_codes(code, n):
+        list_codes = str(code).split('-')
+
+        return list_codes[int(n)]
+
+    @staticmethod
+    def get_unit_of_measure_staz(metric, lang, iri=False):
+
+        if iri:
+            return TermUtils.irify(UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"].lower())
+        elif lang == 'symbol':
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit"]
+        elif lang == 'it':
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit_IT"]
+        else:
+            return UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"]
+        
+
+    @staticmethod
+    def get_unit_of_measure_ind(metric, lang, iri=False):
+
+        if iri:
+            return TermUtils.irify(UNIT_OF_MEASURES_IND[metric]["Unit_EN"].lower())
+        elif lang == 'symbol':
+            return UNIT_OF_MEASURES_IND[metric]["Unit"]
+        elif lang == 'it':
+            return UNIT_OF_MEASURES_IND[metric]["Unit_IT"]
+        else:
+            return UNIT_OF_MEASURES_IND[metric]["Unit_EN"]
+    
+
+class PesticidesTriplifier(Triplifier):
     
     '''
         The following protected attributes are declared by the superclass Triplifier:
@@ -86,7 +141,7 @@ class RONTriplifier(Triplifier):
          - self._rml_path -> the path to the RML mapping files
          - self._data_path -> the path to CSV data files.
     '''
-    def __init__(self):
+    def __init__(self, year : int):
         
         functions_dictionary = {
             'measures_collection_title': Functions.measures_collection_title,
@@ -95,28 +150,56 @@ class RONTriplifier(Triplifier):
             'time_interval': Functions.time_interval,
             'round_coord': Utils.round_coord,
             'getYearMonth': Utils.getYearMonth,
-            'label_it': Utils.label_it,
-            'label_en': Utils.label_en,
             'preserve_value': Functions.preserve_value,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
             'get_unit_of_measure_wmo': Functions.get_unit_of_measure_wmo,
-            'replace': Functions.replace,
             'cod_place': Functions.cod_place,
-            'po_assertion_uuid': UtilsFunctions.po_assertion_uuid
+            'coord_uri': Functions.coord_uri,
+            'get_point': Functions.get_point,
+            'title': Utils.title,
+            'capitalize': Utils.capitalize,
+            'lower': Utils.lower,
+            'upper': Utils.upper,
+            'label_it': Utils.label_it,
+            'label_en': Utils.label_en,
+            'replace': Utils.replace,
+            'identity': Utils.identity,
+            'get_cas_codes': Functions.get_cas_codes,
+            'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
+            'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
+            'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
+            'digest': UtilsFunctions.short_uuid
             }
         
-        super().__init__('ron', functions_dictionary)
-        self._dirty_data_path = os.path.join('ron', 'v2', 'dirtydata')
+        super().__init__('pesticides', functions_dictionary)
+        self._dirty_data_path = os.path.join('pesticides', 'v2', 'dirtydata')
+
+        self._conf_vars.update({"year": year})
         
         
     def _dataset_initialisation(self) -> None:
-        print("RMN preprocessing...")
+        print("Pesticides preprocessing...")
         
         KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+
+        df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=None, engine='python', iterator=True)
+        sep = df._engine.data.dialect.delimiter
+        df.close()
+
+        global UNIT_OF_MEASURES_STAZ
+
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        UNIT_OF_MEASURES_STAZ = units_df.to_dict(orient="index")
+        del units_df
+
+        global UNIT_OF_MEASURES_IND
+        
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        UNIT_OF_MEASURES_IND = units_df.to_dict(orient="index")
         
         print("\t preprocessing completed.")
    
     def get_graph_iri(self):
-        return 'https://w3id.org/italia/env/ld/ron'
+        return 'https://w3id.org/italia/env/ld/pesticides'
     

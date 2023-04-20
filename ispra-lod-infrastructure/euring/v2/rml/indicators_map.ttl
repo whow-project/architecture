@@ -22,42 +22,6 @@
     rml:source "{{ csv_file }}" ;
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
-    
-:METRICS_CSV
-    rml:source "{{ metrics_csv_file }}" ;
-    rml:referenceFormulation ql:CSV;
-    crml:separator ";".
-
-:DatasetISPRA
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
-            rr:class ispra-top:Dataset
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template  "{{dataset.upper()}} Dataset";
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:label_it('{{dataset}}')%";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:label_en('{{dataset}}')%";
-            rr:language "en"
-        ]
-    ].
 
 
 :MainCollection
@@ -71,14 +35,15 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isPartOf;
         rr:objectMap [
-            rr:parentTriplesMap :DatasetISPRA
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+            rr:termType rr:IRI
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione di risorse di %eval:label_it('{{dataset}}')% associate a: { {{NOME_PLACE}} }";
+            rr:template "Collezione delle risorse {{dataset|upper}} associate a: { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -86,7 +51,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: { {{NOME_PLACE}} }";
+            rr:template "{{dataset|upper}} resources collection associated with: { {{NOME_PLACE}} }";
             rr:language "en"
         ]
     ];
@@ -94,23 +59,11 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isCollectionOf;
         rr:objectMap [
-            rr:parentTriplesMap :Place
+            rr:template "https://w3id.org/italia/env/ld/place/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%/00201_{ {{COD_PLACE}} }";
+            rr:termType rr:IRI
         ]
     ].
 
-#    rr:predicateObjectMap [
-#        rr:predicate ispra-top:hasMember;
-#        rr:objectMap [
-#            rr:parentTriplesMap :IndicatorCollections;
-#        ]
-#    ];
-
-#    rr:predicateObjectMap [
-#        rr:predicate ispra-top:isPartOf;
-#        rr:objectMap [
-#            rr:parentTriplesMap :DatasetISPRA
-#        ]
-#    ];
 
 :IndicatorCollections
     rml:logicalSource :CSV;
@@ -123,7 +76,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione degli indicatori di %eval:label_it('{{dataset}}')% associati a: { {{NOME_PLACE}} }";
+            rr:template "Collezione degli indicatori {{dataset|upper}} associati a: { {{NOME_PLACE}} }";
             rr:language "it"
         ]
     ];
@@ -131,7 +84,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collection of %eval:label_en('{{dataset}}')% indicators associated with: { {{NOME_PLACE}} }";
+            rr:template "Collection of {{dataset|upper}} indicators associated with: { {{NOME_PLACE}} }";
             rr:language "en"
         ]
     ];
@@ -139,16 +92,10 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isPartOf;
         rr:objectMap [
-            rr:parentTriplesMap :MainCollection;
+             rr:parentTriplesMap :MainCollection
         ]
     ] .
 
-:Place
-    rml:logicalSource :CSV;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place/%eval:place_type('{ {{COD_PLACE}} }', '{{COD_PLACE}}')%/00201_{ {{COD_PLACE}} }"
-    ].
 
 :Year
     rml:logicalSource :CSV;
@@ -236,7 +183,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isMemberOf;
         rr:objectMap [
-            rr:parentTriplesMap :IndicatorsCollectionMetric{{indicator}}
+        rr:parentTriplesMap :IndicatorsCollectionMetric{{indicator}}
         ]
     ];
 

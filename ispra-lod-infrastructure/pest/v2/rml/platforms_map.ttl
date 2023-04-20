@@ -1,0 +1,626 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/stations_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix time: <http://www.w3.org/2006/time#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+
+:CSV_STATIONS
+  rml:source "{{ csv_stations }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+
+:DatasetISPRA
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+            rr:class ispra-top:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Dataset Nazionale della concentrazione di %eval:label_it('{{dataset}}')% nelle acque italiane";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "National dataset of %eval:label_en('{{dataset}}')% concentration in Italian waters";
+            rr:language "en"
+        ]
+    ].
+
+
+:Catalogue
+  rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{ {{PLACE_CODE}} }";
+        rr:class ispra-top:Collection
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: %eval:title('{ {{PLACE_NAME}} }')%";
+            rr:language "en"
+        ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isCollectionOf;
+    rr:objectMap [
+      rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{ {{PLACE_CODE}} }";
+      rr:termType rr:IRI
+    ]
+] .
+
+
+:SamplingCatalogue
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+  ].
+
+
+:IspraCode
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00106_{ {{STAT_KEY}} }";
+    rr:class ispra-top:UniqueIdentifier
+    ];
+
+  rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:label_en('{{dataset}}')% sampling station ID { {{STAT_KEY}} }";
+            rr:language "en"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Identificativo stazione di campionamento %eval:label_it('{{dataset}}')% { {{STAT_KEY}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Codice univoco stazione di campionamento %eval:label_it('{{dataset}}')% - { {{STAT_KEY}} } - composto dal codice regione ({ {{REG_ID}}}), dalla tipologia stazione (%eval:upper('{ {{STAT_TYPE}} }')%) e dall'ID regionale della stazione ({ {{STAT_CODE}}})";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Pesticide sampling station unique code - { {{STAT_KEY}} } - composed of the region code ({ {{REG_ID}}}), the station type (%eval:upper('{ {{STAT_TYPE}} }')%) and the station regional ID ({ {{STAT_CODE}}})";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{{dataset}}_{ {{STAT_KEY}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+  :IdentifierSchema
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/00106";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Schema identificativi stazioni di campionamento %eval:label_it('{{dataset}}')%";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "%eval:label_en('{{dataset}}')% sampling stations identifiers schema";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Schema di identificativi univoci delle stazioni di campionamento %eval:label_it('{{dataset}}')% gestite da ISPRA";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Unique identifiers schema of %eval:label_en('{{dataset}}')% sampling stations managed by ISPRA";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "06"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:parentTriplesMap :Ispra
+        ]
+    ].
+
+
+  :Ispra
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/organisation/001"
+        ].
+
+
+:StationCollection
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/00201_{ {{PLACE_CODE}} }";
+    rr:class inspire-mf:PlatformCollection
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Collection of the %eval:label_en('{{dataset}}')% sampling stations associated with: %eval:title('{ {{PLACE_NAME}} }')%";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Collezione delle stazioni di campionamento %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :Catalogue;
+    ]
+  ] .
+
+:Station
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{ {{STAT_KEY}} }";
+    rr:class inspire-mf:Platform
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            rr:parentTriplesMap :StationCollection;
+        ]
+    ];
+        
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling station with ID { {{STAT_KEY}} }";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Stazione di campionamento %eval:label_it('{{dataset}}')% con ID { {{STAT_KEY}} }";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:hasUniqueIdentifier;
+    rr:objectMap [
+      rr:parentTriplesMap :IspraCode
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LONG}} }')%"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LAT}} }')%"
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:hasFeature;
+    rr:objectMap [
+      rr:parentTriplesMap :Feature
+    ]
+  ].
+
+
+:Feature
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+    rr:class ispra-place:Feature
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LONG}} }')%"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{ {{LAT}} }')%"
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap :FeatureGeometry
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isPartOf;
+    rr:objectMap [
+      rr:parentTriplesMap :FeatureOfInterest;
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling point corresponding to station { {{STAT_KEY}} }, year {{YEAR}}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% corrispondente alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling point associated with station { {{STAT_KEY}} }, year {{YEAR}}, placed at the location %eval:title('{ {{LOC_NAME}} }')% (municipality of %eval:title('{ {{PLACE_NAME}} }')%)";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}, posto in località %eval:title('{ {{LOC_NAME}} }')% (comune di %eval:title('{ {{PLACE_NAME}} }')%)";
+      rr:language "it"
+    ]
+  ].
+
+
+:FeatureGeometry
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/%eval:coord_uri('{ {{LONG}} }')%_%eval:coord_uri('{ {{LAT}} }')%_point";	
+    rr:class ispra-place:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di coordinate { {{LONG}} }, { {{LAT}} }";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Point with coordinates { {{LONG}} }, { {{LAT}} }";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:geometry;
+    rr:objectMap [
+      rr:template "%eval:get_point('{ {{LONG}} }','{ {{LAT}} }')%";
+      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+    ]
+  ].
+
+
+:FeatureOfInterest
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:digest('{ {{BASIN}} }{ {{WBODY}} }')%";
+    rr:class inspire-mf:FeatureOfInterest
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Bacino { {{BASIN}} }, corpo idrico { {{WBODY}} }";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Basin { {{BASIN}} }, water body { {{WBODY}} }";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+        rr:template "Corpo idrico { {{WBODY}} } afferente al Bacino { {{BASIN}} }";
+        rr:language "it"
+      ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+        rr:template "Water body { {{WBODY}} } belonging to the { {{BASIN}} } basin";
+        rr:language "en"
+      ]
+    ].
+
+
+:Year
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+        rr:class ispra-top:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:year;
+        rr:objectMap [
+            rr:constant "{{YEAR}}";
+            rr:datatype xsd:gYear
+        ]
+    ].
+
+
+{% for indicator in indicators %}
+:StationsIndicatorsCollection{{indicator}}
+  rml:logicalSource :CSV_STATIONS;
+
+  crml:condition "df['{{indicator}}'].notnull()";
+
+  rr:subjectMap [
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}";
+      rr:class inspire-mf:IndicatorCollection
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate ispra-top:isPartOf;
+      rr:objectMap [
+          rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00201_{ {{PLACE_CODE}} }";
+          rr:termType rr:IRI
+      ]
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate ispra-top:isParametrisedBy;
+      rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}";
+        rr:termType rr:IRI
+      ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:identifier;
+      rr:objectMap [
+          rr:template "{{dataset}}_{ {{STAT_TYPE}} }{{indicator}}"
+      ]
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} associati alla stazione { {{STAT_KEY}} }";
+          rr:language "it"
+      ]
+  ];
+
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "{ {{STAT_TYPE}} }{{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+          rr:language "en"
+      ]
+  ] .
+
+
+:Stationindicators{{indicator}}
+  rml:logicalSource :CSV_STATIONS;
+
+  crml:condition "df['{{indicator}}'].notnull()";
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}_{{YEAR}}";
+        rr:class inspire-mf:Indicator
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+          rr:language "it"
+      ]
+  ];
+  
+  rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+          rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+          rr:language "en"
+      ]
+  ];
+      
+  rr:predicateObjectMap [
+      rr:predicate ispra-top:isMemberOf;
+      rr:objectMap [
+          rr:parentTriplesMap :StationsIndicatorsCollection{{indicator}}
+      ]
+  ];
+
+  rr:predicateObjectMap [
+      rr:predicate ispra-top:hasValue;
+      rr:objectMap [
+          rr:parentTriplesMap :Value{{indicator}}
+      ]
+    ];
+  
+  rr:predicateObjectMap [
+      rr:predicate ispra-top:atTime;
+      rr:objectMap [
+          rr:parentTriplesMap :Year
+      ]
+  ].
+
+
+:Value{{indicator}}
+    rml:logicalSource :CSV_STATIONS;
+    
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en', True)%";
+        rr:class ispra-top:Value
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:value;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en', True)%";
+            rr:termType rr:IRI
+        ]
+    ] .
+
+{%endfor%}
+

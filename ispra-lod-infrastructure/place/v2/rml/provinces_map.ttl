@@ -20,13 +20,6 @@
   crml:separator "\t".
 
 
-<#DatasetISPRA>
-    rml:logicalSource <#ProvincesCSV>;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/place";
-    ].
-
 <#IstatCode>
   rml:logicalSource <#ProvincesCSV>;
   
@@ -123,14 +116,16 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasCountry;
     rr:objectMap [
-      rr:parentTriplesMap <#Nation>
+      rr:template "https://w3id.org/italia/env/ld/place/country/00201_0";
+      rr:termType rr:IRI
     ]
   ];
   
   rr:predicateObjectMap [
     rr:predicate ispra-place:hasRegion;
     rr:objectMap [
-      rr:parentTriplesMap <#Regions>
+      rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}";
+      rr:termType rr:IRI
     ]
   ];
   
@@ -142,11 +137,12 @@
   ];
 
   rr:predicateObjectMap [
-        rr:predicate ispra-top:isMemberOf;
-        rr:objectMap [
-            rr:parentTriplesMap <#DatasetISPRA>;
-        ]
-    ];
+    rr:predicate ispra-top:isMemberOf;
+    rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+        rr:termType rr:IRI
+    ]
+  ];
 
   rr:predicateObjectMap [
     rr:predicate onto-clv:hasRankOrder;
@@ -169,14 +165,6 @@
     rr:template "https://w3id.org/italia/env/onto/place/%eval:metropolitan_city_type('{COD_PROV}','{YEAR_PROV}')%"
   ].
    
- <#Regions>
-  rml:logicalSource <#ProvincesCSV>;
-  
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/region/00201_{COD_REG}"
-  ].
-  
-  
  <#Geometry>
   rml:logicalSource <#ProvincesCSV>;
   
@@ -225,14 +213,6 @@ rr:predicateObjectMap [
     ]
   ].
   
- 
- <#Nation>
-  rml:logicalSource <#ProvincesCSV>;
-
-  rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/country/00201_0"
-  ].
-
 #=================
 #PROVINCES REPLACED BY METROPOLITAN CITIES
 <#MetropolitanCitiesCSV>

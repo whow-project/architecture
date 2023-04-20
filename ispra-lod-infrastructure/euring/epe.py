@@ -8,6 +8,7 @@ from triplification import Triplifier, UtilsFunctions
 from typing import Dict, Callable
 import re
 import pandas as pd
+from utils import Utils
 
 
 UNIT_OF_MEASURES = None
@@ -59,7 +60,10 @@ def __istat_normaliser(istat, length):
 
 def istat_normaliser(df):
     
-    fields_length_dict = {"cod_com_istat": 6}
+    fields_length_dict = {"cod_com_istat": 6,
+                          "COD_PRO": 3,
+                          "COD_REG": 2,
+                          "Nazione": 1}
     
     for key in fields_length_dict.keys():
         if key in df.columns:
@@ -67,16 +71,6 @@ def istat_normaliser(df):
         
     return df
 
-
-def round_coord(coord):
-
-    try:
-        value = str(round(float(coord),5))
-    
-    except ValueError:
-        value = str(coord)
-
-    return value
 
 def get_point(long, lat):
     return 'POINT('+str(long)+' '+str(lat)+')'
@@ -105,16 +99,6 @@ def get_unit_of_measure(metric, lang, iri=False):
     else:
         return UNIT_OF_MEASURES[metric]["Unit_EN"]
     
-    '''
-    if iri:
-        return TermUtils.irify(UNIT_OF_MEASURES[UNIT_OF_MEASURES["Campo"] == metric]["Unit_EN"].values[0].lower())
-    elif lang == 'symbol':
-        return UNIT_OF_MEASURES[UNIT_OF_MEASURES["Campo"] == metric]["Unit"].values[0]
-    elif lang == 'it':
-        return UNIT_OF_MEASURES[UNIT_OF_MEASURES["Campo"] == metric]["Unit_IT"].values[0]
-    else:
-        return UNIT_OF_MEASURES[UNIT_OF_MEASURES["Campo"] == metric]["Unit_EN"].values[0]
-    '''
 
 def get_value(indicator_value, iri=False):
     try:
@@ -128,6 +112,46 @@ def get_value(indicator_value, iri=False):
         value = TermUtils.irify(value)
     
     return value
+
+
+def place_type(istat, field):
+
+    istat = str(istat)
+    field = str(field)
+  
+    if field == "IdOST_Origine":
+        if len(istat) == 3:
+            if istat.startswith("2"):
+                type = "metropolitancity"
+            else:
+                type = "province"
+        elif len(istat) == 2:
+            type = "region"
+        elif len(istat) == 1:
+            type = "country"
+        elif len(istat) > 3 and len(istat) <= 6:
+            type = "municipality"
+        else:
+            type = None       
+        return "%s"%(type)
+
+    elif field == "PRO_COM":
+        type = "municipality"
+    elif field == "COD_PRO":
+        if istat.startswith("2"):
+            type = "metropolitancity"
+        else:
+            type = "province"
+    elif field == "COD_REG":
+        type = "region"
+    elif field == "COD":
+        type = "country"
+        
+    else:
+        return None
+
+    return "%s"%(type)
+
 
 class EpeTriplifier(Triplifier):
     
@@ -146,12 +170,13 @@ class EpeTriplifier(Triplifier):
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
             'istat_normaliser': istat_normaliser,
-            'round_coord': round_coord,
+            'round_coord': Utils.round_coord,
             'format_date': format_date,
             'format_euring': format_euring,
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
             'get_value': get_value,
+            'place_type': place_type,
             'get_point': get_point,
             'digest': UtilsFunctions.short_uuid
             }
@@ -171,7 +196,7 @@ class EpeTriplifier(Triplifier):
         files = [ file for file in os.listdir(self._data_path) if file.endswith(".csv") ]
 
         for file in files:
-            if ('istat' in file):
+            if ('istat' in file or 'Regioni' in file):
                 print ("ISTAT ID normalizer for", file)
                 df = pd.read_csv(os.path.join(self._data_path, file), sep=None, engine='python', iterator=True)
                 sep = df._engine.data.dialect.delimiter
@@ -180,6 +205,16 @@ class EpeTriplifier(Triplifier):
                 df_istat = istat_normaliser(df)
                 df_istat.to_csv(os.path.join(self._data_path, file), sep=sep, index=None)
                 del df_istat, df
+
+        df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
+        separator = df._engine.data.dialect.delimiter
+        df.close()
+        
+        global UNIT_OF_MEASURES
+        
+        
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campi.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        UNIT_OF_MEASURES = units_df.to_dict(orient="index")
         
         print("\t preprocessing completed.")
         

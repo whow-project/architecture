@@ -10,6 +10,7 @@ from typing import Dict, Callable
 import re
 from kg_loader import KnowledgeGraphLoader
 import pandas as pd
+from utils import Utils
 
 
 UNIT_OF_MEASURES = None
@@ -149,26 +150,6 @@ def place_type(istat, field):
     return "%s"%(type)
 
 
-def label_it(dset):
-    dset = str(dset)
-    if (dset == "soilc"):
-        return str("consumo del suolo")
-        #return TermUtils.irify("consumo del suolo")
-    elif (dset == "urban"):
-        return str("aree urbane")
-    else:
-        return None
-
-def label_en(dset):
-    dset = str(dset)
-    if (dset == "soilc"):
-        return str("soil consumption")
-    elif (dset == "urban"):
-        return str("urban areas")
-    else:
-        return None
-
-
 class LandTriplifier(Triplifier):
     
     '''
@@ -186,8 +167,8 @@ class LandTriplifier(Triplifier):
             'indicator_collection_entity': indicator_collection_entity,
             'unit_entity': unit_entity,
             'place_type': place_type,
-            'label_it': label_it,
-            'label_en': label_en,
+            'label_it': Utils.label_it,
+            'label_en': Utils.label_en,
             'get_unit_of_measure': get_unit_of_measure,
             'round': round,
             'get_value': get_value

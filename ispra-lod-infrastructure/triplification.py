@@ -2,7 +2,7 @@ from builtins import staticmethod
 import os
 
 import pandas as pd
-from pyrml.pyrml import RMLConverter
+from pyrml import RMLConverter
 
 from abc import ABC, abstractclassmethod
 import json
