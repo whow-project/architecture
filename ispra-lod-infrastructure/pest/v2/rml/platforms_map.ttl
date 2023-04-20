@@ -488,7 +488,7 @@
 
   crml:condition "df['{{indicator}}'].notnull()";
 
-    rr:subjectMap [
+  rr:subjectMap [
       rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00106_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}";
       rr:class inspire-mf:IndicatorCollection
   ];
