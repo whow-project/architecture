@@ -60,7 +60,7 @@ class KnowledgeGraphLoader():
         sftp = SFTPClient.from_transport(ssh.get_transport())
         try:
             sftp.chdir(folder)  # Test if remote_path exists
-        except (IOError, FileNotFoundError) as e:
+        except (IOError) as e:
             sftp.mkdir(folder)  # Create remote_path
             sftp.chdir(folder)
         print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
@@ -84,7 +84,7 @@ class KnowledgeGraphLoader():
         else:
             # create sql file
             with open(sql_file, 'w') as sql_out:
-                print("DELETE FROM LOAD_LIST;", file=sql_out)
+                print(f"DELETE FROM LOAD_LIST WHERE ll_file='{file_toload}' and ll_graph='{str_graph}';", file=sql_out)
                 print("LD_ADD('" + file_toload + "', '" + str_graph + "');", file=sql_out)
                 print("RDF_LOADER_RUN(log_enable=>3);", file=sql_out)
                 print("CHECKPOINT;", file=sql_out)
@@ -112,7 +112,6 @@ class KnowledgeGraphLoader():
             print ('No triples to delete!')
         else:
             with open(sql_file, 'w') as sql_del:
-                print("DELETE FROM LOAD_LIST;", file=sql_del)
                 #Divide deletes in batches
                 for sublist in list(Utils.chunks(read_f.splitlines(),len_batch)):
                     print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del) 
