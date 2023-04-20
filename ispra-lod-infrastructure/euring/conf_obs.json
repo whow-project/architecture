@@ -10,6 +10,8 @@
     "dest_folder": "/path/to/folder",
     "username": "username",
     "passwd": "password",
+    "dbuser": "dba",
+    "dbpasswd": "dba",
 	"year": {{year}},
 	"mappings": [
 	    {

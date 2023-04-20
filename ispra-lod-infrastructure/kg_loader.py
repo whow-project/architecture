@@ -70,7 +70,7 @@ class KnowledgeGraphLoader():
         scp.close()
 
     
-    def sparql_bulk_load(self,ipaddr,file_str,folder,graph_iri):
+    def sparql_bulk_load(self,ipaddr,user,passwd,file_str,folder,graph_iri):
 
         sql_file = 'upload_graph_' + graph_iri.split('/')[-2] + '.sql'
         file_toload = folder + '/' + file_str
@@ -95,11 +95,11 @@ class KnowledgeGraphLoader():
             print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
             timeout_s = 10
             #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-            command = "isql.8.3 " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
             run([command], shell=True)
 
 
-    def sparql_delete(self,ipaddr,file_str,graph_iri):
+    def sparql_delete(self,ipaddr,user,passwd,file_str,graph_iri):
 
         sql_file = 'del_graph_' + graph_iri.split('/')[-2] + '.sql'
         str_graph = str(graph_iri)
@@ -126,7 +126,7 @@ class KnowledgeGraphLoader():
             # deletion of triples
             print ('deleting triples from', str_graph, '...')
             #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-            command = "isql.8.3  " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+            command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
             run([command], shell=True)
 
 

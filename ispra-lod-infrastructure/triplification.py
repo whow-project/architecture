@@ -102,7 +102,7 @@ class RDFOutputConfiguration():
 
 class MappingConfiguration():
     
-    def __init__(self, dataset : str, graph_iri : str, rml_folder : str, dest_address : str, dest_folder : str, username : str, passwd : str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
+    def __init__(self, dataset : str, graph_iri : str, rml_folder : str, dest_address : str, dest_folder : str, username : str, passwd : str, dbuser: str, dbpasswd: str, data_folder :str, dirty_data_folder: str, mappings : List[Mapping], rdf_output_configuration : RDFOutputConfiguration, year : int = None):
         self.__dataset = dataset
         self.__graph_iri = graph_iri
         self.__rml_folder = rml_folder
@@ -110,6 +110,8 @@ class MappingConfiguration():
         self.__dest_folder = dest_folder
         self.__username = username
         self.__passwd = passwd
+        self.__dbuser = dbuser
+        self.__dbpasswd = dbpasswd
         self.__data_folder = data_folder
         self.__dirty_data_folder = dirty_data_folder
         self.__mappings = mappings
@@ -136,6 +138,12 @@ class MappingConfiguration():
 
     def get_passwd(self):
         return self.__passwd
+    
+    def get_dbuser(self):
+        return self.__dbuser
+    
+    def get_dbpasswd(self):
+        return self.__dbpasswd
     
     def get_data_folder(self):
         return self.__data_folder
@@ -200,6 +208,10 @@ class MappingConfiguration():
             user_str = mapping_conf["username"]
             global pass_str
             pass_str = mapping_conf["passwd"]
+            global dbuser_str
+            dbuser_str = mapping_conf["dbuser"]
+            global dbpass_str
+            dbpass_str = mapping_conf["dbpasswd"]
             data_path = mapping_conf["data_folder"]
             dirty_data_path = mapping_conf["dirty_data_folder"]
             
@@ -255,7 +267,7 @@ class MappingConfiguration():
                 
                 maps.append(Mapping(rml_file, input_files, variables))
             
-            mapping_configuration = MappingConfiguration(dataset, graph_iri, rml_path, dest_ip, dest_path, user_str, pass_str, data_path, dirty_data_path, maps, rdf_output_configuration, year)
+            mapping_configuration = MappingConfiguration(dataset, graph_iri, rml_path, dest_ip, dest_path, user_str, pass_str, dbuser_str, dbpass_str, data_path, dirty_data_path, maps, rdf_output_configuration, year)
         else:
             raise MalfofmedConfigJsonException()
         
@@ -302,6 +314,8 @@ class Triplifier(ABC):
         self._dest_path = mapping_configuration.get_dest_folder()
         self._user_str = mapping_configuration.get_username()
         self._pass_str = mapping_configuration.get_passwd()
+        self._dbuser_str = mapping_configuration.get_dbuser()
+        self._dbpass_str = mapping_configuration.get_dbpasswd()
         self._data_path = mapping_configuration.get_data_folder()
         self._dirty_data_path = mapping_configuration.get_dirty_data_folder()
         
@@ -371,9 +385,9 @@ class TriplificationManager():
 
             if bool_update:
                 if os.path.exists(file_load):
-                    self.__kg_loader.sparql_bulk_load(str(dest_ip),str(file_load),str(dest_path),graph_name)
+                    self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name)
                 if os.path.exists(file_delete):
-                    self.__kg_loader.sparql_delete(str(dest_ip),str(file_delete),graph_name)
+                    self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name)
            
         
 
