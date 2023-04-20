@@ -60,7 +60,7 @@ class KnowledgeGraphLoader():
         sftp = SFTPClient.from_transport(ssh.get_transport())
         try:
             sftp.chdir(folder)  # Test if remote_path exists
-        except IOError:
+        except (IOError, FileNotFoundError) as e:
             sftp.mkdir(folder)  # Create remote_path
             sftp.chdir(folder)
         print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
