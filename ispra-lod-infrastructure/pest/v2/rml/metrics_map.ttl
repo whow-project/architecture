@@ -142,6 +142,6 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:symbol;
         rr:objectMap [
-            rml:reference "{Unit_EN}"
+            rr:template "{Unit_EN}"
         ]
     ] .
