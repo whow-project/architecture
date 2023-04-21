@@ -147,6 +147,8 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
     dest_path = mapping_conf["dest_folder"]
     user_str = mapping_conf["username"]
     pass_str = mapping_conf["passwd"]
+    dbuser_str = mapping_conf["dbuser"]
+    dbpass_str = mapping_conf["dbpasswd"]
     graph_str = mapping_conf["graph_iri"]
 
     print("Starting preprocessing ...")
@@ -233,28 +235,28 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
 
     if bool_update:
         if os.path.exists(file_loadR):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadR),str(dest_path),graph_str)
+            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadR),str(dest_path),graph_str)
         if os.path.exists(file_loadP):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadP),str(dest_path),graph_str)
+            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadP),str(dest_path),graph_str)
         if os.path.exists(file_loadM):
-            loader.sparql_bulk_load(str(dest_ip),str(file_loadM),str(dest_path),graph_str)
+            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadM),str(dest_path),graph_str)
 
         #Different function, to preserve dead entities
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
             file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
-            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delR
+            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delR
             if os.path.exists(file_delR):
                 run([command], shell=True)
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
             file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
-            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delP
+            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delP
             if os.path.exists(file_delP):
                 run([command], shell=True)
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
             file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
-            command = "isql.8.3 " + dest_ip + ":1111 " + "dba " + "dba " + file_delM
+            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delM
             if os.path.exists(file_delM):
                 run([command], shell=True)
