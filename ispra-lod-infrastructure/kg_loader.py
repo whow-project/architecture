@@ -72,7 +72,10 @@ class KnowledgeGraphLoader():
     
     def sparql_bulk_load(self,ipaddr,user,passwd,file_str,folder,graph_iri):
 
-        sql_file = 'upload_graph_' + graph_iri.split('/')[-2] + '.sql'
+        sql_dir = 'sql'
+        if not os.path.exists(sql_dir):
+            os.makedirs(sql_dir)
+        sql_file = os.path.join(sql_dir, 'upload_graph_' + graph_iri.split('/')[-2] + '.sql')
         file_toload = folder + '/' + file_str
         str_graph = str(graph_iri)
 
@@ -101,7 +104,10 @@ class KnowledgeGraphLoader():
 
     def sparql_delete(self,ipaddr,user,passwd,file_str,graph_iri):
 
-        sql_file = 'del_graph_' + graph_iri.split('/')[-2] + '.sql'
+        sql_dir = 'sql'
+        if not os.path.exists(sql_dir):
+            os.makedirs(sql_dir)
+        sql_file = os.path.join(sql_dir,'del_graph_' + graph_iri.split('/')[-2] + '.sql')
         str_graph = str(graph_iri)
         len_batch = 500
 
