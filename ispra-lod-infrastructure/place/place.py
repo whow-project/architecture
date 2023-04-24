@@ -125,9 +125,9 @@ def print_delete(file_toDel, file_update, cat):
             for dd in sublist:
                 if dd: print (dd, file=sql_del)
             print ('} } ;', file=sql_del)
-        print("CHECKPOINT;", file=sql_del)
-        print("COMMIT WORK;", file=sql_del)
-        print("CHECKPOINT;", file=sql_del)
+            print("CHECKPOINT;", file=sql_del)
+            print("COMMIT WORK;", file=sql_del)
+            print("CHECKPOINT;", file=sql_del)
 
     return sql_file
 
