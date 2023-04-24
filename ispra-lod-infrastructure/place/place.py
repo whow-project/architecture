@@ -95,7 +95,6 @@ def exec_remote_command(ipaddr,user,passwd,command):
         print('Resource unaivailable, check your inputs in the config file!')
         return 0
     
-    print ('executing', command, 'on', user+'@'+ipaddr)
     stdin, stdout, stderr = ssh.exec_command(command)
     for line in stdout.readlines():
         print (line)
