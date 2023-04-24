@@ -454,8 +454,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
     rr:objectMap [
-      rr:template "POINT ({LONG} {LAT})";
-      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+      rr:template "POINT ({LONG} {LAT})"
+      #rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
     ]
   ];
 
@@ -607,8 +607,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
     rr:objectMap [
-      rr:template "POINT ({LONG} {LAT})";
-      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+      rr:template "POINT ({LONG} {LAT})"
+      #rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
     ]
   ];
 

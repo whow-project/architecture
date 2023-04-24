@@ -235,8 +235,8 @@
     rr:predicateObjectMap [
         rr:predicate ispra-place:geometry;
         rr:objectMap [
-            rr:template "POINT(%eval:round_coord('{ {{LONG_CENTROID}} }')% %eval:round_coord('{ {{LAT_CENTROID}} }')%)";
-            rr:datatype geosparql:wktLiteral
+            rr:template "POINT(%eval:round_coord('{ {{LONG_CENTROID}} }')% %eval:round_coord('{ {{LAT_CENTROID}} }')%)"
+            #rr:datatype geosparql:wktLiteral
         ]
     ];
 

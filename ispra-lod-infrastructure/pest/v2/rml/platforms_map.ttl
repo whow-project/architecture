@@ -418,8 +418,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
     rr:objectMap [
-      rr:template "%eval:get_point('{ {{LONG}} }','{ {{LAT}} }')%";
-      rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+      rr:template "%eval:get_point('{ {{LONG}} }','{ {{LAT}} }')%"
+      #rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
     ]
   ].
 

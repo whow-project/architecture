@@ -1270,8 +1270,8 @@
    rr:predicateObjectMap [
      rr:predicate ispra-place:geometry;
      rr:objectMap [
-       rml:reference "POINT";
-       rr:datatype geosparql:wktLiteral
+       rml:reference "POINT"
+       #rr:datatype geosparql:wktLiteral
      ]
    ];
 
