@@ -98,7 +98,7 @@ def print_delete(file_toDel, file_update, cat):
 
     sql_dir = 'sql'
     if not os.path.exists(sql_dir):
-            os.makedirs(sql_dir)
+        os.makedirs(sql_dir)
     sql_file = os.path.join(sql_dir,'del_list_' + cat + '.sql')
     len_batch = 500
 
