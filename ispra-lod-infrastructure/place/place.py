@@ -123,7 +123,7 @@ def print_delete(file_toDel, file_update, cat):
         for sublist in list(Utils.chunks(delG.serialize(format='nt11').splitlines(),len_batch)):
             print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del)
             for dd in sublist:
-                if dd: print (dd.decode("utf-8"), file=sql_del)
+                if dd: print (dd, file=sql_del)
             print ('} } ;', file=sql_del)
         print("CHECKPOINT;", file=sql_del)
         print("COMMIT WORK;", file=sql_del)
