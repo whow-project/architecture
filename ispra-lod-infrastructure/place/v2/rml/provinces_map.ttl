@@ -139,7 +139,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isMemberOf;
     rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+        rr:template "https://w3id.org/italia/env/ld/place/dataset";
         rr:termType rr:IRI
     ]
   ];
