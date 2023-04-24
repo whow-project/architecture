@@ -11,6 +11,7 @@ from rdflib.parser import StringInputSource
 from kg_loader import KnowledgeGraphLoader
 from pyrml import TermUtils, RMLConverter
 from typing import Dict
+from utils import Utils
 
 
 def metropolitan_city(istat):
@@ -95,7 +96,11 @@ def print_delete(file_toDel, file_update, cat):
         str_triple_todel = f.read()
     graph_toDel.parse(data=str_triple_todel, format='nt11')
 
-    sql_file = 'del_list_' + cat + '.sql'
+    sql_dir = 'sql'
+    if not os.path.exists(sql_dir):
+            os.makedirs(sql_dir)
+    sql_file = os.path.join(sql_dir,'del_list_' + cat + '.sql')
+    len_batch = 500
 
     if not len(graph_toDel):
         return sql_file
@@ -114,10 +119,12 @@ def print_delete(file_toDel, file_update, cat):
             delG.add((s, p, o))
 
     with open(sql_file, 'w') as sql_del:
-        print("DELETE FROM LOAD_LIST;", file=sql_del)
-        for dd in (delG.serialize(format='nt11').splitlines()):
-            if dd: print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> { ' + dd + '} } ;', file=sql_del)
-        #print("RDF_LOADER_RUN();", file=sql_del)
+        #Divide deletes in batches
+        for sublist in list(Utils.chunks(delG.serialize(format='nt11').splitlines(),len_batch)):
+            print ('SPARQL DELETE DATA { GRAPH <' + str_graph + '> {', file=sql_del)
+            for dd in sublist:
+                if dd: print (dd.decode("utf-8"), file=sql_del)
+            print ('} } ;', file=sql_del)
         print("CHECKPOINT;", file=sql_del)
         print("COMMIT WORK;", file=sql_del)
         print("CHECKPOINT;", file=sql_del)
