@@ -214,8 +214,8 @@
    rr:predicateObjectMap [
      rr:predicate ispra-place:geometry;
      rr:objectMap [
-       rml:reference "CENTROID_COM";
-       rr:datatype geosparql:wktLiteral
+       rml:reference "CENTROID_COM"
+       #rr:datatype geosparql:wktLiteral
      ]
    ];
 
@@ -246,8 +246,8 @@
    rr:predicateObjectMap [
      rr:predicate ispra-place:geometry;
      rr:objectMap [
-       rml:reference "POLYGON_COM";
-       rr:datatype geosparql:wktLiteral
+       rml:reference "POLYGON_COM"
+       #rr:datatype geosparql:wktLiteral
      ]
    ];
 

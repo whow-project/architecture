@@ -176,8 +176,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
     rr:objectMap [
-      rml:reference "CENTROID_PROV";
-      rr:datatype geosparql:wktLiteral
+      rml:reference "CENTROID_PROV"
+      #rr:datatype geosparql:wktLiteral
     ]
   ];
 
