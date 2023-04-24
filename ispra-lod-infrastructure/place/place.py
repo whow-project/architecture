@@ -2,6 +2,7 @@ import os
 import json
 import gzip
 import pandas as pd
+from paramiko import SSHClient, AutoAddPolicy
 from shapely.wkt import loads
 from subprocess import Popen, run
 from jinja2 import Environment, FileSystemLoader, Template
@@ -82,6 +83,42 @@ def get_lat(shp_point):
 
     return value
 
+
+def exec_remote_command(ipaddr,user,passwd,command):
+    ssh = SSHClient()
+    ssh.load_system_host_keys()
+    ssh.set_missing_host_key_policy(AutoAddPolicy())
+
+    try:
+        ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
+    except BlockingIOError:
+        print('Resource unaivailable, check your inputs in the config file!')
+        return 0
+    
+    print ('executing', command, 'on', user+'@'+ipaddr)
+    stdin, stdout, stderr = ssh.exec_command(command)
+    for line in stdout.readlines():
+        print (line)
+    ssh.close()
+
+    return stdout
+
+
+def remote_isql(ipaddr,user,passwd,dbuser,dbpasswd,sqlfile,destfolder):
+
+    loader = KnowledgeGraphLoader()
+
+    remote_sql_path = os.path.join(destfolder,'sql')
+
+    loader.upload_triple_file(ipaddr,user,passwd,sqlfile,remote_sql_path)
+
+    remote_sql_file = os.path.join(remote_sql_path, sqlfile.split('/')[-1])
+
+    remote_command = "isql 1111 " + str(dbuser) + " " + str(dbpasswd) +  " " + remote_sql_file
+
+    log_command = exec_remote_command(ipaddr,user,passwd,remote_command)
+
+
 def print_delete(file_toDel, file_update, cat):
 
     delG = Graph()
@@ -125,9 +162,9 @@ def print_delete(file_toDel, file_update, cat):
             for dd in sublist:
                 if dd: print (dd, file=sql_del)
             print ('} } ;', file=sql_del)
-            print("CHECKPOINT;", file=sql_del)
-            print("COMMIT WORK;", file=sql_del)
-            print("CHECKPOINT;", file=sql_del)
+        print("CHECKPOINT;", file=sql_del)
+        print("COMMIT WORK;", file=sql_del)
+        print("CHECKPOINT;", file=sql_del)
 
     return sql_file
 
@@ -252,18 +289,21 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
         if os.path.exists(file_deleteR):
             print ('deleting regions ...')
             file_delR = print_delete(file_deleteR,str(file_tripleR),"regions")
-            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delR
-            if os.path.exists(file_delR):
-                run([command], shell=True)
+            #command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delR
+            #if os.path.exists(file_delR):
+            #    run([command], shell=True)
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),file_delR,str(dest_path))
         if os.path.exists(file_deleteP):
             print ('deleting provinces ...')
             file_delP = print_delete(file_deleteP,str(file_tripleP),"provinces")
-            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delP
-            if os.path.exists(file_delP):
-                run([command], shell=True)
+            #command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delP
+            #if os.path.exists(file_delP):
+            #    run([command], shell=True)
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),file_delP,str(dest_path))
         if os.path.exists(file_deleteM):
             print ('deleting municipalities ...')
             file_delM = print_delete(file_deleteM,str(file_tripleM),"municipalities")
-            command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delM
-            if os.path.exists(file_delM):
-                run([command], shell=True)
+            #command = "isql.8.3 " + dest_ip + ":1111 " + str(dbuser_str) + " " + str(dbpass_str) + " " + file_delM
+            #if os.path.exists(file_delM):
+            #    run([command], shell=True)
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),file_delM,str(dest_path))
