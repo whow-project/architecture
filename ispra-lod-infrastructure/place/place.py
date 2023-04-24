@@ -100,8 +100,6 @@ def exec_remote_command(ipaddr,user,passwd,command):
         print (line)
     ssh.close()
 
-    return stdout
-
 
 def remote_isql(ipaddr,user,passwd,dbuser,dbpasswd,sqlfile,destfolder):
 
@@ -115,7 +113,7 @@ def remote_isql(ipaddr,user,passwd,dbuser,dbpasswd,sqlfile,destfolder):
 
     remote_command = "isql 1111 " + str(dbuser) + " " + str(dbpasswd) +  " " + remote_sql_file
 
-    log_command = exec_remote_command(ipaddr,user,passwd,remote_command)
+    exec_remote_command(ipaddr,user,passwd,remote_command)
 
 
 def print_delete(file_toDel, file_update, cat):
@@ -278,11 +276,24 @@ def placeRDF(config_file_path : str, bool_upload : bool, bool_update : bool):
 
     if bool_update:
         if os.path.exists(file_loadR):
-            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadR),str(dest_path),graph_str)
+
+            sql_loadR = loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadR),str(dest_path),graph_str,run_load=False)
+
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_loadR,str(dest_path))
+
+
         if os.path.exists(file_loadP):
-            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadP),str(dest_path),graph_str)
+            
+            sql_loadP = loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadP),str(dest_path),graph_str,run_load=False)
+
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_loadP,str(dest_path))
+
+
         if os.path.exists(file_loadM):
-            loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadM),str(dest_path),graph_str)
+            
+            sql_loadM = loader.sparql_bulk_load(str(dest_ip),str(dbuser_str),str(dbpass_str),str(file_loadM),str(dest_path),graph_str,run_load=False)
+
+            remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_loadM,str(dest_path))
 
         #Different function, to preserve dead entities
         if os.path.exists(file_deleteR):

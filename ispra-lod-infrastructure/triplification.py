@@ -385,9 +385,17 @@ class TriplificationManager():
 
             if bool_update:
                 if os.path.exists(file_load):
-                    self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name)
+
+                    sql_load = self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name,run_load=False)
+
+                    self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_load,str(dest_path))
+
+
                 if os.path.exists(file_delete):
-                    self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name)
+
+                    sql_del = self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name,run_load=False)
+
+                    self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_del,str(dest_path))
            
         
 

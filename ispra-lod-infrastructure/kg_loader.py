@@ -69,8 +69,43 @@ class KnowledgeGraphLoader():
         scp.put(file,folder)
         scp.close()
 
+
+    def exec_remote_command(self,ipaddr,user,passwd,command):
+        '''
+        Execute a SSH remote command
+        '''
+        ssh = SSHClient()
+        ssh.load_system_host_keys()
+        ssh.set_missing_host_key_policy(AutoAddPolicy())
+
+        try:
+            ssh.connect(hostname=ipaddr, port='22', username=user, password=passwd)
+        except BlockingIOError:
+            print('Resource unaivailable, check your inputs in the config file!')
+            return 0
+        
+        stdin, stdout, stderr = ssh.exec_command(command)
+        for line in stdout.readlines():
+            print (line)
+        ssh.close()
+
+
+    def remote_isql(self,ipaddr,user,passwd,dbuser,dbpasswd,sqlfile,destfolder):
+        '''
+        Execute the instructions contained inside a sql file on a remote virtuoso server via an isql instance
+        '''
+        remote_sql_path = os.path.join(destfolder,'sql')
+
+        self.upload_triple_file(ipaddr,user,passwd,sqlfile,remote_sql_path)
+
+        remote_sql_file = os.path.join(remote_sql_path, sqlfile.split('/')[-1])
+
+        remote_command = "isql 1111 " + str(dbuser) + " " + str(dbpasswd) +  " " + remote_sql_file
+
+        self.exec_remote_command(ipaddr,user,passwd,remote_command)
+
     
-    def sparql_bulk_load(self,ipaddr,user,passwd,file_str,folder,graph_iri):
+    def sparql_bulk_load(self,ipaddr,user,passwd,file_str,folder,graph_iri,run_load=True):
 
         sql_dir = 'sql'
         if not os.path.exists(sql_dir):
@@ -94,15 +129,18 @@ class KnowledgeGraphLoader():
                 print("COMMIT WORK;", file=sql_out)
                 print("CHECKPOINT;", file=sql_out)
 
-            # bulk load of triples
-            print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
-            timeout_s = 10
-            #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-            command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
-            run([command], shell=True)
+            if (run_load):
+                # bulk load of triples
+                print ("sending " + file_str + " triples to", str_graph, "graph via sparql ...")
+                timeout_s = 10
+                #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+                command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
+                run([command], shell=True)
+
+        return sql_file
 
 
-    def sparql_delete(self,ipaddr,user,passwd,file_str,graph_iri):
+    def sparql_delete(self,ipaddr,user,passwd,file_str,graph_iri,run_load=True):
 
         sql_dir = 'sql'
         if not os.path.exists(sql_dir):
@@ -129,11 +167,14 @@ class KnowledgeGraphLoader():
                 print("COMMIT WORK;", file=sql_del)
                 print("CHECKPOINT;", file=sql_del)
 
-            # deletion of triples
-            print ('deleting triples from', str_graph, '...')
-            #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
-            command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
-            run([command], shell=True)
+            if (run_load):
+                # deletion of triples
+                print ('deleting triples from', str_graph, '...')
+                #command = "isql-vt " + ipaddr+":1111 " + "dba " + "dba " + sql_file
+                command = "isql.8.3 " + ipaddr+":1111 " + user +" " + passwd + " " + sql_file
+                run([command], shell=True)
+
+        return sql_file
 
 
     def toLoad_toDelete_2 (self, new_graph, name, dataset):
