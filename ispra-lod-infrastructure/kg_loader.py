@@ -1,17 +1,17 @@
 from rdflib import Graph
-from rdflib.store import Store
 from rdflib.plugin import get as plugin
-import os, sys
+import os
 import configuration as conf
 import gzip, tarfile
 from utils import Utils
 from builtins import staticmethod
 from paramiko import SSHClient, SFTPClient, AutoAddPolicy
+from datetime import datetime
 from utf8_converter import UTF8Converter
 from scp import SCPClient
-from subprocess import run, Popen, PIPE, STDOUT
+from subprocess import run
 import multiprocessing as mp
-import time, traceback
+import time
 
 '''
 def synchronized(func):
@@ -200,6 +200,9 @@ class KnowledgeGraphLoader():
             
             to_load = new_graph - old_graph
             to_delete = old_graph - new_graph
+
+            now = datetime.now() # current date and time
+            mytime = now.strftime("%Y-%m-%dT%H:%M:%S")
             
             #new_graph.serialize(kg_path, format="nt11")
 
@@ -210,7 +213,7 @@ class KnowledgeGraphLoader():
                 '''
                 deleted = self.__delete(to_delete, dataset)
             except:
-                self.__save_graph(os.path.join(kg_folder, name.lower()), "delete.nt.gz", to_delete)
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "delete_"+str(mytime)+".nt.gz", to_delete)
                 deleted = False
             
             try:
@@ -220,7 +223,7 @@ class KnowledgeGraphLoader():
                 '''
                 loaded = self.__load(to_load, dataset)
             except:
-                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", to_load)
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "load_"+str(mytime)+".nt.gz", to_load)
                 loaded = False
                 
             
@@ -234,7 +237,7 @@ class KnowledgeGraphLoader():
                 loaded = self.__load(new_graph, dataset)
             except:
                 loaded = False
-                self.__save_graph(os.path.join(kg_folder, name.lower()), "load.nt.gz", new_graph)
+                self.__save_graph(os.path.join(kg_folder, name.lower()), "load_"+str(mytime)+".nt.gz", new_graph)
                 
                 
             if loaded:                    
@@ -243,14 +246,14 @@ class KnowledgeGraphLoader():
                 ret = False
                 
         graph_string = new_graph.serialize(format="nt11")
-        
+    
         with gzip.open(kg_path, 'wt') as f:
             f.write(graph_string)
-        kg_path_wtime = kg_path.replace('.nt.gz', '_'+str(time.time())+'.nt.gz')
+        kg_path_wtime = kg_path.replace('.nt.gz', '_'+str(mytime)+'.nt.gz')
         with gzip.open(kg_path_wtime, 'wt') as f:
             f.write(graph_string)
 
-        return kg_path, (os.path.join(kg_folder, name.lower(), "load.nt.gz")), (os.path.join(kg_folder, name.lower(), "delete.nt.gz"))
+        return kg_path, (os.path.join(kg_folder, name.lower(), "load_"+str(mytime)+".nt.gz")), (os.path.join(kg_folder, name.lower(), "delete_"+str(mytime)+".nt.gz"))
 
 
     def toLoad_toDelete (self, new_graph, name, dataset):
