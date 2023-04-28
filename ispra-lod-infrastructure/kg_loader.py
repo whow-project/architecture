@@ -187,7 +187,8 @@ class KnowledgeGraphLoader():
         if not os.path.exists(os.path.dirname(kg_path)):
             os.makedirs(os.path.dirname(kg_path))
             
-        
+        now = datetime.now() # current date and time
+        mytime = now.strftime("%Y-%m-%dT%H:%M:%S")
         
         if os.path.isfile(kg_path):
         
@@ -201,9 +202,6 @@ class KnowledgeGraphLoader():
             to_load = new_graph - old_graph
             to_delete = old_graph - new_graph
 
-            now = datetime.now() # current date and time
-            mytime = now.strftime("%Y-%m-%dT%H:%M:%S")
-            
             #new_graph.serialize(kg_path, format="nt11")
 
             try:
