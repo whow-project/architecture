@@ -162,10 +162,10 @@ class KnowledgeGraphLoader():
                     for dd in sublist:
                         if dd: print (dd.decode("utf-8"), file=sql_del)
                     print ('} } ;', file=sql_del)
-                #print("RDF_LOADER_RUN();", file=sql_del)
-                print("CHECKPOINT;", file=sql_del)
-                print("COMMIT WORK;", file=sql_del)
-                print("CHECKPOINT;", file=sql_del)
+                    #print("RDF_LOADER_RUN();", file=sql_del)
+                    print("CHECKPOINT;", file=sql_del)
+                    print("COMMIT WORK;", file=sql_del)
+                    print("CHECKPOINT;", file=sql_del)
 
             if (run_load):
                 # deletion of triples
