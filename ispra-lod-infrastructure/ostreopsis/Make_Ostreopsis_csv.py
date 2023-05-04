@@ -2,7 +2,6 @@ import os
 import pandas as pd
 import geopandas as gpd
 import contextily as cx
-import matplotlib as mpl
 from matplotlib import pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
 
@@ -29,7 +28,8 @@ def associate_istat(file_istat, file_samples, foutput):
 
 	print ('Associating records to ISTAT code ...')
 	#Read ISTAT shapefile
-	gdf_shf = gpd.read_file(file_istat)
+	zipfile = file_istat+"!Limiti01012020/Com01012020/Com01012020_WGS84.shp"
+	gdf_shf = gpd.read_file(zipfile)
 	gdf_shf = gdf_shf.to_crs(epsg=32632)
 
 	#Read samples file
@@ -39,7 +39,10 @@ def associate_istat(file_istat, file_samples, foutput):
 
 	#Join geodataframes according to min distance
 	gdf_joined=gpd.sjoin_nearest(gdf_sample, gdf_shf)
-	gdf_joined= gdf_joined.drop(['index_right','COD_RIP', 'COD_REG', 'COD_PROV', 'COD_CM', 'COD_UTS', 'PRO_COM', 'COMUNE', 'COMUNE_A', 'CC_UTS', 'Shape_Area', 'Shape_Leng', 'geometry'], axis=1)
+	try:
+		gdf_joined= gdf_joined.drop(['index_right','COD_RIP', 'COD_REG', 'COD_PROV', 'COD_CM', 'COD_UTS', 'PRO_COM', 'COMUNE', 'COMUNE_A', 'CC_UTS', 'Shape_Area', 'Shape_Leng', 'geometry'], axis=1)
+	except KeyError:
+		gdf_joined= gdf_joined.drop(['index_right','COD_RIP', 'COD_REG', 'COD_PROV', 'COD_CM', 'COD_UTS', 'PRO_COM', 'COMUNE', 'COMUNE_A', 'CC_UTS', 'SHAPE_AREA','SHAPE_LENG', 'SHAPE_LEN', 'geometry'], axis=1)
 	gdf_joined.to_csv(foutput, sep=';', index=None)
 
 	#Plot map
@@ -66,6 +69,7 @@ def associate_istat(file_istat, file_samples, foutput):
 	plt.legend(loc='upper right')
 	plt.draw()
 	plt.show()
+	plt.savefig('ostreopsis/map.png')
 
 
 if __name__ == '__main__':
@@ -74,7 +78,7 @@ if __name__ == '__main__':
 	data_path = 'data/ostreopsis/csv' #path with original csv files
 	file_output = 'data/ostreopsis/v2/dirtydata/Ostreopsis_Ovata_AllRegions.csv'
 	file_output_istat = 'data/ostreopsis/v2/dirtydata/Ostreopsis_Ovata_AllRegions_withISTATcode.csv'
-	file_comuni_istat = 'istat/Limiti01012022/Com01012022/Com01012022_WGS84.shp' #ISTAT shapefile
+	file_comuni_istat = 'istat/Limiti01012020.zip'
 
 	aggregate_files(data_path, file_output)
 	associate_istat(file_comuni_istat, file_output, file_output_istat)
