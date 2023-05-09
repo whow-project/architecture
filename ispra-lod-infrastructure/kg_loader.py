@@ -47,6 +47,15 @@ class KnowledgeGraphLoader():
 
     def upload_triple_file(self,ipaddr,user,passwd,file,folder):
 
+        #check if file is not empty
+        try:
+            with gzip.open(file, 'r') as f:
+                read_f = f.read()
+                if len(read_f) == 1:
+                    return
+        except:
+            pass
+
         ssh = SSHClient()
         ssh.load_system_host_keys()
         ssh.set_missing_host_key_policy(AutoAddPolicy())
@@ -63,7 +72,7 @@ class KnowledgeGraphLoader():
         except (IOError) as e:
             sftp.mkdir(folder)  # Create remote_path
             sftp.chdir(folder)
-        print ('Uploading', file, 'to', user + '@' + ipaddr, '...')
+        print ('Uploading', file, 'to', user + '@' + ipaddr, '->', folder, '...')
 
         scp = SCPClient(ssh.get_transport())
         scp.put(file,folder)
@@ -84,8 +93,12 @@ class KnowledgeGraphLoader():
             print('Resource unaivailable, check your inputs in the config file!')
             return 0
         
+        print ('executing', command, 'on', user+'@'+ipaddr)
+
         stdin, stdout, stderr = ssh.exec_command(command)
         for line in stdout.readlines():
+            print (line)
+        for line in stderr.readlines():
             print (line)
         ssh.close()
 
@@ -196,6 +209,8 @@ class KnowledgeGraphLoader():
                 graph_string = f.read()
         
             old_graph = Graph()
+
+            print ("Parsing previous graph", kg_path, '...')
             
             old_graph.parse(data = graph_string, format="nt11")
             

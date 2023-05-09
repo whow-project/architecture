@@ -1,5 +1,5 @@
 from builtins import staticmethod
-import os
+import os, gzip
 
 import pandas as pd
 from pyrml import RMLConverter
@@ -375,27 +375,34 @@ class TriplificationManager():
             dataset_name = str(result.get_mapping_configuration().get_dataset().lower())
             graph_name = str(result.get_mapping_configuration().get_graph_iri().lower())
             
-
             if bool_upload:
                 self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_triple), os.path.join(str(dest_path),str(file_triple.replace(file_triple.split('/')[-1],''))))
+
                 if os.path.exists(file_load):
                     self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_load), os.path.join(str(dest_path),str(file_load.replace(file_load.split('/')[-1],''))))
+                
                 if os.path.exists(file_delete):
                     self.__kg_loader.upload_triple_file(str(dest_ip), str(user_str), str(pass_str), str(file_delete), os.path.join(str(dest_path),str(file_delete.replace(file_delete.split('/')[-1],''))))
 
             if bool_update:
+                #check if load file is not empty
                 if os.path.exists(file_load):
+                    with gzip.open(file_load, 'r') as f:
+                        read_f = f.read()
+                    if len(read_f) != 1:
+                        sql_load = self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name,run_load=False)
 
-                    sql_load = self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name,run_load=False)
-
-                    self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_load,str(dest_path))
+                        self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_load,str(dest_path))
 
 
+                #check if del file is not empty
                 if os.path.exists(file_delete):
+                    with gzip.open(file_delete, 'r') as f:
+                        read_f = f.read()
+                    if len(read_f) != 1:
+                        sql_del = self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name,run_load=False)
 
-                    sql_del = self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name,run_load=False)
-
-                    self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_del,str(dest_path))
+                        self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_del,str(dest_path))
            
         
 
