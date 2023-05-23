@@ -91,34 +91,34 @@
         ]
     ];
 
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost')% di %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
-            rr:language "it"
-        ]
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost', '{ {{CAS_NAME_IT}} }')%";
+    #         rr:language "it"
+    #     ]
+    # ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost', '{ {{CAS_NAME_EN}} }')%";
+    #         rr:language "en"
+    #     ]
+    # ];
 
     rr:predicateObjectMap [
-        rr:predicate dcterms:description;
+        rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost')% of %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
-            rr:language "en"
+            rr:template "Parametro %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_sost', '{ {{CAS_NAME_IT}} }')%";
+            rr:language "it"
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} per %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} for %eval:capitalize('{ {{CAS_NAME_EN}} }')%";
+            rr:template "Parameter %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_sost', '{ {{CAS_NAME_EN}} }')%";
             rr:language "en"
         ]
     ].
@@ -154,34 +154,34 @@
       ]
   ];
 
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost')% di %eval:capitalize('{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} }";
-            rr:language "it"
-        ]
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost', '{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} }";
+    #         rr:language "it"
+    #     ]
+    # ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost', '{ {{CAS_NAME_EN}} }')% for the station { {{STAT_KEY}} }";
+    #         rr:language "en"
+    #     ]
+    # ];
 
     rr:predicateObjectMap [
-        rr:predicate dcterms:description;
+        rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost')% of %eval:capitalize('{ {{CAS_NAME_IT}} }')% for the station { {{STAT_KEY}} }";
-            rr:language "en"
+            rr:template "Indicatori di %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_sost', '{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} }";
+            rr:language "it"
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } per la stazione { {{STAT_KEY}} }";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } indicators for the station { {{STAT_KEY}} }";
+            rr:template "Indicators of %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_sost', '{ {{CAS_NAME_EN}} }')% for the station { {{STAT_KEY}} }";
             rr:language "en"
         ]
     ].
@@ -200,7 +200,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:template "Indicatore di %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_sost', '{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'it')%";
             rr:language "it"
         ]
     ];
@@ -208,26 +208,26 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicator { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associated with the station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+            rr:template "Indicator of %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_sost', '{ {{CAS_NAME_EN}} }')% for the station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_ind('{ {{STAT_TYPE}} }{{indicator}}', 'en')%";
             rr:language "en"
         ]
     ];
 
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato a: %eval:lower('{ {{CAS_NAME_IT}} }')%', per la stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
-            rr:language "it"
-        ]
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost', '{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}";
+    #         rr:language "it"
+    #     ]
+    # ];
 
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with: %eval:lower('{ {{CAS_NAME_EN}} }')%', for the station { {{STAT_KEY}} }, in the year {{YEAR}}";
-            rr:language "en"
-        ]
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost', '{ {{CAS_NAME_EN}} }')% for the station { {{STAT_KEY}} }, in the year {{YEAR}}";
+    #         rr:language "en"
+    #     ]
+    # ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;

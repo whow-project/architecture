@@ -117,9 +117,15 @@ class Functions():
         elif lang == 'symbol':
             return UNIT_OF_MEASURES_STAZ[metric]["Unit"]
         elif lang == 'it':
-            return UNIT_OF_MEASURES_STAZ[metric]["Unit_IT"]
+            if UNIT_OF_MEASURES_STAZ[metric]["Unit_IT"] != "Numero":
+                return UNIT_OF_MEASURES_STAZ[metric]["Unit_IT"]
+            else:
+                return ''
         else:
-            return UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"]
+            if UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"] != "Number":
+                return UNIT_OF_MEASURES_STAZ[metric]["Unit_EN"]
+            else:
+                return ''
         
 
     @staticmethod
@@ -136,15 +142,31 @@ class Functions():
         
 
     @staticmethod
-    def descr_par(metric, lang, range):
+    def descr_par(metric, lang, range, subst):
 
         str_out = ''
 
+        if range == 'label_sost':
+            if lang == 'it':
+                type_it = str(DESCRIPTION_PAR_SOST[metric]["Tipo"]).replace('Pesticidi','')
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Descrizione_breve"]) + ' di ' + str(subst).capitalize() + type_it
+            elif lang == 'en':
+                type_EN = str(DESCRIPTION_PAR_SOST[metric]["Type"]).replace('Pesticides','')
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Brief_description"]) + ' of ' + str(subst).capitalize() + type_EN
+
+        if range == 'label_staz':
+            if lang == 'it':
+                type_it = str(DESCRIPTION_PAR_STAZ[metric]["Tipo"]).replace('Pesticidi','')
+                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Descrizione_breve"]) + type_it
+            elif lang == 'en':
+                type_EN = str(DESCRIPTION_PAR_STAZ[metric]["Type"]).replace('Pesticides','')
+                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Brief_description"]) + type_EN
+
         if range == 'sost':
             if lang == 'it':
-                str_out = str(DESCRIPTION_PAR_SOST[metric]["Tipo"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Descrizione_breve"])
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Tipo"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Descrizione"]) + ' di ' + str(subst).capitalize()
             elif lang == 'en':
-                str_out = str(DESCRIPTION_PAR_SOST[metric]["Type"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Brief_description"])
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Type"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Description"]) + ' of ' + str(subst).capitalize()
 
         elif range == 'staz':
             if lang == 'it':

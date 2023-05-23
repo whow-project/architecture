@@ -524,37 +524,37 @@
       ]
   ];
 
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'staz', '')% per la stazione { {{STAT_KEY}} }";
+    #         rr:language "it"
+    #     ]
+    # ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'staz', '')% for the station { {{STAT_KEY}} }";
+    #         rr:language "en"
+    #     ]
+    # ];
+
     rr:predicateObjectMap [
-        rr:predicate dcterms:description;
+        rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'staz')% per la stazione { {{STAT_KEY}} }";
+            rr:template "Indicatori di %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_staz', '')% per la stazione { {{STAT_KEY}} }";
             rr:language "it"
         ]
     ];
 
     rr:predicateObjectMap [
-        rr:predicate dcterms:description;
+        rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'staz')% for the station { {{STAT_KEY}} }";
+            rr:template "Indicators of %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_staz', '')% for the station { {{STAT_KEY}} }";
             rr:language "en"
         ]
-    ];
-
-  rr:predicateObjectMap [
-      rr:predicate rdfs:label;
-      rr:objectMap [
-          rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} per la stazione { {{STAT_KEY}} }";
-          rr:language "it"
-      ]
-  ];
-
-    rr:predicateObjectMap [
-      rr:predicate rdfs:label;
-      rr:objectMap [
-          rr:template "{ {{STAT_TYPE}} }{{indicator}} indicators for the station { {{STAT_KEY}} }";
-          rr:language "en"
-      ]
-  ] .
+    ].
 
 
 :Stationindicators{{indicator}}
@@ -570,7 +570,7 @@
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicatore { {{STAT_TYPE}} }{{indicator}} associato alla stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+          rr:template "Indicatore di %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_staz', '')% per la stazione { {{STAT_KEY}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'it')%";
           rr:language "it"
       ]
   ];
@@ -578,7 +578,7 @@
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicator { {{STAT_TYPE}} }{{indicator}} associated with station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol')%";
+          rr:template "Indicator of %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_staz', '')% for the station { {{STAT_KEY}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en')%";
           rr:language "en"
       ]
   ];
@@ -596,6 +596,14 @@
           rr:parentTriplesMap :Value{{indicator}}
       ]
     ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:hasSource;
+      rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/samplingseries/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+        rr:termType rr:IRI
+      ]
+    ];    
   
   rr:predicateObjectMap [
       rr:predicate ispra-top:atTime;
@@ -611,7 +619,7 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'en', True)%";
+        rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_staz('{ {{STAT_TYPE}} }{{indicator}}', 'symbol', True)%";
         rr:class ispra-top:Value
     ];
     
