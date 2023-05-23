@@ -11,6 +11,8 @@ from kg_loader import KnowledgeGraphLoader
 
 UNIT_OF_MEASURES_STAZ = None
 UNIT_OF_MEASURES_IND = None
+DESCRIPTION_PAR_SOST = None
+DESCRIPTION_PAR_STAZ = None
 
 
 class Functions():
@@ -131,6 +133,26 @@ class Functions():
             return UNIT_OF_MEASURES_IND[metric]["Unit_IT"]
         else:
             return UNIT_OF_MEASURES_IND[metric]["Unit_EN"]
+        
+
+    @staticmethod
+    def descr_par(metric, lang, range):
+
+        str_out = ''
+
+        if range == 'sost':
+            if lang == 'it':
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Tipo"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Descrizione_breve"])
+            elif lang == 'en':
+                str_out = str(DESCRIPTION_PAR_SOST[metric]["Type"]) + ': ' + str(DESCRIPTION_PAR_SOST[metric]["Brief_description"])
+
+        elif range == 'staz':
+            if lang == 'it':
+                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Tipo"]) + ': ' + str(DESCRIPTION_PAR_STAZ[metric]["Descrizione"])
+            elif lang == 'en':
+                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Type"]) + ': ' + str(DESCRIPTION_PAR_STAZ[metric]["Description"])
+
+        return str_out
     
 
 class PesticidesTriplifier(Triplifier):
@@ -168,6 +190,7 @@ class PesticidesTriplifier(Triplifier):
             'get_cas_codes': Functions.get_cas_codes,
             'get_unit_of_measure_staz': Functions.get_unit_of_measure_staz,
             'get_unit_of_measure_ind': Functions.get_unit_of_measure_ind,
+            'descr_par': Functions.descr_par,
             'po_assertion_uuid': UtilsFunctions.po_assertion_uuid,
             'digest': UtilsFunctions.short_uuid
             }
@@ -197,7 +220,17 @@ class PesticidesTriplifier(Triplifier):
         
         units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
         UNIT_OF_MEASURES_IND = units_df.to_dict(orient="index")
-        
+
+        global DESCRIPTION_PAR_SOST
+
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
+        DESCRIPTION_PAR_SOST = units_df.to_dict(orient="index")
+
+        global DESCRIPTION_PAR_STAZ
+
+        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
+        DESCRIPTION_PAR_STAZ = units_df.to_dict(orient="index")
+
         print("\t preprocessing completed.")
    
     def get_graph_iri(self):

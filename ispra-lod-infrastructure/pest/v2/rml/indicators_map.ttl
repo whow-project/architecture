@@ -92,9 +92,25 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost')% di %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost')% of %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} associato a: %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
+            rr:template "Parametro { {{STAT_TYPE}} }{{indicator}} per %eval:capitalize('{ {{CAS_NAME_IT}} }')%";
             rr:language "it"
         ]
     ];
@@ -102,7 +118,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} associated with: %eval:capitalize('{ {{CAS_NAME_EN}} }')%";
+            rr:template "Parameter { {{STAT_TYPE}} }{{indicator}} for %eval:capitalize('{ {{CAS_NAME_EN}} }')%";
             rr:language "en"
         ]
     ].
@@ -132,9 +148,32 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }"
+      ]
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'sost')% di %eval:capitalize('{ {{CAS_NAME_IT}} }')% per la stazione { {{STAT_KEY}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'sost')% of %eval:capitalize('{ {{CAS_NAME_IT}} }')% for the station { {{STAT_KEY}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } associati alla stazione { {{STAT_KEY}} }";
+            rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } per la stazione { {{STAT_KEY}} }";
             rr:language "it"
         ]
     ];
@@ -142,7 +181,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } indicators associated with the station { {{STAT_KEY}} }";
+            rr:template "{ {{STAT_TYPE}} }{{indicator}}_{ {{CAS_CODE}} } indicators for the station { {{STAT_KEY}} }";
             rr:language "en"
         ]
     ].
@@ -189,6 +228,13 @@
             rr:language "en"
         ]
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{ {{STAT_KEY}} }_{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }_{{YEAR}}"
+      ]
+  ];
         
     rr:predicateObjectMap [
         rr:predicate ispra-top:isMemberOf;

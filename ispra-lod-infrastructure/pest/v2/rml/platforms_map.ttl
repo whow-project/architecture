@@ -329,6 +329,14 @@
   ];
 
   rr:predicateObjectMap [
+    rr:predicate ispra-top:atTime;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+  rr:predicateObjectMap [
     rr:predicate geo:long;
     rr:objectMap [
       rr:template "%eval:round_coord('{ {{LONG}} }')%"
@@ -353,7 +361,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isPartOf;
     rr:objectMap [
-      rr:parentTriplesMap :FeatureOfInterest;
+      rr:parentTriplesMap :BasinFeature;
     ]
   ];
 
@@ -377,7 +385,7 @@
   rr:predicateObjectMap [
     rr:predicate dcterms:description;
     rr:objectMap [
-      rr:template "%eval:label_en('{{dataset}}')% sampling point associated with station { {{STAT_KEY}} }, year {{YEAR}}, placed at the location %eval:title('{ {{LOC_NAME}} }')% (municipality of %eval:title('{ {{PLACE_NAME}} }')%)";
+      rr:template "%eval:label_en('{{dataset}}')% sampling point associated with station { {{STAT_KEY}} }, placed at the location %eval:title('{ {{LOC_NAME}} }')% (municipality of %eval:title('{ {{PLACE_NAME}} }')%), for year {{YEAR}}";
       rr:language "en"
     ]
   ];
@@ -385,7 +393,7 @@
   rr:predicateObjectMap [
     rr:predicate dcterms:description;
     rr:objectMap [
-      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }, nell'anno {{YEAR}}, posto in località %eval:title('{ {{LOC_NAME}} }')% (comune di %eval:title('{ {{PLACE_NAME}} }')%)";
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }, posto in località %eval:title('{ {{LOC_NAME}} }')% (comune di %eval:title('{ {{PLACE_NAME}} }')%), nell'anno {{YEAR}}";
       rr:language "it"
     ]
   ].
@@ -424,12 +432,12 @@
   ].
 
 
-:FeatureOfInterest
+:BasinFeature
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:digest('{ {{BASIN}} }{ {{WBODY}} }')%";
-    rr:class inspire-mf:FeatureOfInterest
+    rr:template "https://w3id.org/italia/env/ld/place/feature/%eval:digest('{ {{BASIN}} }{ {{WBODY}} }')%";
+    rr:class ispra-place:Feature
   ];
 
   rr:predicateObjectMap [
@@ -516,10 +524,26 @@
       ]
   ];
 
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'staz')% per la stazione { {{STAT_KEY}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'staz')% for the station { {{STAT_KEY}} }";
+            rr:language "en"
+        ]
+    ];
+
   rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} associati alla stazione { {{STAT_KEY}} }";
+          rr:template "Indicatori { {{STAT_TYPE}} }{{indicator}} per la stazione { {{STAT_KEY}} }";
           rr:language "it"
       ]
   ];
@@ -527,7 +551,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-          rr:template "{ {{STAT_TYPE}} }{{indicator}} indicators associated with the station { {{STAT_KEY}} }";
+          rr:template "{ {{STAT_TYPE}} }{{indicator}} indicators for the station { {{STAT_KEY}} }";
           rr:language "en"
       ]
   ] .

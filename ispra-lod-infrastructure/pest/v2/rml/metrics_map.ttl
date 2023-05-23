@@ -52,7 +52,7 @@
         rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "{Descrizione}";
+            rr:template "{Tipo}: {Descrizione}";
             rr:language "it"
         ]
     ];
@@ -60,7 +60,7 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:description;
         rr:objectMap [
-            rr:template "{Description}";
+            rr:template "{Type}: {Description}";
             rr:language "en"
         ]
     ];

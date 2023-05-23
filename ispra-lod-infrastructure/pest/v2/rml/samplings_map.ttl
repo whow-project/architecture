@@ -109,10 +109,17 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-place:hasFeature;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{ {{STAT_KEY}} }_{{YEAR}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate inspire-mf:hasFeatureOfInterest;
         rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:digest('{ {{BASIN}} }{ {{WBODY}} }')%";
-        rr:termType rr:IRI
+            rr:parentTriplesMap <#FeatureOfInterest>
         ]
     ]; 
 
@@ -129,3 +136,28 @@
             rr:parentTriplesMap <#SamplingCollection>
         ]
     ].
+
+
+<#FeatureOfInterest>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{ {{STAT_KEY}} }";
+        rr:class inspire-mf:FeatureOfInterest
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Water quality status at the { {{STAT_KEY}} } station";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Stato della qualità delle acque in corrispondenza della stazione { {{STAT_KEY}} }";
+            rr:language "it"
+        ]
+    ].    
