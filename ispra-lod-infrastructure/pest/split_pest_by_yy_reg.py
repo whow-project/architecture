@@ -12,6 +12,10 @@ def split_by_year_and_region(csv_file):
 
     regions = np.unique(df_csv_large['regione'].str.replace(' ','').str.replace('/','').str.replace("'",""))
 
+    with open("regions.txt", "w") as regout:
+        for reg in regions:
+            print (reg, file=regout)
+
     for yy in (range(1900, 2022)):
         df_years = df_csv_large[df_csv_large[year_cols[0]] == str(yy)]
         if (not(df_years.empty)):
