@@ -22,7 +22,9 @@ def split_by_year_and_region(csv_file):
             print ('Processing year', yy, '...')
             for reg in regions:
                 df_reg = df_years[df_years['regione']==reg]
-                df_reg.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + reg + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+                if (not(df_reg.empty)):
+                    print ('Processing region', reg, '...')
+                    df_reg.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + reg + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
                 del df_reg
         del df_years
 
