@@ -10,7 +10,7 @@ def split_by_year_and_region(csv_file):
     csv_data_name = (csv_file.name.split('/')[-1]).split('.')[0]
     year_cols = [col for col in df_csv_large.columns if 'anno' in col]
 
-    regions = np.unique(df_csv_large['regione'].str.replace(' ','').str.replace('/','').str.replace("'",""))
+    regions = np.unique(df_csv_large['regione'])
 
     with open("regions.txt", "w") as regout:
         for reg in regions:
@@ -24,7 +24,8 @@ def split_by_year_and_region(csv_file):
                 df_reg = df_years[df_years['regione']==reg]
                 if (not(df_reg.empty)):
                     print ('Processing region', reg, '...')
-                    df_reg.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + reg + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+                    regname = reg.replace(' ','').replace('/','').replace("'","")
+                    df_reg.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + regname + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
                 del df_reg
         del df_years
 
