@@ -38,7 +38,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:isClassifiedBy;
+        rr:predicate ispra-top:hasPart;
         rr:objectMap [
             rr:template "https://w3id.org/whow/controlled-vocabulary/chemical-substances/cas-%eval:get_cas_codes('{cod_cas}', 0)%-%eval:get_cas_codes('{cod_cas}', 1)%-%eval:get_cas_codes('{cod_cas}', 2)%";
             rr:termType rr:IRI
