@@ -651,8 +651,8 @@
 	rr:predicateObjectMap [
 		rr:predicate ispra-top:value;
 		rr:objectMap [
-			rml:reference "MEASUREMENT_HEIGHT";
-			rr:datatype xsd:float
+			rml:reference "MEASUREMENT_HEIGHT"
+			#rr:datatype xsd:float
 		]
 	];
 
