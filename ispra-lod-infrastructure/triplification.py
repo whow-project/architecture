@@ -2,7 +2,8 @@ from builtins import staticmethod
 import os, gzip
 
 import pandas as pd
-from pyrml import RMLConverter
+from pyrml import RMLConverter, FunctionAlreadyRegisteredException
+
 
 from abc import ABC, abstractclassmethod
 import json
@@ -327,10 +328,13 @@ class Triplifier(ABC):
             try:
                 files = [file.get_file_name() for file in mapping.get_input_files()]
                 print("Processing mapping %s to files %s."%(mapping.get_rml_file(), files))
-                rml_converter = RMLConverter()
+                rml_converter = RMLConverter.get_instance()
                 
                 for function_name in self._functions_dictionary:
-                    rml_converter.register_function(function_name, self._functions_dictionary[function_name])
+                    try:
+                        rml_converter.register_function(function_name, self._functions_dictionary[function_name])
+                    except FunctionAlreadyRegisteredException as e:
+                        print(f'Warning: The function {function_name} has been already registered. It will be not replaced.')
         
                 g_tmp = rml_converter.convert(mapping.get_rml_file(), False, mapping.to_dict())
                                 
