@@ -49,11 +49,21 @@ class UTF8Converter():
 
             #posnomefile=filename.rfind("\\") #WINDOWS ...
             
-            with open(filename, mode="r", encoding=encodingfrom) as fr:
-                data = fr.read()
+            BLOCKSIZE = 1024*1024
+            with open(filename, 'rb') as inf:
+                with open(filenameclean, 'wb') as ouf:
+                    while True:
+                        data = inf.read(BLOCKSIZE)
+                        if not data: break
+                        converted = data.decode(encodingfrom).encode('utf-8')
+                        ouf.write(converted)
+            
+            
+            #with open(filename, mode="r", encoding=encodingfrom) as fr:
+            #    data = fr.read()
                 
-            with open(filenameclean, mode="w",encoding='UTF-8') as fw:
-                fw.write(data)
+            #with open(filenameclean, mode="w",encoding='UTF-8') as fw:
+            #    fw.write(data)
             
             #with open(filenameclean, mode="w",encoding='UTF-8') as fw, open(filename, mode="r", encoding=encodingfrom) as fr:
             #    fw.writelines(l for l in fr)
@@ -75,12 +85,15 @@ class UTF8Converter():
         filenameclean=str(self.__output_dir)+'/'+justnomefile
         detector.reset()
 
-        with open(filename, 'rb') as infile:
-            for line in infile:
-                detector.feed(line)
-                if detector.done: 
-                    break
-            detector.close()
+        BLOCKSIZE = 1024*1024
+        with open(filename, 'rb') as inf:
+            with open(filenameclean, 'wb') as ouf:
+                while True:
+                    data = inf.read(BLOCKSIZE)
+                    if not data: break
+                    converted = data.decode(encodingfrom).encode('utf-8')
+                    ouf.write(converted)
+                    
             #print (detector.result)
             encodingfrom = detector.result['encoding']
             print(encodingfrom)
