@@ -1,0 +1,25 @@
+@prefix : <https://w3id.org/whow/data/dcat/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+
+:catalog_01 a dcat:Catalog ;
+    dct:description "Catalogo di dataset per il testing." ;
+    dct:title "Catalogo 01" ;
+    dcat:dataset :dataset_01, :dataset_02 .
+    
+:dataset_01 a dcat:Dataset ;
+    dct:description "Dataset 01 per il testing basato sui dataset dei corpi idrici della Regione Lombardia" ;
+    dct:title "Corpi idrici della Regione Lombardia" ;
+    dcat:distribution :distribution_01 .
+    
+:dataset_02 a dcat:Dataset ;
+    dct:description "Dataset 02 per il testing basato su Lakes linking" ;
+    dct:title "Lakes linking" ;
+    dcat:distribution :distribution_02 .
+    
+:distribution_01 a dcat:Distribution ;
+    dcat:accessURL <https://hub.dati.lombardia.it/resource/d4ep-yvbw.csv> .
+    
+    
+:distribution_02 a dcat:Distribution ;
+    dcat:accessURL <https://raw.githubusercontent.com/whow-project/datasets/main/RML-RULES/hydrography/lakes/lakesLinking.csv> .

@@ -2,7 +2,7 @@ from pelix.ipopo.decorators import ComponentFactory, Instantiate, Validate, Prov
 import pyodbc
 
 from api.api import TriplestoreManager
-from curses.ascii import RS
+from rdflib.term import URIRef, Graph
 
 
 @ComponentFactory("triplestore-factory")
@@ -34,7 +34,21 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
         
         rs = cnxn.execute(querystr)
         
-        return RS
+        return rs
     
-vtm = VirtuosoTriplestoreManager()
-vtm.query('SELECT * FROM LOAD_LIST')
+    def add_graph(self, g: Graph, graph_identifier: URIRef):
+        Virtuoso = plugin("Virtuoso", Store)
+        
+        store = Virtuoso("DSN=VOS;UID=dba;PWD=dba;WideAsUTF16=Y")
+        
+        graph = Graph(store,identifier = graph_identifier)
+        
+        for triple in g:
+            graph.add(triple)
+            
+    def get_graph(self, graph_identifier):
+        
+        Virtuoso = plugin("Virtuoso", Store)
+        store = Virtuoso("DSN=VOS;UID=dba;PWD=dba;WideAsUTF16=Y")
+        return Graph(store,identifier = graph_identifier)
+    

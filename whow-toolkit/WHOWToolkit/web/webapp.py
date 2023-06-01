@@ -1,66 +1,165 @@
-from pelix.ipopo.decorators import ComponentFactory, Requires, Instantiate, Validate, Property, Provides
+from pelix.ipopo.decorators import ComponentFactory, Requires, Instantiate, Validate, Property, Provides, BindField, UnbindField
+
+from api.api import RESTApp, _HTTPResource, WebSocketComponent
 
 import asyncio
+import threading
 import websockets
 import uuid
 import os
 import tarfile
+import shutil
+from Cython.Shadow import address
+from openpyxl.workbook import web
 
+from typing import Dict
+
+from flask import Flask
+from websockets.server import WebSocketServerProtocol
+
+
+
+class WebSocketApp(object):
+    
+    PATH_REGISTRY: Dict[str, Dict[str,WebSocketComponent]] = dict()
+    
+    @classmethod
+    async def _manage(cls, websocket: WebSocketServerProtocol, path: str):
+        print(f'Websocket: {websocket}')
+        print(f'Path: {path}')
+        
+        endpoint = f'{websocket.host}:{websocket.port}'
+        print(f'Request endpoint: {endpoint}')
+        
+        if endpoint in cls.PATH_REGISTRY:
+            endpoint_services = cls.PATH_REGISTRY[endpoint]
+            
+            if path in endpoint_services:
+                service: WebSocketComponent = endpoint_services[path]
+                
+                if service:
+                    message = await websocket.recv()
+                    
+                    out_message = service.execute(message)
+            
+                    await websocket.send(out_message)
+                    
+                else:
+                    print('A path is registered, but service is None.')
+                    
+            else:
+                print(f'No path registered {path} for a websocket service.')
+        else:
+            print(f'No WebSocket server is active and serving at {endpoint}.')
+            
+    @classmethod
+    def start(cls, host, port):
+        
+        loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(loop)
+        ws_server = websockets.serve(WebSocketApp._manage, host, port)
+
+        loop.run_until_complete(ws_server)
+        loop.run_forever() # this is missing
+        loop.close()
+
+    @classmethod
+    def register_service(cls, endpoint: str, path: str, service: WebSocketComponent):
+        if endpoint not in cls.PATH_REGISTRY:
+            cls.PATH_REGISTRY[endpoint] = dict()
+            
+        cls.PATH_REGISTRY[endpoint][path] = service
+        print(f"Registerd websocket service {service} at path {endpoint}{service._path}")
+            
+    @classmethod
+    def unregister_service(cls, endpoint: str, path: str):
+        if endpoint in cls.PATH_REGISTRY:
+            del(cls.PATH_REGISTRY[endpoint][path])
 
 @ComponentFactory("websocket-factory")
 @Property("_host", "server.host", "localhost")
 @Property("_port", "server.port", "8765")
-@Requires("_cleanser", "data-cleansing")
-@Requires("_rml_mapper", "rml-mapper")
-@Requires("_triplestore_manager", "triplestore-manager")
+@Requires("_websocketcomponents", "websocketcomponent", aggregate=True)
 @Instantiate("websocket-server")
-class WebSocketServer(object):
+class _WebSocketServer(object):
     
-    
-    async def _manage(self, websocket, path):
-        print(f'Websocket: {websocket}')
-        print(f'Path: {path}')
-        
-        if path == '/rml_mapper':
-            out = self._rml_mapper.map()
-            print(f'RDF file tar.gz {out}')
-            with open(out, "rb") as f:
-                ba = bytearray(f.read())
-                await websocket.send(ba)
-        elif path == '/triplestore_manager':
-            data = await websocket.recv()
-            
-            id = uuid.uuid4()
-            tar_file = f'{uuid.uuid4()}.nt.tar.gz'
-            
-            graph_path = os.path.join(self._triplestore_manager._graphs_folder, tar_file)
-            
-            print(f'The graph path is {graph_path}')
-            with open(graph_path, 'wb') as binary_file:
-                binary_file.write(data)
-                
-            tar = tarfile.open(os.path.join(graph_path))
-            tar.extractall(self._triplestore_manager._graphs_folder)
-            
-            os.remove(graph_path)
-            
-            self._triplestore_manager.load_graphs()
-            await websocket.send('mapping completed')
-        elif path == '/data-cleansing':
-            self._cleanser.clean()
-            await websocket.send('mapping completed')
-        
-        #await websocket.send('mapping completed')
-    
-    async def start_server(self):
-        async with websockets.serve(self._manage, self._host, self._port):
-            await asyncio.Future()  # run forever
     
     @Validate
     def validate(self, context):
-        print('Server')
-        
         #loop = asyncio.get_event_loop()
         #loop.run_until_complete(self.start_server())
-        asyncio.run(self.start_server())
+        #asyncio.run(self.start_server()):
+        
+        server = threading.Thread(target=WebSocketApp.start, args=(self._host, self._port), daemon=True)
+        server.start()
+        
+        print('WebSocket Server is UP!')
+        
+        
+    @BindField('_websocketcomponents')
+    def bind_dict(self, field, service, svc_ref):
+        webcomponent_path = svc_ref.get_property('websocketcomponent.path')
+
+        #self.__path_registry[service._path] = service
+        
+        WebSocketApp.register_service(f'{self._host}:{self._port}', service._path, service)
+
+        print(f"Websocket server contains {len(self._websocketcomponents)} services.")
+        
+        
+        
+        
+    @UnbindField('_websocketcomponents')
+    def unbind_dict(self, field, service, svc_ref):
+        WebSocketApp.unregister_service(f'{self._host}:{self._port}', path, service)
+
+
+@ComponentFactory("http-server-factory")
+@Property("_host", "http.server.host", "localhost")
+@Property("_port", "http.server.port", "5000")
+@Requires("_webcomponents", "webcomponent", aggregate=True)
+#@Provides("httpserver")
+@Instantiate("httpserver-impl")
+class HTTPServer(RESTApp):
     
+    def __init__(self):
+        super().__init__(self._port)
+        self._webcomponents = []
+    
+    @Validate
+    def validate(self, context):
+        print("HTTP webapp is starting")
+        app = RESTApp.get_flask_app()
+        
+    
+    
+    @BindField('_webcomponents')
+    def bind_dict(self, field, service, svc_ref):
+        webcomponent_path= svc_ref.get_property('webcomponent.path')
+
+        RESTApp.get_flask_app().add_url_rule(service._path, view_func=service.as_view(service._path))
+        print(f'Web component path: {service._path} {svc_ref}')
+        
+        print(f"Web app running with {len(self._webcomponents)} web components.")
+        
+        
+        
+        
+    @UnbindField('_webcomponents')
+    def unbind_dict(self, field, service, svc_ref):
+        pass
+        
+    @property
+    def host(self):
+        return self._host
+    
+    @property
+    def port(self):
+        return self._port
+
+    '''
+    def register_resource(self, func, path, *args, **kwargs):
+        RESTApp.get_flask_app().add_url_rule(path, view_func=func.as_view(path), *args, **kwargs)
+        print(f'2 Args: {path}')
+        print(f'2 Registered resource {func}')
+    '''

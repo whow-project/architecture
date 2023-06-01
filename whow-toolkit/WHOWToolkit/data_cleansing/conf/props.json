@@ -1,4 +1,5 @@
 {
-	"dirty_data": "/Users/andrea/airflow/dirtydata/",
-	"cleaned_data": "/Users/andrea/airflow/data/"
+	"dirty_data": "./data_cleansing/dirtydata/",
+	"cleaned_data": "./data_cleansing/data/",
+	"http_endpoint": "http://localhost:5000"
 }

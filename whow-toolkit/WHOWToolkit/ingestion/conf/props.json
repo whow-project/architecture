@@ -1,0 +1,6 @@
+{
+	"data.folder": "./ingestion/data/",
+	"meta.folder": "./ingestion/meta/",
+	"data.catalogue.graph_path": "./ingestion/meta/catalog.ttl",
+	"http.endpoint": "http://localhost:5000/data/"
+}

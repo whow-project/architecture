@@ -1,0 +1,4 @@
+{
+	"graphs.location": "./metadata/graphs",
+	"http.endpoint": "http://localhost:5000/metadatacreator/"
+}

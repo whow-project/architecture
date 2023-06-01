@@ -1,0 +1,5 @@
+{
+	"rml.folder": "./mappers/rml",
+	"graphs.folder": "./mappers/graphs",
+	"http.endpoint": "http://localhost:5000/mapper/"
+}

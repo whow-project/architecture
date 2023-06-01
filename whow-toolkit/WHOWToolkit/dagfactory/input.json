@@ -1,0 +1,53 @@
+{
+	"bound_services": {
+		"https://w3id.org/whow/onto/flow/ingestion": {
+			"endpoint": "ws://host.docker.internal:8765/ingestion",
+			"data": {
+				"title": "Test data catalog",
+				"description": "Some description for the test data catalog.",
+				"distributions": [
+					{"id": "hydrolakes",
+					 "mimetype": "text/csv",
+					 "accessURL": "https://hub.dati.lombardia.it/resource/d4ep-yvbw.csv"},
+					{"id": "lakesLinking",
+					 "mimetype": "text/csv",
+					 "accessURL": "https://raw.githubusercontent.com/whow-project/datasets/main/RML-RULES/hydrography/lakes/lakesLinking.csv"}
+				],
+				"store": true
+			}
+		},
+		"https://w3id.org/whow/onto/flow/preprocessing": {
+			"endpoint": "ws://host.docker.internal:8765/preprocessor",
+			"data": {"ids": ["hydrolakes", "lakesLinking"]}
+		},
+		"https://w3id.org/whow/onto/flow/mapping": {
+			"endpoint": "ws://host.docker.internal:8765/mapping",
+			"data": {
+				"graphs": [{
+					"id": "RMLMappinghydrolakes",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				}]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/metadating": {
+			"endpoint": "ws://host.docker.internal:8765/metadating",
+			"data": {
+				"meta": [
+					{
+						"graph_id": "RMLMappinghydrolakes",
+						"title": "RDF hydrolakes",
+						"description": "RDF dataset for representing hydrolakes of Lombardia Region in Italy.",
+						"dataset": "https://hub.dati.lombardia.it/resource/d4ep-yvbw",
+						"distribution": "https://hub.dati.lombardia.it/resource/d4ep-yvbw-rdf",
+						"accessURL": "https://hub.dati.lombardia.it/resource/d4ep-yvbw.rdf"
+					}
+				]
+			}
+		}
+		
+	} 
+}

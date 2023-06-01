@@ -1,0 +1,105 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatapit: <http://dati.gov.it/onto/dcatapit#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix tvo: <https://data.europa.eu/m8g/transform-validate-ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wfm: <https://w3id.org/whow/onto/workflow-mgmt/> .
+
+<https://www.dati.lombardia.it/?browse> a dcatapit:Catalog,
+        dcat:Catalog ;
+    dct:description "Il catalogo dei dati aperti di Regione Lombardia"@it ;
+    dct:modified "2023-02-20"^^xsd:date ;
+    dct:publisher <http://www.regione.lombardia.it> ;
+    dct:title "Catalogo OpenData di Regione Lombardia"@it ;
+    dcat:dataset <https://www.dati.lombardia.it/d/4fvy-q2d2> ;
+    dcat:themeTaxonomy <http://publications.europa.eu/resource/authority/data-theme> ;
+    foaf:homepage <https://www.dati.lombardia.it/> .
+
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2> a dcatapit:Dataset,
+        dcat:Dataset ;
+    dct:accrualPeriodicity <http://publications.europa.eu/resource/authority/frequency/UNKNOWN> ;
+    dct:description "Il dataset raccoglie i dati analitici relativi alle sostanze monitorate sui punti della rete di monitoraggio qualitativo delle acque sotterranee della Regione Lombardia. I dati sono validati." ;
+    dct:identifier "arpa_mi:4fvy-q2d2" ;
+    dct:modified "2017-11-29"^^xsd:date ;
+    dct:publisher <http://www.regione.lombardia.it> ;
+    dct:rightsHolder <http://www.arpalombardia.it> ;
+    dct:spatial <https://www.geonames.org/3174618> ;
+    dct:title "Dato analitico puntuale relativo a ciascun punto della rete  di monitoraggio qualitativo delle acque sotterranee" ;
+    dcat:distribution <https://www.dati.lombardia.it/d/4fvy-q2d2-csv>,
+        <https://www.dati.lombardia.it/d/4fvy-q2d2-json>,
+        <https://www.dati.lombardia.it/d/4fvy-q2d2-rdf>,
+        <https://www.dati.lombardia.it/d/4fvy-q2d2-tsv>,
+        <https://www.dati.lombardia.it/d/4fvy-q2d2-xml> ;
+    dcat:theme <http://publications.europa.eu/resource/authority/data-theme/ENVI> .
+
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2-csv> a dcatapit:Distribution,
+        dcat:Distribution ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+    dct:license <https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10> ;
+    dcat:accessURL <https://www.dati.lombardia.it/api/views/4fvy-q2d2/rows.csv?accessType=DOWNLOAD> .
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2-json> a dcatapit:Distribution,
+        dcat:Distribution ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/JSON> ;
+    dct:license <https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10> ;
+    dcat:accessURL <https://www.dati.lombardia.it/api/views/4fvy-q2d2/rows.json?accessType=DOWNLOAD> .
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2-rdf> a dcatapit:Distribution,
+        dcat:Distribution ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/RDF> ;
+    dct:license <https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10> ;
+    dcat:accessURL <https://www.dati.lombardia.it/api/views/4fvy-q2d2/rows.rdf?accessType=DOWNLOAD> .
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2-tsv> a dcatapit:Distribution,
+        dcat:Distribution ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/TSV> ;
+    dct:license <https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10> ;
+    dcat:accessURL <https://www.dati.lombardia.it/api/views/4fvy-q2d2/rows.tsv?accessType=DOWNLOAD> .
+
+<https://www.dati.lombardia.it/transformation/4fvy-q2d2-turtles> a tvo:Transformation , tvo:Plan , prov:Plan;
+    rdfs:label "The Transformation Plan"@en ;
+    tvo:declaresOutputDistribution <https://www.dati.lombardia.it/d/4fvy-q2d2-turtle> ;
+    tvo:hadInputSource <https://www.dati.lombardia.it/d/4fvy-q2d2-csv> , <https://www.dati.lombardia.it/d/4fvy-q2d2-supporting-file-csv>;
+    tvo:needsExecution "true"^^xsd:boolean ;
+    tvo:wasTransformationExecutedBy <https://www.dati.lombardia.it/transformation-activity/4fvy-q2d2> ;
+    prov:hadPrimarySource <https://www.dati.lombardia.it/d/4fvy-q2d2-csv> ;
+    tvo:definesTransformationRuleIn <https://www.dati.lombardia.it/rml-mapping-script/4fvy-q2d2-turtle-rml-rule> ;
+    wfm:hasTask <https://www.dati.lombardia.it/preprocessing-activity/4fvy-q2d2>, <https://www.dati.lombardia.it/transformation-activity/4fvy-q2d2> ;
+    wfm:hasFirstTask <https://www.dati.lombardia.it/preprocessing-activity/4fvy-q2d2> ;
+    wfm:hasLastTask <https://www.dati.lombardia.it/transformation-activity/4fvy-q2d2> .
+
+<https://www.dati.lombardia.it/rml-mapping-script/4fvy-q2d2-turtle-rml-rule> a tvo:TransformationResource, tvo:RMLMappingScript , dcat:Resource ;
+    rdfs:label "The RML rules for mapping from tabular data to RDF"@en ;
+    dct:modified "2023-02-22"^^xsd:dateTime ;
+    tvo:transformationResourceFilePath "https://www.dropbox.com/s/ie7ksceb1atvbr4/hydromappinglake.ttl?dl=0"^^xsd:anyURI .
+
+<https://www.dati.lombardia.it/d/4fvy-q2d2-supporting-file-csv> a dcatapit:Distribution,
+        dcat:Distribution , tvo:Distribution ;
+    dct:format <http://publications.europa.eu/resource/authority/file-type/CSV> ;
+    dct:license <https://w3id.org/italia/controlled-vocabulary/licences/A11_CCO10> ;
+    dcat:downloadURL <https://www.dropbox.com/s/b98lcbq593p9jqq/lakesLinking.csv?dl=0> .
+
+<https://www.dati.lombardia.it/transformation-activity/4fvy-q2d2> a tvo:TranformationExecution , prov:Activity ;
+     rdfs:label "Transformation execution activity"@en ;
+     wfm:hasInput [
+     	wfm:argument "config" ;
+     	wfm:value "http://semantics.istc.cnr.it/whow/mapper/input.json"
+     ] ;
+     wfm:hasActivityType <https://w3id.org/whow/onto/workflow-mgmt/ActivityType/triplification> ;
+     tvo:executedTransformation <https://www.dati.lombardia.it/transformation/4fvy-q2d2-turtle> .
+
+
+<https://www.dati.lombardia.it/preprocessing-activity/4fvy-q2d2> a wfm:PreprocessingExecution , prov:Activity ;
+     rdfs:label "Transformation execution activity"@en ;
+     wfm:hasInput [
+     	wfm:argument "config" ;
+     	wfm:value "http://semantics.istc.cnr.it/whow/preprocessor/input.json"
+     ] ;
+     wfm:hasActivityType <https://w3id.org/whow/onto/workflow-mgmt/ActivityType/preprocessing> ;
+     wfm:hasNextTask <https://www.dati.lombardia.it/transformation-activity/4fvy-q2d2> ;
+     tvo:executedTransformation <https://www.dati.lombardia.it/transformation/4fvy-q2d2-turtle> .

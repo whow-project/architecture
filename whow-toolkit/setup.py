@@ -7,7 +7,9 @@ install_requires=[
    'shortuuid>=1.0.9,<=1.0.9',
    'Jinja2>=3.1.2,<=3.1.2',
    'Flask>=2.2.2,<=2.2.2',
-   'apache-airflow>=2.4.2,<=2.4.2'
+   'apache-airflow>=2.4.2,<=2.4.2',
+   'pyodbc>=4.0.34,<=4.0.34',
+   'owlready2>=0.41,<=0.41'
 ]
 
 setup(name='WHOWToolkit', version='0.0.1',
