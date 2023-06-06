@@ -63,7 +63,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rml:reference "STAT_CODE"
+      rr:template "{{dataset}}_{STAT_CODE}"
     ]
   ];
 

@@ -93,6 +93,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{METRIC}"
+      ]
+  ];
+
+    rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
             rml:reference "METRIC_DESCRIPTION_IT";
@@ -130,6 +137,13 @@
             rr:parentTriplesMap :IndicatorCatalogue;
         ]
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{STAT_CODE}_{METRIC}"
+      ]
+  ];   
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
@@ -173,6 +187,13 @@
            rr:language "it"
         ]
     ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%"
+      ]
+  ];    
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:isMemberOf;
