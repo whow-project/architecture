@@ -59,8 +59,9 @@
 
 {% for indicator in indicators %}
 :Parameter{{indicator}}
-
     rml:logicalSource :CSV_INDICATORS;
+
+    crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{ {{STAT_TYPE}} }{{indicator|lower}}_{ {{CAS_CODE}} }";
@@ -110,7 +111,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parametro %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_sost', '{ {{CAS_NAME_IT}} }')%";
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'it', 'label_sost', '{ {{CAS_NAME_IT}} }')%";
             rr:language "it"
         ]
     ];
@@ -118,7 +119,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Parameter %eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_sost', '{ {{CAS_NAME_EN}} }')%";
+            rr:template "%eval:descr_par('{ {{STAT_TYPE}} }{{indicator}}', 'en', 'label_sost', '{ {{CAS_NAME_EN}} }')%";
             rr:language "en"
         ]
     ].
