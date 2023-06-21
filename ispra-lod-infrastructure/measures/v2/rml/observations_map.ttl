@@ -1,0 +1,429 @@
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix wgs84_pos: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+@prefix geosparql: <http://www.opengis.net/ont/geosparql#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix inspire: <https://w3id.org/italia/env/onto/inspire/> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+
+
+
+<#CSV_DATA>
+    rml:source "{{ observation_data }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+<#ObservationSensor>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE}"
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:implementsProcedure;
+        rr:objectMap [
+            rr:parentTriplesMap <#Procedure>
+        ]
+    ].
+
+
+<#Procedure>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/{NETWORK}/procedure/{TYPE}"
+    ].
+
+<#Catalogue>
+    rml:logicalSource <#CSV_DATA>;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}";
+    rr:class inspire-mf:ObservationCollection
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "{{dataset.upper()}} observations collection of {PLACE_NAME}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Collezione delle osservazioni {{dataset.upper()}} di {PLACE_NAME}";
+      rr:language "it"
+    ]
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{CODE_PLACE}";
+            rr:termType rr:IRI
+        ]
+    ] .
+
+<#ObservationCollection>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:class inspire-mf:ObservationCollection
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isObservationCollectionMadeBySensor;
+        rr:objectMap [
+            rr:parentTriplesMap <#ObservationSensor>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasValidationLevel;
+        rr:objectMap [
+            rr:parentTriplesMap <#Obs_validation>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DESC_EN}";
+	    rr:language "en" 
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{DESC_IT}";
+	    rr:language "it" 
+        ]
+    ];
+
+    rr:predicateObjectMap [
+    rr:predicate dcterms:modified;
+    rr:objectMap [
+          rr:template "%eval:getYearMonth({MODIFIED})%";
+          rr:datatype xsd:gYearMonth
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasMedia;
+        rr:objectMap [
+            rr:parentTriplesMap <#File>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasObservationParameter;
+        rr:objectMap [
+            rr:parentTriplesMap <#ObservationParameter>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:hasFeatureOfInterest;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap <#TimeInterval>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap <#Catalogue>
+        ]
+    ] .
+
+<#Obs_validation>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/validationlevel/{VALIDATION}";
+        rr:class inspire-mf:ValidationLevel
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Livello di validazione {VALIDATION}";
+            rr:language "it"
+        ]
+    ]; 
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Validation level {VALIDATION}";
+            rr:language "en"
+        ]
+    ].
+
+<#File>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:class ispra-top:Media;
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasDownloadURL;
+        rr:objectMap [
+            rml:reference "DATA";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:mediaType;
+        rr:objectMap [
+            rr:constant "text/csv"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasDataSchema;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataschema/{TYPE}";
+            rr:termType rr:IRI
+        ]
+    ].
+
+<#ObservationParameter>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{TYPE}";
+        rr:class inspire-mf:ObservationParameter
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{TYPE}"
+            #rr:language "en"
+        ]
+    ].
+
+
+<#TimeInterval>
+    rml:logicalSource <#CSV_DATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/timeinterval/%eval:time_interval(*)%";
+        rr:class ispra-top:TimeInterval
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{PERIOD}"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:startTime;
+        rr:objectMap [
+            rr:template "{START}";
+            rr:datatype xsd:dateTime
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:endTime;
+        rr:objectMap [
+            rr:template "{END}";
+            rr:datatype xsd:dateTime
+        ]
+    ].
+
+    #=================
+#PARAMETERS
+
+<#CSV_SCHEMATA>
+    rml:source "{{ schemata_data }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+    
+#===== SCHEMA
+
+<#SCHEMA>
+    rml:logicalSource <#CSV_SCHEMATA>;
+
+    rr:subjectMap [
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataschema/{SCHEMA}";
+        rr:class ispra-top:DataSchema
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Data schema for media files of type {SCHEMA}";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Schema di dati for file media di tipo {SCHEMA}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasSchemaAttribute;
+        rr:objectMap [
+            rr:parentTriplesMap <#Column>;
+        ]
+    ].
+
+
+#===== SCHEMA COLUMNS 
+
+<#Column>
+    rml:logicalSource <#CSV_SCHEMATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/schemaattribute/{SCHEMA}_{COL_NUMBER}";
+        rr:class ispra-top:SchemaAttribute
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Column n.{COL_NUMBER}: {PARAMETER}";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Colonna n.{COL_NUMBER}: {PARAMETER}";
+            rr:language "it"
+        ]
+    ];
+
+   
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:name;
+        rr:objectMap [
+            rml:reference "PARAMETER"
+        ]
+    ];
+
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isClassifiedBy;
+        rr:objectMap [
+            rr:parentTriplesMap <#Parameter>
+        ]
+    ].
+
+
+
+<#Parameter>
+    rml:logicalSource <#CSV_SCHEMATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{PARAMETER}";
+        rr:class inspire-mf:ObservationParameter
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "DESC_EN";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "DESC_IT";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate owl:sameAs;
+        rr:objectMap [
+            rml:reference "WMO";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap <#UnitOfMeasure>
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:acronym;
+        rr:objectMap [
+            rml:reference "PARAMETER"
+        ]
+    ].
+
+
+<#UnitOfMeasure>
+    rml:logicalSource <#CSV_SCHEMATA>;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/{UNIT_OF_MEASURE}";
+        rr:class ispra-top:UnitOfMeasure
+    ];
+  
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "UNIT_OF_MEASURE_DESC_EN";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "UNIT_OF_MEASURE_DESC_IT";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate owl:sameAs;
+        rr:objectMap [
+            rml:reference "UNIT_OF_MEASURE_WMO";
+            rr:termType rr:IRI
+        ]
+    ].
