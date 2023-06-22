@@ -24,36 +24,26 @@
 	rml:referenceFormulation ql:CSV;
 	crml:separator ";".
 
-:CSV_SENSOR_TYPES
-	rml:source "{{ csv_sensors_types }}" ;
-	rml:referenceFormulation ql:CSV;
-	crml:separator ";".
-
-:CSV_SENSOR_SUPERTYPES
-	rml:source "{{ csv_sensors_supertypes }}" ;
-	rml:referenceFormulation ql:CSV;
-	crml:separator ";".
-
 
 :Platform
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{NETWORK}_fixed_buoy";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{STAT_MODEL}";
 	].
 
 :Sensor
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{NETWORK}_{SENS_TYPE_EN}";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}";
         rr:class inspire-mf:Sensor
 	];
 
         rr:predicateObjectMap [
 	    rr:predicate rdfs:label;
             rr:objectMap [
-                rr:template "{SENS_TYPE_IT} ospitato dalla piattaforma {STAT_CODE} della rete {{dataset|upper}}{NETWORK}";
+                rr:template "{SENS_IT} ospitato dalla piattaforma {STAT_CODE} della rete {NETWORK}-{STAT_MODEL}";
                 rr:language "it"
             ]
 	];
@@ -61,7 +51,7 @@
         rr:predicateObjectMap [
 	    rr:predicate rdfs:label;
             rr:objectMap [
-                rr:template "{SENS_TYPE_EN} hosted by the platform {STAT_CODE} part of the network {{dataset|upper}}{NETWORK}";
+                rr:template "{SENS_EN} hosted by the platform {STAT_CODE} part of the {NETWORK}-{STAT_MODEL} network";
                 rr:language "en"
             ]
 	];
@@ -179,14 +169,14 @@
         crml:condition "df['DIRECTIONAL_RESULT'].notnull()";
 
 	rr:subjectMap [
-        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_directional_angle_{DIRECTIONAL_RESULT}_deg";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}_directional_angle_{DIRECTIONAL_RESULT}_deg";
         	rr:class inspire-mf:SystemCapability
     ];
         
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "Angolo direzionale del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+			rr:template "Angolo direzionale del sensore {SENS_IT} della rete {NETWORK}";
 	    		rr:language "it"
       ]
     ];
@@ -194,7 +184,7 @@
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-        		rr:template "Directional angle of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+        		rr:template "Directional angle of the sensor of the {SENS_EN} of the {NETWORK}-{STAT_MODEL} network";
 	    		rr:language "en"
       		]
     	];
@@ -294,14 +284,14 @@
         crml:condition "df['SENSOR_SAMPLING_FREQUENCY'].notnull()";
 
 	rr:subjectMap [
-        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_sampling_frequency_{SENSOR_SAMPLING_FREQUENCY}_hz";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}_sampling_frequency_{SENSOR_SAMPLING_FREQUENCY}_hz";
         	rr:class inspire-mf:SystemCapability
     ];
         
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "Frequenza di campionamento del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+			rr:template "Frequenza di campionamento del sensore {SENS_IT} della rete {NETWORK}-{STAT_MODEL}";
 	    		rr:language "it"
       ]
     ];
@@ -309,7 +299,7 @@
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-        		rr:template "Sampling frequency of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+        		rr:template "Sampling frequency of the sensor of the {SENS_EN} of the {NETWORK}-{STAT_MODEL} network";
 	    		rr:language "en"
       		]
     	];
@@ -438,14 +428,14 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_averaging_period_%eval:replace('-', '', '{PERIOD}')%{PERIOD_UNIT}";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}_averaging_period_%eval:replace('-', '', '{PERIOD}')%{PERIOD_UNIT}";
         	rr:class inspire-mf:SystemCapability
     ];
         
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "Intervallo di calcolo delle media del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+			rr:template "Intervallo di calcolo delle media del sensore {SENS_IT} della rete {NETWORK}-{STAT_MODEL}";
 	    		rr:language "it"
       ]
     ];
@@ -453,7 +443,7 @@
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-        		rr:template "Averaging period of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+        		rr:template "Averaging period of the sensor of the {SENS_EN} of the {NETWORK}-{STAT_MODEL} network";
 	    		rr:language "en"
       		]
     	];
@@ -561,14 +551,14 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemdeployment/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE_EN}_measurement_height_{MEASUREMENT_HEIGHT}_m";
+        	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemdeployment/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}_measurement_height_{MEASUREMENT_HEIGHT}_m";
         	rr:class inspire-mf:SystemDeployment
     ];
         
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-			rr:template "Altezza di misurazione del sensore {SENS_TYPE_IT} della rete {{dataset.upper()}} {NETWORK}";
+			rr:template "Altezza di misurazione del sensore {SENS_IT} della rete {NETWORK}-{STAT_MODEL}";
 	    		rr:language "it"
       ]
     ];
@@ -576,7 +566,7 @@
 	rr:predicateObjectMap [
 		rr:predicate rdfs:label;
 		rr:objectMap [
-        		rr:template "Measurement height of the sensor of the {SENS_TYPE_EN} of the {{dataset.upper()}} {NETWORK}";
+        		rr:template "Measurement height of the sensor of the {SENS_EN} of the {NETWORK}-{STAT_MODEL} network";
 	    		rr:language "en"
       		]
     	];
@@ -616,7 +606,7 @@
 	rr:predicateObjectMap [
     		rr:predicate rdfs:label;
     		rr:objectMap [
-      			rr:template "MeasurementH height";
+      			rr:template "Measurement height";
 	  		rr:language "en"
       		]
     	] .
@@ -852,17 +842,17 @@
     ].
 
 :SensorTypeBroader
-    rml:logicalSource :CSV_SENSOR_SUPERTYPES;
+    rml:logicalSource :CSV_SENSOR_MODELS;
 
     rr:subjectMap [
-    	rr:template "https://w3id.org/italia/env/ld/common/sensortype/{TYPE_EN}";
+    	rr:template "https://w3id.org/italia/env/ld/common/sensortype/{SUPERTYPE}";
 	rr:class inspire-mf:SensorType 
     ];
 
     rr:predicateObjectMap [
     	rr:predicate rdfs:label;
         rr:objectMap [
-            rml:reference "TYPE_EN";
+            rml:reference "EN";
             rr:language "en"
         ]
     ];
@@ -870,7 +860,7 @@
     rr:predicateObjectMap [
     	rr:predicate rdfs:label;
         rr:objectMap [
-            rml:reference "TYPE_IT";
+            rml:reference "IT";
             rr:language "it"
         ]
     ];

@@ -1,5 +1,5 @@
 from builtins import staticmethod
-import os, re
+import os, re, csv
 import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
@@ -92,21 +92,24 @@ class MeasuresTriplifier(Triplifier):
             }
         
         super().__init__(key_name, functions_dictionary)
-        self._dirty_data_path = os.path.join(key_name, 'v2', 'dirtydata')
+        self._dirty_data_path = os.path.join('data', key_name, 'v2', 'dirtydata')
+        self._data_path = os.path.join('data', key_name, 'v2', 'data')
+
+        self._dataset_initialisation(key_name)
         
-        
-    def _dataset_initialisation(self) -> None:
+
+    def _dataset_initialisation(self, dataset) -> None:
         print("RMN preprocessing...")
-        self.__preprocess()
+        self.__preprocess(dataset)
         KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
         print("\t preprocessing completed.")
         
     
-    def get_graph_iri(self):
+    def get_graph_iri(self, key_name : str):
         return 'https://w3id.org/italia/env/ld/' + key_name
     
 
-    def __preprocess(self) -> None:
+    def __preprocess(self, dset) -> None:
         '''
         Split the original csvs according to network and saves new files into corresponding dirs
         '''
@@ -116,20 +119,23 @@ class MeasuresTriplifier(Triplifier):
         for file in os.listdir(dirtydatafolder):
             csvfile = os.path.join(dirtydatafolder, file)
             
-            df_tosplit = pd.read_csv(csvfile, sep=';')
+            df_tosplit = pd.read_csv(csvfile, sep=';', dtype=str)
             #loop on networks
             try:
                 netws = [s for s in df_tosplit['NETWORK'].unique()]
             except KeyError:
+                newfolder = os.path.join("data", dset ,"v2", "dirtydata")
+                newcsvfile = os.path.join(newfolder, file)
+                df_tosplit.to_csv(newcsvfile, sep=';', index=None, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
                 continue
 
             for netw in netws:
                 df_sel = df_tosplit[df_tosplit['NETWORK'] == netw]
+                #df_sel = df_sel.dropna(axis=1, how='all')
 
                 newfolder = os.path.join("data", netw.lower() ,"v2", "dirtydata")
                 newcsvfile = os.path.join(newfolder, file)
-
-                df_sel.to_csv(newcsvfile, sep=';', index=None)
+                df_sel.to_csv(newcsvfile, sep=';', index=None, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
 
                 del df_sel
 
