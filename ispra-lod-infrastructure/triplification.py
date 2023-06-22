@@ -328,7 +328,7 @@ class Triplifier(ABC):
             try:
                 files = [file.get_file_name() for file in mapping.get_input_files()]
                 print("Processing mapping %s to files %s."%(mapping.get_rml_file(), files))
-                rml_converter = RMLConverter.get_instance()
+                rml_converter = RMLConverter()
                 
                 for function_name in self._functions_dictionary:
                     try:
@@ -337,12 +337,14 @@ class Triplifier(ABC):
                         print(f'Warning: The function {function_name} has been already registered. It will be not replaced.')
         
                 g_tmp = rml_converter.convert(mapping.get_rml_file(), False, mapping.to_dict())
-                                
+                
                 if g:
                     g = KnowledgeGraph.add_all(g, g_tmp)
                     #g += g_tmp
                 else:
                     g = g_tmp
+                
+				
             except Exception as e:
                 print("An error occurred while p mapping %s to files %s."%(mapping.get_rml_file(), files))
                 print( "EXCEPTION FORMAT PRINT:\n{}".format( e ) )
@@ -366,6 +368,8 @@ class TriplificationManager():
     def do_triplification(self, bool_upload, bool_update):
         try:
             result = self.__triplifier.triplify()
+            
+            print(f'The RDF graph contains {len(result.get_graph())} triples')
         except MissingDataFolderException as e:
             print("MissingDataFolderException error: {0}".format(e))
             result = None
