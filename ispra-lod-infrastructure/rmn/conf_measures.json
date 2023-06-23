@@ -1,0 +1,64 @@
+{
+	"dataset": "rmn",
+	"graph_iri": "https://w3id.org/italia/env/ld/rmn/",
+	"rdf_dump_file_name": "rmn_dump",
+	"rdf_dump_file_serialisation": "ntriples",
+	"data_folder": "data/rmn/v2/data",
+	"dirty_data_folder": "data/rmn/v2/dirtydata",
+	"rml_folder": "data/measures/v2/rml",
+   "dest_address": "11.111.111.11",
+   "dest_folder": "/path/to/folder",
+   "username": "username",
+   "passwd": "password",
+   "dbuser": "dba",
+   "dbpasswd": "dba",
+	"mappings":[
+         {
+            "rml":"stations_map.ttl",
+            "data":[
+               {
+                  "id":"csv_stations",
+                  "file":"stations.csv"
+               },
+               {
+                  "id":"csv_station_models",
+                  "file":"station_models.csv"
+               },
+               {
+                  "id":"csv_seas",
+                  "file":"seas.csv"
+               },
+               {
+                  "id":"csv_network",
+                  "file":"network.csv"
+               }
+            ]
+         },
+         {
+            "rml":"sensors_map.ttl",
+            "data":[
+               {
+                  "id":"csv_sensors",
+                  "file":"sensors.csv"
+               },
+               {
+                  "id":"csv_sensor_models",
+                  "file":"sensor_models.csv"
+               }
+            ]
+         },
+         {
+            "rml":"observations_map.ttl",
+            "data":[
+               {
+                  "id":"observation_data",
+                  "file":"observations.csv"
+               },
+               {
+                  "id":"schemata_data",
+                  "file":"observation_schemata.csv"
+               }
+            ]
+		}
+	]
+}

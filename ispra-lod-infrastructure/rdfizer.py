@@ -9,6 +9,7 @@ from rendis.rendisV2 import RendisTriplifier
 from triplification import TriplificationManager
 from euring.epe import EpeTriplifier
 from land.land import LandTriplifier
+from measures.measures import MeasuresTriplifier
 from pest.pesticides import PesticidesTriplifier
 
 def process(arg_parser: Namespace):
@@ -31,15 +32,10 @@ def process(arg_parser: Namespace):
             print("Found specific dataset: %s"%(args.dataset))
             datasets = [args.dataset]
         else:
-            datasets = ['ron', 'rmn']
+            datasets = ['ron', 'rmn', 'rmlv']
         
         for dataset in datasets:
-            if dataset == 'rmn':
-                triplifier = RMNTriplifier()
-            elif dataset == 'ron': 
-                triplifier = RONTriplifier()
-            else:
-                triplifier = None
+            triplifier = MeasuresTriplifier(dataset)
                 
             if triplifier:
                 triplifiers.append(triplifier)
