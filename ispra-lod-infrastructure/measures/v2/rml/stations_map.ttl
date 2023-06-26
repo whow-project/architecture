@@ -287,7 +287,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_IT} parte della rete {NETWORK}-{STAT_MODEL} localizzata in prossimità di {PLACE_NAME}";
+      rr:template "{STAT_TYPE_IT} parte della rete {NETWORK}-{STAT_MODEL}, in prossimità di {PLACE_NAME}";
       rr:language "it"
     ]
   ];

@@ -94,19 +94,24 @@ class MeasuresTriplifier(Triplifier):
         super().__init__(key_name, functions_dictionary)
         self._dirty_data_path = os.path.join('data', key_name, 'v2', 'dirtydata')
         self._data_path = os.path.join('data', key_name, 'v2', 'data')
+        self.dataset = key_name
 
-        self._dataset_initialisation(key_name)
+        self._dataset_initialisation()
         
 
-    def _dataset_initialisation(self, dataset) -> None:
-        print("RMN preprocessing...")
-        self.__preprocess(dataset)
+    def _dataset_initialisation(self) -> None:
+
+        print(self.dataset.upper(), "preprocessing...")
+        self.__preprocess(self.dataset)
         KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
         print("\t preprocessing completed.")
         
     
     def get_graph_iri(self, key_name : str):
         return 'https://w3id.org/italia/env/ld/' + key_name
+    
+    def get_dataset_name(self, key_name : str):
+        return key_name
     
 
     def __preprocess(self, dset) -> None:
