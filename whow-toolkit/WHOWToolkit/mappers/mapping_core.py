@@ -11,7 +11,7 @@ import json
 from typing import Dict
 
 
-from rdflib import Graph
+from rdflib import Graph, Dataset
 from pelix.ipopo.decorators import ComponentFactory, Instantiate, Validate, Provides, Requires, Property
 
 import asyncio
@@ -52,6 +52,9 @@ class MappingConfiguration():
 @Instantiate("pyrml-rml-mapper")
 class PYRMLMapper(Mapper):
     
+    def __init__(self):
+        self.__base_uri = 'https://w3id.org/whow/rml/'
+    
     @Validate
     def validate(self, context):
         print('pyRML engine is active!')
@@ -72,7 +75,6 @@ class PYRMLMapper(Mapper):
         }
     
     '''
-    
     def map(self, input: MapperInput, *args, **kwargs):
         
         if not os.path.exists(self._graphs_folder):
@@ -128,4 +130,40 @@ class PYRMLMapper(Mapper):
             g.serialize(destination=graph_path, format='nt')
         
         return {'graphs': graphs}
+    
+    def get_rml(self, mapping_id: str) -> Graph:
+        
+        d= Dataset(store="Oxigraph")
+        d.open('mappings')
+        
+        g = d.get_graph(f'{self.__base_uri}{mapping_id}')
+        
+        if not g:
+            return f'No RML exists with ID {mapping_id}', 404
+        else:
+            return g
+    
+    def save_rml(self, mapping_id: str, mapping_graph: Graph) -> bool:
+        d= Dataset(store="Oxigraph")
+        d.open('mappings')
+        
+        print(f'Retrieving graph with ID {mapping_id}')
+        
+        if mapping_id not in d.contexts():
+            g = d.add_graph(f'{self.__base_uri}{mapping_id}')
+            
+            g += mapping_graph
+            
+            d.close()
+            return True
+        else:
+            return False
+        
+        
+    def delete_rml(self, mapping_id: str) -> None:
+        
+        d= Dataset(store="Oxigraph")
+        d.open('mappings')
+        d.remove_context(mapping_id)
+        d.close()
     

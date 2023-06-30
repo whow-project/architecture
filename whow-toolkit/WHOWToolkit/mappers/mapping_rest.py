@@ -4,7 +4,11 @@ from mappers.mapping_core import MappingConfiguration
 from flask.helpers import send_file
 from flask.views import MethodView
 from pelix.ipopo.decorators import ComponentFactory, Property, Provides, Instantiate, Validate
+from pelix.framework import FrameworkFactory
+from pelix.utilities import use_service
+from flask import request
 
+from rdflib import Graph
 
 @ComponentFactory("mapping-web-factory")
 @Property('_path', 'webcomponent.path', '/mapper/<graph>')
@@ -36,3 +40,72 @@ class PYRMLMapperWeb(MethodView):
             return "Success", 200
         else:
             abort(404)
+            
+            
+            
+@ComponentFactory("rml-store-web-factory")
+@Property('_path', 'webcomponent.path', '/mapper/rml/<graph>')
+@Provides('webcomponent')
+@Instantiate("rml-store-web-inst")
+class RMLStoreWeb(MethodView):
+    
+    def __init__(self):
+        self.__conf = MappingConfiguration.get_instance()
+        
+    @Validate
+    def validate(self, context):
+        print('RMLStoreWeb is active!')
+    
+    def get(self, graph):
+        
+        ctx = FrameworkFactory.get_framework().get_bundle_context()
+        reference = ctx.get_service_reference('mapper')
+        
+        supported_mime_types = ('application/rdf+xml', 'text/turtle', 'application/json-ld', 'application/json', 'application/n-triples')
+        
+        content_types = [ctype for ctype in request.accept_mimetypes.values()]
+            
+        if any(item in supported_mime_types for item in content_types):
+        
+            with use_service(ctx, reference) as mapper:
+                g : Graph = mapper.get_rml(graph)
+                return g.serialize(format=content_types[0]), 200
+            
+        else:
+            return "Mime type not acceptable", 406
+            
+    def post(self, graph):
+        
+        ctx = FrameworkFactory.get_framework().get_bundle_context()
+        reference = ctx.get_service_reference('mapper')
+        
+        supported_mime_types = ('application/rdf+rml', 'text/turtle', 'application/json-ld', 'text', 'application/n-triples')
+            
+        content_type = request.content_type
+        print(f'Content type: {content_type}')
+        
+        if content_type in supported_mime_types:
+            with use_service(ctx, reference) as mapper:
+        
+                data = request.data.decode('utf-8')
+                
+                g = Graph()
+                g.parse(format=content_type, data=data)
+                
+                ret = mapper.save_rml(graph, g)
+                
+                if ret:
+                    return "Success", 200
+                else:
+                    return "An RML mapping with the same ID already exists.", 409
+        else:
+            return "Mime type not acceptable", 406
+        
+    def delete(self, graph):
+        
+        ctx = FrameworkFactory.get_framework().get_bundle_context()
+        reference = ctx.get_service_reference('mapper')
+        
+        with use_service(ctx, reference) as mapper:
+            mapper.delete_rml(graph)
+            return "Success", 200

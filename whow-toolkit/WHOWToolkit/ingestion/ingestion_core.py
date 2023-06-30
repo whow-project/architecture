@@ -76,6 +76,9 @@ class SimpleIngester(Ingester):
         
         if store:
                 
+            if not os.path.exists(self._data_folder):
+                os.makedirs(self._data_folder)
+            
             access_url = distribution.access_urls[0]
             
             mediatypes = distribution.values(DCAT.mediaType)
