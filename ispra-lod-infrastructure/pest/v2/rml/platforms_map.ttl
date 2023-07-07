@@ -454,23 +454,7 @@
       rr:template "Basin { {{BASIN}} }, water body { {{WBODY}} }";
       rr:language "en"
     ]
-  ];
-
-  rr:predicateObjectMap [
-    rr:predicate dcterms:description;
-    rr:objectMap [
-        rr:template "Corpo idrico { {{WBODY}} } afferente al Bacino { {{BASIN}} }";
-        rr:language "it"
-      ]
-    ];
-
-  rr:predicateObjectMap [
-    rr:predicate dcterms:description;
-    rr:objectMap [
-        rr:template "Water body { {{WBODY}} } belonging to the { {{BASIN}} } basin";
-        rr:language "en"
-      ]
-    ].
+  ].
 
 
 :Year
