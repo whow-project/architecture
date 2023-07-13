@@ -1,0 +1,75 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix idlab-fn: <http://example.com/idlab/function/> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix ispra-emf: <https://w3id.org/italia/env/onto/inspire-mf/>.
+@prefix ispra-plc: <https://w3id.org/italia/env/onto/place/>.
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/>.
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix hydro: <https://w3id.org/whow/onto/hydrography/>.
+@prefix w-mon: <https://w3id.org/whow/onto/water-monitoring/>.
+@prefix l0: <https://w3id.org/italia/onto/l0/>.
+@prefix clv: <https://w3id.org/italia/onto/CLV/>.
+@base <https://w3id.org/italia/env/ld/rml-rules> .
+
+
+#LogicalSourceOstreopsis
+<#LogicalSourceOstreopsis>
+  rml:source "{{ csv_observation }}" ;
+  rml:referenceFormulation ql:CSV;
+  crml:separator ";".
+
+<#WaterObservationOstreoptisMapping> a rr:TriplesMap;
+rml:logicalSource <#LogicalSourceOstreopsis>;
+
+  rr:subjectMap [
+    fnml:functionValue [
+     rr:predicateObjectMap [
+       rr:predicate fno:executes ;
+       rr:objectMap [ rr:constant grel:array_join ]
+     ] ;
+     rr:predicateObjectMap [
+       rr:predicate grel:p_array_a ;
+       rr:objectMap  [ rr:constant "https://w3id.org/italia/env/ld/water-observation"]
+     ];
+     rr:predicateObjectMap [
+       rr:predicate grel:p_string_sep ;
+       rr:objectMap [ rr:constant "/" ]
+    ]
+   ];
+   rr:class w-mon:WaterBiologicalQualityParameterObservation;
+  ];
+  rr:predicateObjectMap [
+   rr:predicate rdfs:label ;
+   rr:objectMap [ rr:template "Observation of ostreoptis ovata with value {Ostreopsis cf. ovata (cell/l)} with sample point in {Nome Sito} done at {Data}." ; rr:language "en" ]
+  ];
+  rr:predicateObjectMap [
+   rr:predicate rdfs:label ;
+   rr:objectMap [ rr:template "Osservazione di ostreoptis ovata con valore {Ostreopsis cf. ovata (cell/l)} con punto prelievo {Nome Sito}, fatta il {Data}." ; rr:language "it" ]
+  ];
+  rr:predicateObjectMap [
+     rr:predicate w-mon:hasWaterObservableProperty ;
+     rr:objectMap [ rr:constant "https://w3id.org/italia/env/ld/observable-property/110068"; rr:termType rr:IRI; ]
+  ];
+  rr:predicateObjectMap [
+     rr:predicate w-mon:hasBiologicalAgent ;
+     rr:objectMap [ rr:constant "https://w3id.org/italia/env/ld/biological-agent/110068"; rr:termType rr:IRI; ]
+  ];
+  rr:predicateObjectMap [
+     rr:predicate w-mon:hasObservationSample ;
+     rr:objectMap [ rr:template "http://w3id.org/italia/env/ld/water-sample/{LAT}-{LONG}"; rr:termType rr:IRI ]
+  ];
+  rr:predicateObjectMap [
+     rr:predicate ispra-emf:generationTime ;
+     rr:objectMap [ rr:template "https://w3id.org/italia/env/ld/temporal-entity/({Data})"; rr:termType rr:IRI ]
+  ].
+
