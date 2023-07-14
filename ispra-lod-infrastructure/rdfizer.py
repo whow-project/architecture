@@ -10,6 +10,7 @@ from triplification import TriplificationManager
 from euring.epe import EpeTriplifier
 from land.land import LandTriplifier
 from measures.measures import MeasuresTriplifier
+from ostreopsis.ostreopsis import OstreopsisTriplifier
 from pest.pesticides import PesticidesTriplifier
 
 def process(arg_parser: Namespace):
@@ -60,6 +61,11 @@ def process(arg_parser: Namespace):
             print(year)
             triplifiers.append(LandTriplifier(land_key,year))
     
+    elif args.ostreopsis:
+        for year in args.ostreopsis:
+            print (year)
+            triplifiers.append(OstreopsisTriplifier(year))
+    
     elif args.epe:
         for year in args.epe:
             print (year)
@@ -97,13 +103,11 @@ if __name__ == "__main__":
                             default=False,
                             help="Urban area Conversion")
 
-    arg_parser.add_argument("-e", "--epe", dest="epe", nargs='+',
-                            default=False,
-                            help="Epe Conversion")
+    arg_parser.add_argument("-e", "--epe", dest="epe", nargs='+', default=False, help="Epe Conversion")
+
+    arg_parser.add_argument("-os", "--ostreopsis", dest="ostreopsis", nargs='+', default=False, help="Ostreopsis Conversion")
     
-    arg_parser.add_argument("-pe", "--pest", dest="pest", nargs='+',
-                            default=False,
-                            help="Pesticides Conversion")
+    arg_parser.add_argument("-pe", "--pest", dest="pest", nargs='+', default=False, help="Pesticides Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,
