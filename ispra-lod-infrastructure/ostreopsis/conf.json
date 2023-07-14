@@ -1,7 +1,7 @@
 {
 	"dataset": "ostreopsis",
 	"graph_iri": "https://w3id.org/italia/env/ld/ostreopsis/",
-	"rdf_dump_file_name": "ostreopsis",
+	"rdf_dump_file_name": "ostreopsis_{{year}}",
 	"rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/ostreopsis/v2/data",
     "dirty_data_folder": "data/ostreopsis/v2/dirtydata",
@@ -12,13 +12,14 @@
    "passwd": "password",
    "dbuser": "dba",
    "dbpasswd": "dba",
+   "year": {{year}},
 	"mappings":[
          {
             "rml":"observation.ttl",
             "data":[
                {
                 "id":"csv_observation",
-                "file":"Ostreopsis_Ovata_AllRegions_withISTATcode_withSeas.csv"
+                "file":"Ostreopsis_Ovata_AllRegions_{{year}}_withISTATcode_withSeas.csv"
                },
                {
                 "id":"csv_place",
