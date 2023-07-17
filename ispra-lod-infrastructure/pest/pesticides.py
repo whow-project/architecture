@@ -1,6 +1,7 @@
 from builtins import staticmethod
 import os
 import re
+import math
 import pandas as pd
 import datetime as dt
 from pyrml import TermUtils
@@ -16,6 +17,11 @@ DESCRIPTION_PAR_STAZ = None
 
 
 class Functions():
+
+    @staticmethod
+    def get_null(value):
+        return (str(value) != '')
+
 
     @staticmethod
     def measures_collection_title(row):
@@ -149,18 +155,18 @@ class Functions():
         if range == 'label_sost':
             if lang == 'it':
                 type_it = str(DESCRIPTION_PAR_SOST[metric]["Tipo"]).replace('Pesticidi','')
-                str_out = str(DESCRIPTION_PAR_SOST[metric]["Descrizione_breve"]) + ' di ' + str(subst).capitalize() + type_it
+                str_out = '"' + str(DESCRIPTION_PAR_SOST[metric]["Descrizione_breve"]) + '"' + ' della sostanza ' + str(subst).capitalize() + type_it
             elif lang == 'en':
                 type_EN = str(DESCRIPTION_PAR_SOST[metric]["Type"]).replace('Pesticides','')
-                str_out = str(DESCRIPTION_PAR_SOST[metric]["Brief_description"]) + ' of ' + str(subst).capitalize() + type_EN
+                str_out = '"' + str(DESCRIPTION_PAR_SOST[metric]["Brief_description"]) + '"' + ' of the substance ' + str(subst).capitalize() + type_EN
 
         if range == 'label_staz':
             if lang == 'it':
                 type_it = str(DESCRIPTION_PAR_STAZ[metric]["Tipo"]).replace('Pesticidi','')
-                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Descrizione_breve"]) + type_it
+                str_out = '"' + str(DESCRIPTION_PAR_STAZ[metric]["Descrizione_breve"]) + '"' + type_it
             elif lang == 'en':
                 type_EN = str(DESCRIPTION_PAR_STAZ[metric]["Type"]).replace('Pesticides','')
-                str_out = str(DESCRIPTION_PAR_STAZ[metric]["Brief_description"]) + type_EN
+                str_out = '"' + str(DESCRIPTION_PAR_STAZ[metric]["Brief_description"]) + '"' + type_EN
 
         if range == 'sost':
             if lang == 'it':
@@ -192,6 +198,7 @@ class PesticidesTriplifier(Triplifier):
             'station_model_uri': Functions.station_model_uri,
             'station_model_id': Functions.station_model_id,
             'time_interval': Functions.time_interval,
+            'get_null': Functions.get_null,
             'round_coord': Utils.round_coord,
             'getYearMonth': Utils.getYearMonth,
             'preserve_value': Functions.preserve_value,
