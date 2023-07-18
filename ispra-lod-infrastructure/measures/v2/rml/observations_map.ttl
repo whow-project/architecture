@@ -367,6 +367,14 @@
 
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:parentTriplesMap <#UnitOfMeasure>
+        ]
+    ];
+
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
             rr:parentTriplesMap <#Parameter>
@@ -404,13 +412,6 @@
         rr:objectMap [
             rml:reference "WMO";
             rr:termType rr:IRI
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:hasUnitOfMeasure;
-        rr:objectMap [
-            rr:parentTriplesMap <#UnitOfMeasure>
         ]
     ];
 
