@@ -14,6 +14,7 @@
 @prefix inspire: <https://w3id.org/italia/env/onto/inspire/> .
 @prefix csvw: <http://www.w3.org/ns/csvw#> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
 
 
 
@@ -149,6 +150,30 @@
         rr:predicate inspire-mf:hasFeatureOfInterest;
         rr:objectMap [
             rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate foaf:depiction;
+        rr:objectMap [
+            rr:template "{IMAGE1}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate foaf:depiction;
+        rr:objectMap [
+            rr:template "{IMAGE2}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate foaf:depiction;
+        rr:objectMap [
+            rr:template "{IMAGE3}";
             rr:termType rr:IRI
         ]
     ];
