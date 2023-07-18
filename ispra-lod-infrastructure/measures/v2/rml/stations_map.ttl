@@ -33,6 +33,11 @@
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 
+:CSV_STATION_MODELS_CLASSIFICATION
+    rml:source "{{ csv_station_models_classification }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
 :CSV_NETWORK
     rml:source "{{ csv_network }}" ;
     rml:referenceFormulation ql:CSV;
@@ -343,7 +348,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/common/platformtype/{TYPE_EN}";
+    rr:template "https://w3id.org/italia/env/ld/common/platformtype/{STAT_TYPE_EN}";
 	rr:class inspire-mf:PlatformType
   ];
 
@@ -668,30 +673,43 @@
     rr:predicateObjectMap [
         rr:predicate dcterms:isReferencedBy;
         rr:objectMap [
-            rr:parentTriplesMap :StationModelPDF
+            rr:template "{PDF}";
+            rr:termType rr:IRI
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate foaf:depiction;
         rr:objectMap [
-            rr:parentTriplesMap :StationModelIMG
+            rr:template "{IMAGE}";
+            rr:termType rr:IRI
         ]
     ];
 
     rr:predicateObjectMap [
       rr:predicate ispra-top:isClassifiedBy;
       rr:objectMap [
-        rml:reference "ClassifiedBy"
+        rr:parentTriplesMap :StationModelClassification;
+        rr:joinCondition [
+          rr:child "MODEL";
+          rr:parent "MODEL"
+        ]
       ]
     ].
 
+
+:StationModelClassification
+  rml:logicalSource :CSV_STATION_MODELS_CLASSIFICATION;
+
+    rr:subjectMap [
+      rml:reference "ClassifiedBy"
+    ].
 
 
 :PositioningSystemQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['POSITIONING_SYSTEM'].notnull()";
+    #crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_positioning_system";
@@ -732,7 +750,7 @@
 :PositioningSystem
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['POSITIONING_SYSTEM'].notnull()";
+    #crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/parameter/positioning_system";
@@ -772,7 +790,7 @@
 :PositioningSystemDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['POSITIONING_SYSTEM'].notnull()";
+    #crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Positioning_system"
@@ -781,7 +799,7 @@
 :PositioningSystemWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['POSITIONING_SYSTEM'].notnull()";
+    #crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q17141406"
@@ -790,7 +808,7 @@
 :PositioningSystemValue
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['POSITIONING_SYSTEM'].notnull()";
+    #crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/platformattribute/{POSITIONING_SYSTEM}";
@@ -817,7 +835,7 @@
 :HullTypeQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['HULL_TYPE'].notnull()";
+    #crml:condition "df['HULL_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_hull_type";
@@ -858,7 +876,7 @@
 :HullType
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['HULL_TYPE'].notnull()";
+    #crml:condition "df['HULL_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/parameter/hull";
@@ -898,7 +916,7 @@
 :HullTypeDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['HULL_TYPE'].notnull()";
+    #crml:condition "df['HULL_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Hull_(watercraft)"
@@ -907,7 +925,7 @@
 :HullTypeWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['HULL_TYPE'].notnull()";
+    #crml:condition "df['HULL_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q426745"
@@ -916,7 +934,7 @@
 :HullTypeValue
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['HULL_TYPE'].notnull()";
+    #crml:condition "df['HULL_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/concept/{HULL_TYPE}";
@@ -942,7 +960,7 @@
 :Manufacturer
 
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['MANUFACTURER'].notnull()";
+  #crml:condition "df['MANUFACTURER'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/organisation/{MANUFACTURER}";
@@ -969,7 +987,7 @@
 :MooringType
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['MOORING_TYPE'].notnull()";
+    #crml:condition "df['MOORING_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/parameter/mooring";
@@ -1009,7 +1027,7 @@
 :MooringTypeDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['MOORING_TYPE'].notnull()";
+    #crml:condition "df['MOORING_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Mooring"
@@ -1018,7 +1036,7 @@
 :MooringTypeWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['MOORING_TYPE'].notnull()";
+    #crml:condition "df['MOORING_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q587735"
@@ -1027,7 +1045,7 @@
 :StationMooringType
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['MOORING_TYPE'].notnull()";
+    #crml:condition "df['MOORING_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/concept/{MOORING_TYPE}";
@@ -1054,7 +1072,7 @@
 :MooringTypeQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['MOORING_TYPE'].notnull()";
+    #crml:condition "df['MOORING_TYPE'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_mooring_type";
@@ -1095,7 +1113,7 @@
 :StationDiameterQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['DIAMETER'].notnull()";
+    #crml:condition "df['DIAMETER'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_diameter";
@@ -1136,7 +1154,7 @@
 :Diameter
 
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['DIAMETER'].notnull()";
+  #crml:condition "df['DIAMETER'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/parameter/diameter";
@@ -1176,7 +1194,7 @@
 :DiameterDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['DIAMETER'].notnull()";
+    #crml:condition "df['DIAMETER'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Diameter"
@@ -1185,7 +1203,7 @@
 :DiameterWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['DIAMETER'].notnull()";
+    #crml:condition "df['DIAMETER'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q37221"
@@ -1194,7 +1212,7 @@
 :StationDiameter
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['DIAMETER'].notnull()";
+    #crml:condition "df['DIAMETER'].notnull()";
 
     rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/value/{DIAMETER}-meters";
@@ -1236,7 +1254,7 @@
 :StructureMaterialQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['STRUCTURE_EN'].notnull()";
+    #crml:condition "df['STRUCTURE_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_material";
@@ -1276,7 +1294,7 @@
 
 :StructureMaterial
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['STRUCTURE_EN'].notnull()";
+  #crml:condition "df['STRUCTURE_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/parameter/material";
@@ -1316,7 +1334,7 @@
 :MaterialDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['STRUCTURE_EN'].notnull()";
+    #crml:condition "df['STRUCTURE_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Material"
@@ -1325,7 +1343,7 @@
 :MaterialWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['STRUCTURE_EN'].notnull()";
+    #crml:condition "df['STRUCTURE_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q214609"
@@ -1334,7 +1352,7 @@
 
 :StructureMaterialValue
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['STRUCTURE_EN'].notnull()";
+    #crml:condition "df['STRUCTURE_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/concept/{STRUCTURE_EN}";
@@ -1356,19 +1374,6 @@
         ]
     ].
 
-:StationModelPDF
-    rml:logicalSource :CSV_STATION_MODELS;
-
-    rr:subjectMap [
-        rr:template "{PDF}"
-    ].
-
-:StationModelIMG
-    rml:logicalSource :CSV_STATION_MODELS;
-
-    rr:subjectMap [
-      rr:template "{IMAGE}"
-    ].
 
 :Meter
 
@@ -1399,7 +1404,7 @@
 :LevellingQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LEVELLING_EN'].notnull()";
+    #crml:condition "df['LEVELLING_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemcapability/{MODEL}_{TYPE_EN}_levelling";
@@ -1447,7 +1452,7 @@
 
 :LevellingYear
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['LEVELLING_EN'].notnull()";
+  #crml:condition "df['LEVELLING_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/year/{TIME}";
@@ -1481,7 +1486,7 @@
 
 :LevellingProperty
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['LEVELLING_EN'].notnull()";
+  #crml:condition "df['LEVELLING_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/parameter/levelling";
@@ -1521,7 +1526,7 @@
 :LevellingDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LEVELLING_EN'].notnull()";
+    #crml:condition "df['LEVELLING_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/Levelling"
@@ -1530,7 +1535,7 @@
 :LevellingWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LEVELLING_EN'].notnull()";
+    #crml:condition "df['LEVELLING_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q961466"
@@ -1539,7 +1544,7 @@
 
 :LevellingValue
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['LEVELLING_EN'].notnull()";
+  #crml:condition "df['LEVELLING_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/method/{LEVELLING_EN}";
@@ -1567,7 +1572,7 @@
 :DeploymentQP
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LOCATION_EN'].notnull()";
+    #crml:condition "df['LOCATION_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/systemdeployment/{MODEL}_{TYPE_EN}_deployment";
@@ -1608,7 +1613,7 @@
 
 :DeploymentProperty
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['LOCATION_EN'].notnull()";
+  #crml:condition "df['LOCATION_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/common/parameter/deployment";
@@ -1648,7 +1653,7 @@
 :DeploymentDBpedia
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LOCATION_EN'].notnull()";
+    #crml:condition "df['LOCATION_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://dbpedia.org/resource/System_deployment"
@@ -1657,7 +1662,7 @@
 :DeploymentWikidata
 
     rml:logicalSource :CSV_STATION_MODELS;
-    crml:condition "df['LOCATION_EN'].notnull()";
+    #crml:condition "df['LOCATION_EN'].notnull()";
 
     rr:subjectMap [
         rr:template "http://www.wikidata.org/entity/Q4189534"
@@ -1666,7 +1671,7 @@
 
 :DeploymentValue
   rml:logicalSource :CSV_STATION_MODELS;
-  crml:condition "df['LOCATION_EN'].notnull()";
+  #crml:condition "df['LOCATION_EN'].notnull()";
 
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/concept/{LOCATION_EN}";
