@@ -27,7 +27,7 @@ class Toolkit(object):
             ]
             
             #modules = ['mappers', 'triplestores', 'web']
-            modules = ['ingestion', 'data_cleansing', 'mappers', 'metadata', 'reasoners', 'web']
+            modules = ['ingestion', 'data_cleansing', 'mappers', 'metadata', 'reasoners', 'ispraapi', 'web']
             
             cls.__framework = create_framework(bundles)
             cls.__framework.start()
