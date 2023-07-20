@@ -124,21 +124,29 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
-    rr:predicateObjectMap [
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:hasIdentifierSchema;
+    rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/identifierschema/%eval:getidentifiercode('{NETWORK}')%";
+        rr:termType rr:IRI
+      ]
+    ];
+
+  rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rr:template "{{dataset}}_{STAT_CODE}";
+      rr:template "{{dataset}}_%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_CODE}";
+      rr:template "%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
       rr:language "en"
     ]
   ];
@@ -146,7 +154,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_CODE}";
+      rr:template "%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
       rr:language "it"
     ]
   ].
@@ -186,7 +194,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{STAT_MODEL}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_MODEL}";
     rr:class inspire-mf:Platform
   ];
 
@@ -380,7 +388,7 @@
 #   rml:logicalSource :CSV_STATIONS;
 
 #   rr:subjectMap [
-#     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/{STAT_CODE}_{STAT_TYPE_EN}";
+#     rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_TYPE_EN}";
 #     rr:class ispra-place:Geometry
 #   ];
 
@@ -492,7 +500,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/{STAT_CODE}";	
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";	
     rr:class ispra-place:Geometry
   ];
 

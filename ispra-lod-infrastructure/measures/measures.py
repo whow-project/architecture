@@ -21,7 +21,17 @@ class Functions():
     @staticmethod
     def preserve_value(val):
         return val
-    
+
+    @staticmethod
+    def getidentifiercode(dataset):
+        id_code_dict = {
+            "ron": "20101",
+            "rmn": "00105",
+            "rmlv": "20201"
+            }
+        return id_code_dict[(str(dataset).lower())]
+
+
     @staticmethod
     def is_primary(value, mode=None):
         if mode:
@@ -83,6 +93,7 @@ class MeasuresTriplifier(Triplifier):
             'label_it': Utils.label_it,
             'label_en': Utils.label_en,
             'preserve_value': Functions.preserve_value,
+            'getidentifiercode': Functions.getidentifiercode,
             'is_primary': Functions.is_primary,
             'get_unit_of_measure': Functions.get_unit_of_measure,
             'get_unit_of_measure_wmo': Functions.get_unit_of_measure_wmo,

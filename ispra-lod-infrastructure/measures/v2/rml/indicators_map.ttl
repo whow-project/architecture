@@ -34,7 +34,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/{STAT_CODE}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
         rr:class inspire-mf:IndicatorCollection
     ];
 
@@ -104,7 +104,7 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/{STAT_CODE}_{METRIC}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{METRIC}";
         rr:class inspire-mf:IndicatorCollection
     ];
 
@@ -125,7 +125,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
             rr:objectMap [
-            rr:template "{{dataset}}_{STAT_CODE}_{METRIC}"
+            rr:template "{{dataset}}_%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{METRIC}"
       ]
   ];   
 
@@ -151,7 +151,7 @@
     crml:condition "df['VALUE'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%";
         rr:class inspire-mf:Indicator
 
     ];
@@ -175,7 +175,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:identifier;
             rr:objectMap [
-            rr:template "{{dataset}}_{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%"
+            rr:template "{{dataset}}_%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{METRIC}_%eval:replace('-', '', '{PERIOD}')%"
       ]
   ];    
 
@@ -312,5 +312,5 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%"
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%"
     ].

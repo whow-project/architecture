@@ -29,14 +29,14 @@
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/{STAT_CODE}_{STAT_MODEL}";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_MODEL}";
 	].
 
 :Sensor
 	rml:logicalSource :CSV_SENSORS;
 
 	rr:subjectMap [
-		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{STAT_MODEL}_{SENS_EN}";
+		rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_MODEL}_{SENS_EN}";
         rr:class inspire-mf:Sensor
 	];
 
@@ -95,13 +95,15 @@
 
         rr:predicateObjectMap [
         	rr:predicate inspire-mf:hasSystemCapability;
-        	rr:objectMap [	    		rr:parentTriplesMap :SamplingFrequencyQP
+        	rr:objectMap [
+				rr:parentTriplesMap :SamplingFrequencyQP
         	]
     	];
 
 	rr:predicateObjectMap [
 		rr:predicate inspire-mf:hasSystemCapability;
-		rr:objectMap [			rr:parentTriplesMap :DirectionalResultQP
+		rr:objectMap [
+			rr:parentTriplesMap :DirectionalResultQP
 		]
 	];
 	

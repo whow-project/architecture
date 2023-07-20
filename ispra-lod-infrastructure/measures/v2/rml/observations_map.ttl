@@ -35,7 +35,7 @@
     rml:logicalSource <#CSV_DATA>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE}"
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sensor/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_MODEL}_{SENS_TYPE}"
     ];
 
     rr:predicateObjectMap [
@@ -89,7 +89,7 @@
     rml:logicalSource <#CSV_DATA>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
         rr:class inspire-mf:ObservationCollection
     ];
 
@@ -149,7 +149,7 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:hasFeatureOfInterest;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/{STAT_CODE}";
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
             rr:termType rr:IRI
         ]
     ];
@@ -220,7 +220,7 @@
     rml:logicalSource <#CSV_DATA>;
 
     rr:subjectMap [
-	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
+	rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
         rr:class ispra-top:Media;
     ];
 
