@@ -6,10 +6,10 @@
 "data_folder": "data/ron/v2/data",
 "dirty_data_folder": "data/ron/v2/dirtydata",
 "rml_folder": "data/measures/v2/rml",
-"dest_address": "10.158.251.55",
-"dest_folder": "/usr/local/virtuoso-opensource/share/virtuoso/vad/test_sgiulio",
-"username": "lodbz",
-"passwd": "docker?0ibz",
+"dest_address": "11.111.111.11",
+"dest_folder": "/path/to/folder",
+"username": "username",
+"passwd": "password",
 "dbuser": "dba",
 "dbpasswd": "dba",
 "mappings":[
@@ -35,6 +35,10 @@
             {
                "id":"csv_network",
                "file":"network.csv"
+            },
+            {
+               "id":"csv_schema",
+               "file":"code_schema.csv"
             }
          ]
       },

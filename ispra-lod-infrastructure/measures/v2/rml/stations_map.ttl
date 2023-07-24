@@ -43,6 +43,11 @@
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 
+:CSV_SCHEMA
+    rml:source "{{ csv_schema }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".    
+
 
 :DatasetISPRA
     rml:logicalSource :CSV_STATIONS;
@@ -120,33 +125,32 @@
     ]
 ] .
 
-:IspraCode
-  rml:logicalSource :CSV_STATIONS;
+:IdCode
+  rml:logicalSource :CSV_SCHEMA;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/{ID_PROVIDER}{ID_SCHEMA}_{STAT_CODE}";
     rr:class ispra-top:UniqueIdentifier
   ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasIdentifierSchema;
     rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/identifierschema/%eval:getidentifiercode('{NETWORK}')%";
-        rr:termType rr:IRI
-      ]
+      rr:parentTriplesMap :IdentifierSchema
+        ]
     ];
 
   rr:predicateObjectMap [
     rr:predicate ispra-top:identifier;
     rr:objectMap [
-      rr:template "{{dataset}}_%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
+      rr:template "{{dataset}}_{STAT_CODE}";
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
+      rr:template "{NETWORK} station ID {STAT_CODE}";
       rr:language "en"
     ]
   ];
@@ -154,10 +158,59 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
+      rr:template "ID stazione {NETWORK} {STAT_CODE}";
       rr:language "it"
     ]
-  ].
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isIssuedBy;
+      rr:objectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
+        rr:termType rr:IRI
+      ]
+    ].
+
+
+:IdentifierSchema
+    rml:logicalSource :CSV_SCHEMA;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/identifierschema/{ID_PROVIDER}{ID_SCHEMA}";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Schema identificativi codici stazione {NETWORK}";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Identifier schema of {NETWORK} station codes";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rml:reference "ID_SCHEMA"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
+            rr:termType rr:IRI
+        ]
+    ].
+
 
 :StationCollection
   rml:logicalSource :CSV_STATIONS;
@@ -308,7 +361,11 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
-      rr:parentTriplesMap :IspraCode
+      rr:parentTriplesMap :IdCode;
+        rr:joinCondition [
+          rr:child "NETWORK";
+          rr:parent "NETWORK"
+        ]
     ]
   ];
 
@@ -337,7 +394,7 @@
   rr:predicateObjectMap [
     rr:predicate inspire-mf:isPlatformOf;
     rr:objectMap [
-        rr:parentTriplesMap :NETWORK;
+        rr:parentTriplesMap :Network;
         rr:joinCondition [
           rr:child "NETWORK";
           rr:parent "NETWORK"
@@ -566,7 +623,7 @@
   ].
 
 
-:NETWORK
+:Network
   rml:logicalSource :CSV_NETWORK;
 
   rr:subjectMap [

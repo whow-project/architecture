@@ -27,9 +27,29 @@ class Functions():
         id_code_dict = {
             "ron": "20101",
             "rmn": "00105",
-            "rmlv": "20201"
+            "rmlv": "00106"
             }
         return id_code_dict[(str(dataset).lower())]
+    
+
+    @staticmethod
+    def getidentifierlabel_it(dataset):
+        label_dict = {
+            "ron": "Schema identificativi boe ondametriche rete RON",
+            "rmn": "Schema identificativi mareografi rete RMN",
+            "rmlv": "Schema identificativi mareografi rete della Laguna di Venezia e dell'Alto Adriatico"
+            }
+        return label_dict[(str(dataset).lower())]
+    
+
+    @staticmethod
+    def getidentifierlabel_en(dataset):
+        label_dict = {
+            "ron": "RON wave buoy network identifier schema",
+            "rmn": "RMN tide gauge network identifier schema",
+            "rmlv": "Venice Lagoon and North Adriatic tide gauge network identifier schema"
+            }
+        return label_dict[(str(dataset).lower())]
 
 
     @staticmethod
