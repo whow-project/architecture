@@ -48,10 +48,10 @@
     rml:referenceFormulation ql:CSV;
     crml:separator ";".
 
-:CSV_ORGANISATION
-    rml:source "{{ csv_organisation }}" ;
-    rml:referenceFormulation ql:CSV;
-    crml:separator ";".
+# :CSV_ORGANISATION
+#     rml:source "{{ csv_organisation }}" ;
+#     rml:referenceFormulation ql:CSV;
+#     crml:separator ";".
 
 
 :DatasetISPRA
@@ -171,11 +171,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isIssuedBy;
       rr:objectMap [
-        rr:parentTriplesMap :Organisation;
-        rr:joinCondition [
-          rr:child "ID_PROVIDER";
-          rr:parent "CODE_ID"
-        ]
+        rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
+        rr:termType rr:IRI
       ]
     ].
 
@@ -214,11 +211,8 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isIssuedBy;
         rr:objectMap [
-            rr:parentTriplesMap :Organisation;
-            rr:joinCondition [
-              rr:child "ID_PROVIDER";
-              rr:parent "CODE_ID"
-            ]
+            rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
+            rr:termType rr:IRI
         ]
     ].
 
@@ -1771,34 +1765,34 @@
   ].
 
 
-  :Organisation
-    rml:logicalSource :CSV_ORGANISATION;
+  # :Organisation
+  #   rml:logicalSource :CSV_ORGANISATION;
 
-    rr:subjectMap [
-      rr:template "https://w3id.org/italia/env/ld/common/organisation/{CODE_ID}";
-      rr:class ispra-top:Organisation
-    ];
+  #   rr:subjectMap [
+  #     rr:template "https://w3id.org/italia/env/ld/common/organisation/{CODE_ID}";
+  #     rr:class ispra-top:Organisation
+  #   ];
 
-    rr:predicateObjectMap [
-      rr:predicate owl:sameAs;
-      rr:objectMap [
-        rml:reference "SAMEAS";
-        rr:termType rr:IRI
-    ]
-  ];
+  #   rr:predicateObjectMap [
+  #     rr:predicate owl:sameAs;
+  #     rr:objectMap [
+  #       rml:reference "SAMEAS";
+  #       rr:termType rr:IRI
+  #   ]
+  # ];
 
-    rr:predicateObjectMap [
-      rr:predicate rdfs:label;
-      rr:objectMap [
-        rml:reference "DESC_EN";
-        rr:language "en"
-    ]
-  ];
+  #   rr:predicateObjectMap [
+  #     rr:predicate rdfs:label;
+  #     rr:objectMap [
+  #       rml:reference "DESC_EN";
+  #       rr:language "en"
+  #   ]
+  # ];
 
-  rr:predicateObjectMap [
-    rr:predicate rdfs:label;
-    rr:objectMap [
-      rml:reference "DESC_IT";
-      rr:language "it"
-    ]
-  ].
+  # rr:predicateObjectMap [
+  #   rr:predicate rdfs:label;
+  #   rr:objectMap [
+  #     rml:reference "DESC_IT";
+  #     rr:language "it"
+  #   ]
+  # ].
