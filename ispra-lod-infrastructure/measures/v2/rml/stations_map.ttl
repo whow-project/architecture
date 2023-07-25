@@ -46,7 +46,12 @@
 :CSV_SCHEMA
     rml:source "{{ csv_schema }}" ;
     rml:referenceFormulation ql:CSV;
-    crml:separator ";".    
+    crml:separator ";".
+
+:CSV_ORGANISATION
+    rml:source "{{ csv_organisation }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
 
 
 :DatasetISPRA
@@ -166,8 +171,11 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:isIssuedBy;
       rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
-        rr:termType rr:IRI
+        rr:parentTriplesMap :Organisation;
+        rr:joinCondition [
+          rr:child "ID_PROVIDER";
+          rr:parent "CODE_ID"
+        ]
       ]
     ].
 
@@ -206,8 +214,11 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isIssuedBy;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/common/organisation/{ID_PROVIDER}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap :Organisation;
+            rr:joinCondition [
+              rr:child "ID_PROVIDER";
+              rr:parent "CODE_ID"
+            ]
         ]
     ].
 
@@ -1755,6 +1766,39 @@
     rr:predicate rdfs:label;
     rr:objectMap [
       rml:reference "LOCATION_IT";
+      rr:language "it"
+    ]
+  ].
+
+
+  :Organisation
+    rml:logicalSource :CSV_ORGANISATION;
+
+    rr:subjectMap [
+      rr:template "https://w3id.org/italia/env/ld/common/organisation/{CODE_ID}";
+      rr:class ispra-top:Organisation
+    ];
+
+    rr:predicateObjectMap [
+      rr:predicate owl:sameAs;
+      rr:objectMap [
+        rml:reference "SAMEAS";
+        rr:termType rr:IRI
+    ]
+  ];
+
+    rr:predicateObjectMap [
+      rr:predicate rdfs:label;
+      rr:objectMap [
+        rml:reference "DESC_EN";
+        rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rml:reference "DESC_IT";
       rr:language "it"
     ]
   ].
