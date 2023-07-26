@@ -225,6 +225,22 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:constant "CSV media";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:constant "CSV media";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:hasDownloadURL;
         rr:objectMap [
             rml:reference "DATA";
