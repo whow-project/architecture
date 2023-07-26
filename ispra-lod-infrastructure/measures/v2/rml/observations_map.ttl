@@ -334,7 +334,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Schema di dati for file media di tipo {SCHEMA}";
+            rr:template "Schema di dati per file media di tipo {SCHEMA}";
             rr:language "it"
         ]
     ];
