@@ -22,6 +22,179 @@
     crml:separator ";".
 
 
+:Station
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{keystaz}_{{YEAR}}";
+    rr:class inspire-mf:Platform
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            r:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/00201_{codice_comune}";
+            rr:termType rr:IRI
+        ]
+    ];
+        
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling station with ID {keystaz}, year {{YEAR}}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Stazione di campionamento %eval:label_it('{{dataset}}')% con ID {keystaz}, anno {{YEAR}}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:hasUniqueIdentifier;
+    rr:objectMap [
+      rr:parentTriplesMap :IspraCode
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{long}')%"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{lat}')%"
+    ]
+  ];
+  
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:hasFeature;
+    rr:objectMap [
+      rr:parentTriplesMap :Feature
+    ]
+  ].
+
+
+:Feature
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{keystaz}_{{YEAR}}";
+    rr:class ispra-place:Feature
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:atTime;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:long;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{long}')%"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate geo:lat;
+    rr:objectMap [
+      rr:template "%eval:round_coord('{lat}')%"
+    ]
+  ];
+  
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:hasGeometry;
+    rr:objectMap [
+      rr:parentTriplesMap :FeatureGeometry
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-top:isPartOf;
+    rr:objectMap [
+      rr:template "https://w3id.org/italia/env/ld/place/feature/%eval:digest('{bacinofmt}{corpoidricofmt}')%";
+      rr:termType rr:IRI
+    ]
+  ];
+
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling point corresponding to station {keystaz}, year {{YEAR}}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% corrispondente alla stazione {keystaz}, nell'anno {{YEAR}}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "%eval:label_en('{{dataset}}')% sampling point associated with station {keystaz}, placed at the location %eval:title('{localita}')% (municipality of %eval:title('{comune}')%), for year {{YEAR}}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate dcterms:description;
+    rr:objectMap [
+      rr:template "Punto di campionamento %eval:label_it('{{dataset}}')% associato alla stazione {keystaz}, posto in località %eval:title('{localita}')% (comune di %eval:title('{comune}')%), nell'anno {{YEAR}}";
+      rr:language "it"
+    ]
+  ].
+
+
+:FeatureGeometry
+  rml:logicalSource :CSV_STATIONS;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/%eval:coord_uri('{long}')%_%eval:coord_uri('{lat}')%_point";	
+    rr:class ispra-place:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di coordinate {long}, {lat}";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Point with coordinates {long}, {lat}";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:geometry;
+    rr:objectMap [
+      rr:template "%eval:get_point('{long}','{lat}')%"
+      #rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+    ]
+  ].
+
 
 :SamplingSeries
     rml:logicalSource :CSV_STATIONS;
