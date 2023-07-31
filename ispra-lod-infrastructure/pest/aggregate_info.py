@@ -32,7 +32,7 @@ def get_subst_list(output_folder):
 
             del df_year
 
-        df_collection = df_collection.drop(list(df_collection.columns[11:]), axis=1)
+        #df_collection = df_collection.drop(list(df_collection.columns[11:]), axis=1)
         df_collection = df_collection.drop(['anno'], axis=1)
         df_collection.drop_duplicates(inplace=True)
         df_collection.reset_index(drop=True, inplace=True)
@@ -74,7 +74,7 @@ def get_staz_list(output_folder):
 
             del df_year
 
-        df_collection = df_collection.drop(list(df_collection.columns[11:]), axis=1)
+        #df_collection = df_collection.drop(list(df_collection.columns[11:]), axis=1)
         df_collection = df_collection.drop(['anno'], axis=1)
         df_collection.drop_duplicates(inplace=True)
         df_collection.reset_index(drop=True, inplace=True)
