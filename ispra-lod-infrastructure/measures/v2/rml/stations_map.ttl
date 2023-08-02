@@ -1152,7 +1152,7 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-      rr:template "Tipo di scafo relativo a: {TYPE_IT} della rete {NETWORK}, modello {MODEL}";
+      rr:template "Tipo di ormeggio relativo a: {TYPE_IT} della rete {NETWORK}, modello {MODEL}";
 	    rr:language "it"
       ]
     ];

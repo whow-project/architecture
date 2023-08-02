@@ -85,17 +85,17 @@
         ]
     ] .
 
-<#ObservationCollection>
+<#ObservationSeries>
     rml:logicalSource <#CSV_DATA>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationcollection/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
-        rr:class inspire-mf:ObservationCollection
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/observationseries/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{TYPE}_%eval:replace('-', '', '{PERIOD}')%";
+        rr:class inspire-mf:ObservationSeries
     ];
 
 
     rr:predicateObjectMap [
-        rr:predicate inspire-mf:isObservationCollectionMadeBySensor;
+        rr:predicate inspire-mf:isObservationMadeBySensor;
         rr:objectMap [
             rr:parentTriplesMap <#ObservationSensor>
         ]
@@ -142,15 +142,22 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:hasObservationParameter;
         rr:objectMap [
-            rr:parentTriplesMap <#ObservationParameter>
+            rr:parentTriplesMap <#ObservationParameter>;
+			rr:joinCondition [
+				rr:child "TYPE"; 
+				rr:parent "SCHEMA"
+			]            
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate inspire-mf:hasFeatureOfInterest;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/featureofinterest/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap <#FeatureOfInterest>;
+            rr:joinCondition [
+				rr:child "TYPE"; 
+				rr:parent "SCHEMA"
+			]      
         ]
     ];
 
@@ -263,19 +270,61 @@
         ]
     ].
 
-<#ObservationParameter>
-    rml:logicalSource <#CSV_DATA>;
+
+<#FeatureOfInterest>
+    rml:logicalSource <#CSV_SCHEMATA>;
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{TYPE}";
+        rr:template "https://w3id.org/italia/env/ld/common/featureofinterest/{BROADER}";
+        rr:class inspire-mf:FeatureOfInterest
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{BROADER}"
+        ]
+    ].
+
+
+<#ObservationParameter>
+    rml:logicalSource <#CSV_SCHEMATA>;
+
+    crml:condition "df['par_URI'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{BROADER}_{PARAMETER}";
         rr:class inspire-mf:ObservationParameter
     ];
     
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{TYPE}"
-            #rr:language "en"
+            rml:reference "DESC_EN";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:reference "DESC_IT";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+	rr:predicate owl:sameAs;
+        rr:objectMap [
+            rml:reference "WMO";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:acronym;
+        rr:objectMap [
+            rml:reference "PARAMETER"
         ]
     ].
 
@@ -381,7 +430,6 @@
         ]
     ];
 
-
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasUnitOfMeasure;
         rr:objectMap [
@@ -389,52 +437,14 @@
         ]
     ];
 
-
     rr:predicateObjectMap [
         rr:predicate ispra-top:isClassifiedBy;
         rr:objectMap [
-            rr:parentTriplesMap <#Parameter>
-        ]
-    ].
-
-
-
-<#Parameter>
-    rml:logicalSource <#CSV_SCHEMATA>;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{PARAMETER}";
-        rr:class inspire-mf:ObservationParameter
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rml:reference "DESC_EN";
-            rr:language "en"
-        ]
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rml:reference "DESC_IT";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-	rr:predicate owl:sameAs;
-        rr:objectMap [
-            rml:reference "WMO";
-            rr:termType rr:IRI
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:acronym;
-        rr:objectMap [
-            rml:reference "PARAMETER"
+            rr:parentTriplesMap <#ObservationParameter>;
+            rr:joinCondition [
+            rr:child "PARAMETER";
+            rr:parent "PARAMETER"
+         ]
         ]
     ].
 
