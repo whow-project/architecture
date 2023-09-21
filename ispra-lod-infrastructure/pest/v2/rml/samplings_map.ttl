@@ -18,38 +18,6 @@
     crml:separator ";".
 
 
-<#Sampler>
-    rml:logicalSource <#CSV_DATA>;
-
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{ {{STAT_KEY}} }";
-        rr:class inspire-mf:Sampler
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-        rr:template "%eval:label_en('{{dataset}}')% sampler associated with station { {{STAT_KEY}} }";
-        rr:language "en"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-        rr:template "Campionatore di %eval:label_it('{{dataset}}')% associato alla stazione { {{STAT_KEY}} }";
-        rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate inspire-mf:isHostedBy;
-        rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platform/00106_{ {{STAT_KEY}} }";
-        rr:termType rr:IRI
-        ]
-    ].
-
 
 <#SamplingCollection>
     rml:logicalSource <#CSV_DATA>;

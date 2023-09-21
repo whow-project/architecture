@@ -23,6 +23,38 @@
     crml:separator ";".
 
 
+:Sampler
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{keystaz}_{{YEAR}}";
+        rr:class inspire-mf:Sampler
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "%eval:label_en('{{dataset}}')% sampler associated with station {keystaz}, year {{YEAR}}";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Campionatore di %eval:label_it('{{dataset}}')% associato alla stazione {keystaz}, anno {{YEAR}}";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isHostedBy;
+        rr:objectMap [
+          rr:parentTriplesMap :Station
+        ]
+    ].
+
+
 :Station
   rml:logicalSource :CSV_STATIONS;
 
@@ -224,8 +256,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-place:hasFeature;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{keystaz}_{{YEAR}}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap :Feature
         ]
     ];
 
@@ -240,8 +271,7 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:isSamplingSeriesMadeBySampler;
         rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{keystaz}";
-        rr:termType rr:IRI
+        rr:parentTriplesMap :Sampler
         ]
     ];
 
