@@ -186,17 +186,16 @@ class MappingConfiguration():
         json_conf = template.render(template_vars)
         
         mapping_conf = json.loads(json_conf)
-                
+
         if "dataset" in mapping_conf \
             and "graph_iri" in mapping_conf \
             and "data_folder" in mapping_conf \
             and "dirty_data_folder" in mapping_conf \
             and "rml_folder" in mapping_conf \
             and "mappings" in mapping_conf \
-            and "graph_iri" in mapping_conf \
             and "rdf_dump_file_name" in mapping_conf \
             and "rdf_dump_file_serialisation" in mapping_conf:
-            
+
             dataset = mapping_conf["dataset"]
             graph_iri = mapping_conf["graph_iri"]
 
@@ -305,6 +304,7 @@ class Triplifier(ABC):
     
     def triplify(self) -> TriplificationResult:
         
+        self._dataset_initialisation()
         
         print(f'The triplifier {type(self)} is using the configuration provided in {self._mapping_conf}.')
         mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
@@ -320,7 +320,6 @@ class Triplifier(ABC):
         self._data_path = mapping_configuration.get_data_folder()
         self._dirty_data_path = mapping_configuration.get_dirty_data_folder()
         
-        self._dataset_initialisation()
         g = None
         
         
@@ -344,6 +343,8 @@ class Triplifier(ABC):
                 else:
                     g = g_tmp
                     
+                rml_converter.reset()
+                
                 rml_converter.reset()
                 
 				

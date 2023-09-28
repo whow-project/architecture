@@ -1,10 +1,10 @@
-# USAGE: python3 split_pest_by_year.py <path/csv_file.csv>
+# USAGE: python3 split_pest_by_yy_reg.py <path/csv_file.csv>
 
-import sys, csv
+import os, sys, csv, glob
 import numpy as np
 import pandas as pd
 
-def split_by_year_and_region(csv_file):
+def split_by_year_and_region(csv_file, output_folder):
     print ('Reading', csv_file.name, '...')
     df_csv_large = pd.read_csv(csv_file.name, delimiter=';', dtype=str)
     csv_data_name = (csv_file.name.split('/')[-1]).split('.')[0]
@@ -25,14 +25,19 @@ def split_by_year_and_region(csv_file):
                 if (not(df_reg.empty)):
                     print ('Processing region', reg, '...')
                     regname = reg.replace(' ','').replace('/','').replace("'","")
-                    df_reg.to_csv('data/pest/v2/dirtydata/' + csv_data_name + '_' + regname + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+                    df_reg.to_csv(output_folder + csv_data_name + '_' + regname + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
                 del df_reg
         del df_years
 
 
+
 if __name__ == '__main__':
+
+    outdir = "data/pest/v2/dirtydata/"
+
     CSVFile = open(str(sys.argv[1]))
-    split_by_year_and_region(CSVFile)
+    split_by_year_and_region(CSVFile, outdir)
+
 
 
 

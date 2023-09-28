@@ -80,3 +80,9 @@ class Utils:
         result = (format(result.year, '04d') + '-' + format(result.month, '02d'))
 
         return result
+    
+    def get_xsd_type(s):
+        if str(s) == "Number":
+            return "xsd:integer"
+        else:
+            return "xsd:float"
