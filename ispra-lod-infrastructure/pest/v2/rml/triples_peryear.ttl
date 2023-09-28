@@ -8,6 +8,7 @@
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
 
@@ -22,6 +23,38 @@
     crml:separator ";".
 
 
+:Sampler
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{keystaz}_{{YEAR}}";
+        rr:class inspire-mf:Sampler
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "%eval:label_en('{{dataset}}')% sampler associated with station {keystaz}, year {{YEAR}}";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "Campionatore di %eval:label_it('{{dataset}}')% associato alla stazione {keystaz}, anno {{YEAR}}";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate inspire-mf:isHostedBy;
+        rr:objectMap [
+          rr:parentTriplesMap :Station
+        ]
+    ].
+
+
 :Station
   rml:logicalSource :CSV_STATIONS;
 
@@ -33,7 +66,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isMemberOf;
         rr:objectMap [
-            r:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/00201_{codice_comune}";
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/platformcollection/00201_{codice_comune}";
             rr:termType rr:IRI
         ]
     ];
@@ -223,8 +256,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-place:hasFeature;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/place/feature/00106_{keystaz}_{{YEAR}}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap :Feature
         ]
     ];
 
@@ -239,8 +271,7 @@
     rr:predicateObjectMap [
         rr:predicate inspire-mf:isSamplingSeriesMadeBySampler;
         rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/sampler/00106_{keystaz}";
-        rr:termType rr:IRI
+        rr:parentTriplesMap :Sampler
         ]
     ];
 
@@ -361,10 +392,10 @@
 :Indicators{{indicator}}
     rml:logicalSource :CSV_SUBSTANCES;
     
-    crml:condition "df['{{indicator}}'].notnull()";
+    #crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{keystaz}_{tipo_staz}{{indicator|lower}}_{CAS}_{{YEAR}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{keystaz}_{tipo_stazione}{{indicator|lower}}_{CAS}_{{YEAR}}";
         rr:class inspire-mf:Indicator
     ];
 
@@ -425,7 +456,7 @@
 :SubValue{{indicator}}
     rml:logicalSource :CSV_SUBSTANCES;
     
-    crml:condition "df['{{indicator}}'].notnull()";
+    #crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_ind('{tipo_stazione}{{indicator}}', 'en', True)%";

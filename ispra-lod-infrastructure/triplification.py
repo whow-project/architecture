@@ -343,7 +343,11 @@ class Triplifier(ABC):
                     #g += g_tmp
                 else:
                     g = g_tmp
+<<<<<<< HEAD
 
+=======
+                    
+>>>>>>> 898ebaf3185e4afe9595690fd1ad9375d3a3f959
                 rml_converter.reset()
                 
 				

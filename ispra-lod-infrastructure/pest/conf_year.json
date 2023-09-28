@@ -1,0 +1,45 @@
+{
+"dataset": "pest",
+"graph_iri": "https://w3id.org/italia/env/ld/pest/{{year}}/",
+"rdf_dump_file_name": "pest_Marche_{{year}}",
+"rdf_dump_file_serialisation": "ntriples",
+"data_folder": "data/pest/v2/data",
+"dirty_data_folder": "data/pest/v2/dirtydata",
+"rml_folder": "data/pest/v2/rml",
+"dest_address": "11.111.111.11",
+"dest_folder": "/path/to/folder",
+"username": "username",
+"passwd": "password",
+"dbuser": "dba",
+"dbpasswd": "dba",
+"year": {{year}},
+      "mappings":[
+  {
+      "rml":"triples_peryear.ttl",
+      "data":[
+        {
+            "id":"csv_stations",
+            "file":"stazioni{{year}}new_Marche_{{year}}.csv"
+        },
+        {
+          "id":"csv_substances",
+          "file":"stazioni_sostanze{{year}}new_Marche_{{year}}.csv"
+        }
+      ],
+      "variables": [
+        {
+          "id": "indicators_stat",
+          "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni{{year}}new_Marche_{{year}}.csv', 19)"
+        },
+        {
+          "id": "indicators_sub",
+          "value": "MappingConfiguration.columns_as_tuple('data/pest/v2/dirtydata/stazioni_sostanze{{year}}new_Marche_{{year}}.csv', 11)"
+        },
+        {
+          "id": "YEAR",
+          "value": "'{{year}}'"
+        }
+      ]
+    }
+  ]
+}
