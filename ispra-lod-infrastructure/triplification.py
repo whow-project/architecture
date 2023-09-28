@@ -368,7 +368,7 @@ class TriplificationManager():
         
         
     #def do_triplification(self):
-    def do_triplification(self, bool_upload, bool_update):
+    def do_triplification(self, bool_upload, bool_update, bool_localisql):
         try:
             result = self.__triplifier.triplify()
             
@@ -401,9 +401,10 @@ class TriplificationManager():
                     with gzip.open(file_load, 'r') as f:
                         read_f = f.read()
                     if len(read_f) != 1:
-                        sql_load = self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name,run_load=False)
+                        sql_load = self.__kg_loader.sparql_bulk_load(str(dest_ip), str(dbuser_str), str(dbpass_str), str(file_load),str(dest_path),graph_name,run_load=bool_localisql)
 
-                        self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_load,str(dest_path))
+                        if not bool_localisql:
+                            self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_load,str(dest_path))
 
 
                 #check if del file is not empty
@@ -411,9 +412,10 @@ class TriplificationManager():
                     with gzip.open(file_delete, 'r') as f:
                         read_f = f.read()
                     if len(read_f) != 1:
-                        sql_del = self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name,run_load=False)
+                        sql_del = self.__kg_loader.sparql_delete(str(dest_ip), str(dbuser_str), str(dbpass_str),str(file_delete),graph_name,run_load=bool_localisql)
 
-                        self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_del,str(dest_path))
+                        if not bool_localisql:
+                            self.__kg_loader.remote_isql(str(dest_ip),str(user_str),str(pass_str),str(dbuser_str),str(dbpass_str),sql_del,str(dest_path))
            
         
 

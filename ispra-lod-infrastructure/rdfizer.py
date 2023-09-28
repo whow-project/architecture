@@ -75,7 +75,7 @@ def process(arg_parser: Namespace):
         '''
         triplification_manager = TriplificationManager(triplifier, KnowledgeGraphLoader(), args.json_config)
         #triplification_manager.do_triplification()
-        triplification_manager.do_triplification(args.upload, args.update)
+        triplification_manager.do_triplification(args.upload, args.update, args.localisql)
 
 
 if __name__ == "__main__":
@@ -124,6 +124,8 @@ if __name__ == "__main__":
     arg_parser.add_argument("--upload", help="upload the output files on the server", action="store_true")
 
     arg_parser.add_argument("--update", help="update the virtuoso store on the server", action="store_true")
+    
+    arg_parser.add_argument("--localisql", help="run the local isql for Virtuoso update", action="store_true")
 
     args = arg_parser.parse_args()
     
