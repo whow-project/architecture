@@ -328,7 +328,7 @@ class Triplifier(ABC):
             try:
                 files = [file.get_file_name() for file in mapping.get_input_files()]
                 print("Processing mapping %s to files %s."%(mapping.get_rml_file(), files))
-                rml_converter = RMLConverter()
+                rml_converter = RMLConverter.get_instance()
                 
                 for function_name in self._functions_dictionary:
                     try:
@@ -343,6 +343,8 @@ class Triplifier(ABC):
                     #g += g_tmp
                 else:
                     g = g_tmp
+
+                rml_converter.reset()
                 
 				
             except Exception as e:
