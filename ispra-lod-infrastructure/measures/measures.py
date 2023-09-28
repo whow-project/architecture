@@ -127,8 +127,7 @@ class MeasuresTriplifier(Triplifier):
         self._data_path = os.path.join('data', key_name, 'v2', 'data')
         self.dataset = key_name
 
-        self._dataset_initialisation()
-        
+       
 
     def _dataset_initialisation(self) -> None:
 

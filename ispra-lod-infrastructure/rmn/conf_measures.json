@@ -13,27 +13,35 @@
    "dbuser": "dba",
    "dbpasswd": "dba",
 	"mappings":[
-         {
-            "rml":"stations_map.ttl",
-            "data":[
-               {
-                  "id":"csv_stations",
-                  "file":"stations.csv"
-               },
-               {
-                  "id":"csv_station_models",
-                  "file":"station_models.csv"
-               },
-               {
-                  "id":"csv_seas",
-                  "file":"seas.csv"
-               },
-               {
-                  "id":"csv_network",
-                  "file":"network.csv"
-               }
-            ]
-         },
+      {
+         "rml":"stations_map.ttl",
+         "data":[
+            {
+               "id":"csv_stations",
+               "file":"stations.csv"
+            },
+            {
+               "id":"csv_station_models",
+               "file":"station_models.csv"
+            },
+            {
+               "id":"csv_station_models_classification",
+               "file":"station_model_classification.csv"
+            },
+            {
+               "id":"csv_seas",
+               "file":"seas.csv"
+            },
+            {
+               "id":"csv_network",
+               "file":"network.csv"
+            },
+            {
+               "id":"csv_schema",
+               "file":"code_schema.csv"
+            }
+         ]
+      },
          {
             "rml":"sensors_map.ttl",
             "data":[

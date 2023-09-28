@@ -843,45 +843,45 @@
         ]
     ].
 
-:SensorTypeBroader
-    rml:logicalSource :CSV_SENSOR_MODELS;
+# :SensorTypeBroader
+#     rml:logicalSource :CSV_SENSOR_MODELS;
 
-    rr:subjectMap [
-    	rr:template "https://w3id.org/italia/env/ld/common/sensortype/{SUPERTYPE}";
-	rr:class inspire-mf:SensorType 
-    ];
+#     rr:subjectMap [
+#     	rr:template "https://w3id.org/italia/env/ld/common/sensortype/{SUPERTYPE}";
+# 	rr:class inspire-mf:SensorType 
+#     ];
 
-    rr:predicateObjectMap [
-    	rr:predicate rdfs:label;
-        rr:objectMap [
-            rml:reference "EN";
-            rr:language "en"
-        ]
-    ];
+#     rr:predicateObjectMap [
+#     	rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rml:reference "EN";
+#             rr:language "en"
+#         ]
+#     ];
 
-    rr:predicateObjectMap [
-    	rr:predicate rdfs:label;
-        rr:objectMap [
-            rml:reference "IT";
-            rr:language "it"
-        ]
-    ];
+#     rr:predicateObjectMap [
+#     	rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rml:reference "IT";
+#             rr:language "it"
+#         ]
+#     ];
 
-    rr:predicateObjectMap [
-    	rr:predicate owl:sameAs;
-        rr:objectMap [
-            rml:reference "DBPEDIA";
-            rr:termType rr:IRI
-        ]
-    ];
+#     rr:predicateObjectMap [
+#     	rr:predicate owl:sameAs;
+#         rr:objectMap [
+#             rml:reference "DBPEDIA";
+#             rr:termType rr:IRI
+#         ]
+#     ];
 
-    rr:predicateObjectMap [
-    	rr:predicate owl:sameAs;
-        rr:objectMap [
-            rml:reference "WIKIDATA";
-            rr:termType rr:IRI
-        ]
-    ] .
+#     rr:predicateObjectMap [
+#     	rr:predicate owl:sameAs;
+#         rr:objectMap [
+#             rml:reference "WIKIDATA";
+#             rr:termType rr:IRI
+#         ]
+#     ] .
 
 
 #===============================================================================
