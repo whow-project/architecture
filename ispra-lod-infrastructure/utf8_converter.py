@@ -11,8 +11,8 @@ import os.path
 class UTF8Converter():
     
     def __init__(self, input_dir, output_dir):
-    	self.__input_dir = input_dir
-    	self.__output_dir = output_dir
+        self.__input_dir = input_dir
+        self.__output_dir = output_dir
 
     def convert(self):
         #fileext = "csv" #estensione del file da processare e codificare in UTF-8

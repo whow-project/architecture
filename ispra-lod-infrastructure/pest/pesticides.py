@@ -225,7 +225,8 @@ class PesticidesTriplifier(Triplifier):
             }
         
         super().__init__('pesticides', functions_dictionary)
-        self._dirty_data_path = os.path.join('pesticides', 'v2', 'dirtydata')
+        self._dirty_data_path = os.path.join('data', 'pest', 'v2', 'dirtydata')
+        self._data_path = os.path.join('data', 'pest', 'v2', 'data')
 
         self._conf_vars.update({"year": year})
         
