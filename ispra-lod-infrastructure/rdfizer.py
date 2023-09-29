@@ -1,6 +1,7 @@
 from argparse import ArgumentParser, Namespace
 
 from kg_loader import KnowledgeGraphLoader
+from common.common import CommonTriplifier
 from rmn.rmn import RMNTriplifier
 from ron.ron import RONTriplifier
 from place.place_shp2csv import place_maker
@@ -17,7 +18,10 @@ def process(arg_parser: Namespace):
     
     triplifiers = []
     
-    if args.place:
+    if args.common:
+        triplifiers.append(CommonTriplifier())
+    
+    elif args.place:
         for year in args.place:
             print(year)
             place_maker("data/istat/Limiti0101%s.zip" % year)
@@ -81,6 +85,11 @@ def process(arg_parser: Namespace):
 if __name__ == "__main__":
     arg_parser = ArgumentParser("annual_run.py", description="This script runs ISPRA Data Conversion (annual)")
 
+    arg_parser.add_argument("-cmn", "--common", dest="common", nargs='?',
+                            const=True,
+                            default=False,
+                            help="Common Conversion")
+    
     arg_parser.add_argument("-p", "--pl", dest="place", nargs='+',
                             default=False,
                             help="place Conversion")
