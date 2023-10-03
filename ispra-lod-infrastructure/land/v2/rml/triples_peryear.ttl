@@ -1,0 +1,126 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/triples_peryear.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+
+:CSV
+    rml:source "{{ csv_file }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+
+:Year
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+        rr:class ispra-top:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:year;
+        rr:objectMap [
+            rr:constant "{{YEAR}}";
+            rr:datatype xsd:gYear
+        ]
+    ].
+
+
+{% for indicator in indicators %}
+:Indicators{{indicator}}
+    rml:logicalSource :CSV;
+    
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00201_{ {{COD_PLACE}} }_{{indicator|lower}}_{{YEAR}}";
+        rr:class inspire-mf:Indicator
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicatore {{indicator}} associato a { {{NOME_PLACE}} } per l'anno {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicator {{indicator}} associated with { {{NOME_PLACE}} } for year {{YEAR}}: { {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "en"
+        ]
+    ];
+        
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }_{{indicator|lower}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasValue;
+        rr:objectMap [
+            rr:parentTriplesMap :Value{{indicator}}
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap :Year
+        ]
+    ].
+
+:Value{{indicator}}
+    rml:logicalSource :CSV;
+    
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+        rr:class ispra-top:Value
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{indicator}} } %eval:get_unit_of_measure('{{indicator}}', 'symbol')%";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:value;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUnitOfMeasure;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/common/unitofmeasure/%eval:get_unit_of_measure('{{indicator}}', 'en', True)%";
+            rr:termType rr:IRI
+        ]
+    ] .
+
+{%endfor%}

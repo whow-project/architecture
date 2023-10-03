@@ -1,7 +1,7 @@
 {
     "dataset": "soilc",
     "graph_iri": "https://w3id.org/italia/env/ld/soilc/",
-    "rdf_dump_file_name": "soilc_{{year}}",
+    "rdf_dump_file_name": "soilc_static",
     "rdf_dump_file_serialisation": "ntriples",
     "data_folder": "data/soilc/v2/data",
     "dirty_data_folder": "data/soilc/v2/dirtydata",
@@ -12,20 +12,19 @@
     "passwd": "password",
     "dbuser": "dba",
     "dbpasswd": "dba",
-    "year": {{year}},
 	"mappings": [
 		{
-            "rml": "indicators_mapV2.ttl",
+            "rml": "indicators_mapV3.ttl",
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Nazionale_{{year}}.csv"
+                    "file": "Nazionale_static.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Nazionale_{{year}}.csv', 1)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Nazionale_static.csv', 1)"
                 },
                 {
                     "id": "YEAR",
@@ -42,17 +41,17 @@
             ]
         },
 		{
-            "rml": "indicators_mapV2.ttl",
+            "rml": "indicators_mapV3.ttl",
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Regioni_{{year}}.csv"
+                    "file": "Regioni_static.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Regioni_{{year}}.csv', 1)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Regioni_static.csv', 1)"
                 },
                 {
                     "id": "YEAR",
@@ -69,17 +68,17 @@
             ]
         },
         {
-            "rml": "indicators_mapV2.ttl",
+            "rml": "indicators_mapV3.ttl",
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Province_{{year}}.csv"
+                    "file": "Province_static.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Province_{{year}}.csv', 3)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Province_static.csv', 3)"
                 },
                 {
                     "id": "YEAR",
@@ -96,17 +95,17 @@
             ]
         },
         {
-            "rml": "indicators_mapV2.ttl",
+            "rml": "indicators_mapV3.ttl",
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Comuni_{{year}}.csv"
+                    "file": "Comuni_static.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Comuni_{{year}}.csv', 5)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/soilc/v2/dirtydata/Comuni_static.csv', 5)"
                 },
                 {
                     "id": "YEAR",
@@ -122,7 +121,6 @@
                 }
             ]
         },
-
         {
             "rml": "metrics_map.ttl",
             "data": [
