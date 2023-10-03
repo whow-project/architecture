@@ -127,8 +127,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:atTime;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap :Year
         ]
     ];
 
@@ -284,6 +283,23 @@
     ].
 
 
+:Year
+    rml:logicalSource :CSV_STATIONS;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+        rr:class ispra-top:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:year;
+        rr:objectMap [
+            rr:constant "{{YEAR}}";
+            rr:datatype xsd:gYear
+        ]
+    ].
+
+
 {% for indicator in indicators_stat %}
 
 :Stationindicators{{indicator}}
@@ -338,8 +354,7 @@
   rr:predicateObjectMap [
       rr:predicate ispra-top:atTime;
       rr:objectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
-        rr:termType rr:IRI
+        rr:parentTriplesMap :Year
       ]
   ].
 
@@ -448,8 +463,7 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:atTime;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap :Year
         ]
     ].
 
