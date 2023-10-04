@@ -90,7 +90,8 @@
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
-      rr:parentTriplesMap :IspraCode
+      rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/00106_{keystaz}";
+      rr:termType rr:IRI
     ]
   ];
 
