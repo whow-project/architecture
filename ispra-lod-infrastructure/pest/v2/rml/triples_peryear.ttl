@@ -269,7 +269,7 @@
     ]; 
 
     rr:predicateObjectMap [
-        rr:predicate inspire-mf:isSamplingSeriesMadeBySampler;
+        rr:predicate inspire-mf:isSamplingMadeBySampler;
         rr:objectMap [
         rr:parentTriplesMap :Sampler
         ]
