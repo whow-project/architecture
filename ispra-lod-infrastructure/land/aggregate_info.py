@@ -1,8 +1,11 @@
 # USAGE: python3 aggregate_info.py <dataset>
 
 import os, sys, csv, glob
+import numpy as np
 import pandas as pd
+import warnings
 
+warnings.simplefilter(action='ignore', category=FutureWarning)
 
 def get_summary_list(dataset):
 
@@ -24,7 +27,8 @@ def get_summary_list(dataset):
             #keep only necessary information
             for col in df_year.columns:
                 if col in list(df_fields['Campo']):
-                    df_year.drop([col], axis=1, inplace=True)
+                    #df_year.drop([col], axis=1, inplace=True)
+                    df_year.loc[:, col] = np.nan
 
             if (df_collection.empty):
                 df_collection = df_year.copy()

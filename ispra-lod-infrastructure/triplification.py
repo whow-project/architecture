@@ -242,9 +242,9 @@ class MappingConfiguration():
                         identifier = file_conf["id"]
                         filename = file_conf["file"]
                 
-                        file_path = os.path.join(data_path, filename)
+                        file_path = os.path.join(dirty_data_path, filename)
                         if os.path.exists(file_path):
-                            input_files.append(MappingData(identifier, file_path))
+                            input_files.append(MappingData(identifier, file_path.replace('dirtydata', 'data')))
                             
                         else:
                             #raise MissingDataFolderException(file_path)
