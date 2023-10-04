@@ -6,6 +6,7 @@
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
 
 
 :CSV_ORGANISATION
@@ -40,13 +41,29 @@
     rr:predicateObjectMap [
       rr:predicate rdfs:label;
       rr:objectMap [
-        rml:reference "DESC_EN";
+        rml:reference "LABEL_EN";
         rr:language "en"
     ]
   ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
+        rr:objectMap [
+        rml:reference "LABEL_IT";
+        rr:language "it"
+    ]
+  ];
+
+    rr:predicateObjectMap [
+      rr:predicate dcterms:description;
+      rr:objectMap [
+        rml:reference "DESC_EN";
+        rr:language "en"
+    ]
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
         rr:objectMap [
         rml:reference "DESC_IT";
         rr:language "it"
