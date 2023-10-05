@@ -40,7 +40,7 @@
         rr:class inspire-mf:Sensor
 	];
 
-        rr:predicateObjectMap [
+	rr:predicateObjectMap [
 	    rr:predicate rdfs:label;
             rr:objectMap [
                 rr:template "{SENS_IT} ospitato dalla piattaforma {STAT_CODE} della rete {NETWORK}-{STAT_MODEL}";
@@ -48,7 +48,7 @@
             ]
 	];
 
-        rr:predicateObjectMap [
+	rr:predicateObjectMap [
 	    rr:predicate rdfs:label;
             rr:objectMap [
                 rr:template "{SENS_EN} hosted by the platform {STAT_CODE} part of the {NETWORK}-{STAT_MODEL} network";
@@ -69,36 +69,36 @@
 	];
 
     rr:predicateObjectMap [
-	rr:predicate inspire-mf:hasSensorType;
-	rr:objectMap [
-        rr:parentTriplesMap :SensorType;
-        rr:joinCondition [
+		rr:predicate inspire-mf:hasSensorType;
+		rr:objectMap [
+        	rr:parentTriplesMap :SensorType;
+        	rr:joinCondition [
 				rr:child "SENSOR_MODEL"; 
 				rr:parent "ID"
 			]
 	    ]
     ];
 
-        rr:predicateObjectMap [
+	rr:predicateObjectMap [
 		rr:predicate inspire-mf:hasSystemCapability;
 		rr:objectMap [
 			rr:parentTriplesMap :SensorPeriodQP
 		]
 	];
 
-        rr:predicateObjectMap [
+	rr:predicateObjectMap [
 		rr:predicate inspire-mf:hasSystemDeployment;
 		rr:objectMap [
 		rr:parentTriplesMap :MeasurementHeightQP
 		]
 	];
 
-        rr:predicateObjectMap [
-        	rr:predicate inspire-mf:hasSystemCapability;
-        	rr:objectMap [
-				rr:parentTriplesMap :SamplingFrequencyQP
-        	]
-    	];
+	rr:predicateObjectMap [
+		rr:predicate inspire-mf:hasSystemCapability;
+		rr:objectMap [
+			rr:parentTriplesMap :SamplingFrequencyQP
+		]
+	];
 
 	rr:predicateObjectMap [
 		rr:predicate inspire-mf:hasSystemCapability;
@@ -114,12 +114,12 @@
 		]
 	];
 
-        rr:predicateObjectMap [
+	rr:predicateObjectMap [
 		rr:predicate inspire-mf:isHostedBy;
 		rr:objectMap [
 			rr:parentTriplesMap :Platform
-      		]
-    	] .
+		]
+	].
 
 
 #===============================================================================
