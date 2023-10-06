@@ -231,34 +231,34 @@ class PesticidesTriplifier(Triplifier):
         self._conf_vars.update({"year": year})
         
         
-    def _dataset_initialisation(self) -> None:
+    def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
         print("Pesticides preprocessing...")
         
-        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+        KnowledgeGraphLoader.convert_utf8(dirty_data_path, data_path)
 
-        df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=None, engine='python', iterator=True)
+        df = pd.read_csv(os.path.join(data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=None, engine='python', iterator=True)
         sep = df._engine.data.dialect.delimiter
         df.close()
 
         global UNIT_OF_MEASURES_STAZ
 
-        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
         UNIT_OF_MEASURES_STAZ = units_df.to_dict(orient="index")
         del units_df
 
         global UNIT_OF_MEASURES_IND
         
-        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
         UNIT_OF_MEASURES_IND = units_df.to_dict(orient="index")
 
         global DESCRIPTION_PAR_SOST
 
-        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
+        units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campiPesticidiStazioniSostanze.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
         DESCRIPTION_PAR_SOST = units_df.to_dict(orient="index")
 
         global DESCRIPTION_PAR_STAZ
 
-        units_df = pd.read_csv(os.path.join(self._data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
+        units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campiPesticidiStazioni.csv"), sep=sep)[["Campo", "Descrizione_breve", "Brief_description", "Descrizione", "Description", "Tipo", "Type"]].set_index('Campo')
         DESCRIPTION_PAR_STAZ = units_df.to_dict(orient="index")
 
         print("\t preprocessing completed.")
