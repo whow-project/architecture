@@ -129,11 +129,11 @@ class MeasuresTriplifier(Triplifier):
 
        
 
-    def _dataset_initialisation(self) -> None:
+    def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
 
         print(self.dataset.upper(), "preprocessing...")
         self.__preprocess(self.dataset)
-        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+        KnowledgeGraphLoader.convert_utf8(dirty_data_path, data_path)
         print("\t preprocessing completed.")
         
     

@@ -408,7 +408,7 @@
 :Indicators{{indicator}}
     rml:logicalSource :CSV_SUBSTANCES;
     
-    #crml:condition "df['{{indicator}}'].notnull()";
+    crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/00106_{keystaz}_{tipo_stazione}{{indicator|lower}}_{CAS}_{{YEAR}}";
@@ -471,7 +471,7 @@
 :SubValue{{indicator}}
     rml:logicalSource :CSV_SUBSTANCES;
     
-    #crml:condition "df['{{indicator}}'].notnull()";
+    crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/common/value/{ {{indicator}} }_%eval:get_unit_of_measure_ind('{tipo_stazione}{{indicator}}', 'en', True)%";

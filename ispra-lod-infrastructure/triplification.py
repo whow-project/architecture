@@ -242,9 +242,9 @@ class MappingConfiguration():
                         identifier = file_conf["id"]
                         filename = file_conf["file"]
                 
-                        file_path = os.path.join(data_path, filename)
+                        file_path = os.path.join(dirty_data_path, filename)
                         if os.path.exists(file_path):
-                            input_files.append(MappingData(identifier, file_path))
+                            input_files.append(MappingData(identifier, file_path.replace('dirtydata', 'data')))
                             
                         else:
                             #raise MissingDataFolderException(file_path)
@@ -304,9 +304,6 @@ class Triplifier(ABC):
     
     def triplify(self) -> TriplificationResult:
         
-        self._dataset_initialisation()
-        
-        print(f'The triplifier {type(self)} is using the configuration provided in {self._mapping_conf}.')
         mapping_configuration = MappingConfiguration.load(self._mapping_conf, self._conf_vars)
         
         self._graph_iri = mapping_configuration.get_graph_iri()
@@ -319,6 +316,10 @@ class Triplifier(ABC):
         self._dbpass_str = mapping_configuration.get_dbpasswd()
         self._data_path = mapping_configuration.get_data_folder()
         self._dirty_data_path = mapping_configuration.get_dirty_data_folder()
+
+        self._dataset_initialisation(self._dirty_data_path, self._data_path)
+        
+        print(f'The triplifier {type(self)} is using the configuration provided in {self._mapping_conf}.')
         
         g = None
         
