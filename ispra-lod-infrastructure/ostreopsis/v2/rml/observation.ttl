@@ -175,7 +175,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
 rml:logicalSource <#LogicalSourceOstreopsis> ;
   rr:subjectMap [
     rr:template "https://w3id.org/italia/env/ld/temporal-entity/({Data})";
-    rr:class ispra-top:TermporalEntity
+    rr:class ispra-top:TemporalEntity
   ] ;
   rr:predicateObjectMap [
    rr:predicate rdfs:label ;
