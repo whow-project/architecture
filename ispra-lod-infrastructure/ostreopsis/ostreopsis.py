@@ -23,10 +23,10 @@ class OstreopsisTriplifier(Triplifier):
         self._conf_vars.update({"year": year})
         
         
-    def _dataset_initialisation(self) -> None:
+    def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
         print("Ostreopsis preprocessing...")
         
-        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+        KnowledgeGraphLoader.convert_utf8(dirty_data_path, data_path)
         
         print("\t preprocessing completed.")
    

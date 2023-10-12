@@ -14,26 +14,32 @@
 @prefix ispra-plc: <https://w3id.org/italia/env/onto/place/>.
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/>.
 @prefix skos: <http://www.w3.org/2004/02/skos/core#> .
-@prefix crml: <http://w3id.org/stlab/crml#> .
 @prefix hydro: <https://w3id.org/whow/onto/hydrography/>.
 @prefix w-mon: <https://w3id.org/whow/onto/water-monitoring/>.
 @prefix l0: <https://w3id.org/italia/onto/l0/>.
 @prefix clv: <https://w3id.org/italia/onto/CLV/>.
 @base <https://w3id.org/italia/env/ld/rml-rules> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix csvw: <http://www.w3.org/ns/csvw> .
 
 
-#LogicalSourceOstreopsis
-<#LogicalSourceOstreopsis>
-  rml:source "{{ csv_observation }}" ;
-  rml:referenceFormulation ql:CSV;
-  crml:separator ";".
+# #LogicalSourceOstreopsis
+<#LogicalSourceOstreopsis> a rml:BaseSource ;
+    rml:source [
+      a csvw:Table;
+      csvw:url "{{ csv_observation }}";
 
-#LogicalSourceLinkingPlace
-<#LogicalSourceLinkingPlace>
-  rml:source "{{ csv_place }}" ;
-  rml:referenceFormulation ql:CSV;
-  crml:separator ",".
+      csvw:dialect [
+        a csvw:Dialect;
+        csvw:delimiter ";"
+      ]
+    ];
+    rml:referenceFormulation ql:CSV .
 
+# <#LogicalSourceOstreopsis>
+#   rml:source "{{ csv_observation }}" ;
+#   rml:referenceFormulation ql:CSV;
+#   crml:separator ";".
 
 
 ##Input SPARQL
@@ -89,14 +95,19 @@
  """
       .
 
+#LogicalSourceLinkingPlace
+<#LogicalSourceLinkingPlace> a rml:BaseSource ;
+   rml:source "{{ csv_place }}" ;
+   rml:referenceFormulation ql:CSV .
+
 
 ###########################################################
 ##                  MAPPING RULES
 ##########################################################
 ###############################
-# OSTREOPTIS OVATA OBS MAPPING
+# OSTREOPSIS OVATA OBS MAPPING
 ###############################
-<#WaterObservationOstreoptisMapping> a rr:TriplesMap;
+<#WaterObservationOstreopsisMapping> a rr:TriplesMap;
 rml:logicalSource <#LogicalSourceOstreopsis>;
   rr:subjectMap [
     fnml:functionValue [
@@ -121,11 +132,11 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
   ];
   rr:predicateObjectMap [
    rr:predicate rdfs:label ;
-   rr:objectMap [ rr:template "Observation of ostreoptis ovata with value {Ostreopsis cf. ovata (cell/l)} with sample point in {Nome Sito} done at {Data}." ; rr:language "en" ]
+   rr:objectMap [ rr:template "Observation of Ostreopsis ovata with value {Ostreopsis cf. ovata cell/l} with sample point in {Nome Sito} done at {Data}." ; rr:language "en" ]
   ];
   rr:predicateObjectMap [
    rr:predicate rdfs:label ;
-   rr:objectMap [ rr:template "Osservazione di ostreoptis ovata con valore {Ostreopsis cf. ovata (cell/l)} con punto prelievo {Nome Sito}, fatta il {Data}." ; rr:language "it" ]
+   rr:objectMap [ rr:template "Osservazione di Ostreopsis ovata con valore {Ostreopsis cf. ovata cell/l} con punto prelievo {Nome Sito}, fatta il {Data}." ; rr:language "it" ]
   ];
   rr:predicateObjectMap [
     rr:predicate w-mon:hasResult ;
@@ -145,7 +156,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
   ];
   rr:predicateObjectMap [
      rr:predicate w-mon:hasObservationSample ;
-     rr:objectMap [ rr:template "http://w3id.org/italia/env/ld/water-sample/{LAT}-{LONG}"; rr:termType rr:IRI ]
+     rr:objectMap [ rr:template "https://w3id.org/italia/env/ld/water-sample/{LAT}-{LONG}"; rr:termType rr:IRI ]
   ];
   rr:predicateObjectMap [
      rr:predicate ispra-emf:generationTime ;
@@ -185,20 +196,20 @@ rml:logicalSource <#LogicalSourceOstreopsis> ;
 <#WaterSampleMapping> a rr:TriplesMap;
 rml:logicalSource <#LogicalSourceOstreopsis>;
   rr:subjectMap [
-    rr:template "http://w3id.org/italia/env/ld/water-sample/{LAT}-{LONG}";
+    rr:template "https://w3id.org/italia/env/ld/water-sample/{LAT}-{LONG}";
     rr:class w-mon:WaterSample
   ];
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Campione acqua preso in {Codice Sito}: {Nome Sito}, Coordinate geografiche: %eval:round_coord({LAT})% - %eval:round_coord({LONG})%" ; rr:language "it"]
+    rr:objectMap [ rr:template "Campione acqua preso in {Codice Sito}: {Nome Sito}, Coordinate geografiche: {LAT} - {LONG}" ; rr:language "it"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Water Sample taken at {Codice Sito}: {Nome Sito} - Geographical coordinates: %eval:round_coord({LAT})% - %eval:round_coord({LONG})%" ; rr:language "en"]
+    rr:objectMap [ rr:template "Water Sample taken at {Codice Sito}: {Nome Sito} - Geographical coordinates: {LAT} - {LONG}" ; rr:language "en"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate w-mon:isTakenAt ;
-    rr:objectMap [ rr:template "http://w3id.org/italia/env/ld/sampling-point/{Codice Sito}" ; rr:termType rr:IRI ]
+    rr:objectMap [ rr:template "https://w3id.org/italia/env/ld/sampling-point/{Codice Sito}" ; rr:termType rr:IRI ]
   ] ;
   rr:predicateObjectMap [
     rr:predicate w-mon:isSampleOf ;
@@ -290,16 +301,16 @@ rml:logicalSource <#LogicalSourceLinkingPlace> ;
 <#SamplinPointObjMapping> a rr:TriplesMap;
 rml:logicalSource <#LogicalSourceOstreopsis>;
   rr:subjectMap [
-    rr:template "http://w3id.org/italia/env/ld/sampling-point/{Codice Sito}";
+    rr:template "https://w3id.org/italia/env/ld/sampling-point/{Codice Sito}";
     rr:class w-mon:SamplingPoint , ispra-top:Location , ispra-emf:FeatureOfInterest
   ];
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Punto Prelievo {Codice Sito}: {Nome Sito}, Coordinate geografiche: %eval:round_coord({LAT})% - %eval:round_coord({LONG})%" ; rr:language "it"]
+    rr:objectMap [ rr:template "Punto Prelievo {Codice Sito}: {Nome Sito}, Coordinate geografiche: {LAT} - {LONG}" ; rr:language "it"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Sampling Point {Codice Sito}: {Nome Sito}, Geographical coordinates: %eval:round_coord({LAT})% - %eval:round_coord({LONG})%" ; rr:language "en"]
+    rr:objectMap [ rr:template "Sampling Point {Codice Sito}: {Nome Sito}, Geographical coordinates: {LAT} - {LONG}" ; rr:language "en"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate l0:identifier ;
@@ -336,7 +347,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
      rr:objectMap [
         rr:parentTriplesMap <#MunicipalityURIMapping> ;
         rr:joinCondition [
-           rr:child "PRO_COM_T";
+           rr:child "Istatcode";
            rr:parent "ID.value" ;
         ] ;
       ]
@@ -375,7 +386,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
   ];
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Geometria Punto: {LAT} - ({LONG})" ; rr:language "it"]
+    rr:objectMap [ rr:template "Geometria Punto: {LAT} - {LONG}" ; rr:language "it"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
@@ -400,105 +411,10 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
 
 
 
-
-
-    # ## result mapping
-    #
-    #     <#ResultMapping> a rr:TriplesMap;
-    #     rml:logicalSource <#LogicalSourceOstreopsis>;
-    #     rr:subjectMap [
-    #     fnml:functionValue [
-    #      rr:predicateObjectMap [
-    #        rr:predicate fno:executes ;
-    #        rr:objectMap [ rr:constant grel:array_join ]
-    #      ];
-    #
-    #       rr:predicateObjectMap [
-    #         rr:predicate grel:p_array_a ;
-    #         rr:objectMap [ rr:constant "https://w3id.org/whow/data/observation-result/"]
-    #       ] ;
-    #       rr:predicateObjectMap [
-    #             rr:predicate grel:p_array_a ;
-    #            rr:objectMap
-    #                    [rml:reference "Ostreopsis cf. ovata (cell/l)"]
-    #
-    #       ];
-    #       rr:predicateObjectMap [
-    #             rr:predicate grel:p_array_a ;
-    #            rr:objectMap
-    #                    [rr:constant "cell-l"]
-    #
-    #       ];
-    #       rr:predicateObjectMap [
-    #         rr:predicate grel:p_string_sep ;
-    #         rr:objectMap [ rr:constant "-" ]
-    #       ]
-    #     ];
-    #           rr:class w-mon:ObservationValue
-    #                 ];
-    #      rr:predicateObjectMap [
-    #         rr:predicate rdfs:label ;
-    #         rr:objectMap [
-    #            rr:template "Observation value {Ostreopsis cf. ovata (cell/l)}" ; rr:language "en" ] #agg datatype property
-    #       ];
-    #
-    #       rr:predicateObjectMap [
-    #         rr:predicate ispra-top:hasUnitOfMeasure;
-    #         rr:objectMap [rr:template "http://w3id.org/whow/data/um/cell-l";
-    #         rr:termType rr:IRI;]
-    #
-    #         ].
-    #
-    #
-    #         <#ResultMapping2> a rr:TriplesMap;
-    #         rml:logicalSource <#LogicalSourceOstreopsis>;
-    #         rr:subjectMap [
-    #         fnml:functionValue [
-    #          rr:predicateObjectMap [
-    #            rr:predicate fno:executes ;
-    #            rr:objectMap [ rr:constant grel:array_join ]
-    #          ];
-    #
-    #           rr:predicateObjectMap [
-    #             rr:predicate grel:p_array_a ;
-    #             rr:objectMap [ rr:constant "https://w3id.org/whow/data/observation-result/"]
-    #           ] ;
-    #           rr:predicateObjectMap [
-    #                 rr:predicate grel:p_array_a ;
-    #                 rr:objectMap
-    #                         [rml:reference "Ostreopsis cf. ovata (cell/ g fw)"]
-    #
-    #           ];
-    #           rr:predicateObjectMap [
-    #                 rr:predicate grel:p_array_a ;
-    #                 rr:objectMap
-    #                         [rr:constant "cell-g-fw"]
-    #
-    #           ];
-    #           rr:predicateObjectMap [
-    #             rr:predicate grel:p_string_sep ;
-    #             rr:objectMap [ rr:constant "-" ]
-    #           ]
-    #         ];
-    #               rr:class w-mon:ObservationValue
-    #                     ];
-    #          rr:predicateObjectMap [
-    #             rr:predicate rdfs:label ;
-    #             rr:objectMap [
-    #                rr:template "Observation value {Ostreopsis cf. ovata (cell/ g fw)}" ; rr:language "en" ] #agg datatype property
-    #           ];
-    #
-    #           rr:predicateObjectMap [
-    #             rr:predicate ispra-top:hasUnitOfMeasure;
-    #             rr:objectMap [rr:template "http://w3id.org/whow/data/um/cell-g-fw";
-    #             rr:termType rr:IRI;]
-    #
-    #             ].
-
 ################################
 ### OBSERVABLE PROPERTY Mapping
 ################################
-<#ObservablePropertyOstreoptisMapping> a rr:TriplesMap;
+<#ObservablePropertyOstreopsisMapping> a rr:TriplesMap;
 rml:logicalSource <#LogicalSourceOstreopsis>;
   rr:subjectMap [
     rr:constant "https://w3id.org/italia/env/ld/observable-property/110068";
@@ -533,7 +449,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
 ################################
 ### BIOLOGICAL AGENT Mapping
 ################################
-<#BiologicalAgentOstreoptisMapping> a rr:TriplesMap;
+<#BiologicalAgentOstreostisMapping> a rr:TriplesMap;
 rml:logicalSource <#LogicalSourceOstreopsis>;
   rr:subjectMap [
     rr:constant "https://w3id.org/italia/env/ld/biological-agent/110068";
@@ -553,7 +469,7 @@ rml:logicalSource <#LogicalSourceOstreopsis>;
   ];
   rr:predicateObjectMap [
     rr:predicate skos:prefLabel ;
-    rr:objectMap [ rr:constant "Ostreoptis ovata"]
+    rr:objectMap [ rr:constant "Ostreopsis ovata"]
   ];
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier ;
@@ -634,7 +550,7 @@ rr:termType rr:IRI ;
       ] ;
       rr:predicateObjectMap [
         rr:predicate idlab-fn:str ;
-        rr:objectMap [rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata (cell/l)}-cell-l"]
+        rr:objectMap [rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata cell/l}-cell-l"]
       ]
   ].
 
@@ -676,22 +592,22 @@ rml:logicalSource <#LogicalSourceOstreopsis> ;
         ] ;
         rr:predicateObjectMap [
           rr:predicate idlab-fn:str ;
-          rr:objectMap [rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata (cell/l)}-cell-l"]
+          rr:objectMap [rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata cell/l}-cell-l"]
         ]
     ];
     rr:class w-mon:ObservationValue
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Valore {Ostreopsis cf. ovata (cell/l)} cell/l" ; rr:language "it"]
+    rr:objectMap [ rr:template "Valore {Ostreopsis cf. ovata cell/l} cell/l" ; rr:language "it"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Value {Ostreopsis cf. ovata (cell/l)} cell/l" ; rr:language "en"]
+    rr:objectMap [ rr:template "Value {Ostreopsis cf. ovata cell/l} cell/l" ; rr:language "en"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate ispra-top:value ;
-    rr:objectMap [ rml:reference "Ostreopsis cf. ovata (cell/l)" ; rr:datatype xsd:integer ]
+    rr:objectMap [ rml:reference "Ostreopsis cf. ovata cell/l" ; rr:datatype xsd:integer ]
   ] ;
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUnitOfMeasure ;
@@ -750,15 +666,15 @@ rml:logicalSource <#LogicalSourceOstreopsis> ;
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Valore {Ostreopsis cf. ovata (cell/ g fw)} cell/g fw" ; rr:language "it"]
+    rr:objectMap [ rr:template "Valore {Ostreopsis cf. ovata cell/ g fw} cell/g fw" ; rr:language "it"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate rdfs:label ;
-    rr:objectMap [ rr:template "Value {Ostreopsis cf. ovata (cell/ g fw)} cell/g fw" ; rr:language "en"]
+    rr:objectMap [ rr:template "Value {Ostreopsis cf. ovata cell/ g fw} cell/g fw" ; rr:language "en"]
   ] ;
   rr:predicateObjectMap [
     rr:predicate ispra-top:value ;
-    rr:objectMap [ rml:reference "Ostreopsis cf. ovata (cell/ g fw)" ; rr:datatype xsd:decimal ]
+    rr:objectMap [ rml:reference "Ostreopsis cf. ovata cell/ g fw" ; rr:datatype xsd:decimal ]
   ] ;
   rr:predicateObjectMap [
     rr:predicate ispra-top:hasUnitOfMeasure ;
@@ -822,47 +738,51 @@ fnml:functionValue [
     ] ;
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Regione}"]
+      rr:objectMap  [ rml:reference "Regione"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Provincia}"]
+      rr:objectMap  [ rml:reference "Provincia"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Comune}"]
+      rr:objectMap  [ rml:reference "Comune"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Codice Sito}"]
+      rr:objectMap  [ rml:reference "Codice Sito"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Nome Sito}"]
+      rr:objectMap  [ rml:reference "Nome Sito"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{LONG}"]
+      rr:objectMap  [ rml:reference "LONG"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{LAT}"]
+      rr:objectMap  [ rml:reference "LAT"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Data}"]
+      rr:objectMap  [ rml:reference "Data"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{Ostreopsis cf. ovata (cell/l)}"]
+      rr:objectMap  [ rml:reference "Ostreopsis cf. ovata cell/l"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_array_a ;
-      rr:objectMap  [ rr:template "{PRO_COM_T}"]
+      rr:objectMap  [ rml:reference "Istatcode"]
+    ];
+    rr:predicateObjectMap [
+      rr:predicate grel:p_array_a ;
+      rr:objectMap  [ rml:reference "Seaname"]
     ];
     rr:predicateObjectMap [
       rr:predicate grel:p_string_sep ;
-      rr:objectMap [ rr:constant "-" ]
+      rr:objectMap [ rr:constant "" ]
     ];
   ].
 
@@ -879,7 +799,7 @@ fnml:functionValue [
     ] ;
     rr:predicateObjectMap [
         rr:predicate grel:valueParameter2 ;
-        rr:objectMap [ rml:reference "Ostreopsis cf. ovata (cell/l)" ]
+        rr:objectMap [ rml:reference "Ostreopsis cf. ovata cell/l" ]
     ]
 ] .
 
@@ -896,7 +816,7 @@ fnml:functionValue [
     ] ;
     rr:predicateObjectMap [
         rr:predicate grel:valueParameter2 ;
-        rr:objectMap [ rml:reference "Ostreopsis cf. ovata (cell/ g fw)" ]
+        rr:objectMap [ rml:reference "Ostreopsis cf. ovata cell/ g fw" ]
     ]
 ] .
 
@@ -914,7 +834,7 @@ rr:termType rr:IRI ;
      ];
      rr:predicateObjectMap [
        rr:predicate grel:any_false ;
-       rr:objectMap [ rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata (cell/ g fw)}-cell-g-fw" ]
+       rr:objectMap [ rr:template "https://w3id.org/italia/env/ld/observation-value/{Ostreopsis cf. ovata cell/ g fw}-cell-g-fw" ]
      ]
    ] .
 
@@ -926,7 +846,7 @@ fnml:functionValue [
   ];
   rr:predicateObjectMap [
     rr:predicate idlab-fn:str ;
-    rr:objectMap [ rml:reference "Ostreopsis cf. ovata (cell/ g fw)" ]
+    rr:objectMap [ rml:reference "Ostreopsis cf. ovata cell/ g fw" ]
   ]
 ] .
 
