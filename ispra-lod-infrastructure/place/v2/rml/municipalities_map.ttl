@@ -111,9 +111,10 @@
     rr:predicate ispra-top:name;
     rr:objectMap [
       rml:reference "COMUNE_A";
-      rml:languageMap [
-	rml:reference "LANGUAGE_A"
-	]
+      rr:language "LANGUAGE_A"
+#      rml:languageMap [
+#	rml:reference "LANGUAGE_A"
+#	]
       ]
     ];
   
@@ -121,9 +122,10 @@
     rr:predicate rdfs:label;
     rr:objectMap [
       rml:reference "COMUNE_A";
-      rml:languageMap [
-	rml:reference "LANGUAGE_A"
-	]
+      rr:language "LANGUAGE_A"
+      #      rml:languageMap [
+      #	rml:reference "LANGUAGE_A"
+      #	]
       ]
     ];
     
