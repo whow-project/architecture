@@ -562,7 +562,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}";	
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/geometry/%eval:getidentifiercode('{NETWORK}')%_{STAT_CODE}_{STAT_MODEL}";	
     rr:class ispra-place:Geometry
   ];
 
@@ -592,6 +592,22 @@
     rr:predicate ispra-place:hasGeometryType;
     rr:objectMap [
       rr:parentTriplesMap :StationGeometryType
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Point of coordinates (%eval:round_coord({LAT})%, %eval:round_coord({LONG})%)";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di coordinate (%eval:round_coord({LAT})%, %eval:round_coord({LONG})%)";
+      rr:language "it"
     ]
   ].
 

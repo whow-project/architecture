@@ -293,7 +293,7 @@
     crml:condition "df['par_URI'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{BROADER}_{PARAMETER}";
+        rr:template "https://w3id.org/italia/env/ld/common/observationparameter/{SCHEMA}";
         rr:class inspire-mf:ObservationParameter
     ];
     
@@ -319,14 +319,14 @@
             rml:reference "WMO";
             rr:termType rr:IRI
         ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:acronym;
-        rr:objectMap [
-            rml:reference "PARAMETER"
-        ]
     ].
+
+    # rr:predicateObjectMap [
+    #     rr:predicate ispra-top:acronym;
+    #     rr:objectMap [
+    #         rml:reference "PARAMETER"
+    #     ]
+    # ].
 
 
 <#TimeInterval>
