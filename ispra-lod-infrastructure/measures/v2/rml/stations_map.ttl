@@ -598,7 +598,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Point of coordinates (%eval:round_coord({LAT})%, %eval:round_coord({LONG})%)";
+      rr:template "Point with coordinates (%eval:round_coord({LAT})%, %eval:round_coord({LONG})%)";
       rr:language "en"
     ]
   ];
