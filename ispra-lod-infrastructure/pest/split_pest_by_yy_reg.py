@@ -12,7 +12,7 @@ def split_by_year_and_region(csv_file, output_folder):
 
     regions = np.unique(df_csv_large['regione'])
 
-    with open("regions.txt", "w") as regout:
+    with open(os.path.join("pest", "regions.txt"), "w") as regout:
         for reg in regions:
             print (reg.replace(' ','').replace('/','').replace("'",""), file=regout)
 

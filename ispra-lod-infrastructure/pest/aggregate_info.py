@@ -7,7 +7,7 @@ import pandas as pd
 def get_subst_list(output_folder):
 
     regions = []
-    with open('regions.txt') as file:
+    with open(os.path.join('pest', 'regions.txt')) as file:
         for line in file:
            regions.append(line) 
 
