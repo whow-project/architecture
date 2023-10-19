@@ -106,6 +106,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rml:template "{{YEAR}}"
+        ]
+    ];    
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:year;
         rr:objectMap [
             rr:constant "{{YEAR}}";
