@@ -2,11 +2,15 @@ from abc import ABC, abstractmethod
 from pelix.ipopo.decorators import Requires
 from flask import Flask
 import threading
-from typing import Dict, List, Type
+from typing import Dict, List, Type, Union
 from rdflib import Graph, RDF, URIRef, Literal, Namespace
 import uuid
-from rdflib.namespace import DCTERMS, DCAT, DefinedNamespace
+from rdflib.namespace import DCTERMS, DCAT, XSD, DefinedNamespace
 import json
+import re
+import logging
+from collections import OrderedDict
+from rdflib.graph import DATASET_DEFAULT_GRAPH_ID
 
 
 class Reference(object):
@@ -334,7 +338,47 @@ class MappingConf(Input):
         if 'rmls' and 'id' in d:
             return MappingConf(lf(d['rmls']), d['id'])
         else:
-            return None    
+            return None   
+        
+class MetadataConf(Input):
+    
+    def __init__(self, graph_id: str, dataset_id: str, distribution_id: str, configuration: str):
+        self.__graph_id = graph_id
+        self.__dataset_id = dataset_id
+        self.__distribution_id = distribution_id
+        self.__configuration = configuration
+        
+    @property
+    def graph_id(self) -> Reference:
+        return self.__graph_id
+    
+    @property
+    def dataset_id(self) -> Reference:
+        return self.__dataset_id
+    
+    @property
+    def distribution_id(self) -> Reference:
+        return self.__distribution_id
+    
+    @property
+    def configuration(self) -> Reference:
+        return self.__configuration
+    
+    @staticmethod
+    def from_dict(d: Dict) -> Input:
+        
+        dict_keys = ['id', 'dataset_id', 'distribution_id', 'configuration']
+        
+        for dict_key in dict_keys:
+            if dict_key not in d:
+                raise MissingKeyInDictionary('id')
+        
+        graph_id = Reference(d['id'])
+        dataset_id = Reference(d['dataset_id'])
+        distribution_id = Reference(d['distribution_id'])
+        configuration = Reference(d['configuration']) 
+        
+        return MetadataConf(graph_id, dataset_id, distribution_id, configuration)
             
 
 class MapperInput(DataCollection):
@@ -352,7 +396,7 @@ class MapperInput(DataCollection):
         
         input: DataCollection = InputBuilder.build(DataCollection, dict)
         
-        print(f'Input contains {dict}')
+        logging.info(f'Input contains {dict}')
         if 'graphs' in dict:
             mapping_confs = [MappingConf.from_dict(conf) for conf in dict['graphs']]
         else:
@@ -360,15 +404,140 @@ class MapperInput(DataCollection):
         
         return MapperInput(input.data_sources, mapping_confs)
     
+    
 class MetadataInput(Input):
     
-    def __init__(self, graph_uri: Reference, title: str, description: str, dataset: Reference = None, distribution: Reference = None, access_url: Reference = None):
+    def __init__(self, metadata_confs: List[MetadataConf]):
+        self.__metadata_confs = metadata_confs
+        
+    @property
+    def metadata_confs(self):
+        return self.__metadata_confs
+
+    @staticmethod
+    def from_dict(dict: Dict) -> 'MetadataInput':
+        
+        print(f'Input contains {dict}')
+        if 'meta' in dict:
+            metadata_confs = [MetadataConf.from_dict(conf) for conf in dict['meta']]
+        else:
+            raise MissingKeyInDictionary('meta')
+        
+        return MetadataInput(metadata_confs)
+    
+class ValidatorConfiguration(Input):
+    
+    def __init__(self, graph_id: Reference, graph_uri: Reference):
+        self.__graph_id = graph_id
         self.__graph_uri = graph_uri
-        self.__title = title
-        self.__description = description
-        self.__dataset = dataset
-        self.__distribution = distribution
-        self.__access_url = access_url
+        
+    @property
+    def graph_id(self) -> Reference:
+        return self.__graph_id
+    
+    @property
+    def graph_uri(self) -> Reference:
+        return self.__graph_uri
+
+    @staticmethod
+    def from_dict(dict: Dict) -> 'ValidatorConfiguration':
+        
+        if 'id' and 'uri' in dict:
+            return ValidatorConfiguration(dict['id'], dict['uri'])
+        else:
+            raise MissingKeyInDictionary('id or uri')
+        
+    
+class ValidatorInput(Input):
+    
+    def __init__(self, confs: List[ValidatorConfiguration]):
+        self.__confs = confs
+        
+    @property
+    def confs(self):
+        return self.__confs
+
+    @staticmethod
+    def from_dict(dict: Dict) -> 'ValidatorInput':
+        
+        if 'metadata' in dict:
+            confs = [ValidatorConfiguration(conf['id'], conf['uri']) for conf in dict['metadata']]
+        else:
+            raise MissingKeyInDictionary('metadata')
+        
+        return ValidatorInput(confs)
+    
+
+'''    
+class MetadataInput(Input):
+    
+    NAMESPACES = {'dcat': DCAT, 
+              'dct': DCTERMS, 
+              'dcterms': DCTERMS, 
+              'terms': DCTERMS}
+    
+    def __init__(self, dataset: Dict[str,str], distribution: Dict[str,str]):
+        
+        self.__properties = dict()
+        
+        self.__dataset = Graph()
+        self.__distro = Graph()
+        
+        for k,v in dataset.items():
+            prop = self.__get_uriref(k)
+            if prop in DCAT or prop in DCTERMS:
+                val = self.__get_rdfterm(v)
+                if val:
+                    
+            else:
+                raise ValueError("Illegal DCAT o DCT property: ", prop)
+    
+    def __get_rdfterm(self, term: str) -> Union[URIRef, Literal]:
+        if term[0] == '<' and terms[-1:] == '>':
+            return URIRef(term[1:-2])
+        else:
+            pattern = '(\'|")(.*)(\'|")(@([a-z]+)|(\^\^(.*)))?'
+            
+            m = re.match(pattern, term)
+            if m:
+                lexical_form = m.group(2)
+                lang = m.group(5)
+                dtype = m.group(7)
+                
+                if lang:
+                    return Literal(term, lang=lang)
+                elif dtype:
+                    
+                    dtype = self.__get_uriref(dtype)
+                    return Literal(term, datatype=dtype)
+                else:
+                    return Literal(term)
+                    
+            else:
+                return None
+    
+    def __get_uriref(self, term: str) -> URIRef:
+        prop = None
+        
+        if term[0] == '<' and terms[-1:] == '>':
+            prop = URIRef(term[1:-2])
+        else:
+            parts = term.split(':')
+            if len(parts) == 2:
+                prefix = parts[0]
+                prop_id = parts[1]
+            
+                if prefix in NAMESPACES:
+                    prop = NAMESPACES[prefix][prop_id]
+                else:
+                    prop = URIRef(term)
+                
+            else:
+                prop = URIRef(term)
+        
+        return prop
+      
+        
         
     @property
     def graph_uri(self):
@@ -399,25 +568,62 @@ class MetadataInput(Input):
     def from_dict(d: Dict) -> 'Input':
         
         return MetadataInput(**d)
-     
+'''
 
-class DataPreprocessor(ABC):
+class ToolkitComponent(ABC):
     
     @abstractmethod
-    def preprocess(self, input: DataCollection, *args, **kwargs):
+    def do_job(self, input: Input, *args, **kwargs):
         pass
+    
+    @abstractmethod
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        pass
+
+
+class Ingester(ToolkitComponent):
+    
+    def do_job(self, input: Graph, store=True):
+        pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return []
+
+class DataPreprocessor(ToolkitComponent):
+    
+    @abstractmethod
+    def do_job(self, input: DataCollection, *args, **kwargs):
+        pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return [Ingester]
 
 class Mapper(ABC):
     
     @abstractmethod
-    def map(self, input: MapperInput, *args, **kwargs):
+    def do_job(self, input: MapperInput, *args, **kwargs):
         pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return [DataPreprocessor]
     
 class MetadataCreator(ABC):
     
     @abstractmethod
-    def create_metadata(self, input: MetadataInput, *args, **kwargs):
+    def do_job(self, input: MetadataInput, *args, **kwargs):
         pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return [Mapper]
+    
+class Validator(ABC):
+    
+    @abstractmethod
+    def do_job(self, input: ValidatorInput, *args, **kwargs):
+        pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return [MetadataCreator]
     
 class MissingKeyInDictionary(Exception):
     
@@ -475,6 +681,7 @@ class RESTApp(object):
     port = None
     
     def __init__(self, port):
+        RESTApp.host = '0.0.0.0'
         RESTApp.port = port
     
     @classmethod
@@ -485,7 +692,7 @@ class RESTApp(object):
             cls.instance = Flask('__name__')
             #cls.instance.run(port=RESTApp.port)
             
-            threading.Thread(target=lambda: cls.instance.run(port=RESTApp.port)).start()
+            threading.Thread(target=lambda: cls.instance.run(host=RESTApp.host, port=RESTApp.port)).start()
             
             
         return cls.instance
@@ -593,3 +800,85 @@ class MediaTypeRegistry(object):
             return cls.REGISTRY[mediatype]
         else:
             return None
+        
+class MultiOrderedDict(OrderedDict):
+    def __setitem__(self, key, value):
+        if key in self:
+            if isinstance(value, list):
+                self[key].extend(value)
+                return
+            elif isinstance(value,str):
+                return # ignore conversion list to string (line 554)
+        super(MultiOrderedDict, self).__setitem__(key, value)
+
+
+class MalformedRDFTerm(Exception):
+    
+    def __init__(self, key, message="The RDF term {0} is malformed."):
+        self.key = key
+        self.message = message.format(key)
+        super().__init__(self.message)
+
+class RDFTermFactory():
+    
+    NAMESPACES = {
+        'dct': DCTERMS,
+        'dcterms': DCTERMS,
+        'terms': DCTERMS,
+        'dcat': DCAT,
+        'xsd': XSD
+    }
+    
+    @staticmethod
+    def create_rdf_term(term):
+        
+        try:
+            rdfterm = RDFTermFactory.create_uri(term)
+        except MalformedRDFTerm as e:
+            rdfterm = RDFTermFactory.create_literal(term)
+            
+        return rdfterm 
+            
+    
+    @staticmethod
+    def create_uri(uri):
+    
+        if uri[0] == '<' and uri[-1] == '>':
+            return URIRef(uri[1:-2])
+        elif ':' in uri:
+            prefix, id = uri.split(':')
+            if prefix in RDFTermFactory.NAMESPACES:
+                return RDFTermFactory.NAMESPACES[prefix][id]
+        else:
+            raise MalformedRDFTerm(uri)
+
+    @staticmethod        
+    def create_literal(literal):
+        
+        pattern_lexical_value = '(\'|")(.*)(\'|")'
+        pattern_language = '@([a-z]{2})$'
+        pattern_datatype = '\^\^(.*)$'
+        
+        #me = re.match(pattern, '\questo è un testo\'@it')
+        
+        me = re.search(pattern_lexical_value, literal)
+        if me:
+            lexical_value = me.group(2)
+            
+            me = re.search(pattern_language, literal)
+            if me:
+                return Literal(lexical_value, lang=me.group(1))
+            else:
+                me = re.search(pattern_datatype, literal)
+                if me:
+                    datatype = me.group(1)
+                    datatype = get_uri(datatype)
+                    
+                    return Literal(lexical_value, datatype=datatype)
+                else:
+                    return Literal(lexical_value)
+            
+        else:
+            raise MalformedRDFTerm(literal)
+    
+    

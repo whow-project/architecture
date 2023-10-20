@@ -101,17 +101,22 @@ class WHOWOperator(BaseOperator):
         if bound_service in bound_services:
             service = bound_services[bound_service]
             service_uri = service['endpoint']
-            conf_data = service['data']
-            
+            conf_data = service['data'] if 'data' in service else None
+            print(f'CONF_DATA {conf_data}')
             if not (conf_data or in_data): 
                 print(f'No data provided, hence no communication with {service_uri} will be established.')
                 return None
             elif in_data and conf_data:
+                print('1. in_data and conf_data')
                 data = {**conf_data, **in_data}
             elif not in_data and conf_data:
+                print('2. not in_data and conf_data')
                 data = conf_data
             else:
+                print('3. in_data')
                 data = in_data
+                
+            print(f'DD DATA: {data}')
                 
             out = asyncio.run(communicate_with(service_uri, json.dumps(data)))
             out = json.loads(out)
@@ -213,7 +218,8 @@ class DAGFactory(object):
             return operators
              
 g = Graph()
-g.parse('http://semantics.istc.cnr.it/whow/transformationPlan_v3.ttl', format='ttl')
+#g.parse('http://semantics.istc.cnr.it/whow/transformationPlan_v3.ttl', format='ttl')
+g.parse('http://host.docker.internal/whow/transformationPlan_v3.ttl', format='ttl')
     
 dags = DAGFactory.create(g)
 

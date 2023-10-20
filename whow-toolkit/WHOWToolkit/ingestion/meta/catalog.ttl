@@ -1,0 +1,29 @@
+@prefix ns1: <http://www.w3.org/ns/dcat#> .
+@prefix ns2: <http://purl.org/dc/terms/> .
+
+<https://w3id.org/whow/data/catalog/99c55eaf-c23e-4113-812f-6d6f16011391> a ns1:Catalog ;
+    ns2:description "Some description for the test data catalog." ;
+    ns2:title "Test data catalog" ;
+    ns1:dataset <https://w3id.org/whow/data/dataset/9de05550-7de8-453b-89ff-5ee160b56cb1>,
+        <https://w3id.org/whow/data/dataset/e0724a33-b7b4-4598-88e4-2a87a81e5d03> .
+
+<https://w3id.org/whow/data/dataset/9de05550-7de8-453b-89ff-5ee160b56cb1> a ns1:Dataset ;
+    ns2:description "Test data catalog - dataset 1" ;
+    ns2:title "9de05550-7de8-453b-89ff-5ee160b56cb1 - dataset 1" ;
+    ns1:distribution <https://w3id.org/whow/data/distribution/a8b0ae9b-195f-40e1-9041-155a10b91123> .
+
+<https://w3id.org/whow/data/dataset/e0724a33-b7b4-4598-88e4-2a87a81e5d03> a ns1:Dataset ;
+    ns2:description "Test data catalog - dataset 0" ;
+    ns2:title "e0724a33-b7b4-4598-88e4-2a87a81e5d03 - dataset 0" ;
+    ns1:distribution <https://w3id.org/whow/data/distribution/5c0c0e5c-0760-4ceb-9fa1-cadd6eb0cff7> .
+
+<https://w3id.org/whow/data/distribution/5c0c0e5c-0760-4ceb-9fa1-cadd6eb0cff7> a ns1:Distribution ;
+    ns2:identifier "hydrolakes" ;
+    ns1:accessURL <http://localhost:5000/data/54139587-318b-4a93-b394-84968f4c4366> ;
+    ns1:mediaType <https://w3id.org/whow/onto/flow/text-csv> .
+
+<https://w3id.org/whow/data/distribution/a8b0ae9b-195f-40e1-9041-155a10b91123> a ns1:Distribution ;
+    ns2:identifier "linking" ;
+    ns1:accessURL <http://localhost:5000/data/274fc224-94b4-4123-85ca-b7d6d062ee1a> ;
+    ns1:mediaType <https://w3id.org/whow/onto/flow/text-csv> .
+

@@ -8,6 +8,7 @@ from rdflib.namespace._RDF import RDF
 from rdflib.namespace._DCTERMS import DCTERMS
 import os
 import json
+import logging
 
 
 @ComponentFactory("metadata-websocket-factory")
@@ -24,7 +25,7 @@ class DCATWebSocketComponent(WebSocketComponent):
     def validate(self, context):
         
         self.__conf = Configuration('./metadata/conf/props.json')
-        self._graphs_location = self.__conf.get_property('graphs.location')
+        self._graphs_location = self.__conf.get_property('graphs.folder')
         
         endpoint = self.__conf.get_property('http.endpoint')
         self._http_endpoint = endpoint if endpoint.endswith('/') else endpoint + '/' 
@@ -32,7 +33,20 @@ class DCATWebSocketComponent(WebSocketComponent):
         if not os.path.exists(self._graphs_location):
             os.makedirs(self._graphs_location)
     
+    
     def execute(self, message: str, *args, **kwargs) -> str:
+        
+        _input = json.loads(message)
+        logging.info(f'Metadata WS received {_input}')
+        
+        out = self._metadata_creator.do_job(MetadataInput.from_dict(_input))
+        
+        
+        ret = {"status": "success", "content": {'graphs': _input['graphs'], **out}}
+        return json.dumps(ret)
+    
+    
+    def execute_old(self, message: str, *args, **kwargs) -> str:
         
         _input = json.loads(message)
         

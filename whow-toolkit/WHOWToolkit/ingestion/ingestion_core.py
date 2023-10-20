@@ -1,5 +1,5 @@
 from abc import ABC
-from api.api import Configuration, Reference, DataSource, DataCollection, DCATCatalog, DCATDataset, DCATDistribution, HTTPResource, WebComponent, DCATObject, WebSocketComponent, WHOWFlow, MediaTypeRegistry
+from api.api import Ingester, Configuration, Reference, DataSource, DataCollection, DCATCatalog, DCATDataset, DCATDistribution, HTTPResource, WebComponent, DCATObject, WebSocketComponent, WHOWFlow, MediaTypeRegistry
 from rdflib import Graph, URIRef, Literal, Namespace
 from rdflib.namespace import DCAT, DC, RDF, RDFS
 import requests
@@ -9,22 +9,21 @@ from pelix.framework import FrameworkFactory, Bundle
 from pelix.utilities import use_service
 from typing import List, Dict
 from rdflib.namespace._RDF import RDF
-from babel.messages import catalog
 from flask import request
 from flask.views import MethodView
 import os
-from docutils.nodes import title
 import json
 from rdflib.namespace._DCTERMS import DCTERMS
 from rdflib.term import URIRef
 from flask.helpers import send_file
 from slugify.slugify import slugify
 
+'''
 class Ingester(ABC):
     
     def ingest(self, metadata: Graph, store=True):
         pass
-        
+'''     
 
 @ComponentFactory("ingestion-factory")
 @Property('_data_folder', 'data.folder', '')
@@ -103,7 +102,7 @@ class SimpleIngester(Ingester):
             self._data_catalogue_graph.serialize(destination=self.__conf.get_property('data.catalogue.graph_path'), format='ttl')
     
     
-    def ingest(self, metadata: Graph, store=True):
+    def do_job(self, input: Graph, store=True):
         if store:
             tuples = metadata.subject_objects(DCAT.accessURL, True)
             downloaded = False

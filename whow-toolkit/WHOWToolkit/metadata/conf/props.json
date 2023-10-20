@@ -1,4 +1,5 @@
 {
-	"graphs.location": "./metadata/graphs",
-	"http.endpoint": "http://localhost:5000/metadatacreator/"
+	"rml.folder": "./metadata/rml",
+	"graphs.folder": "./metadata/graphs",
+	"http.endpoint": "http://localhost:5000/metadata-mgr/"
 }
