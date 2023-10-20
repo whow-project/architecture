@@ -6,7 +6,7 @@ from flask.views import MethodView
 from pelix.ipopo.decorators import ComponentFactory, Property, Provides, Instantiate, Validate
 from pelix.framework import FrameworkFactory
 from pelix.utilities import use_service
-from flask import request
+from flask import request, abort
 
 from rdflib import Graph
 

@@ -44,7 +44,7 @@ class CleansingWebSocketComponent(WebSocketComponent):
             
             datacollection = DataCollection.from_dict(_input)
             
-            out = self._cleanser.preprocess(datacollection)
+            out = self._cleanser.do_job(datacollection)
             
             out_message = {'status': 'success', 'content': out}
             return json.dumps(out_message)

@@ -32,12 +32,15 @@ class Cleanser(DataPreprocessor):
             
         print(f'The data cleanser {self} has been activated.    ls')
     
-    def preprocess(self, input: DataCollection, *args, **kwargs):
+    def do_job(self, input: DataCollection, *args, **kwargs):
         
         print(input)
         output = []
         
         #print(js)
+        
+        if not os.path.exists(self._dest_folder):
+            os.makedirs(self._dest_folder)
         
         for source in input.data_sources:
             

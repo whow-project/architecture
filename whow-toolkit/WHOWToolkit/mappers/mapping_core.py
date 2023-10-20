@@ -8,6 +8,8 @@ import glob
 import shutil
 import json
 
+import logging
+
 from typing import Dict
 
 
@@ -75,7 +77,7 @@ class PYRMLMapper(Mapper):
         }
     
     '''
-    def map(self, input: MapperInput, *args, **kwargs):
+    def do_job(self, input: MapperInput, *args, **kwargs):
         
         if not os.path.exists(self._graphs_folder):
             os.makedirs(self._graphs_folder)
@@ -93,12 +95,13 @@ class PYRMLMapper(Mapper):
         
         template_vars = dict()
         for in_data in data:
+            logging.info(f'DATASOURCE: {in_data.identifier}:{in_data.reference.uri}')
             template_vars[in_data.identifier] = in_data.reference.uri
             
         #rml_maps = [rml_map for rml_map in glob.iglob(f'{self._rml_folder}/*.ttl')]
         
-        print(f'RML maps: {mapping_confs}')
-        print(f'Template vars: {template_vars}')
+        logging.info(f'RML maps: {mapping_confs}')
+        logging.info(f'Template vars: {template_vars}')
         graphs = []
         
         for mapping_conf in mapping_confs:
@@ -111,7 +114,7 @@ class PYRMLMapper(Mapper):
             
                 rml_map_file = f'{self._rml_folder}/{str(uuid.uuid4())}.ttl'
                 
-                print(f'RML MAP URI {rml_map.uri}')
+                logging.info(f'RML MAP URI {rml_map.uri}')
                 urllib.request.urlretrieve(rml_map.uri, rml_map_file)
                 
                 rml_mapper: RMLConverter = RMLConverter.get_instance()
@@ -125,6 +128,7 @@ class PYRMLMapper(Mapper):
             
             
             endpoint = self._http_endpoint if self._http_endpoint.endswith('/') else self._http_endpoint + '/'
+            logging.info(f'Graph generated {endpoint}{graph_id}.nt')
             graphs.append({'id': graph_id, 'uri': f'{endpoint}{graph_id}.nt'})
             graph_path = os.path.join(self._graphs_folder, f'{graph_id}.nt')
             g.serialize(destination=graph_path, format='nt')

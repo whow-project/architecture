@@ -38,8 +38,6 @@ class ReasoningWebSocketComponent(WebSocketComponent):
         
         print(f'Reasoner input message {_input}')
         
-        
-        
         out = self._reasoner.do_reasoning()
         
         ret = {"status": "success", "content": out}

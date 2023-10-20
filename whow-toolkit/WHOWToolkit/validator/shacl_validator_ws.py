@@ -1,26 +1,22 @@
-import json
-
 from pelix.ipopo.decorators import ComponentFactory, Property, Requires, Provides, Instantiate, Validate
 
-from rdflib import Graph, URIRef, Literal, RDF, RDFS, DCAT, DCTERMS
-from rdflib.namespace import Namespace
+from api.api import ValidatorInput, Validator, WebSocketComponent
+import logging
+import json
 
-from api.api import DataCollection, DCATCatalog, WebSocketComponent, MapperInput
-
-
-@ComponentFactory("mapper-websocket-factory")
-@Property('_path', 'websocketcomponent.path', '/mapping')
-@Requires('_mapper','mapper')
+@ComponentFactory("validator-websocket-factory")
+@Property('_path', 'websocketcomponent.path', '/validation')
+@Requires('_validator','validator')
 @Provides('websocketcomponent')
-@Instantiate("mapper-websocket-inst")
-class MappingWebSocketComponent(WebSocketComponent):
+@Instantiate("validator-websocket-inst")
+class ValidatorWebSocketComponent(WebSocketComponent):
 
     def __init__(self):
         super().__init__(self._path)
         
     @Validate
     def validate(self, context):
-        print('MappingWebSocketComponent is active!')
+        print('ValidatorWebSocketComponent is active!')
         
     '''
     
@@ -38,9 +34,11 @@ class MappingWebSocketComponent(WebSocketComponent):
             
         _input = json.loads(message)
         
-        print(f'Mapper input message {_input}')
+        logging.info(f'Validator input message {_input}')
         
-        out = self._mapper.do_job(MapperInput.from_dict(_input))
+        out = self._validator.do_job(ValidatorInput.from_dict(_input))
+        
+        out = {**_input, 'validation': out}
         
         ret = {"status": "success", "content": out}
         

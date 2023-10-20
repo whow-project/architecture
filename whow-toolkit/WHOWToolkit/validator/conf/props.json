@@ -1,0 +1,4 @@
+{
+	"shacl.file": "./validator/shacl/dcat-ap-SHACL.ttl",
+	"http.endpoint": "http://localhost:5000/validator/"
+}
