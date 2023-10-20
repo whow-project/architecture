@@ -295,7 +295,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rml:template "{{YEAR}}"
+            rr:template "{{YEAR}}"
         ]
     ];
 
