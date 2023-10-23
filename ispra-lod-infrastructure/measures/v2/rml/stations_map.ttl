@@ -499,13 +499,13 @@
 #     ]
 #   ].
 
-:StationGeometryType
-  rml:logicalSource :CSV_STATIONS;
+# :StationGeometryType
+#   rml:logicalSource :CSV_STATIONS;
 
-  rr:subjectMap [
-    rr:constant "https://w3id.org/italia/env/ld/common/geometrytype/point";
-    rr:class ispra-place:GeometryType
-  ].
+#   rr:subjectMap [
+#     rr:constant "https://w3id.org/italia/env/ld/common/geometrytype/point";
+#     rr:class ispra-place:GeometryType
+#   ].
 
 
 :Feature
@@ -588,12 +588,12 @@
     ]
   ];
 
-  rr:predicateObjectMap [
-    rr:predicate ispra-place:hasGeometryType;
-    rr:objectMap [
-      rr:parentTriplesMap :StationGeometryType
-    ]
-  ];
+  # rr:predicateObjectMap [
+  #   rr:predicate ispra-place:hasGeometryType;
+  #   rr:objectMap [
+  #     rr:parentTriplesMap :StationGeometryType
+  #   ]
+  # ];
 
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
