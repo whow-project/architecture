@@ -21,6 +21,8 @@ def get_summary_list(dataset):
 
         print ('Processing', item)
         for file in (glob.glob(os.path.join(output_folder, item+'*'))):
+            if ('static' in file):
+                continue
             print (file)
             df_year = pd.read_csv(file, sep=';', dtype=str)
     
