@@ -1,0 +1,140 @@
+{
+    "dataset": "urban",
+    "graph_iri": "https://w3id.org/italia/env/ld/urban/",
+    "rdf_dump_file_name": "urban_static",
+    "rdf_dump_file_serialisation": "ntriples",
+    "data_folder": "data/urban/v2/data",
+    "dirty_data_folder": "data/urban/v2/dirtydata",
+    "rml_folder": "data/land/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+    "dbuser": "dba",
+    "dbpasswd": "dba",
+	"mappings": [
+		{
+            "rml": "indicators_mapV3.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Nazionale_static.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Nazionale_static.csv', 1)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nazione'"
+                }
+            ]
+        },
+		{
+            "rml": "indicators_mapV3.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Regioni_static.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Regioni_static.csv', 1)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD_REG'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nome_Regione'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV3.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Province_static.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Province_static.csv', 3)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'COD_PRO'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nome_Provincia'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV3.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Comuni_static.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Comuni_static.csv', 5)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'PRO_COM'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Nome_Comune'"
+                }
+            ]
+        },
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Descrizione_campi.csv"
+                },
+
+                {
+                    "id": "csv_mu_sameas_file",
+                    "file": "UnitOfMeasuresSameAses.csv"
+                }
+            ]
+        }
+
+	]
+}
