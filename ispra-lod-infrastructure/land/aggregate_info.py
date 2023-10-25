@@ -13,14 +13,17 @@ def get_summary_list(dataset):
 
     df_fields = pd.read_csv(os.path.join(output_folder, 'Descrizione_campi.csv'), sep=';', skiprows=range(1,7))
     
-    type_list = ['Nazionale', 'Regioni', 'Province', 'Comuni']
+    type_list = ['Nazionale', 'Regioni', 'Province', 'Comuni', 'Citta metropolitana']
 
     for item in type_list:
 
         df_collection = pd.DataFrame()
 
+        filelist = glob.glob(os.path.join(output_folder, item+'*'))
+        if len(filelist) == 0: continue
+
         print ('Processing', item)
-        for file in (glob.glob(os.path.join(output_folder, item+'*'))):
+        for file in filelist:
             if ('static' in file):
                 continue
             print (file)
