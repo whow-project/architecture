@@ -11,7 +11,11 @@ def get_summary_list(dataset):
 
     output_folder = os.path.join('data', dataset, 'v2', 'dirtydata')
 
-    df_fields = pd.read_csv(os.path.join(output_folder, 'Descrizione_campi.csv'), sep=';', skiprows=range(1,7))
+    skiprange=[]
+    if (dataset == 'soilc'):
+        skiprange = range(1,7)
+    
+    df_fields = pd.read_csv(os.path.join(output_folder, 'Descrizione_campi.csv'), sep=';', skiprows=skiprange)
     
     type_list = ['Nazionale', 'Regioni', 'Province', 'Comuni', 'Citta metropolitana']
 
