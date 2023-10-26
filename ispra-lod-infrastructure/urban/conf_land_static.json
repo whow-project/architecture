@@ -18,33 +18,6 @@
             "data": [
                 {
                     "id": "csv_file",
-                    "file": "Nazionale_static.csv"
-                }
-            ],
-            "variables": [
-                {
-                    "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Nazionale_static.csv', 1)"
-                },
-                {
-                    "id": "YEAR",
-                    "value": "'{{year}}'"
-                },
-                {
-                    "id": "COD_PLACE",
-                    "value": "'COD'"
-                },
-                {
-                    "id": "NOME_PLACE",
-                    "value": "'Nazione'"
-                }
-            ]
-        },
-		{
-            "rml": "indicators_mapV3.ttl",
-            "data": [
-                {
-                    "id": "csv_file",
                     "file": "Regioni_static.csv"
                 }
             ],
@@ -59,11 +32,38 @@
                 },
                 {
                     "id": "COD_PLACE",
-                    "value": "'COD_REG'"
+                    "value": "'IdOST_Origine'"
                 },
                 {
                     "id": "NOME_PLACE",
-                    "value": "'Nome_Regione'"
+                    "value": "'OST'"
+                }
+            ]
+        },
+        {
+            "rml": "indicators_mapV3.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Citta metropolitana_static.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta metropolitana_static.csv', 1)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'IdOST_Origine'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'OST'"
                 }
             ]
         },
@@ -86,11 +86,11 @@
                 },
                 {
                     "id": "COD_PLACE",
-                    "value": "'COD_PRO'"
+                    "value": "'IdOST_Origine'"
                 },
                 {
                     "id": "NOME_PLACE",
-                    "value": "'Nome_Provincia'"
+                    "value": "'OST'"
                 }
             ]
         },
@@ -113,11 +113,11 @@
                 },
                 {
                     "id": "COD_PLACE",
-                    "value": "'PRO_COM'"
+                    "value": "'IdOST_Origine'"
                 },
                 {
                     "id": "NOME_PLACE",
-                    "value": "'Nome_Comune'"
+                    "value": "'OST'"
                 }
             ]
         },

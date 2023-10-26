@@ -14,18 +14,45 @@
     "dbpasswd": "dba",
     "year": {{year}},
 	"mappings": [
+        {
+            "rml": "triples_peryear.ttl",
+            "data": [
+                {
+                    "id": "csv_file",
+                    "file": "Regioni_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Regioni_{{year}}.csv', 1)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'IdOST_Origine'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'OST'"
+                }
+            ]
+        },
 		{
         "rml": "triples_peryear.ttl",
         "data": [
             {
                 "id": "csv_file",
-                "file": "Nazionale_{{year}}.csv"
+                "file": "Citta metropolitana_{{year}}.csv"
             }
         ],
         "variables": [
             {
                 "id": "indicators",
-                "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Nazionale_{{year}}.csv', 1)"
+                "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Citta metropolitana_{{year}}.csv', 1)"
             },
             {
                 "id": "YEAR",
@@ -33,38 +60,11 @@
             },
             {
                 "id": "COD_PLACE",
-                "value": "'COD'"
+                "value": "'IdOST_Origine'"
             },
             {
                 "id": "NOME_PLACE",
-                "value": "'Nazione'"
-            }
-        ]
-    },
-    {
-        "rml": "triples_peryear.ttl",
-        "data": [
-            {
-                "id": "csv_file",
-                "file": "Regioni_{{year}}.csv"
-            }
-        ],
-        "variables": [
-            {
-                "id": "indicators",
-                "value": "MappingConfiguration.columns_as_tuple('data/urban/v2/dirtydata/Regioni_{{year}}.csv', 1)"
-            },
-            {
-                "id": "YEAR",
-                "value": "'{{year}}'"
-            },
-            {
-                "id": "COD_PLACE",
-                "value": "'COD_REG'"
-            },
-            {
-                "id": "NOME_PLACE",
-                "value": "'Nome_Regione'"
+                "value": "'OST'"
             }
         ]
     },
@@ -87,11 +87,11 @@
             },
             {
                 "id": "COD_PLACE",
-                "value": "'COD_PRO'"
+                "value": "'IdOST_Origine'"
             },
             {
                 "id": "NOME_PLACE",
-                "value": "'Nome_Provincia'"
+                "value": "'OST'"
             }
         ]
     },
@@ -114,11 +114,11 @@
             },
             {
                 "id": "COD_PLACE",
-                "value": "'PRO_COM'"
+                "value": "'IdOST_Origine'"
             },
             {
                 "id": "NOME_PLACE",
-                "value": "'Nome_Comune'"
+                "value": "'OST'"
             }
         ]
     }
