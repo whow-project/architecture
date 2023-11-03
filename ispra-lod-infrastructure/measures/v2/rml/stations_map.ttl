@@ -827,9 +827,9 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:hasCharacteristic;
       rr:objectMap [
-        rr:parentTriplesMap :PositioningSystemValue
+        rr:parentTriplesMap :PositioningSystemCharacteristic
       ]
     ] .
 
@@ -891,14 +891,14 @@
         rr:template "http://www.wikidata.org/entity/Q17141406"
     ] .
 
-:PositioningSystemValue
+:PositioningSystemCharacteristic
 
     rml:logicalSource :CSV_STATION_MODELS;
     crml:condition "df['POSITIONING_SYSTEM'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/common/platformattribute/{POSITIONING_SYSTEM}";
-        rr:class ispra-top:PlatformAttribute
+        rr:template "https://w3id.org/italia/env/ld/common/characteristic/{POSITIONING_SYSTEM}";
+        rr:class ispra-top:Characteristic
     ];
 
     rr:predicateObjectMap [
@@ -1522,9 +1522,9 @@
     ];
         
     rr:predicateObjectMap [
-      rr:predicate ispra-top:hasValue;
+      rr:predicate ispra-top:hasCharacteristic;
       rr:objectMap [
-        rr:parentTriplesMap :LevellingValue
+        rr:parentTriplesMap :LevellingCharacteristic
       ]
     ];
 
@@ -1628,13 +1628,13 @@
     ] .
 
 
-:LevellingValue
+:LevellingCharacteristic
   rml:logicalSource :CSV_STATION_MODELS;
   crml:condition "df['LEVELLING_EN'].notnull()";
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/common/method/{LEVELLING_EN}";
-    rr:class inspire-mf:Procedure
+    rr:template "https://w3id.org/italia/env/ld/common/characteristic/{LEVELLING_EN}";
+    rr:class ispra-top:Characteristic
   ];
 
   rr:predicateObjectMap [
