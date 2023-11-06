@@ -200,7 +200,7 @@
   rml:logicalSource :CSV_STATIONS;
 
   rr:subjectMap [
-    rr:template "https://w3id.org/italia/env/ld/place/geometry/%eval:coord_uri('{long}')%_%eval:coord_uri('{lat}')%_point";	
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/{keystaz}_{{YEAR}}_point";	
     rr:class ispra-place:Geometry
   ];
 
