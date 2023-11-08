@@ -72,7 +72,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle osservazioni {{dataset.upper()}} di {PLACE_NAME}";
+      rr:template "Collezione delle osservazioni della {{dataset.upper()}} associate a: {PLACE_NAME}";
       rr:language "it"
     ]
   ];

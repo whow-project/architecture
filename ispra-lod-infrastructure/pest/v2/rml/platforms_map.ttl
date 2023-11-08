@@ -74,7 +74,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate a: %eval:title('{ {{PLACE_NAME}} }')%";
             rr:language "it"
         ]
     ];
@@ -240,7 +240,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di campionamento %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{PLACE_NAME}} }')%";
+      rr:template "Collezione delle stazioni di campionamento %eval:label_it('{{dataset}}')% associate a: %eval:title('{ {{PLACE_NAME}} }')%";
       rr:language "it"
     ]
   ];

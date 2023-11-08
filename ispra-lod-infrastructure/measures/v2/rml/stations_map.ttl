@@ -110,7 +110,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Collezione delle risorse {{dataset.upper()}} di {PLACE_NAME}";
+            rr:template "Collezione delle risorse della {{dataset.upper()}} associate a: {PLACE_NAME}";
             rr:language "it"
         ]
     ];
@@ -236,7 +236,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Collezione delle stazioni di misurazione {{dataset.upper()}} di {PLACE_NAME}";
+      rr:template "Collezione delle stazioni di misurazione della {{dataset.upper()}} associate a: {PLACE_NAME}";
       rr:language "it"
     ]
   ];
