@@ -1,7 +1,10 @@
 import os, sys, math
+import numpy as np
 import pandas as pd
+import datetime as dt
 import geopandas as gpd
 import contextily as cx
+from dateutil import parser
 from matplotlib import pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
 
@@ -30,6 +33,15 @@ def aggregate_files(yy, dpath, foutput):
 			del df_new
 	df_sample = df_sample.loc[:, ~df_sample.columns.str.contains('^Unnamed')]
 	df_sample = df_sample.rename(columns=lambda x: x.strip())
+	
+	#Remove rows with no date
+	df_sample.replace('', np.nan, inplace=True)
+	df_sample.dropna(subset=['Data'], inplace=True)
+	
+	#Cleaning on dates
+	df_sample['Data'] = df_sample['Data'].transform(lambda x: parser.parse(x))
+	df_sample['Data'] = df_sample['Data'].transform(lambda x: dt.datetime.strftime(x, "%Y-%m-%d"))
+	
 	df_sample.to_csv(foutput, sep=';', index=None)
 
 
@@ -94,7 +106,7 @@ def associate_istat_and_seas(yy, file_istat, file_seas, file_samples):
 	#To show ISTAT codes inside polygons:
 	#gdf_shf.apply(lambda x: ax.annotate(text=x['PRO_COM'], xy=x.geometry.centroid.coords[0], ha='center'), axis=1);
 	gdf_sample.plot(ax=ax, label='Sampling points', color='blue')
-	cx.add_basemap(ax, crs=gdf_shf.crs, source=cx.providers.Stamen.TonerLite, zoom=5)
+	#cx.add_basemap(ax, crs=gdf_shf.crs, source=cx.providers.Stamen.TonerLite, zoom=5)
 	#Scale bar
 	ax.add_artist(ScaleBar(dx=1, location='lower right', color='white', sep=10, font_properties={'size': 0},
 						box_color='white', box_alpha=0.0, length_fraction=0.2))
