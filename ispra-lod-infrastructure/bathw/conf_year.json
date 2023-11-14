@@ -1,0 +1,41 @@
+{
+    "dataset": "bathw",
+    "graph_iri": "https://w3id.org/italia/env/ld/bathw/{{year}}/",
+    "rdf_dump_file_name": "bathw_{{year}}",
+    "rdf_dump_file_serialisation": "ntriples",
+    "data_folder": "data/bathw/v2/data",
+    "dirty_data_folder": "data/bathw/v2/dirtydata",
+    "rml_folder": "data/bathw/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+    "dbuser": "dba",
+    "dbpasswd": "dba",
+    "year": {{year}},
+	"mappings": [
+		{
+        "rml": "triples_peryear.ttl",
+        "data": [
+            {
+                "id": "csv_file",
+                "file": "IT_BW2022_{{year}}.csv"
+            }
+        ],
+        "variables": [
+            {
+                "id": "indicators",
+                "value": "MappingConfiguration.columns_as_tuple('data/bathw/v2/dirtydata/IT_BW2022_{{year}}.csv', -1)"
+            },
+            {
+                "id": "YEAR",
+                "value": "'{{year}}'"
+            },
+            {
+                "id": "ID_BW",
+                "value": "'bathingWaterIdentifier'"
+            }
+        ]
+    }
+]
+}

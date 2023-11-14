@@ -13,7 +13,11 @@ def split_by_year(csv_file, output_folder):
     noyears_cols = [col for col in df_csv_large.columns if all(yy not in col for yy in year_cols)]
 
     df_static = df_csv_large[[col for col in noyears_cols]]
-    df_static.to_csv(output_folder + csv_data_name + '_static.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+
+    #Align type with SKOS
+    df_static['specialisedZoneType'] = df_static['specialisedZoneType'].transform(lambda x: str(x).replace('BathingWater', '_bathing_water'))
+
+    df_static.to_csv(os.path.join(output_folder, csv_data_name + '_static.csv'), index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
     del df_static
 
 
@@ -26,10 +30,15 @@ def split_by_year(csv_file, output_folder):
                 df_year = pd.concat([df_year,df_csv_large[col]], axis=1)
             elif (yy in col):
                 df_year = pd.concat([df_year,df_csv_large[col]], axis=1)
+                #Keep only the numerical value
+                df_year[col] = df_year[col].transform(lambda x: str(x)[0])
+                #Remove year from col name
                 df_year.rename(columns={col:col.replace(yy,'')}, inplace=True)
+                #Move 'quality' to last place
+                new_cols = [col for col in df_year.columns if col != 'quality'] + ['quality']
+                df_year = df_year[new_cols]
 
-
-        df_year.to_csv(output_folder + csv_data_name + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+        df_year.to_csv(os.path.join(output_folder, csv_data_name + '_' + str(yy) + '.csv'), index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
         del df_year
 
 def associate_istat_code(file_istat, file_samples):
@@ -57,6 +66,7 @@ def associate_istat_code(file_istat, file_samples):
         print ("I'm missing", diff_record, 'records!')
     gdf_joined.rename(columns={"PRO_COM_T": "Istatcode", "COMUNE": "Istatname"}, inplace=True)
     foutname = file_samples.split('.')[0]+'_withISTATcode.csv'
+    gdf_joined = pd.concat([gdf_joined, pd.DataFrame(data={"quality": [np.nan for kk in range(len(gdf_joined))]})]) #add 'quality' column
     gdf_joined.to_csv(foutname, sep=';', index=None)
     print ('Created', foutname)
 

@@ -1,0 +1,78 @@
+{
+    "dataset": "bathw",
+    "graph_iri": "https://w3id.org/italia/env/ld/bathw/",
+    "rdf_dump_file_name": "bathw_static",
+    "rdf_dump_file_serialisation": "ntriples",
+    "data_folder": "data/bathw/v2/data",
+    "dirty_data_folder": "data/bathw/v2/dirtydata",
+    "rml_folder": "data/bathw/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+    "dbuser": "dba",
+    "dbpasswd": "dba",
+	"mappings": [
+		{
+            "rml": "indicators_map.ttl",
+            "data": [
+                {
+                    "id": "csv_static",
+                    "file": "IT_BW2022_static_withISTATcode.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/bathw/v2/dirtydata/IT_BW2022_static_withISTATcode.csv', 10)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'Istatcode'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Istatname'"
+                },
+                {
+                    "id": "ID_BW",
+                    "value": "'bathingWaterIdentifier'"
+                },
+                {
+                    "id": "URL",
+                    "value": "'bwProfileUrl'"
+                },
+                {
+                    "id":"LONG",
+                    "value": "'lon'"
+                },
+                {
+                    "id":"LAT",
+                    "value": "'lat'"
+                },
+                {
+                    "id":"LOC",
+                    "value": "'nameText'"
+                },
+                {
+                    "id":"TYPE",
+                    "value": "'specialisedZoneType'"
+                }
+            ]
+        },
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_static",
+                    "file": "Description of fields.csv"
+                }
+            ]
+        }
+
+	]
+}

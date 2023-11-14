@@ -12,6 +12,7 @@ from euring.epe import EpeTriplifier
 from land.land import LandTriplifier
 from measures.measures import MeasuresTriplifier
 from ostreopsis.ostreopsis import OstreopsisTriplifier
+from bathw.bathw import BathwTriplifier
 from pest.pesticides import PesticidesTriplifier
 
 def process(arg_parser: Namespace):
@@ -48,6 +49,11 @@ def process(arg_parser: Namespace):
     elif args.rendis:
         triplifiers.append(RendisTriplifier())
 
+    elif args.bathw:
+        for year in args.bathw:
+            print (year)
+            triplifiers.append(BathwTriplifier(year))
+            
     elif args.pest:
         for year in args.pest:
             print (year)
@@ -117,6 +123,8 @@ if __name__ == "__main__":
     arg_parser.add_argument("-os", "--ostreopsis", dest="ostreopsis", nargs='+', default=False, help="Ostreopsis Conversion")
     
     arg_parser.add_argument("-pe", "--pest", dest="pest", nargs='+', default=False, help="Pesticides Conversion")
+
+    arg_parser.add_argument("-bw", "--bathw", dest="bathw", nargs='+', default=False, help="Bathing Water Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,

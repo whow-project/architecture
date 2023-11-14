@@ -1,0 +1,451 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/indicators_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix geo: <http://www.w3.org/2003/01/geo/wgs84_pos#> .
+
+:CSV
+    rml:source "{{ csv_static }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+
+:DatasetISPRA
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+            rr:class ispra-top:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:label_it('{{dataset}}')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "%eval:label_en('{{dataset}}')%";
+            rr:language "en"
+        ]
+    ].
+
+
+:MainCollection
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{ {{COD_PLACE}} }";
+        rr:class ispra-top:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate a: { {{NOME_PLACE}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: { {{NOME_PLACE}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isCollectionOf;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/municipality/00201_{ {{COD_PLACE}} }";
+            rr:termType rr:IRI
+        ]
+    ].
+
+
+:IndicatorCollections
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/00201_{ {{COD_PLACE}} }";
+        rr:class inspire-mf:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione degli indicatori di %eval:label_it('{{dataset}}')% associati a: %eval:title('{ {{NOME_PLACE}} }')%";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collection of the %eval:label_en('{{dataset}}')% indicators associated with: %eval:title('{ {{NOME_PLACE}} }')%";
+            rr:language "en"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCollection
+        ]
+    ] .
+
+
+:EEACode
+  rml:logicalSource :CSV;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/uniqueidentifier/20201_{ {{ID_BW}} }";
+    rr:class ispra-top:UniqueIdentifier
+    ];
+
+  rr:predicateObjectMap [
+        rr:predicate ispra-top:hasIdentifierSchema;
+        rr:objectMap [
+            rr:parentTriplesMap :IdentifierSchema
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Bathing water ID { {{ID_BW}} }";
+            rr:language "en"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Identificativo acqua di balneazione { {{ID_BW}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Codice univoco acqua di balneazione - { {{ID_BW}} } - in accordo alla Direttiva Acque di Balneazione (Dir. 2006/7/EC del Parlamento Europeo e del Consiglio Europeo del 15 Febbraio 2006 riguardo la gestione della qualità delle acque di balneazione, che abroga la Direttiva 76/160/EEC)";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Bathing water unique code - { {{ID_BW}} } - according to the Bathing Water Directive (Directive 2006/7/EC of the European Parliament and of the Council of 15 February 2006 concerning the management of bathing water quality and repealing Directive 76/160/EEC)";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:template "{{dataset}}_{ {{ID_BW}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+            rr:constant "https://w3id.org/italia/env/ld/common/organisation/202";
+            rr:termType rr:IRI
+        ]
+    ].
+
+
+  :IdentifierSchema
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:constant "https://w3id.org/italia/env/ld/common/identifierschema/20201";
+        rr:class ispra-top:IdentifierSchema
+        ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Schema identificativi %eval:label_it('{{dataset}}')%";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Bathing water identifiers schema";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Schema di identificativi univoci delle %eval:label_it('{{dataset}}')% nell'Unione Europea";
+            rr:language "it"
+        ]
+    ];
+
+     rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Unique identifiers schema of %eval:label_en('{{dataset}}')% in the EU";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+        rr:objectMap [
+            rr:constant "01"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isIssuedBy;
+        rr:objectMap [
+          rr:constant "https://w3id.org/italia/env/ld/common/organisation/202";
+          rr:termType rr:IRI
+        ]
+    ].
+
+
+:Feature
+  rml:logicalSource :CSV;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/feature/20201_{ {{ID_BW}} }";
+    rr:class ispra-place:Feature;
+    rr:class inspire-mf:FeatureOfInterest
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Acqua di balneazione { {{ID_BW}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Bathing water { {{ID_BW}} }";
+            rr:language "en"
+        ]
+    ];
+
+        rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Acqua di balneazione corrispondente all'ID { {{ID_BW}} }, posta in località { {{LOC}} } nel comune di { {{NOME_PLACE}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Bathing water with ID { {{ID_BW}} }, located at { {{LOC}} }, municipality of { {{NOME_PLACE}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:lat;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LAT}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate geo:long;
+        rr:objectMap [
+            rr:template "%eval:round_coord('{ {{LONG}} }')%";
+            rr:datatype xsd:decimal
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasDownloadURL;
+        rr:objectMap [
+            rr:template "{ {{URL}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasGeometry;
+        rr:objectMap [
+            rr:parentTriplesMap :FeatureGeometry
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isClassifiedBy;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/vocab/bathing_waters/bodies/{ {{TYPE}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasUniqueIdentifier;
+        rr:objectMap [
+            rr:parentTriplesMap :EEACode
+        ]
+    ].
+
+
+:FeatureGeometry
+  rml:logicalSource :CSV;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/20201_{ {{ID_BW}} }_point";	
+    rr:class ispra-place:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Punto di coordinate { {{LONG}} }, { {{LAT}} }";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Point with coordinates { {{LONG}} }, { {{LAT}} }";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:geometry;
+    rr:objectMap [
+      rr:template "%eval:get_point('{ {{LONG}} }','{ {{LAT}} }')%"
+      #rr:datatype "http://www.opengis.net/ont/geosparql#wktLiteral"
+    ]
+  ].
+
+
+:FeatureCollection
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/20201_{ {{ID_BW}} }";
+        rr:class ispra-top:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate a: { {{ID_BW}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: { {{ID_BW}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isCollectionOf;
+        rr:objectMap [
+            rr:parentTriplesMap :Feature
+        ]
+    ].
+
+
+{% for indicator in indicators %}
+
+:IndicatorsCollectionMetric{{indicator}}
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/20201_{ {{ID_BW}} }_{{indicator|lower}}";
+        rr:class inspire-mf:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorCollections
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :FeatureCollection
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isParametrisedBy;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{{indicator|lower}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:identifier;
+            rr:objectMap [
+            rr:template "{{dataset}}_{ {{ID_BW}} }_{{indicator|lower}}"
+      ]
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione degli indicatori di {{indicator}} per l'acqua di balneazione identificata da: { {{ID_BW}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicators collection of {{indicator}} for the bathing water identified by: { {{ID_BW}} }";
+            rr:language "en"
+        ]
+    ].
+
+{%endfor%}
