@@ -98,14 +98,16 @@
   rr:predicateObjectMap [
     rr:predicate geo:long;
     rr:objectMap [
-      rr:template "%eval:round_coord('{long}')%"
+      rr:template "%eval:round_coord('{long}')%";
+      rr:datatype xsd:decimal
     ]
   ];
 
   rr:predicateObjectMap [
     rr:predicate geo:lat;
     rr:objectMap [
-      rr:template "%eval:round_coord('{lat}')%"
+      rr:template "%eval:round_coord('{lat}')%";
+      rr:datatype xsd:decimal
     ]
   ];
   
