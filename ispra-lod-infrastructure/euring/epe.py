@@ -183,14 +183,15 @@ class EpeTriplifier(Triplifier):
         
         super().__init__('epe', functions_dictionary)
         self._dirty_data_path = os.path.join('epe', 'v2', 'dirtydata')
-        
+        self._data_path = os.path.join('epe', 'v2', 'data')
+
         self._conf_vars.update({"year": year})
         
         
-    def _dataset_initialisation(self) -> None:
-        print("Starting preprocessing ...")
+    def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
+        print("EPE preprocessing ...")
 
-        KnowledgeGraphLoader.convert_utf8(self._dirty_data_path, self._data_path)
+        KnowledgeGraphLoader.convert_utf8(dirty_data_path, data_path)
         
 
         files = [ file for file in os.listdir(self._data_path) if file.endswith(".csv") ]
