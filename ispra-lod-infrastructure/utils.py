@@ -22,6 +22,8 @@ class Utils:
             #return TermUtils.irify("consumo del suolo")
         elif (dset == "urban"):
             return str("aree urbane")
+        elif (dset == "bathw"):
+            return str("acque di balneazione")
         elif (dset == "pest"):
             return str("pesticidi")
         elif (dset=="rmn"):
@@ -37,6 +39,8 @@ class Utils:
             return str("soil consumption")
         elif (dset == "urban"):
             return str("urban areas")
+        elif (dset == "bathw"):
+            return str("bathing waters")
         elif (dset == "pest"):
             return str("pesticides")
         elif (dset=="rmn"):
@@ -49,8 +53,7 @@ class Utils:
     def round_coord(coord):
         try:
             value = str(round(float(coord),5))
-
-        except ValueError:
+        except (ValueError, TypeError) as e:
             value = str(coord)
 
         return value
