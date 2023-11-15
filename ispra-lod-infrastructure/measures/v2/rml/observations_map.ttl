@@ -300,16 +300,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rml:reference "DESC_EN";
-            rr:language "en"
-        ]
-    ];
-    
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rml:reference "DESC_IT";
-            rr:language "it"
+            rml:reference "SCHEMA"
         ]
     ];
 
