@@ -282,6 +282,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:name;
+        rr:objectMap [
+            rr:template "{ {{LOC}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate geo:lat;
         rr:objectMap [
             rr:template "%eval:round_coord('{ {{LAT}} }')%";
@@ -298,7 +305,7 @@
     ];
 
     rr:predicateObjectMap [
-        rr:predicate ispra-top:hasDownloadURL;
+        rr:predicate dcterms:isReferencedBy;
         rr:objectMap [
             rr:template "{ {{URL}} }";
             rr:termType rr:IRI

@@ -5,6 +5,20 @@ import numpy as np
 import pandas as pd
 import geopandas as gpd
 
+
+def quality_tag(s):
+    '''
+    Convert to quality tag according to SKOS
+    '''
+    if (pd.isnull(s)):
+        return np.nan
+    else:
+        if ('Good or Sufficient' in str(s)):
+            return '3p'
+        else:
+            return str(s)[0]
+
+
 def split_by_year(csv_file, output_folder):
     print ('Reading', csv_file.name, '...')
     df_csv_large = pd.read_csv(csv_file.name, delimiter=';', dtype=str)
@@ -15,7 +29,7 @@ def split_by_year(csv_file, output_folder):
     df_static = df_csv_large[[col for col in noyears_cols]]
 
     #Align type with SKOS
-    df_static['specialisedZoneType'] = df_static['specialisedZoneType'].transform(lambda x: str(x).replace('BathingWater', '_bathing_water'))
+    df_static['specialisedZoneType'] = df_static['specialisedZoneType'].apply(lambda x: str(x).replace('BathingWater', '_bathing_water'))
 
     df_static.to_csv(os.path.join(output_folder, csv_data_name + '_static.csv'), index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
     del df_static
@@ -31,7 +45,7 @@ def split_by_year(csv_file, output_folder):
             elif (yy in col):
                 df_year = pd.concat([df_year,df_csv_large[col]], axis=1)
                 #Keep only the numerical value
-                df_year[col] = df_year[col].transform(lambda x: str(x)[0])
+                df_year[col] = df_year[col].apply(lambda x: quality_tag(x))
                 #Remove year from col name
                 df_year.rename(columns={col:col.replace(yy,'')}, inplace=True)
                 #Move 'quality' to last place
