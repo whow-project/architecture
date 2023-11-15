@@ -88,7 +88,7 @@ def associate_istat_code(file_istat, file_samples):
 if __name__ == '__main__':
 
     outdir = os.path.join("data","bathw","v2","dirtydata")
-    file_comuni_istat = 'istat/Limiti01012023.zip'
+    file_comuni_istat = os.path.join('data','istat', 'Limiti01012023.zip')
 
     CSVFile = str(sys.argv[1])
     split_by_year(open(CSVFile), outdir)
