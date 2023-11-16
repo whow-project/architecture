@@ -234,7 +234,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-        rr:constant "CSV media";
+        rr:template "CSV media per {{dataset|upper}}{STAT_MODEL}-{PLACE_NAME}, tipo {TYPE}, periodo {PERIOD}";
         rr:language "it"
         ]
     ];
@@ -242,7 +242,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-        rr:constant "CSV media";
+        rr:template "CSV media for {{dataset|upper}}{STAT_MODEL}-{PLACE_NAME}, {TYPE} type, {PERIOD} period";
         rr:language "en"
         ]
     ];
@@ -265,8 +265,11 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:hasDataSchema;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataschema/{TYPE}";
-            rr:termType rr:IRI
+            rr:parentTriplesMap <#SCHEMA>;
+            rr:joinCondition [
+                rr:child "TYPE";
+                rr:parent "SCHEMA"
+        ]
         ]
     ].
 
