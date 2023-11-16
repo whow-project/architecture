@@ -20,6 +20,7 @@ def get_summary_list(dataset):
     df_fields = pd.read_csv(os.path.join(output_folder, 'Descrizione_campi.csv'), sep=';', skiprows=skiprange)
     
     type_list = ['Nazionale', 'Regioni', 'Province', 'Comuni', 'Citta metropolitana']
+    type_dict_soilc = {'Nazionale': 'COD', 'Regioni': 'COD_REG', 'Province': 'COD_PRO', 'Comuni': 'PRO_COM'}
 
     for item in type_list:
 
@@ -54,9 +55,13 @@ def get_summary_list(dataset):
         
         df_collection = pd.DataFrame()
         
+        keyfieldname = 'IdOST_Origine'
+        if (dataset == 'soilc'):
+            keyfieldname = type_dict_soilc[item]
+
         #If one value at least is non nan, keep it
-        for istatcode in df_collection_temp['IdOST_Origine'].unique():
-            df_temp = df_collection_temp[df_collection_temp['IdOST_Origine'] == istatcode]
+        for istatcode in df_collection_temp[keyfieldname].unique():
+            df_temp = df_collection_temp[df_collection_temp[keyfieldname] == istatcode]
             for col in df_temp.columns:
                 if col in list(df_fields['Campo']):
                     if df_temp[col].notnull().values.any():

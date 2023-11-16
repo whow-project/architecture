@@ -25,7 +25,7 @@ def split_by_year_and_region(csv_file, output_folder):
                 if (not(df_reg.empty)):
                     print ('Processing region', reg, '...')
                     regname = reg.replace(' ','').replace('/','').replace("'","")
-                    df_reg.to_csv(output_folder + csv_data_name + '_' + regname + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';')
+                    df_reg.to_csv(output_folder + csv_data_name + '_' + regname + '_' + str(yy) + '.csv', index=None, quoting=csv.QUOTE_NONNUMERIC, quotechar='"', sep=';', encoding='utf-8-sig')
                 del df_reg
         del df_years
 

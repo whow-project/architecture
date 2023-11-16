@@ -16,7 +16,7 @@ def split_epe_by_year(csv_file):
         df_years = df_csv_large[df_csv_large[year_cols[0]] == yy]
         if (not(df_years.empty)):
             print ('Processing year', yy, '...')
-            df_years.to_csv('data/euring/v2/dirtydata/' + csv_data_name + '_' + str(yy) + '.csv', index=None, sep=';')
+            df_years.to_csv('data/euring/v2/dirtydata/' + csv_data_name + '_' + str(yy) + '.csv', index=None, sep=';', encoding='utf-8-sig')
         del df_years
 
 

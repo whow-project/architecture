@@ -31,7 +31,7 @@ def split_by_year(csv_file, output_folder):
     #Align type with SKOS
     df_static['specialisedZoneType'] = df_static['specialisedZoneType'].apply(lambda x: str(x).replace('BathingWater', '_bathing_water'))
 
-    df_static.to_csv(os.path.join(output_folder, csv_data_name + '_static.csv'), index=None, quoting=csv.QUOTE_ALL, quotechar='"', sep=';')
+    df_static.to_csv(os.path.join(output_folder, csv_data_name + '_static.csv'), index=None, quoting=csv.QUOTE_ALL, quotechar='"', sep=';', encoding='utf-8-sig')
     del df_static
 
 
@@ -52,7 +52,7 @@ def split_by_year(csv_file, output_folder):
                 new_cols = [col for col in df_year.columns if col != 'quality'] + ['quality']
                 df_year = df_year[new_cols]
 
-        df_year.to_csv(os.path.join(output_folder, csv_data_name + '_' + str(yy) + '.csv'), index=None, quoting=csv.QUOTE_ALL, quotechar='"', sep=';')
+        df_year.to_csv(os.path.join(output_folder, csv_data_name + '_' + str(yy) + '.csv'), index=None, quoting=csv.QUOTE_ALL, quotechar='"', sep=';', encoding='utf-8-sig')
         del df_year
 
 def associate_istat_code(file_istat, file_samples):
@@ -63,7 +63,7 @@ def associate_istat_code(file_istat, file_samples):
     #Read ISTAT shapefile
     print ('Reading ISTAT shapefile ...')
     zipfile = file_istat+"!Limiti01012023/Com01012023/Com01012023_WGS84.shp"
-    gdf_shf = gpd.read_file(zipfile)
+    gdf_shf = gpd.read_file(zipfile, encoding='utf-8')
     gdf_shf = gdf_shf.to_crs(epsg=32632)
 
     #Read samples file
@@ -82,7 +82,7 @@ def associate_istat_code(file_istat, file_samples):
     foutname = file_samples.split('.')[0]+'_withISTATcode.csv'
     gdf_joined = pd.concat([gdf_joined, pd.DataFrame(data={"quality": [np.nan for kk in range(len(gdf_joined))]})]) #add 'quality' column
     gdf_joined = gdf_joined.dropna(axis=0, how='all')
-    gdf_joined.to_csv(foutname, sep=';', index=None, quoting=csv.QUOTE_ALL, quotechar='"')
+    gdf_joined.to_csv(foutname, sep=';', index=None, quoting=csv.QUOTE_ALL, quotechar='"', encoding='utf-8-sig')
     print ('Created', foutname)
 
 
