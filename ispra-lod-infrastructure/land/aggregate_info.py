@@ -74,7 +74,7 @@ def get_summary_list(dataset):
             del df_temp
 
         newcsvfile = os.path.join(output_folder, item + '_static.csv')
-        df_collection.to_csv(newcsvfile, sep=';', index=None, quotechar='"', quoting=csv.QUOTE_NONNUMERIC)
+        df_collection.to_csv(newcsvfile, sep=';', index=None, quotechar='"', quoting=csv.QUOTE_NONNUMERIC, encoding='utf-8-sig')
 
         del df_collection
 
