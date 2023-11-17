@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import datetime as dt
 import geopandas as gpd
-import contextily as cx
+#import contextily as cx
 from dateutil import parser
 from matplotlib import pyplot as plt
 from matplotlib_scalebar.scalebar import ScaleBar
@@ -41,8 +41,9 @@ def aggregate_files(yy, dpath, foutput):
 	#Cleaning on dates
 	df_sample['Data'] = df_sample['Data'].transform(lambda x: parser.parse(x))
 	df_sample['Data'] = df_sample['Data'].transform(lambda x: dt.datetime.strftime(x, "%Y-%m-%d"))
+	df_sample['Year'] = df_sample['Data'].apply(lambda x: dt.datetime.strptime(x, "%Y-%m-%d").year)
 	
-	df_sample.to_csv(foutput, sep=';', index=None)
+	df_sample.to_csv(foutput, sep=';', index=None, encoding='utf-8')
 
 
 def associate_istat_and_seas(yy, file_istat, file_seas, file_samples):
@@ -72,13 +73,13 @@ def associate_istat_and_seas(yy, file_istat, file_seas, file_samples):
 	print ('Associating records to ISTAT code ...')
 	#Join ISTAT and samples geodataframes according to min distance
 	gdf_joined = gpd.sjoin_nearest(gdf_sample, gdf_shf)
-	gdf_joined = gdf_joined[['Regione','Provincia','Comune','Codice Sito','Nome Sito','LONG','LAT','Data','Ostreopsis cf. ovata cell/l','Ostreopsis cf. ovata cell/ g fw','PRO_COM_T']]
+	gdf_joined = gdf_joined[['Regione','Provincia','Comune','Codice Sito','Nome Sito','LONG','LAT','Year','Data','Ostreopsis cf. ovata cell/l','Ostreopsis cf. ovata cell/ g fw','PRO_COM_T']]
 	diff_record = int(len(df_sample)) - int(len(gdf_joined))
 	if (diff_record != 0):
 		print ("I'm missing", diff_record, 'records!')
 	gdf_joined.rename(columns={"PRO_COM_T": "Istatcode"}, inplace=True)
 	foutname = file_samples.split('.')[0]+'_withISTATcode.csv'
-	gdf_joined.to_csv(foutname, sep=';', index=None)
+	gdf_joined.to_csv(foutname, sep=';', index=None, encoding='utf-8')
 	print ('Created', foutname)
 
 
@@ -90,11 +91,13 @@ def associate_istat_and_seas(yy, file_istat, file_seas, file_samples):
 	#Join geodataframes according to min distance
 	gdf_joined_sea=gpd.sjoin_nearest(gdf_joined, gdf_sea_ita)
 	gdf_joined_sea= gdf_joined_sea.drop(['Country', 'Area_km2', 'Type', 'geometry', 'index_right', 'Subregion', 'index'], axis=1)
+	#Replace empty codes with combination of other columns
+	gdf_joined_sea.loc[gdf_joined_sea["Codice Sito"].isnull(),'Codice Sito'] = gdf_joined_sea["Istatcode"] + gdf_joined_sea["Nome Sito"] 
 	diff_record = int(len(gdf_joined)) - int(len(gdf_joined_sea))
 	if (diff_record != 0):
 		print ("I'm missing", diff_record, 'records!')
 	foutname = file_samples.split('.')[0]+'_withISTATcode_withSeas.csv'
-	gdf_joined_sea.to_csv(foutname, sep=';', index=None)
+	gdf_joined_sea.to_csv(foutname, sep=';', index=None, encoding='utf-8')
 	print ('Created', foutname)
 
 	#Plot map
