@@ -364,6 +364,13 @@
   ];
 
   rr:predicateObjectMap [
+    rr:predicate ispra-top:name;
+    rr:objectMap [
+      rr:template "{STAT_NAME}"
+    ]
+  ];
+
+  rr:predicateObjectMap [
     rr:predicate ispra-top:hasUniqueIdentifier;
     rr:objectMap [
       rr:parentTriplesMap :IdCode;
