@@ -339,6 +339,14 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-top:time;
+        rr:objectMap [
+            rr:template "{PERIOD}";
+            rr:datatype xsd:getYearMonth
+        ]
+    ];    
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:startTime;
         rr:objectMap [
             rr:template "{START}";
