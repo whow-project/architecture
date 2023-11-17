@@ -1,3 +1,5 @@
+#Usage: python3 ostreopsis_excel_to_csv.py <input_xls_file.xlsx>
+
 import os
 import sys
 import csv
@@ -10,7 +12,7 @@ def convert(file_in, folder_out):
         sheet = wb[sheetname]
         
         file_out = os.path.join(folder_out, sheetname + '.csv')
-        with open(file_out, 'wb') as f:   # open('a_file.csv', 'w', newline="") for python 3
+        with open(file_out, 'wb') as f:
             c = csv.writer(f, delimiter=';')
             for r in sheet.iter_rows():
                 print([cell.value for cell in r])
@@ -28,7 +30,7 @@ def convert_pd(year, file_in, folder_out):
             
 if __name__ == '__main__':
     file_in = sys.argv[1]
-    YY = sys.argv[2]
+    YY = file_in.split('.')[0].split('_')[-1]
     folder_out = os.path.join('data', 'ostreopsis', 'csv')
     
     if not os.path.exists(folder_out):
