@@ -7,6 +7,7 @@
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
 @prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix water-indicator: <https://w3id.org/whow/onto/water-indicator/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
 
 
@@ -49,7 +50,8 @@
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/20201_{ {{ID_BW}} }_{{indicator|lower}}_{{YEAR}}";
-        rr:class inspire-mf:Indicator
+        rr:class inspire-mf:Indicator;
+        rr:class water-indicator:WaterIndicatorCalculation
     ];
 
     rr:predicateObjectMap [
