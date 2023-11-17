@@ -118,7 +118,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{dataset.upper()}} resources collection of {PLACE_NAME}";
+            rr:template "{{dataset.upper()}} resources collection associated with: {PLACE_NAME}";
             rr:language "en"
         ]
     ];
@@ -228,7 +228,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{{dataset.upper()}} measurement stations collection of {PLACE_NAME}";
+      rr:template "{{dataset.upper()}} measurement stations collection associated with: {PLACE_NAME}";
       rr:language "en"
     ]
   ];
@@ -350,7 +350,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_EN} part of the {NETWORK}-{STAT_MODEL} network located near {PLACE_NAME}";
+      rr:template "{STAT_TYPE_EN} part of the {NETWORK}-{STAT_MODEL} network located near {STAT_NAME}";
       rr:language "en"
     ]
   ];
@@ -358,7 +358,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "{STAT_TYPE_IT} parte della rete {NETWORK}-{STAT_MODEL}, in prossimità di {PLACE_NAME}";
+      rr:template "{STAT_TYPE_IT} parte della rete {NETWORK}-{STAT_MODEL}, in prossimità di {STAT_NAME}";
       rr:language "it"
     ]
   ];
