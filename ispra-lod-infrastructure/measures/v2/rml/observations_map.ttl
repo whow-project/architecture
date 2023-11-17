@@ -342,7 +342,7 @@
         rr:predicate ispra-top:time;
         rr:objectMap [
             rr:template "{PERIOD}";
-            rr:datatype xsd:getYearMonth
+            rr:datatype xsd:gYearMonth
         ]
     ];    
 
