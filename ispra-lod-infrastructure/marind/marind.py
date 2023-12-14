@@ -34,7 +34,7 @@ class MarIndTriplifier(Triplifier):
          - self._data_path -> the path to CSV data files.
     '''
 
-    def __init__(self, key_name : str):
+    def __init__(self, year : int):
         
         functions_dictionary = {
             'label_it': Utils.label_it,
@@ -42,26 +42,26 @@ class MarIndTriplifier(Triplifier):
             'get_unit_of_measure': Functions.get_unit_of_measure
         }
 
-        super().__init__(key_name, functions_dictionary)
-        self._dirty_data_path = os.path.join('data', key_name, 'v2', 'dirtydata')
-        self._data_path = os.path.join('data', key_name, 'v2', 'data')
-        self.dataset = key_name
+        super().__init__('marind', functions_dictionary)
+        self._dirty_data_path = os.path.join('data', 'marind', 'v2', 'dirtydata')
+        self._data_path = os.path.join('data', 'marind', 'v2', 'data')
+        self._conf_vars.update({"year": year})
 
 
     def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
 
-        print(self.dataset.upper(), "preprocessing...")
+        print('marind', "preprocessing...")
         KnowledgeGraphLoader.convert_utf8(dirty_data_path, data_path)
 
-        df = pd.read_csv(os.path.join(data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
-        sep = df._engine.data.dialect.delimiter
-        df.close()
+        # df = pd.read_csv(os.path.join(data_path, "Descrizione_campi.csv"), sep=None, engine='python', iterator=True)
+        # sep = df._engine.data.dialect.delimiter
+        # df.close()
 
-        global UNIT_OF_MEASURES
+        # global UNIT_OF_MEASURES
 
-        units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campi.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
-        UNIT_OF_MEASURES = units_df.to_dict(orient="index")
-        del units_df
+        # units_df = pd.read_csv(os.path.join(data_path, "Descrizione_campi.csv"), sep=sep)[["Campo", "Unit_EN", "Unit_IT", "Unit"]].set_index('Campo')
+        # UNIT_OF_MEASURES = units_df.to_dict(orient="index")
+        # del units_df
 
         print("\t preprocessing completed.")
 

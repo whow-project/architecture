@@ -1,0 +1,55 @@
+{
+    "dataset": "marind",
+    "graph_iri": "https://w3id.org/italia/env/ld/marind/",
+    "rdf_dump_file_name": "marind_dump",
+    "rdf_dump_file_serialisation": "ntriples",
+    "data_folder": "data/marind/v2/data",
+    "dirty_data_folder": "data/marind/v2/dirtydata",
+    "rml_folder": "data/marind/v2/rml",
+    "dest_address": "11.111.111.11",
+    "dest_folder": "/path/to/folder",
+    "username": "username",
+    "passwd": "password",
+    "dbuser": "dba",
+    "dbpasswd": "dba",
+    "year": {{year}},
+	"mappings": [
+		{
+            "rml": "indicators_map.ttl",
+            "data": [
+                {
+                    "id": "csv_static",
+                    "file": "indicatori_{{year}}.csv"
+                }
+            ],
+            "variables": [
+                {
+                    "id": "indicators",
+                    "value": "MappingConfiguration.columns_as_tuple('data/marind/v2/dirtydata/indicatori_{{year}}.csv', 2)"
+                },
+                {
+                    "id": "YEAR",
+                    "value": "'{{year}}'"
+                },
+                {
+                    "id": "COD_PLACE",
+                    "value": "'Place_code'"
+                },
+                {
+                    "id": "NOME_PLACE",
+                    "value": "'Place_name'"
+                }
+            ]
+        },
+        {
+            "rml": "metrics_map.ttl",
+            "data": [
+                {
+                    "id": "csv_metric",
+                    "file": "Descrizione_campi.csv"
+                }
+            ]
+        }
+
+	]
+}

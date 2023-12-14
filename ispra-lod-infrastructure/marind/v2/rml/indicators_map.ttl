@@ -83,43 +83,43 @@
     rr:predicateObjectMap [
         rr:predicate ispra-top:isCollectionOf;
         rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{Place_code}";
+            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
             rr:termType rr:IRI
         ]
     ].
 
 
-:SeasCollection
-    rml:logicalSource :CSV;
+# :SeasCollection
+#     rml:logicalSource :CSV;
 
-    rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/italianseas";
-        rr:class ispra-top:Collection
-    ];
+#     rr:subjectMap [
+#         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/italianseas";
+#         rr:class ispra-top:Collection
+#     ];
 
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:isCollectionOf;
-        rr:objectMap [
-            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{Place_code}";
-            rr:termType rr:IRI
-        ]
-    ];
+#     rr:predicateObjectMap [
+#         rr:predicate ispra-top:isCollectionOf;
+#         rr:objectMap [
+#             rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
+#             rr:termType rr:IRI
+#         ]
+#     ];
 
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate ai mari italiani";
-            rr:language "it"
-        ]
-    ];
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate ai mari italiani";
+#             rr:language "it"
+#         ]
+#     ];
 
-    rr:predicateObjectMap [
-        rr:predicate rdfs:label;
-        rr:objectMap [
-            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with Italian seas";
-            rr:language "en"
-        ]
-    ].
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with Italian seas";
+#             rr:language "en"
+#         ]
+#     ].
 
 
 :IndicatorCollections
@@ -146,12 +146,12 @@
         ]
     ];
 
-    rr:predicateObjectMap [
-        rr:predicate ispra-top:isPartOf;
-        rr:objectMap [
-            rr:parentTriplesMap :SeasCollection
-        ]
-    ];
+    # rr:predicateObjectMap [
+    #     rr:predicate ispra-top:isPartOf;
+    #     rr:objectMap [
+    #         rr:parentTriplesMap :SeasCollection
+    #     ]
+    # ];
     
     rr:predicateObjectMap [
         rr:predicate ispra-top:isPartOf;
@@ -360,7 +360,40 @@
     
     crml:condition "df['{{indicator}}'].notnull()";
 
+    rr:subjectMap [
+	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/italianseas_{{indicator|lower}}_{{YEAR}}";
+        rr:class ispra-top:Media;
+    ];
     
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "GeoTIFF media per {{dataset|upper}}, indicatore {{indicator}}, anno {{YEAR}}";
+        rr:language "it"
+        ]
+    ];
 
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "GeoTIFF media for {{dataset|upper}}, indicator {{indicator}}, year {{YEAR}}";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasDownloadURL;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:mediaType;
+        rr:objectMap [
+            rr:constant "GeoTIFF"
+        ]
+    ].
 
 {%endfor%}
