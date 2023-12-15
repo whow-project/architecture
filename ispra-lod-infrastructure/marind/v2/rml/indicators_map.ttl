@@ -81,6 +81,13 @@
     ];
 
     rr:predicateObjectMap [
+        rr:predicate ispra-place:hasFeature;
+        rr:objectMap [
+            rr:parentTriplesMap :Seas
+        ]
+    ];
+
+    rr:predicateObjectMap [
         rr:predicate ispra-top:isCollectionOf;
         rr:objectMap [
             rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
@@ -198,6 +205,14 @@
         rr:objectMap [
             rr:template "Italian seas within the coordinates: -";
             rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasNearbyLocation;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
+            rr:termType rr:IRI
         ]
     ];
 
