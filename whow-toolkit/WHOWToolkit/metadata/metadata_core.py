@@ -11,6 +11,7 @@ import pandas as pd
 from configparser import RawConfigParser
 import requests
 from typing import List
+import logging
 
 @ComponentFactory("metadata-factory")
 @Property('_graphs_folder', 'graphs.folder', '')
@@ -60,6 +61,7 @@ class DCATMetadataCreator(MetadataCreator):
             dcat_data = dcat_data_response.text
             
             cp = RawConfigParser(dict_type=MultiOrderedDict, strict=False, delimiters=('='))
+            cp.optionxform = str
             cp.read_string(dcat_data)
             
             
@@ -83,13 +85,14 @@ class DCATMetadataCreator(MetadataCreator):
                         
                         rdfvalues = self.__create_rdf_values(cp[section][dataset_prop])
                         for rdfvalue in rdfvalues:
+                            logging.info(f'Section {section} with URI {subjects[section]} {rdfprop} {rdfvalue}.')
                             g.add((subjects[section], rdfprop, rdfvalue))
                 
                 
                 endpoint = self._http_endpoint if self._http_endpoint.endswith('/') else self._http_endpoint + '/'
-                graphs.append({'id': graph_id.uri, 'uri': f'{endpoint}graph/{graph_id.uri}.nt'})
-                graph_path = os.path.join(self._graphs_folder, f'{graph_id.uri}.nt')
-                g.serialize(destination=graph_path, format='nt')
+                graphs.append({'id': graph_id.uri, 'uri': f'{endpoint}graph/{graph_id.uri}.ttl'})
+                graph_path = os.path.join(self._graphs_folder, f'{graph_id.uri}.ttl')
+                g.serialize(destination=graph_path, format='ttl')
             
         
         return {'metadata': graphs}

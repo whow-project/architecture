@@ -5,7 +5,7 @@ import threading
 from typing import Dict, List, Type, Union
 from rdflib import Graph, RDF, URIRef, Literal, Namespace
 import uuid
-from rdflib.namespace import DCTERMS, DCAT, XSD, DefinedNamespace
+from rdflib.namespace import DCTERMS, DCAT, XSD, PROV, DefinedNamespace
 import json
 import re
 import logging
@@ -826,7 +826,8 @@ class RDFTermFactory():
         'dcterms': DCTERMS,
         'terms': DCTERMS,
         'dcat': DCAT,
-        'xsd': XSD
+        'xsd': XSD,
+        'prov': PROV
     }
     
     @staticmethod
@@ -844,8 +845,8 @@ class RDFTermFactory():
     def create_uri(uri):
     
         if uri[0] == '<' and uri[-1] == '>':
-            return URIRef(uri[1:-2])
-        elif ':' in uri:
+            return URIRef(uri[1:-1])
+        elif ':' in uri and not(uri[0] == "'" or uri[0] == '"'):
             prefix, id = uri.split(':')
             if prefix in RDFTermFactory.NAMESPACES:
                 return RDFTermFactory.NAMESPACES[prefix][id]
@@ -872,7 +873,7 @@ class RDFTermFactory():
                 me = re.search(pattern_datatype, literal)
                 if me:
                     datatype = me.group(1)
-                    datatype = get_uri(datatype)
+                    datatype = RDFTermFactory.create_uri(datatype)
                     
                     return Literal(lexical_value, datatype=datatype)
                 else:

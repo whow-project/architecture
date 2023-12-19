@@ -6,22 +6,21 @@ from rdflib import Graph, URIRef, Literal, RDF, RDFS, DCAT, DCTERMS
 from rdflib.namespace import Namespace
 
 from api.api import DataCollection, DCATCatalog, WebSocketComponent, MapperInput
-import logging
 
 
-@ComponentFactory("mapper-websocket-factory")
-@Property('_path', 'websocketcomponent.path', '/mapping')
-@Requires('_mapper','mapper')
+@ComponentFactory("triplestore-websocket-factory")
+@Property('_path', 'websocketcomponent.path', '/triplestore')
+@Requires('_triplestore','triplestore')
 @Provides('websocketcomponent')
-@Instantiate("mapper-websocket-inst")
-class MappingWebSocketComponent(WebSocketComponent):
+@Instantiate("triplestore-websocket-inst")
+class TriplestoreWebSocketComponent(WebSocketComponent):
 
     def __init__(self):
         super().__init__(self._path)
         
     @Validate
     def validate(self, context):
-        print('MappingWebSocketComponent is active!')
+        print('TriplestoreWebSocketComponent is active!')
         
     '''
     
@@ -39,12 +38,10 @@ class MappingWebSocketComponent(WebSocketComponent):
             
         _input = json.loads(message)
         
-        try:
-            out = self._mapper.do_job(MapperInput.from_dict(_input))
-            
-            ret = {"status": "success", "content": out}
-        except Exception as e:
-            logging.info(f'Error {e} occurred in mapper ws.')
-            raise e
+        print(f'Mapper input message {_input}')
+        
+        out = self._mapper.map(MapperInput.from_dict(_input))
+        
+        ret = {"status": "success", "content": out}
         
         return json.dumps(ret)

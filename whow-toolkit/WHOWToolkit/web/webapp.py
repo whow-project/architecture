@@ -14,6 +14,9 @@ from typing import Dict
 
 from flask import Flask
 from websockets.server import WebSocketServerProtocol
+import logging
+from flask.views import MethodView
+from flask import render_template, Blueprint
 
 
 
@@ -23,11 +26,11 @@ class WebSocketApp(object):
     
     @classmethod
     async def _manage(cls, websocket: WebSocketServerProtocol, path: str):
-        print(f'Websocket: {websocket}')
-        print(f'Path: {path}')
+        logging.info(f'Websocket: {websocket}')
+        logging.info(f'Path: {path}')
         
         endpoint = f'{websocket.host}:{websocket.port}'
-        print(f'Request endpoint: {endpoint}')
+        logging.info(f'Request endpoint: {endpoint}')
         
         if endpoint in cls.PATH_REGISTRY:
             endpoint_services = cls.PATH_REGISTRY[endpoint]
@@ -36,26 +39,31 @@ class WebSocketApp(object):
                 service: WebSocketComponent = endpoint_services[path]
                 
                 if service:
-                    message = await websocket.recv()
-                    
-                    out_message = service.execute(message)
-            
-                    await websocket.send(out_message)
+                    try:
+                        message = await websocket.recv()
+                        
+                        out_message = service.execute(message)
+                
+                        await websocket.send(out_message)
+                        await asyncio.sleep(5)
+                    except Exception as e:
+                        logging.info('ERROR in websocket server handling {e}')
+                        raise e
                     
                 else:
-                    print('A path is registered, but service is None.')
+                    logging.info('A path is registered, but service is None.')
                     
             else:
-                print(f'No path registered {path} for a websocket service.')
+                logging.info(f'No path registered {path} for a websocket service.')
         else:
-            print(f'No WebSocket server is active and serving at {endpoint}.')
+            logging.info(f'No WebSocket server is active and serving at {endpoint}.')
             
     @classmethod
     def start(cls, host, port):
         
         loop = asyncio.new_event_loop()
         asyncio.set_event_loop(loop)
-        ws_server = websockets.serve(WebSocketApp._manage, host, port)
+        ws_server = websockets.serve(WebSocketApp._manage, host, port, ping_timeout=None)
 
         loop.run_until_complete(ws_server)
         loop.run_forever() # this is missing
@@ -129,6 +137,12 @@ class HTTPServer(RESTApp):
         print("HTTP webapp is starting")
         app = RESTApp.get_flask_app()
         
+        
+        blp = Blueprint("home", __name__, url_prefix='/toolkit', template_folder='templates', static_folder='static')
+        
+        blp.add_url_rule('/', view_func=HomeWeb.as_view('home'))
+        app.register_blueprint(blp)
+        logging.info(f"Registered home page with root path {blp.root_path}.")
     
     
     @BindField('_webcomponents')
@@ -161,3 +175,11 @@ class HTTPServer(RESTApp):
         print(f'2 Args: {path}')
         print(f'2 Registered resource {func}')
     '''
+    
+class HomeWeb(MethodView):
+    
+    def get(self):
+        logging.info("Home page.")
+        print("Home page.")
+        return render_template('index.html')
+    
