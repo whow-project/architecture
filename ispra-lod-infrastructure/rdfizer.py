@@ -51,9 +51,7 @@ def process(arg_parser: Namespace):
         triplifiers.append(RendisTriplifier())
 
     elif args.marind:
-        for year in args.marind:
-            print (year)
-            triplifiers.append(MarIndTriplifier(year))
+        triplifiers.append(MarIndTriplifier())
     
     elif args.bathw:
         for year in args.bathw:
@@ -132,7 +130,7 @@ if __name__ == "__main__":
 
     arg_parser.add_argument("-bw", "--bathw", dest="bathw", nargs='+', default=False, help="Bathing Water Conversion")
 
-    arg_parser.add_argument("-mi", "--marind", dest="marind", nargs='+', default=False, help="Marine Indicators Conversion")
+    arg_parser.add_argument("-mi", "--marind", dest="marind", nargs='?', const=True, default=False, help="Marine Indicators Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,

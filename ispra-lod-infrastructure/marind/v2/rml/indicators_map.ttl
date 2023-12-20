@@ -260,21 +260,21 @@
     rml:logicalSource :CSV;
 
     rr:subjectMap [
-        rr:constant "https://w3id.org/italia/env/ld/common/year/{{YEAR}}";
+        rr:template "https://w3id.org/italia/env/ld/common/year/{ {{YEAR}} }";
         rr:class ispra-top:Year
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "{{YEAR}}"
+            rr:template "{ {{YEAR}} }"
         ]
     ];
 
     rr:predicateObjectMap [
         rr:predicate ispra-top:year;
         rr:objectMap [
-            rr:constant "{{YEAR}}";
+            rr:template "{ {{YEAR}} }";
             rr:datatype xsd:gYear
         ]
     ].
@@ -328,14 +328,14 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/italianseas_{{indicator|lower}}_{{YEAR}}";
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/italianseas_{{indicator|lower}}_{ {{YEAR}} }";
         rr:class inspire-mf:Indicator
     ];
 
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicatore {{indicator}} associato ai mari italiani per l'anno {{YEAR}}";
+            rr:template "Indicatore {{indicator}} associato ai mari italiani per l'anno { {{YEAR}} }";
             rr:language "it"
         ]
     ];
@@ -343,7 +343,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-            rr:template "Indicator {{indicator}} associated with Italian seas for year {{YEAR}}";
+            rr:template "Indicator {{indicator}} associated with Italian seas for year { {{YEAR}} }";
             rr:language "en"
         ]
     ];
@@ -376,14 +376,14 @@
     crml:condition "df['{{indicator}}'].notnull()";
 
     rr:subjectMap [
-	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/italianseas_{{indicator|lower}}_{{YEAR}}";
+	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/italianseas_{{indicator|lower}}_{ {{YEAR}} }";
         rr:class ispra-top:Media;
     ];
     
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-        rr:template "GeoTIFF media per {{dataset|upper}}, indicatore {{indicator}}, anno {{YEAR}}";
+        rr:template "GeoTIFF media per {{dataset|upper}}, indicatore {{indicator}}, anno { {{YEAR}} }";
         rr:language "it"
         ]
     ];
@@ -391,7 +391,7 @@
     rr:predicateObjectMap [
         rr:predicate rdfs:label;
         rr:objectMap [
-        rr:template "GeoTIFF media for {{dataset|upper}}, indicator {{indicator}}, year {{YEAR}}";
+        rr:template "GeoTIFF media for {{dataset|upper}}, indicator {{indicator}}, year { {{YEAR}} }";
         rr:language "en"
         ]
     ];

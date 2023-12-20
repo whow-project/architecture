@@ -34,7 +34,7 @@ class MarIndTriplifier(Triplifier):
          - self._data_path -> the path to CSV data files.
     '''
 
-    def __init__(self, year : int):
+    def __init__(self):
         
         functions_dictionary = {
             'label_it': Utils.label_it,
@@ -45,7 +45,6 @@ class MarIndTriplifier(Triplifier):
         super().__init__('marind', functions_dictionary)
         self._dirty_data_path = os.path.join('data', 'marind', 'v2', 'dirtydata')
         self._data_path = os.path.join('data', 'marind', 'v2', 'data')
-        self._conf_vars.update({"year": year})
 
 
     def _dataset_initialisation(self, dirty_data_path: str, data_path: str) -> None:
