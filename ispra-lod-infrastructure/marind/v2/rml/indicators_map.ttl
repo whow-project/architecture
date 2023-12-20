@@ -30,23 +30,23 @@
         rr:objectMap [
             rr:template  "{{dataset.upper()}} Dataset";
         ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:label_it('{{dataset}}')%";
-            rr:language "it"
-        ]
-    ];
-
-    rr:predicateObjectMap [
-        rr:predicate dcterms:description;
-        rr:objectMap [
-            rr:template "%eval:label_en('{{dataset}}')%";
-            rr:language "en"
-        ]
     ].
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:label_it('{{dataset}}')%";
+    #         rr:language "it"
+    #     ]
+    # ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:label_en('{{dataset}}')%";
+    #         rr:language "en"
+    #     ]
+    # ].
 
 
 :MainCollection
