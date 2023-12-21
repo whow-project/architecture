@@ -9,6 +9,7 @@
 @prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
 @prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix w-ind: <https://w3id.org/whow/onto/water-indicator/> .
 
 
 :CSV
@@ -235,7 +236,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Area compresa fra le coordinate: -";
+      rr:template "Area compresa fra le coordinate: (4.0,32.0) (4.0,46.0) (22.0,46.0) (22.0,32.0)";
       rr:language "it"
     ]
   ];
@@ -243,7 +244,7 @@
   rr:predicateObjectMap [
     rr:predicate rdfs:label;
     rr:objectMap [
-      rr:template "Area within the coordinates: -";
+      rr:template "Area within the coordinates: (4.0,32.0) (4.0,46.0) (22.0,46.0) (22.0,32.0)";
       rr:language "en"
     ]
   ];
@@ -251,7 +252,7 @@
   rr:predicateObjectMap [
     rr:predicate ispra-place:geometry;
     rr:objectMap [
-      rr:template "BOX"
+      rr:template "POLYGON((4.0 32.0,4.0 46.0,22.0 46.0,22.0 32.0))"
     ]
   ].
 
@@ -329,7 +330,8 @@
 
     rr:subjectMap [
         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/italianseas_{{indicator|lower}}_{ {{YEAR}} }";
-        rr:class inspire-mf:Indicator
+        rr:class inspire-mf:Indicator;
+        rr:class w-ind:WaterIndicatorCalculation
     ];
 
     rr:predicateObjectMap [

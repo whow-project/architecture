@@ -12,24 +12,23 @@
     "passwd": "password",
     "dbuser": "dba",
     "dbpasswd": "dba",
-    "year": {{year}},
 	"mappings": [
 		{
             "rml": "indicators_map.ttl",
             "data": [
                 {
                     "id": "csv_static",
-                    "file": "indicatori_{{year}}.csv"
+                    "file": "indicatori.csv"
                 }
             ],
             "variables": [
                 {
                     "id": "indicators",
-                    "value": "MappingConfiguration.columns_as_tuple('data/marind/v2/dirtydata/indicatori_{{year}}.csv', 2)"
+                    "value": "MappingConfiguration.columns_as_tuple('data/marind/v2/dirtydata/indicatori.csv', 2)"
                 },
                 {
                     "id": "YEAR",
-                    "value": "'{{year}}'"
+                    "value": "'Year'"
                 },
                 {
                     "id": "COD_PLACE",
