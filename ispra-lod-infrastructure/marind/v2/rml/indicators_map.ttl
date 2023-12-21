@@ -33,22 +33,6 @@
         ]
     ].
 
-    # rr:predicateObjectMap [
-    #     rr:predicate dcterms:description;
-    #     rr:objectMap [
-    #         rr:template "%eval:label_it('{{dataset}}')%";
-    #         rr:language "it"
-    #     ]
-    # ];
-
-    # rr:predicateObjectMap [
-    #     rr:predicate dcterms:description;
-    #     rr:objectMap [
-    #         rr:template "%eval:label_en('{{dataset}}')%";
-    #         rr:language "en"
-    #     ]
-    # ].
-
 
 :MainCollection
     rml:logicalSource :CSV;
@@ -97,39 +81,6 @@
     ].
 
 
-# :SeasCollection
-#     rml:logicalSource :CSV;
-
-#     rr:subjectMap [
-#         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/italianseas";
-#         rr:class ispra-top:Collection
-#     ];
-
-#     rr:predicateObjectMap [
-#         rr:predicate ispra-top:isCollectionOf;
-#         rr:objectMap [
-#             rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
-#             rr:termType rr:IRI
-#         ]
-#     ];
-
-#     rr:predicateObjectMap [
-#         rr:predicate rdfs:label;
-#         rr:objectMap [
-#             rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate ai mari italiani";
-#             rr:language "it"
-#         ]
-#     ];
-
-#     rr:predicateObjectMap [
-#         rr:predicate rdfs:label;
-#         rr:objectMap [
-#             rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with Italian seas";
-#             rr:language "en"
-#         ]
-#     ].
-
-
 :IndicatorCollections
     rml:logicalSource :CSV;
 
@@ -153,13 +104,6 @@
             rr:language "en"
         ]
     ];
-
-    # rr:predicateObjectMap [
-    #     rr:predicate ispra-top:isPartOf;
-    #     rr:objectMap [
-    #         rr:parentTriplesMap :SeasCollection
-    #     ]
-    # ];
     
     rr:predicateObjectMap [
         rr:predicate ispra-top:isPartOf;
