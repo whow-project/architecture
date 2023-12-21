@@ -14,6 +14,7 @@ from measures.measures import MeasuresTriplifier
 from ostreopsis.ostreopsis import OstreopsisTriplifier
 from bathw.bathw import BathwTriplifier
 from pest.pesticides import PesticidesTriplifier
+from marind.marind import MarIndTriplifier
 
 def process(arg_parser: Namespace):
     
@@ -49,6 +50,9 @@ def process(arg_parser: Namespace):
     elif args.rendis:
         triplifiers.append(RendisTriplifier())
 
+    elif args.marind:
+        triplifiers.append(MarIndTriplifier())
+    
     elif args.bathw:
         for year in args.bathw:
             print (year)
@@ -125,6 +129,8 @@ if __name__ == "__main__":
     arg_parser.add_argument("-pe", "--pest", dest="pest", nargs='+', default=False, help="Pesticides Conversion")
 
     arg_parser.add_argument("-bw", "--bathw", dest="bathw", nargs='+', default=False, help="Bathing Water Conversion")
+
+    arg_parser.add_argument("-mi", "--marind", dest="marind", nargs='?', const=True, default=False, help="Marine Indicators Conversion")
 
     arg_parser.add_argument("-m", "--mea", dest="measures", nargs='?',
                             const=True, default=False,

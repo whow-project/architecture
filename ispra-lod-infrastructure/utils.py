@@ -26,6 +26,8 @@ class Utils:
             return str("acque di balneazione")
         elif (dset == "pest"):
             return str("pesticidi")
+        elif (dset == "marind"):
+            return str("IndicatoriMarini")
         elif (dset=="rmn"):
             return str("Rete Mareografica Nazionale")
         elif (dset=="ron"):
@@ -43,6 +45,8 @@ class Utils:
             return str("bathing waters")
         elif (dset == "pest"):
             return str("pesticides")
+        elif (dset == "marind"):
+            return str("MarineIndicators")
         elif (dset=="rmn"):
             return str("National Tide Gauge Network")
         elif (dset=="ron"):

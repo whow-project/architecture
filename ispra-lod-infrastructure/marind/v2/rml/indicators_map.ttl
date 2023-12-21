@@ -1,0 +1,416 @@
+@prefix : <https://w3id.org/italia/env/ld/rml/indicators_map.ttl#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix ispra-top: <https://w3id.org/italia/env/onto/top/> .
+@prefix ispra-place: <https://w3id.org/italia/env/onto/place/> .
+@prefix inspire-mf: <https://w3id.org/italia/env/onto/inspire-mf/> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix w-ind: <https://w3id.org/whow/onto/water-indicator/> .
+
+
+:CSV
+    rml:source "{{ csv_static }}" ;
+    rml:referenceFormulation ql:CSV;
+    crml:separator ";".
+
+
+:DatasetISPRA
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/dataset";
+            rr:class ispra-top:Dataset
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template  "{{dataset.upper()}} Dataset";
+        ]
+    ].
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:label_it('{{dataset}}')%";
+    #         rr:language "it"
+    #     ]
+    # ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate dcterms:description;
+    #     rr:objectMap [
+    #         rr:template "%eval:label_en('{{dataset}}')%";
+    #         rr:language "en"
+    #     ]
+    # ].
+
+
+:MainCollection
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/00201_{ {{COD_PLACE}} }";
+        rr:class ispra-top:Collection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :DatasetISPRA
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate a: { {{NOME_PLACE}} }";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with: { {{NOME_PLACE}} }";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasFeature;
+        rr:objectMap [
+            rr:parentTriplesMap :Seas
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isCollectionOf;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
+            rr:termType rr:IRI
+        ]
+    ].
+
+
+# :SeasCollection
+#     rml:logicalSource :CSV;
+
+#     rr:subjectMap [
+#         rr:template "https://w3id.org/italia/env/ld/{{dataset}}/collection/italianseas";
+#         rr:class ispra-top:Collection
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate ispra-top:isCollectionOf;
+#         rr:objectMap [
+#             rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
+#             rr:termType rr:IRI
+#         ]
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Collezione delle risorse di %eval:label_it('{{dataset}}')% associate ai mari italiani";
+#             rr:language "it"
+#         ]
+#     ];
+
+#     rr:predicateObjectMap [
+#         rr:predicate rdfs:label;
+#         rr:objectMap [
+#             rr:template "Resources collection of %eval:label_en('{{dataset}}')% associated with Italian seas";
+#             rr:language "en"
+#         ]
+#     ].
+
+
+:IndicatorCollections
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/italianseas";
+        rr:class inspire-mf:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione degli indicatori di %eval:label_it('{{dataset}}')% associati ai mari italiani";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collection of the %eval:label_en('{{dataset}}')% indicators associated with Italian seas";
+            rr:language "en"
+        ]
+    ];
+
+    # rr:predicateObjectMap [
+    #     rr:predicate ispra-top:isPartOf;
+    #     rr:objectMap [
+    #         rr:parentTriplesMap :SeasCollection
+    #     ]
+    # ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :MainCollection
+        ]
+    ] .
+
+
+:Seas
+  rml:logicalSource :CSV;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/sea/italianseas";
+    rr:class ispra-place:Feature;
+  ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Mari italiani";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Italian seas";
+            rr:language "en"
+        ]
+    ];
+
+        rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Mari italiani compresi entro le coordinate: -";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate dcterms:description;
+        rr:objectMap [
+            rr:template "Italian seas within the coordinates: -";
+            rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasNearbyLocation;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/place/country/00201_{ {{COD_PLACE}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-place:hasGeometry;
+        rr:objectMap [
+            rr:parentTriplesMap :SeasGeometry
+        ]
+    ].
+
+
+:SeasGeometry
+  rml:logicalSource :CSV;
+
+  rr:subjectMap [
+    rr:template "https://w3id.org/italia/env/ld/place/geometry/italianseas";	
+    rr:class ispra-place:Geometry
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Area compresa fra le coordinate: (4.0,32.0) (4.0,46.0) (22.0,46.0) (22.0,32.0)";
+      rr:language "it"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate rdfs:label;
+    rr:objectMap [
+      rr:template "Area within the coordinates: (4.0,32.0) (4.0,46.0) (22.0,46.0) (22.0,32.0)";
+      rr:language "en"
+    ]
+  ];
+
+  rr:predicateObjectMap [
+    rr:predicate ispra-place:geometry;
+    rr:objectMap [
+      rr:template "POLYGON((4.0 32.0,4.0 46.0,22.0 46.0,22.0 32.0))"
+    ]
+  ].
+
+
+:Year
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/common/year/{ {{YEAR}} }";
+        rr:class ispra-top:Year
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "{ {{YEAR}} }"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:year;
+        rr:objectMap [
+            rr:template "{ {{YEAR}} }";
+            rr:datatype xsd:gYear
+        ]
+    ].
+
+
+{% for indicator in indicators %}
+
+:IndicatorsCollectionMetric{{indicator}}
+    rml:logicalSource :CSV;
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicatorcollection/italianseas_{{indicator|lower}}";
+        rr:class inspire-mf:IndicatorCollection
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isPartOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorCollections
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isParametrisedBy;
+        rr:objectMap [
+            rr:template "https://w3id.org/italia/env/ld/{{dataset}}/parameter/{{indicator|lower}}";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Collezione degli indicatori di {{indicator}} per i mari italiani";
+            rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicators collection of {{indicator}} for Italian seas";
+            rr:language "en"
+        ]
+    ].
+
+
+:Indicators{{indicator}}
+    rml:logicalSource :CSV;
+    
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+        rr:template "https://w3id.org/italia/env/ld/{{dataset}}/indicator/italianseas_{{indicator|lower}}_{ {{YEAR}} }";
+        rr:class inspire-mf:Indicator;
+        rr:class w-ind:WaterIndicatorCalculation
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicatore {{indicator}} associato ai mari italiani per l'anno { {{YEAR}} }";
+            rr:language "it"
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+            rr:template "Indicator {{indicator}} associated with Italian seas for year { {{YEAR}} }";
+            rr:language "en"
+        ]
+    ];
+        
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:isMemberOf;
+        rr:objectMap [
+            rr:parentTriplesMap :IndicatorsCollectionMetric{{indicator}}
+        ]
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:atTime;
+        rr:objectMap [
+            rr:parentTriplesMap :Year
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasMedia;
+        rr:objectMap [
+            rr:parentTriplesMap :File{{indicator}}
+        ]
+    ].
+
+
+:File{{indicator}}
+    rml:logicalSource :CSV;
+    
+    crml:condition "df['{{indicator}}'].notnull()";
+
+    rr:subjectMap [
+	    rr:template "https://w3id.org/italia/env/ld/{{dataset}}/media/italianseas_{{indicator|lower}}_{ {{YEAR}} }";
+        rr:class ispra-top:Media;
+    ];
+    
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "GeoTIFF media per {{dataset|upper}}, indicatore {{indicator}}, anno { {{YEAR}} }";
+        rr:language "it"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate rdfs:label;
+        rr:objectMap [
+        rr:template "GeoTIFF media for {{dataset|upper}}, indicator {{indicator}}, year { {{YEAR}} }";
+        rr:language "en"
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:hasDownloadURL;
+        rr:objectMap [
+            rr:template "{ {{indicator}} }";
+            rr:termType rr:IRI
+        ]
+    ];
+
+    rr:predicateObjectMap [
+        rr:predicate ispra-top:mediaType;
+        rr:objectMap [
+            rr:constant "GeoTIFF"
+        ]
+    ].
+
+{%endfor%}
