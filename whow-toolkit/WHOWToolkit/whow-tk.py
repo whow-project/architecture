@@ -28,8 +28,9 @@ class Toolkit(object):
                  #"pelix.shell.console",
             ]
             
-            #modules = ['mappers', 'triplestores', 'web']
-            modules = ['ingestion', 'data_cleansing', 'mappers', 'metadata', 'validator', 'web']
+            #modules = ['triplifier', 'triplestores', 'web']
+            #modules = ['ingestion', 'data_cleansing', 'triplifier', 'metadata', 'validator', 'triplestores', 'web']
+            modules = ['triplifier', 'dagfactory', 'web']
             
             cls.__framework = create_framework(bundles)
             cls.__framework.start()
@@ -40,11 +41,26 @@ class Toolkit(object):
             
             for module in modules :
                 print(module) 
+                _core_modules = []
+                _rest_modules = []
+                _ws_modules = []
+                _other_modules = []
                 for f in os.listdir(f'./{module}'):
                     if f.endswith('.py'):
                         f = f[:-3]
-                        toolkit_bundles.append(ctx.install_bundle(f, f'./{module}'))
-                        print(f'Installed bundle {module}/{f}')
+                        if f.endswith('_core'):
+                            _core_modules.append(f)
+                        elif f.endswith('_rest'):
+                            _rest_modules.append(f)
+                        elif f.endswith('_ws'):
+                            _ws_modules.append(f)
+                        else:
+                            _other_modules.append(f)
+                
+                _bundles = _core_modules + _rest_modules + _ws_modules + _other_modules
+                for _bundle in _bundles:
+                    toolkit_bundles.append(ctx.install_bundle(_bundle, f'./{module}'))
+                    print(f'Installed bundle {module}/{_bundle}')
             
             #mcr_bundles.append(cls.__framework.install_bundle('webapp', '.'))
             

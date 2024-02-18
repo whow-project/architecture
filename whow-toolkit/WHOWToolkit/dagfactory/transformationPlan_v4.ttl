@@ -1,0 +1,83 @@
+@prefix : <https://w3id.org/whow/data/workflow/> .
+@prefix flow: <https://w3id.org/whow/onto/flow/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatapit: <http://dati.gov.it/onto/dcatapit#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix tvo: <https://data.europa.eu/m8g/transform-validate-ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wfm: <https://w3id.org/whow/onto/workflow-mgmt/> .
+
+
+:Plan a flow:Plan ;
+    rdfs:label "The Plan"@en ;
+    rdfs:comment "This is a demo plan." ;
+    dct:identifier "WHOW-Demo-Workflow" ;
+    flow:hasFirstActivity :Ingestion .
+
+:Ingestion a flow:Activity ;
+    rdfs:label "The data ingestion activity"@en ;
+    flow:hasBoundService flow:ingestion ;
+    flow:hasNextActivity :Cleansing .
+
+:Cleansing a flow:Activity ;
+    rdfs:label "The data cleansing activity"@en ;
+    flow:hasBoundService flow:preprocessing ;
+    flow:hasNextActivity :Mapping .
+
+:Mapping a flow:Activity ;
+    rdfs:label "The data mapping activity with RML"@en ;
+    flow:hasBoundService flow:mapping ;
+    flow:hasNextActivity :Metadating .
+
+:Metadating a flow:Activity ;
+    rdfs:label "The metadata creation activity with RML"@en ;
+    flow:hasBoundService flow:metadating ;
+    flow:hasNextActivity :Validation .
+
+:Validation a flow:Activity ;
+    rdfs:label "The validation activity."@en ;
+    flow:hasBoundService flow:validation ;
+    flow:hasNextActivity :Storing .
+
+:Storing a flow:Activity ;
+    rdfs:label "The data are stored in a triplestore"@en ;
+    flow:hasBoundService flow:storing .
+
+
+:Plan2 a flow:Plan ;
+    rdfs:label "The Plan"@en ;
+    rdfs:comment "This is a demo plan." ;
+    dct:identifier "WHOW-Demo-Workflow" ;
+    flow:hasFirstActivity :Ingestion2 .
+
+:Ingestion2 a flow:Activity ;
+    rdfs:label "The data ingestion activity"@en ;
+    flow:hasBoundService flow:ingestion ;
+    flow:hasNextActivity :Cleansing2 .
+
+:Cleansing2 a flow:Activity ;
+    rdfs:label "The data cleansing activity"@en ;
+    flow:hasBoundService flow:preprocessing ;
+    flow:hasNextActivity :Mapping2 .
+
+:Mapping2 a flow:Activity ;
+    rdfs:label "The data mapping activity with RML"@en ;
+    flow:hasBoundService flow:mapping ;
+    flow:hasNextActivity :Metadating2 .
+
+:Metadating2 a flow:Activity ;
+    rdfs:label "The metadata creation activity with RML"@en ;
+    flow:hasBoundService flow:metadating ;
+    flow:hasNextActivity :Validation2 .
+
+:Validation2 a flow:Activity ;
+    rdfs:label "The validation activity."@en ;
+    flow:hasBoundService flow:validation ;
+    flow:hasNextActivity :Storing2 .
+
+:Storing2 a flow:Activity ;
+    rdfs:label "The data are stored in a triplestore"@en ;
+    flow:hasBoundService flow:storing .

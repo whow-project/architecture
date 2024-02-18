@@ -1,0 +1,4 @@
+{
+	"dags.folder": "./dagfactory/dags/",
+	"http.endpoint": "http://localhost:5000"
+}

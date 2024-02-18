@@ -1,0 +1,140 @@
+{
+	"bound_services": {
+		"https://w3id.org/whow/onto/flow/metadating": {
+			"endpoint": "ws://host.docker.internal:8765/metadating",
+			"data": {
+				"graphs": [{
+					"id": "RMN",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "RON",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "BATHW",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "MARIND",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "PEST",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "OSTEOPSIS",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "PLACE",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "RENDIS",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "SOILC",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				}
+				],
+				"meta": [{
+					"id": "RMN",
+					"dataset_id": "https://w3id.org/italia/env/ld/rmn/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/rmn/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_rmn.ini"
+				},
+				{
+					"id": "RON",
+					"dataset_id": "https://w3id.org/italia/env/ld/ron/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/ron/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_ron.ini"
+				},
+				{
+					"id": "BATHW",
+					"dataset_id": "https://w3id.org/italia/env/ld/bathw/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/bathw/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_bathw.ini"
+				},
+				{
+					"id": "MARIND",
+					"dataset_id": "https://w3id.org/italia/env/ld/marind/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/marind/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_marind.ini"
+				},
+				{
+					"id": "OSTREOPSIS",
+					"dataset_id": "https://w3id.org/italia/env/ld/ostreopsis/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/ostreopsis/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_ostreopsis.ini"
+				},
+				{
+					"id": "PEST",
+					"dataset_id": "https://w3id.org/italia/env/ld/pest/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/pest/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_pest.ini"
+				},
+				{
+					"id": "PLACE",
+					"dataset_id": "https://w3id.org/italia/env/ld/place/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/place/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_place.ini"
+				},
+				{
+					"id": "RENDIS",
+					"dataset_id": "https://w3id.org/italia/env/ld/dissesto/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/rendis/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_rendis.ini"
+				},
+				{
+					"id": "SOILC",
+					"dataset_id": "https://w3id.org/italia/env/ld/soilc/dataset",
+					"distribution_id": "https://w3id.org/italia/env/ld/soilc/distribution/nt",
+					"configuration": "http://host.docker.internal/whow/ispra/metadata_soilc.ini"
+				}
+				]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/validation": {
+			"endpoint": "ws://host.docker.internal:8765/validation"
+		}
+	} 
+}

@@ -1,6 +1,8 @@
 from abc import ABC, abstractmethod
 from pelix.ipopo.decorators import Requires
+from pelix.framework import FrameworkFactory
 from flask import Flask
+from flask.views import MethodView
 import threading
 from typing import Dict, List, Type, Union
 from rdflib import Graph, RDF, URIRef, Literal, Namespace
@@ -12,6 +14,20 @@ import logging
 from collections import OrderedDict
 from rdflib.graph import DATASET_DEFAULT_GRAPH_ID
 
+class WebView(MethodView):
+    
+    def __init__(self):
+        self._ctx = FrameworkFactory.get_framework().get_bundle_context()
+    
+    @property
+    def webservices(self):
+        refs = self._ctx.get_all_service_references("webviewcomponent")
+        return [self._ctx.get_service(ref) for ref in refs]
+    
+    def _get_reference(self, name):
+        ref = self._ctx.get_service_reference(name)
+        return self._ctx.get_service(ref)
+    
 
 class Reference(object):
     
@@ -467,6 +483,27 @@ class ValidatorInput(Input):
         
         return ValidatorInput(confs)
     
+class DAGFactoryInput(Input):
+    
+    def __init__(self, dag_id: Reference, graph_uri: Reference):
+        self.__dag_id = dag_id
+        self.__graph_uri = graph_uri
+        
+    @property
+    def dag_id(self) -> Reference:
+        return self.__dag_id
+    
+    @property
+    def graph_uri(self) -> Reference:
+        return self.__graph_uri
+
+    @staticmethod
+    def from_dict(dict: Dict) -> 'ValidatorConfiguration':
+        
+        if 'id' and 'uri' in dict:
+            return DAGFactoryInput(dict['id'], dict['uri'])
+        else:
+            raise MissingKeyInDictionary('id or uri')
 
 '''    
 class MetadataInput(Input):
@@ -598,7 +635,7 @@ class DataPreprocessor(ToolkitComponent):
     def depends_on(self) -> List[Type['ToolkitComponent']]:
         return [Ingester]
 
-class Mapper(ABC):
+class Mapper(ToolkitComponent):
     
     @abstractmethod
     def do_job(self, input: MapperInput, *args, **kwargs):
@@ -607,7 +644,7 @@ class Mapper(ABC):
     def depends_on(self) -> List[Type['ToolkitComponent']]:
         return [DataPreprocessor]
     
-class MetadataCreator(ABC):
+class MetadataCreator(ToolkitComponent):
     
     @abstractmethod
     def do_job(self, input: MetadataInput, *args, **kwargs):
@@ -616,7 +653,7 @@ class MetadataCreator(ABC):
     def depends_on(self) -> List[Type['ToolkitComponent']]:
         return [Mapper]
     
-class Validator(ABC):
+class Validator(ToolkitComponent):
     
     @abstractmethod
     def do_job(self, input: ValidatorInput, *args, **kwargs):
@@ -639,7 +676,19 @@ class Reasoner(ABC):
     def do_reasoning(self):
         pass
     
+class DAGFactory(ToolkitComponent):
+    
+    @abstractmethod
+    def do_job(self, input: DataCollection, *args, **kwargs):
+        pass
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return []
+    
 class TriplestoreManager(ABC):
+    
+    def depends_on(self) -> List[Type['ToolkitComponent']]:
+        return [Mapper]
     
     @abstractmethod
     def load_graphs(self):

@@ -1,0 +1,284 @@
+{% extends "index.html" %}
+
+    <!-- Script -->
+    {% block script %}
+    <script src="{{url_for('dagfactory.static', filename='dagfactory/js/dagrun.js')}}"></script>
+    {% endblock %}
+    
+    <!-- Header -->
+    {% block head %}
+    <header class="masthead bg-primary text-secondary text-center">
+      <div class="container">
+        
+      </div>
+    </header>
+	{% endblock %}
+    
+    
+    <!-- Create DAG -->
+    {% block content %}
+    <section class="portfolio" id="triplifier-content">
+      <div class="container">
+      	<h2 class="text-center text-uppercase text-secondary mb-0">DAG Configuration</h2>
+      	<hr class="star-dark mb-5"></hr>
+      	
+      	<div class="row">
+      		<div class="col-md-12 col-lg-12">
+      			<h3 id="dag_id" title="{{ dag_id }}">{{ dag_id }}</h3>
+      		</div>
+      		
+      		<div id="upload" class="col-md-12 col-lg-12">
+      			<form id="config-form" action="./dag-config/api/{{ dag_id }}" method="POST">
+      				<div class="form-group">
+	      				<label for="json">Upload a JSON file with the configuration of the workflow</label>
+	      				<input name="json" accept="application/json" class="form-control" type="file"/>
+	      				<button id="upload-json" class="btn btn-primary">load</button>
+	      			</div>
+      			</form>
+      		</div>
+      		
+      		<hr class="switch-dark mb-5"></hr>
+      		
+      		<div class="col-md-12 col-lg-12 center">
+      			<button type="button" class="btn btn-warning switch-option">Edit configuration</button> 
+      		</div>
+      		
+      		<div id="edit" class="col-md-12 col-lg-12">
+		      	<form id="load-form" action="./dag-config/api/{{ dag_id }}" method="POST">
+		      		<section id="metadata-section" class="subsection">
+		      		<h3>Metadata</h3>
+		      		<div id="metadata" class="input-group mb-3">
+  						<div class="input-group-prepend">
+    						<span class="input-group-text">Configuration ID</span>
+  						</div>
+  						<input type="text" name="id" class="form-control" aria-label="ID" required />
+					</div>
+					<div class="input-group mb-3">
+  						<div class="input-group-prepend">
+    						<span class="input-group-text">Name</span>
+  						</div>
+  						<input type="text" name="name" class="form-control" aria-label="Name" required />
+					</div>
+					<div class="input-group mb-3">
+  						<div class="input-group-prepend">
+    						<span class="input-group-text">Description</span>
+  						</div>
+  						<textarea name="description" class="form-control" aria-label="Description"></textarea>
+					</div>
+		      		</section>
+	  			{% for activity in activities %}
+	  				
+	  				{% if activity == 'https://w3id.org/whow/onto/flow/ingestion' %}
+	  				<section id="ingestion-section" class="subsection">
+	  				<h3>Data Ingestion</h3>
+	  				<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="ingestion-endpoint" placeholder="ws://host.docker.internal:8765/ingestion" class="form-control" aria-label="Endpoint" required />
+					</div>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Dataset title</span>
+ 						</div>
+ 						<input type="text" name="ingestion-dataset-title" placeholder="Some title" class="form-control" aria-label="Dataset title" required />
+					</div>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Dataset description</span>
+ 						</div>
+ 						<textarea name="ingestion-dataset-description" class="form-control" aria-label="Dataset description"></textarea>
+					</div>
+					<h6>Distributions</h6>
+					<div class="distribution group">
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Data file ID</span>
+	 						</div>
+	 						<input type="text" name="ingestion-data-file-id" placeholder="Some-ID" class="form-control" aria-label="Data file ID" required />
+						</div>
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Data file type</span>
+	 						</div>
+	 						<select class="custom-select" name="ingestion-data-file-type" required>
+	 							<option selected>Choose...</option>
+	 							<option value="text/csv">CSV</option>
+	 							<option value="text/tab-separated-values">TSV</option>
+	 							<option value="application/json">JSON</option>
+	 							<option value="application/xml">XML</option>
+	 						</select>
+						</div>
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Access URL</span>
+	 						</div>
+	 						<input type="text" name="ingestion-data-file-url" placeholder="https://someurl.foo" class="form-control" aria-label="Data file Access URL" required/>
+						</div>
+					</div>
+					<button type="button" class="btn btn-success add-dataset">+</button>
+					<button type="button" class="btn btn-danger remove-dataset">-</button>
+   					</section>
+					{% endif %}
+					
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/preprocessing' %}
+					<section id="preprocessing-section" class="subsection">
+					<h3>Data Preprocessing</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="preprocessing-endpoint" placeholder="ws://host.docker.internal:8765/preprocessing" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					</section>
+					{% endif %}
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/mapping' %}
+					<section id="triplification-section" class="subsection">
+					<h3>Triplification</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="triplification-endpoint" placeholder="ws://host.docker.internal:8765/mapping" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					<h6>Graph mappings</h6>
+					<div class="graph group">
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Graph ID</span>
+	 						</div>
+	 						<input id="triplification-graph-id-0" type="text" name="triplification-graph-id" placeholder="Some-ID" class="form-control" aria-label="Graph ID" required />
+						</div>
+						<div class="rml group">
+							<div class="input-group mb-3">
+		 						<div class="input-group-prepend">
+		   							<span class="input-group-text">RML descriptor</span>
+		 						</div>
+		 						<input type="text" name="triplification-rml" placeholder="http://someuri.foo" class="form-control" aria-label="RML ID" required />
+							</div>
+						</div>
+						<button type="button" class="btn btn-success add-rml">+</button>
+						<button type="button" class="btn btn-danger remove-rml">-</button>
+					</div>
+					<button type="button" class="btn btn-success add-graph">+</button>
+					<button type="button" class="btn btn-danger remove-graph">-</button>
+					</section>
+					{% endif %}
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/metadating' %}
+					<section id="metadating-section" class="subsection">
+					<h3>Metadating</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="metadating-endpoint" placeholder="ws://host.docker.internal:8765/metadating" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					<h6>Metadata configs</h6>
+					<div class="metadating group">
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Graph ID</span>
+	 						</div>
+	 						<select class="custom-select" name="metadating-graph-id" required>
+	 							<option selected>Choose...</option>
+	 						</select>
+						</div>
+						<div class="input-group mb-3">
+		 					<div class="input-group-prepend">
+		   						<span class="input-group-text">Dataset ID</span>
+		 					</div>
+		 					<input type="text" name="metadating-dataset-id" placeholder="http://someuri.foo/dataset_id" class="form-control" aria-label="Dataset ID" required />
+						</div>
+						<div class="input-group mb-3">
+		 					<div class="input-group-prepend">
+		   						<span class="input-group-text">Distribution ID</span>
+		 					</div>
+		 					<input type="text" name="metadating-distribution-id" placeholder="http://someuri.foo/distribu_id" class="form-control" aria-label="Distribution ID" required />
+						</div>
+						<div class="input-group mb-3">
+		 					<div class="input-group-prepend">
+		   						<span class="input-group-text">INI Configuration file</span>
+		 					</div>
+		 					<input type="text" name="metadating-config" placeholder="http://someuri.foo/ini_props" class="form-control" aria-label="Metadata INI Config" required />
+						</div>
+					</div>	
+					<button type="button" class="btn btn-success add-metadating">+</button>
+					<button type="button" class="btn btn-danger remove-metadating">-</button>
+					</section>
+					{% endif %}
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/reasoning' %}
+					<section id="reasoning-section" class="subsection">
+					<h3>Reasoning</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="reasoning-endpoint" placeholder="ws://host.docker.internal:8765/reasoning" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					<h6>Reasoning configs</h6>
+					<div class="reasoning group">
+						<div class="input-group mb-3">
+	 						<div class="input-group-prepend">
+	   							<span class="input-group-text">Graph ID</span>
+	 						</div>
+	 						<select class="custom-select" name="reasoning-graph-id" required>
+	 							<option selected>Choose...</option>
+	 						</select>
+						</div>
+						<div class="ontology group">
+							<div class="input-group mb-3">
+			 					<div class="input-group-prepend">
+			   						<span class="input-group-text">Ontology URI</span>
+			 					</div>
+		 						<input type="text" name="ontology-uri" placeholder="http://someuri.foo/ontology" class="form-control" aria-label="Ontology URI" required />
+							</div>
+						</div>
+						<button type="button" class="btn btn-success add-ontology">+</button>
+						<button type="button" class="btn btn-danger remove-ontology">-</button>
+					</div>	
+					<button type="button" class="btn btn-success add-reasoning">+</button>
+					<button type="button" class="btn btn-danger remove-reasoning">-</button>
+					</section>
+					{% endif %}
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/validation' %}
+					<section id="validation-section" class="subsection">
+					<h3>Validation</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="validation-endpoint" placeholder="ws://host.docker.internal:8765/validation" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					</section>
+					{% endif %}
+					
+					{% if activity == 'https://w3id.org/whow/onto/flow/storing' %}
+					<section id="storing-section" class="subsection">
+					<h3>Storing</h3>
+					<div class="input-group mb-3">
+ 						<div class="input-group-prepend">
+   							<span class="input-group-text">Endpoint</span>
+ 						</div>
+ 						<input type="text" name="storing-endpoint" placeholder="ws://host.docker.internal:8765/triplestore" class="form-control" aria-label="Endpoint" required/>
+					</div>
+					</section>
+					{% endif %}
+	  			{% endfor %}
+	  			<section id="load-section" class="subsection">
+	  				<div class="center">
+	  					<button type="button" id="load-configuration" class="btn btn-info">Load</button>
+	  					<button type="button" id="exit-configuration" class="btn btn-secondary">Cancel</button>
+	  				</div>
+	  			</section>
+		    	</form>
+		    </div>
+	    </div>
+      	
+      </div>
+    </section>
+	{% endblock %}

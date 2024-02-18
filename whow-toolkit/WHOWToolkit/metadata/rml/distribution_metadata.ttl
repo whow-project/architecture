@@ -1,0 +1,63 @@
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rr: <http://www.w3.org/ns/r2rml#> .
+@prefix rml: <http://semweb.mmlab.be/ns/rml#> .
+@prefix ql: <http://semweb.mmlab.be/ns/ql#>.
+@prefix fnml: <http://semweb.mmlab.be/ns/fnml#> .
+@prefix grel: <http://users.ugent.be/~bjdmeest/function/grel.ttl#> .
+@prefix fno: <https://w3id.org/function/ontology#> .
+@prefix idlab-fn: <http://example.com/idlab/function/> .
+@prefix sd: <http://www.w3.org/ns/sparql-service-description#> .
+@prefix crml: <http://w3id.org/stlab/crml#> .
+@prefix csvw: <http://www.w3.org/ns/csvw#> .
+@prefix l0:  <https://w3id.org/italia/onto/l0/> .
+@prefix top: <https://dati.isprambiente.it/ontology/top/> .
+@prefix hydro: <https://w3id.org/whow/onto/hydrography/> .
+@prefix ispra-mf: <https://dati.isprambiente.it/ontology/inspire-mf/>.
+@prefix dcatapit: <http://dati.gov.it/onto/dcatapit#>
+@base <https://w3id.org/whow/data/> .
+
+:DistributionSource a rml:BaseSource ;
+    rml:source "{{ DISTRIBUTION_CSV }}";
+    rml:referenceFormulation ql:CSV .
+
+
+###########################################################
+##                  MAPPING RULES
+##########################################################
+
+
+:Dataset a rr:TriplesMap ;
+  rml:logicalSource :DatasetSource ;
+  rr:subjectMap [
+    rr:constant "{{ DATASET_ID }}" ;
+    rr:class dcatapit:Dataset
+  ] . 
+  
+:Distribution a rr:TriplesMap ;
+  rml:logicalSource :DistributionSource ;
+  rr:subjectMap [
+    rr:constant "{{ DISTRIBUTION_ID }}" ;
+    rr:class dcatapit:Distribution
+  ] .  
+  
+:DistributionProp a rr:TriplesMap ;
+  rml:logicalSource :DatasetSource ;
+  
+  rr:subjectMap [
+    rr:constant "{{ DISTRIBUTION_ID }}"
+  ] ;
+  rr:predicateObjectMap [
+    rr:predicateMap [
+      rml:reference "PROPERTY"
+  	] ;
+  	rr:objectMap [
+  	  rml:reference "VALUE";
+  	  {{ TERM_TYPE_INFO }}
+  	]
+  ] .
+  
+  
+  

@@ -1,4 +1,9 @@
 {
+	"metadata": {
+		"id": "demo",
+		"name": "Demo workflow configuration",
+		"description": "This configuration can be used for demo purposes."
+	},
 	"bound_services": {
 		"https://w3id.org/whow/onto/flow/ingestion": {
 			"endpoint": "ws://host.docker.internal:8765/ingestion",
@@ -53,6 +58,11 @@
 						"ontologies": [
 							"https://w3id.org/whow/onto/health-monitoring",
 							"https://w3id.org/whow/onto/hydrography"
+						],
+						"graphs": [
+							"https://www.example.org/graph1",
+							"https://www.example.org/graph2",
+							"https://www.example.org/graph3"
 						]
 					}
 				]
@@ -60,6 +70,9 @@
 		},
 		"https://w3id.org/whow/onto/flow/validation": {
 			"endpoint": "ws://host.docker.internal:8765/validation"
+		},
+		"https://w3id.org/whow/onto/flow/storing": {
+			"endpoint": "ws://host.docker.internal:8765/triplestore"
 		}
 	} 
 }
