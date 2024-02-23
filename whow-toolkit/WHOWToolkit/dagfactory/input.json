@@ -11,10 +11,10 @@
 				"title": "Test data catalog",
 				"description": "Some description for the test data catalog.",
 				"distributions": [
-					{"id": "hydrolakes",
+					{"id": "DATA",
 					 "mimetype": "text/csv",
 					 "accessURL": "https://hub.dati.lombardia.it/resource/d4ep-yvbw.csv"},
-					{"id": "linking",
+					{"id": "LINKING",
 					 "mimetype": "text/csv",
 					 "accessURL": "https://raw.githubusercontent.com/whow-project/datasets/main/RML-RULES/hydrography/lakes/lakesLinking.csv"}
 				],
@@ -23,7 +23,7 @@
 		},
 		"https://w3id.org/whow/onto/flow/preprocessing": {
 			"endpoint": "ws://host.docker.internal:8765/preprocessor",
-			"data": {"ids": ["hydrolakes", "linking"]}
+			"data": {"ids": ["DATA", "LINKING"]}
 		},
 		"https://w3id.org/whow/onto/flow/mapping": {
 			"endpoint": "ws://host.docker.internal:8765/mapping",
@@ -32,7 +32,7 @@
 					"id": "RMLMappinghydrolakes",
 					"rmls": [
 						{
-							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+							"uri": "https://raw.githubusercontent.com/whow-project/datasets/main/RML-RULES/hydrography/lakes/RMLMappinghydrolakes_pyrml.ttl"
 						}
 					]
 				}]

@@ -14,6 +14,8 @@ from rdflib import Graph, Dataset
 from pelix.ipopo.decorators import ComponentFactory, Instantiate, Validate, Provides, Requires, Property
 
 from slugify import slugify
+import requests
+import shortuuid
 
 @ComponentFactory("dag-factory")
 @Property('_dags_folder', 'dags.folder', '')
@@ -25,6 +27,10 @@ class AirflowDAGFactory(DAGFactory):
     def __init__(self):
         self._dags_folder = None
         self._http_endpoint = None
+        self._website_airflow_endpoint = None
+        self._airflow_endpoint = None
+        self._airflow_user = None
+        self._airflow_pwd = None
     
     @Validate
     def validate(self, context):
@@ -35,6 +41,10 @@ class AirflowDAGFactory(DAGFactory):
         
         self._dags_folder = self.__conf.get_property('dags.folder')
         self._http_endpoint = self.__conf.get_property('http.endpoint')
+        self._website_airflow_endpoint = self.__conf.get_property('website.airflow.endpoint')
+        self._airflow_endpoint = self.__conf.get_property('airflow.endpoint')
+        self._airflow_user = self.__conf.get_property('airflow.user')
+        self._airflow_pwd = self.__conf.get_property('airflow.pwd')
         
         logging.info(f'DAGS folder is configured to {self._dags_folder}')
         if not os.path.exists(self._dags_folder):
@@ -47,7 +57,13 @@ class AirflowDAGFactory(DAGFactory):
             
         print('DAGFactory is active!')
         
+    @property
+    def airflow_endpoint(self):
+        return self._airflow_endpoint
         
+    @property
+    def website_airflow_endpoint(self):
+        return self._website_airflow_endpoint
     
     '''
     input:
@@ -187,5 +203,55 @@ class AirflowDAGFactory(DAGFactory):
             return dag
         else:
             return None
+        
     
+    def dag_status(self, dag_id: str) -> str:
+        
+        logging.info(f'Retrieving DAG status.')
+        
+        airflow_dag_id = dag_id.replace(':', '_').replace('/', '_')
+        
+        r = requests.get(url=f'{self._airflow_endpoint}/api/v1/dags/{airflow_dag_id}/dagRuns', auth=(self._airflow_user, self._airflow_pwd), params={'order_by': '-start_date'})
+        data = r.json() 
+        
+        dag_runs = data['dag_runs']
+        if len(dag_runs) > 0:
+            dag_run = dag_runs[0]
+            state = dag_run['state']
+        else:
+            state = 'no status'
+            
+        return state
+    
+    
+    def dag_run(self, dag_id: str, config_id: str) -> str:
+        
+        logging.info(f'Running DAG {dag_id} with config {config_id}.')
+        
+        airflow_dag_id = dag_id.replace(':', '_').replace('/', '_')
+        
+        dag_uuid = shortuuid.uuid(str(dag_id))
+        
+        id = slugify(config_id)
+        config_path = os.path.join(self._dags_folder, 'configs', dag_uuid, f'{id}.json')
+                
+        if os.path.exists(config_path):
+            with open(config_path, 'r') as f:
+                json_obj = json.load(f)
+                logging.info(json_obj)
+                config_json = {
+                    'conf': json_obj
+                }
+                
+                headers = {'Content-type': 'application/json'}
+                r = requests.post(url=f'{self._airflow_endpoint}/api/v1/dags/{airflow_dag_id}/dagRuns', json=config_json, headers=headers, auth=(self._airflow_user, self._airflow_pwd))
+                logging.info(f'Airflow responded {r}')
+                
+                return self.dag_status(dag_id)
+                
+        else:
+            return None
+        
+        
+        
     

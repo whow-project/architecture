@@ -30,7 +30,7 @@ class Toolkit(object):
             
             #modules = ['triplifier', 'triplestores', 'web']
             #modules = ['ingestion', 'data_cleansing', 'triplifier', 'metadata', 'validator', 'triplestores', 'web']
-            modules = ['triplifier', 'dagfactory', 'web']
+            modules = ['ingestion', 'data_cleansing', 'triplifier', 'metadata', 'dagfactory', 'validator', 'triplestores', 'web']
             
             cls.__framework = create_framework(bundles)
             cls.__framework.start()

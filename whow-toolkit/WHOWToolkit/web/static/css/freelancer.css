@@ -408,7 +408,8 @@ a:focus, a:hover, a:active {
 }
 
 .bg-secondary {
-  background-color: #6599cf !important;
+  /* background-color: #6599cf !important; */
+  background-color: #2C3E50 !important;
 }
 
 .text-primary {
@@ -457,6 +458,34 @@ a:focus, a:hover, a:active {
 }
 
 .action-icon {
-	font-size: 30px;
+	font-size: 20px;
 	color: black
+}
+
+.red {
+	color: red
+}
+
+.green {
+	color: green
+}
+
+.footer img {
+	width: 150px
+}
+
+.center {
+	text-align: center
+}
+
+.middle {
+	vertical-align: middle
+}
+
+.justify {
+	text-align: justify
+}
+
+.fullsize-img {
+	width: 70%
 }

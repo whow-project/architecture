@@ -312,7 +312,14 @@ class DAGConfigsWeb(WebView):
             logging.info(f'Dags configs is {dag_configs}.')
             if dag_configs is not None:
                 if any(item.startswith('text/html') for item in mime_types):
-                    return render_template('dagfactory-dag-configs.html', services=self.webservices, dag_id=dag_id, configs=dag_configs)
+                    
+                    data = {
+                        'services': self.webservices, 
+                        'dag_id': dag_id, 
+                        'configs': dag_configs, 
+                        'airflow_endpoint': self._dagfactory.website_airflow_endpoint
+                    }
+                    return render_template('dagfactory-dag-configs.html', **data)
                 else:
                     return Response(response=json.dumps(dag_configs), status='200 Success', mimetype='application/json')
             else:
@@ -433,7 +440,7 @@ class DAGConfigWeb(WebView):
         self.__services = services
             
 @ComponentFactory("dagfactory-webview-factory")
-@Property('_name', 'webcomponent.name', 'dagmanager')
+@Property('_name', 'webcomponent.name', 'workflow-mgr')
 @Property('_path', 'webcomponent.path', '/')
 @Property('_context', 'webcomponent.context', __name__)
 @Provides('webviewcomponent')
@@ -469,3 +476,51 @@ class DAGCreateWeb(WebView):
     
     def set_web_services(self, services):
         self.__services = services
+        
+@ComponentFactory("dagstatus-web-factory")
+@Property('_name', 'webcomponent.name', 'dag-status')
+@Property('_path', 'webcomponent.path', '/api/<path:dag_id>')
+@Property('_context', 'webcomponent.context', __name__)
+@Requires('_dagfactory','dagfactory')
+@Provides('webcomponent')
+@Instantiate("dagstatus-web-conf")
+class DAGStatus(WebView):
+    def __init__(self):
+        super().__init__()
+        self._dagfactory = None
+        
+    def get(self, dag_id):
+        if not self._dagfactory:
+            self._dagfactory = self._get_reference('dagfactory')
+            
+        status = self._dagfactory.dag_status(dag_id)
+        
+        return Response(response=f'{{"status": "{status}"}}', status='200', mimetype='application/json')
+
+@ComponentFactory("dagrun-web-factory")
+@Property('_name', 'webcomponent.name', 'dag-run')
+@Property('_path', 'webcomponent.path', '/api/<path:dag_id>')
+@Property('_context', 'webcomponent.context', __name__)
+@Requires('_dagfactory','dagfactory')
+@Provides('webcomponent')
+@Instantiate("dagrun-web-conf")
+class DAGRun(WebView):
+    def __init__(self):
+        super().__init__()
+        self._dagfactory = None
+        
+    def get(self, dag_id):
+        
+        if not self._dagfactory:
+            self._dagfactory = self._get_reference('dagfactory')
+        
+        dag_config_id = request.args.get('config_id')
+            
+        ret = self._dagfactory.dag_run(dag_id, dag_config_id)
+        
+        if ret:
+            return Response(response=f'{{"status": {ret}}}', status='200 Success', mimetype='application/json')
+        else:
+            abort(404)
+
+        

@@ -1,14 +1,14 @@
 import json
 import os
 
-from flask.helpers import send_file
+from flask.helpers import send_file, abort
 from flask.views import MethodView
 from pelix.framework import FrameworkFactory
 from pelix.utilities import use_service
 from pelix.ipopo.decorators import ComponentFactory, Instantiate, Validate, Provides, Property, Requires
 from rdflib import Graph, URIRef, RDF, RDFS, DCAT, DCTERMS
 
-from api.api import Configuration, Reference, DataSource, DataCollection, DCATCatalog, DCATDataset, DCATDistribution, HTTPResource, WebComponent, DCATObject, WebSocketComponent, WHOWFlow, MediaTypeRegistry
+from api.api import WebView, Configuration, Reference, DataSource, DataCollection, DCATCatalog, DCATDataset, DCATDistribution, HTTPResource, WebComponent, DCATObject, WebSocketComponent, WHOWFlow, MediaTypeRegistry
 
 
 @ComponentFactory("data-collection-create-web-factory")
@@ -197,13 +197,17 @@ class IngestionWeb(MethodView, WebComponent):
             abort(404)
         
 @ComponentFactory("data-web-factory")
-@Property('_path', 'webcomponent.path', '/data/<dataset_id>')
+@Property('_name', 'webcomponent.name', 'data')
+@Property('_path', 'webcomponent.path', '<dataset_id>')
+@Property('_context', 'webcomponent.context', __name__)
+@Requires('_ingester', 'ingester')
 @Provides('webcomponent')
 @Instantiate("data-web-inst")
-class DataWeb(MethodView, WebComponent):
+class DataWeb(WebView):
     
     def __init__(self):
-        super().__init__(self._path)
+        super().__init__()
+        self._ingester = None
         
         
         
@@ -214,10 +218,15 @@ class DataWeb(MethodView, WebComponent):
         
     def get(self, dataset_id: str):
         
-        ctx = FrameworkFactory.get_framework().get_bundle_context()
-        reference = ctx.get_service_reference('ingester')
-        with use_service(ctx, reference) as ingester:
-            
-            path = os.path.join(ingester._data_folder, dataset_id)
-            
+        if not self._ingester:
+            self._ingester = self._get_reference('ingester')
+        
+        path = os.path.join(self._ingester._data_folder, dataset_id)
+        
+        if os.path.exists(path):
             return send_file(path), 200
+        else:
+            abort(404)
+        
+    def set_web_services(self, services):
+        self.__services = services

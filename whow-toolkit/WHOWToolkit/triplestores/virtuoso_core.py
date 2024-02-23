@@ -4,6 +4,7 @@ import pyodbc
 from api.api import TriplestoreManager, Input, Configuration
 from rdflib import URIRef, Graph
 import os
+import urllib.request
 import logging
 
 @ComponentFactory("triplestore-factory")
@@ -23,26 +24,56 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
             os.makedirs(self._graph_folder)
         
         
-    def do_job(self, input: Input, *args, **kwargs):
+    def do_job(self, _input: Input, *args, **kwargs):
         
         try:
-            files = []
-            for graph in _input['graphs']:
-                uri: str = graph['uri']
-                pos = uri.rfind('/')
-                filename = uri[pos+1:]
+            if 'graphs' in _input:
+                files = []
+                for graph in _input['graphs']:
+                    graph_id = graph['id']
+                    uri: str = graph['uri']
+                    pos = uri.rfind('/')
+                    filename = uri[pos+1:]
+                    
+                    f = os.path.join(self._graph_folder, f'{filename}.nt')
+                    
+                    urllib.request.urlretrieve(uri, f)
+                    
+                    logging.info(f'Downloaded {uri} to {f}')
+                    files.append(f)
+                    
+                    
+                    self.load_graphs(graph_id)
+                    
                 
-                f = os.path.join(self._graph_folder, filename)
+                for f in files:
+                    os.remove(f)
+                    
+            if 'metadata' in _input:
+                files = []
+                for graph in _input['metadata']:
+                    uri: str = graph['uri']
+                    pos = uri.rfind('/')
+                    filename = uri[pos+1:]
+                    
+                    f = os.path.join(self._graph_folder, f'{filename}.nt')
+                    
+                    opener = urllib.request.build_opener()
+                    opener.addheaders = [('Accept', 'application/n-triples')]
+                    urllib.request.install_opener(opener)
+                    
+                    urllib.request.urlretrieve(uri, f)
+                    
+                    logging.info(f'Downloaded {uri} to {f}')
+                    files.append(f)
+                    
                 
-                urllib.request.urlretrieve(uri, f)
-                
-                logging.info(f'Downloaded {uri} to {f}')
-                files.append(f)
-                
-            self.load_graphs()
-            for f in files:
-                os.remove(f)
+                self.load_graphs('metadata')
+                    
+                for f in files:
+                    os.remove(f)
         except Exception as e:
+            logging.info(f'Raised exception {e}')
             return False
             
         return True
@@ -50,11 +81,11 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
         
         
         
-    def load_graphs(self):
-        q = f"ld_dir_all('{self._graph_folder}', '*.nt', 'data')"
+    def load_graphs(self, dest_graph: str):
+        q = f"ld_dir_all('{self._graph_folder}', '*.nt', '{dest_graph}')"
         self.query(q)
-        q = f"ld_dir_all('{self._graph_folder}', '*.tar.gz', 'data')"
-        self.query(q)
+        #q = f"ld_dir_all('{self._graph_folder}', '*.tar.gz', 'data')"
+        #self.query(q)
         self.query('rdf_loader_run()')
         self.query('CHECKPOINT')
         self.query('COMMIT WORK')
@@ -63,8 +94,9 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
         print('Loaded graphs into Virtuoso!')
 
     def query(self, querystr: str):
-        cnxn = pyodbc.connect('DSN=VIRTUOSO VOS;UID=dba;PWD=dba')
+        cnxn = pyodbc.connect('DSN=VIRTUOSO;UID=dba;PWD=dba')
         
+        logging.info(f'Virtuoso query string {querystr}')
         rs = cnxn.execute(querystr)
         
         return rs

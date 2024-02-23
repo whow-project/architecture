@@ -30,7 +30,7 @@ class TriplifierWeb(WebView):
 
 @ComponentFactory("mapping-web-factory")
 @Property('_name', 'webcomponent.name', 'mapper')
-@Property('_path', 'webcomponent.path', '/mapper/<graph>')
+@Property('_path', 'webcomponent.path', '/<graph>')
 @Property('_context', 'webcomponent.context', __name__)
 @Provides('webcomponent')
 @Instantiate("mapper-web-inst")

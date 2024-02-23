@@ -1,4 +1,8 @@
 {
 	"dags.folder": "./dagfactory/dags/",
-	"http.endpoint": "http://localhost:5000"
+	"http.endpoint": "http://localhost:5000",
+	"website.airflow.endpoint": "http://localhost:8080",
+	"airflow.endpoint": "http://host.docker.internal:8080",
+	"airflow.user": "airflow",
+	"airflow.pwd": "airflow"
 }

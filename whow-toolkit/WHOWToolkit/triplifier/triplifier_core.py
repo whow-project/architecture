@@ -136,8 +136,8 @@ class PYRMLMapper(Mapper):
                 g.serialize(destination=graph_path, format='nt')
                 logging.info(f'Saved graph as {graph_id}.nt')
     
-        except Error as e:
-            logging.info(f'Error {e}')
+        except Exception as e:
+            logging.info(f'Triplification Error {e}')
             raise e
         return {'graphs': graphs}
     

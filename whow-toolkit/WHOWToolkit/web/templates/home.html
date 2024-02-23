@@ -4,34 +4,40 @@
     {% block head %}
     <header class="masthead bg-primary text-secondary text-center">
       <div class="container">
-        <img class="img-fluid mb-5 d-block mx-auto" src="img/logo-arco-con-trasparenza-520x416.png" alt="">
-        <h1 class="text-uppercase mb-0">WHOW Toolkit</h1>
-        <hr class="star-light">
-        <span class="h2-span"><a href="http://stlab.istc.cnr.it/"><img id="stlab" src="./img/CNR.png" /></a></span>
-        <span class="h2-span"><a href="http://www.iccd.beniculturali.it/"><img id="iccd" src="./img/iccd.jpg" /></a></span>
       </div>
     </header>
 	{% endblock %}
     
     <!-- Ontologie -->
     {% block content %}
-    <section class="portfolio" id="ontologie">
+    <section class="portfolio" id="toolkit">
       <div class="container">
-        <h2 class="text-center text-uppercase text-secondary mb-0">Ontologie</h2>
+        <h2 class="text-center text-uppercase text-secondary mb-0">WHOW Toolkit</h2>
         <hr class="star-dark mb-5">
         <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <a class="portfolio-item d-block mx-auto" href="http://localhost:9090/lode/extract?url=http://stlab.istc.cnr.it/arco/docker_data/ontologies/arco-core.owl">
-              <div class="ontology-title text-center text-white"><h3>Ontologia core</h3></div>
-              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
-                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
-                  <i class="fa fa-search-plus fa-3x"></i>
-                </div>
-              </div>
-              <img class="img-fluid" src="img/core.png" alt="">
-            </a>
+          <div class="col-md-12 col-lg-12">
+            <p class="justify">The WHOW Toolkit provides a set of reusable and
+					independent software components for dealing with the creation and
+					management of large knowledge graphs, like the one we constructed
+					in the context of the project. The communication among the
+					components is limited to and enabled by specific interfaces. The
+					latter are based either on REST API over HTTP or WebSocket API. The
+					REST API relies on conventional one-directional connections over
+					HTTP(s). On the contrary, WebSocket API makes it possible to open a
+					two-way interactive communication session between two components
+					identified as a client and server, respectively. With WebSocket, it
+					is possible to send messages to a server and receive event-driven
+					responses without having to poll the server for a reply. The choice
+					between the REST API or WebSocket API depends on specific
+					implementation needs as they provide different services as well as
+					different architectural integrations for final deployment.
+			</p>
+			<p class="center"> 
+				<img class="fullsize-img" alt="architecture" src="{{url_for('home.static', filename='img/toolkit.png')}}" />
+			</p>
           </div>
-          <div class="col-md-6 col-lg-4">
+      	</div>
+          <!-- div class="col-md-6 col-lg-4">
             <a class="portfolio-item d-block mx-auto" href="http://localhost:9090/lode/extract?url=http://stlab.istc.cnr.it/arco/docker_data/ontologies/cp-description.owl">
               <div class="ontology-title text-center text-white"><h3>Cultrural property description</h3></div>
               <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
@@ -85,8 +91,6 @@
               </div>
               <img class="img-fluid" src="img/locations.png" alt="">
             </a>
-          </div>
-        </div>
-      </div>
+          </div -->
     </section>
 	{% endblock %}

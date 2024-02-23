@@ -16,7 +16,8 @@ install_requires=[
    'chardet>=5.1.0,<=5.1.0'
    'Cython>=0.29.35,<=0.29.35',
    'requests>=2.31.0,<=2.31.0',
-   'pyshacl>=0.23.0,<=0.23.0'
+   'pyshacl>=0.23.0,<=0.23.0',
+   'pyodbc>=5.0.1,<=>=5.0.1'
 ]
 
 setup(name='WHOWToolkit', version='0.0.1',

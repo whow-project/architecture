@@ -1,22 +1,75 @@
 function dagRun(){
 	$(".dagrun").on("click", function(e){
+		e.preventDefault();
 		dagId = $(this).attr("dag_id");
 		configId = $(this).attr("config_id");
 		console.log("DAG RUN triggered for DAG ID " + dagId + " and config ID " + configId);
 		
 		$.ajax({
-			url: "./dag-config-run",
-			method: 'PUT',
-			type: "PUT",
-			data: {"dag_id": dagId, "dag_config": configId},
+			url: "./dag-run/api/" + dagId,
+			method: 'GET',
+			type: "GET",
+			data: {"config_id": configId},
 			//data: $(this),
 			//contentType: 'multipart/form-data',
 			contentType: false,
 			cache: false,
-			processData: false,
+			processData: true,
 			success: function(data){
-				console.log('DAG created');
-				window.location.href = "./dag-config-status/api/" + dagId + "/" + configId;
+				console.log('DAG runned');
+				window.location.href = "./dag-configs/api/" + dagId;
+			},
+			error: function(data){
+				$('.portfolio').append('<p>An error occurred while executing the DAG.</p>')
+			}
+		});
+	});
+
+}
+
+function dagStatus(){
+	
+	
+	$.ajax({
+		url: "./dag-status/api/" + $("#dag-configs").attr("dag_id"),
+		method: 'GET',
+		type: "GET",
+		dataType: "json",
+		success: function(data){
+			if(data.status == "running"){
+				$("i", $("#dagstatus")).removeClass("red")
+				$("i", $("#dagstatus")).addClass("green")
+			} 
+			else {
+				$("i", $("#dagstatus")).addClass("red")
+				$("i", $("#dagstatus")).removeClass("green")
+			}
+		},
+		error: function(data){
+			$('.portfolio').append('<p>An error occurred while getting the DAG status.</p>')
+		}
+	});
+	
+	
+	$("#dagstatus").on("click", function(e){
+		e.preventDefault();
+		dagId = $(this).attr("dag_id");
+		configId = $(this).attr("config_id");
+		console.log("DAG RUN triggered for DAG ID " + dagId + " and config ID " + configId);
+		
+		$.ajax({
+			url: "./dag-run/api/" + dagId,
+			method: 'GET',
+			type: "GET",
+			data: {"config_id": configId},
+			//data: $(this),
+			//contentType: 'multipart/form-data',
+			contentType: false,
+			cache: false,
+			processData: true,
+			success: function(data){
+				console.log('DAG runned');
+				window.location.href = "./dag-configs/api/" + dagId;
 			},
 			error: function(data){
 				$('.portfolio').append('<p>An error occurred while creating the DAG.</p>')
@@ -545,6 +598,9 @@ function graphIDManagement(e) {
 
 
 $(document).ready( function (){
+	window.setInterval(function(){
+		dagStatus();	
+	}, 5000);
 	dagRun();
 	dagConfigure();
 	addConfigurationButtons();

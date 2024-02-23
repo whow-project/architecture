@@ -33,7 +33,7 @@ class VirtuosoWebSocketComponent(WebSocketComponent):
         _input = json.loads(message)
         logging.info(f'Triplestore WS received {_input}')
         
-        out = self._triplestore_manager.do_job(_input['graphs'])
+        out = self._triplestore_manager.do_job(_input)
         
         if out:
             ret = {"status": "success", "content": _input}

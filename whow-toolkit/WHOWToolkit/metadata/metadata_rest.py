@@ -11,7 +11,9 @@ from flask import request
 from rdflib import Graph
 
 @ComponentFactory("metadata-graph-web-factory")
-@Property('_path', 'webcomponent.path', '/metadata-mgr/graph/<graph_id>')
+@Property('_name', 'webcomponent.name', 'metadata-mgr')
+@Property('_path', 'webcomponent.path', '/graph/<graph_id>')
+@Property('_context', 'webcomponent.context', __name__)
 @Provides('webcomponent')
 @Instantiate("metadata-graph-web-inst")
 class MetadataWeb(MethodView):
