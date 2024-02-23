@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+         xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+         xmlns:owl="http://www.w3.org/2002/07/owl#"
+         xml:base="http://www.lesfleursdunormal.fr/static/_downloads/pizza_onto.owl"
+         xmlns="http://www.lesfleursdunormal.fr/static/_downloads/pizza_onto.owl#">
+
+<owl:Ontology rdf:about="http://www.lesfleursdunormal.fr/static/_downloads/pizza_onto.owl"/>
+
+<owl:ObjectProperty rdf:about="#has_topping">
+  <rdfs:domain rdf:resource="#Pizza"/>
+  <rdfs:range rdf:resource="#Topping"/>
+</owl:ObjectProperty>
+
+<owl:Class rdf:about="#CheeseTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#FishTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#MeatTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Pizza">
+  <owl:disjointWith rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#TomatoTopping">
+  <rdfs:subClassOf rdf:resource="#Topping"/>
+</owl:Class>
+
+<owl:Class rdf:about="#Topping"/>
+
+<owl:Class rdf:about="#Entity">
+  <rdfs:subClassOf rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:disjointWith rdf:resource="http://www.w3.org/2002/07/owl#Thing"/>
+  <owl:equivalentClass rdf:resource="http://www.w3.org/2002/07/owl#Nothing"/>
+</owl:Class>
+
+<rdf:Description rdf:about="http://www.w3.org/2002/07/owl#Nothing">
+  <owl:equivalentClass rdf:resource="#Entity"/>
+</rdf:Description>
+
+<owl:AllDisjointClasses>
+  <owl:members rdf:parseType="Collection">
+    <rdf:Description rdf:about="#CheeseTopping"/>
+    <rdf:Description rdf:about="#FishTopping"/>
+    <rdf:Description rdf:about="#MeatTopping"/>
+    <rdf:Description rdf:about="#TomatoTopping"/>
+  </owl:members>
+</owl:AllDisjointClasses>
+
+
+</rdf:RDF>

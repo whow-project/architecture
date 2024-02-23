@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<rdf:RDF
+        xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+        xmlns:edp="https://europeandataportal.eu/voc#">
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/BMP">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/CSV">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/DBF">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GEOJSON">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/GZIP">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/HTML">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ICS">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JPEG2000">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/JSON_LD">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KML">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/KMZ">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/NETCDF">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ODS">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/PNG">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_QUADS">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_N_TRIPLES">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TRIG">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_TURTLE">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RDF_XML">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RSS">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/RTF">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TAR">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TIFF">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TSV">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/TXT">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/WMS_SRVC">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/XML">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+    <rdf:Description rdf:about="http://publications.europa.eu/resource/authority/file-type/ZIP">
+        <edp:isNonProprietary rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</edp:isNonProprietary>
+    </rdf:Description>
+
+</rdf:RDF>

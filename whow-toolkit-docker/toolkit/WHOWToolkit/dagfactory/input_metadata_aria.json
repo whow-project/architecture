@@ -1,0 +1,168 @@
+{
+	"bound_services": {
+		"https://w3id.org/whow/onto/flow/metadating": {
+			"endpoint": "ws://host.docker.internal:8765/metadating",
+			"data": {
+				"graphs": [{
+					"id": "acque_consumo_parametri",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "acque_sotteranee",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "altezza_laghi",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "ats",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "corpi_idirci_fluviali",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "corpi_idrici_lacustri",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "farmaci",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "malattie",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "meteo",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "radioattivita",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				},
+				{
+					"id": "degenze",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				}
+				],
+				"meta": [{
+					"id": "acque_consumo_parametri",
+					"dataset_id": "https://hub.dati.lombardia.it/d/beda-kb7b",
+					"distribution_id": "https://hub.dati.lombardia.it/d/beda-kb7b-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_acque_consumo_parametri.ini"
+				},
+				{
+					"id": "acque_sotteranee",
+					"dataset_id": "https://hub.dati.lombardia.it/d/46wy-4ydd",
+					"distribution_id": "https://hub.dati.lombardia.it/d/46wy-4ydd-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_acque_sotteranee.ini"
+				},
+				{
+					"id": "altezza_laghi",
+					"dataset_id": "https://hub.dati.lombardia.it/d/xiye-qjzy",
+					"distribution_id": "https://hub.dati.lombardia.it/d/xiye-qjzy-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_altezza_laghi.ini"
+				},
+				{
+					"id": "ats",
+					"dataset_id": "https://hub.dati.lombardia.it/d/h55m-dqi2",
+					"distribution_id": "https://hub.dati.lombardia.it/d/h55m-dqi2-rdf",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_ATS.ini"
+				},
+				{
+					"id": "corpi_idirci_fluviali",
+					"dataset_id": "https://hub.dati.lombardia.it/d/beda-kb7b",
+					"distribution_id": "https://hub.dati.lombardia.it/d/beda-kb7b-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_corpi_idirci_fluviali.ini"
+				},
+				{
+					"id": "corpi_idrici_lacustri",
+					"dataset_id": "https://hub.dati.lombardia.it/d/d4ep-yvbw",
+					"distribution_id": "https://hub.dati.lombardia.it/d/d4ep-yvbw-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_corpi_idrici_lacustri.ini"
+				},
+				{
+					"id": "farmaci",
+					"dataset_id": "https://hub.dati.lombardia.it/d/2mr3-henm",
+					"distribution_id": "https://hub.dati.lombardia.it/d/2mr3-henm-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_farmaci.ini"
+				},
+				{
+					"id": "malattie",
+					"dataset_id": "https://hub.dati.lombardia.it/d/fvk5-jiuq",
+					"distribution_id": "https://hub.dati.lombardia.it/d/fvk5-jiuq-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_malattie.ini"
+				},
+				{
+					"id": "meteo",
+					"dataset_id": "https://hub.dati.lombardia.it/d/647i-nhxk",
+					"distribution_id": "https://hub.dati.lombardia.it/d/647i-nhxk-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_meteo.ini"
+				},
+				{
+					"id": "radioattivita",
+					"dataset_id": "https://hub.dati.lombardia.it/d/7973-exxq",
+					"distribution_id": "https://hub.dati.lombardia.it/d/7973-exxq-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_radioattivita.ini"
+				},
+				{
+					"id": "degenze",
+					"dataset_id": "https://hub.dati.lombardia.it/d/rzni-6n8h",
+					"distribution_id": "https://hub.dati.lombardia.it/d/rzni-6n8h-ttl",
+					"configuration": "http://host.docker.internal/whow/aria/metadata_degenze.ini"
+				}
+				]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/validation": {
+			"endpoint": "ws://host.docker.internal:8765/validation"
+		}
+	} 
+}

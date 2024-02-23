@@ -1,0 +1,5 @@
+{
+	"dirty_data": "./data_cleansing/dirtydata/",
+	"cleaned_data": "./data_cleansing/data/",
+	"http_endpoint": "http://localhost:5000"
+}

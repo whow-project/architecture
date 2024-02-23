@@ -1,0 +1,73 @@
+{
+	"bound_services": {
+		"https://w3id.org/whow/onto/flow/ingestion": {
+			"endpoint": "ws://host.docker.internal:8765/ingestion",
+			"data": {
+				"title": "Test data catalog",
+				"description": "Some description for the test data catalog.",
+				"distributions": [
+					{"id": "hydrolakes",
+					 "mimetype": "text/csv",
+					 "accessURL": "https://hub.dati.lombardia.it/resource/d4ep-yvbw.csv"},
+					{"id": "linking",
+					 "mimetype": "text/csv",
+					 "accessURL": "https://raw.githubusercontent.com/whow-project/datasets/main/RML-RULES/hydrography/lakes/lakesLinking.csv"}
+				],
+				"store": true
+			}
+		},
+		"https://w3id.org/whow/onto/flow/preprocessing": {
+			"endpoint": "ws://host.docker.internal:8765/preprocessor",
+			"data": {"ids": ["hydrolakes", "linking"]}
+		},
+		"https://w3id.org/whow/onto/flow/mapping": {
+			"endpoint": "ws://host.docker.internal:8765/mapping",
+			"data": {
+				"graphs": [{
+					"id": "RMLMappinghydrolakes",
+					"rmls": [
+						{
+							"uri": "http://localhost:5000/mapper/RMLMappinghydrolakes.ttl"
+						}
+					]
+				}]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/metadating": {
+			"endpoint": "ws://host.docker.internal:8765/metadating",
+			"data": {
+				"meta": [{
+					"id": "RMLMappinghydrolakes",
+					"dataset_id": "https://hub.dati.lombardia.it/resource/d4ep-yvbw",
+					"distribution_id": "https://hub.dati.lombardia.it/resource/d4ep-yvbw-rdf",
+					"configuration": "http://host.docker.internal/whow/config_test.ini"
+				}]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/reasoning": {
+			"endpoint": "ws://host.docker.internal:8765/reasoning",
+			"data": {
+				"reasoning": [
+					{
+						"graph_id": "RMLMappinghydrolakes",
+						"ontologies": [
+							"https://w3id.org/whow/onto/health-monitoring",
+							"https://w3id.org/whow/onto/hydrography"
+						],
+						"graphs": [
+							"https://www.example.org/graph1",
+							"https://www.example.org/graph2",
+							"https://www.example.org/graph3"
+						]
+					}
+				]
+			}
+		},
+		"https://w3id.org/whow/onto/flow/validation": {
+			"endpoint": "ws://host.docker.internal:8765/validation"
+		},
+		"https://w3id.org/whow/onto/flow/storing": {
+			"endpoint": "ws://host.docker.internal:8765/triplestore"
+		}
+	} 
+}

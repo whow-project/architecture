@@ -1,0 +1,4 @@
+{
+	"graph.folder": "/graphs",
+	"http.endpoint": "http://localhost:5000/triplestore/"
+}

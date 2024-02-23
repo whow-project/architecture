@@ -1,0 +1,5 @@
+{
+	"shacl.file": "./validator/shacl/dcat-ap-SHACL.ttl",
+	"vocabularies.folder": "./validator/vocs", 
+	"http.endpoint": "http://localhost:5000/validator/"
+}

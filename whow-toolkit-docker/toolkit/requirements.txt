@@ -1,0 +1,11 @@
+rdflib==6.3.2
+websockets==11.0.2
+iPOPO==1.0.1
+requests==2.31.0
+chardet==5.1.0
+Owlready2==0.43
+Werkzeug==2.2.2
+Flask==2.2.2
+owlrl==6.0.2
+pyshacl==0.23.0
+pyodbc==5.0.1

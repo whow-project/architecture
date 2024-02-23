@@ -1,0 +1,33 @@
+{% extends "index.html" %}
+
+    <!-- Script -->
+    {% block script %}
+    <script src="{{url_for('dagfactory.static', filename='dagfactory/js/dagfactory.js')}}"></script>
+    {% endblock %}
+    
+    <!-- Header -->
+    {% block head %}
+    <header class="masthead bg-primary text-secondary text-center">
+      <div class="container">
+        
+      </div>
+    </header>
+	{% endblock %}
+    
+    <!-- Load RDF -->
+    {% block content %}
+    <section class="portfolio" id="triplifier-content">
+      <div class="container">
+      	<h2 class="text-center text-uppercase text-secondary mb-0">Instantiate a KG Creation Workflow</h2>
+      	<hr class="star-dark mb-5"></hr>
+      	<form action="./dagfactory/api/dag/create" method="POST" enctype="multipart/form-data">
+      		<div class="form-group">
+	      		<label for="graph">Upload an RDF file with the workflow details.</label>
+	      		<input name="graph" class="form-control" type="file"/>
+	      		<input type="submit" accept="text/turtle" class="btn btn-primary" value="load" />
+	      	</div>
+      	</form>
+      	
+      </div>
+    </section>
+	{% endblock %}

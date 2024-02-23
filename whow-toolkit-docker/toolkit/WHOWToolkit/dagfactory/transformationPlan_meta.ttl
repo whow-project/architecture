@@ -1,0 +1,29 @@
+@prefix : <https://w3id.org/whow/data/workflow/> .
+@prefix flow: <https://w3id.org/whow/onto/flow/> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcatapit: <http://dati.gov.it/onto/dcatapit#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
+@prefix tvo: <https://data.europa.eu/m8g/transform-validate-ontology#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix wfm: <https://w3id.org/whow/onto/workflow-mgmt/> .
+
+
+:Plan a flow:Plan ;
+    rdfs:label "The Plan"@en ;
+    flow:hasFirstActivity :Metadating .
+
+:Metadating a flow:Activity ;
+    rdfs:label "The metadata creation activity with RML"@en ;
+    flow:hasBoundService flow:metadating ;
+    flow:hasNextActivity :Validation .
+
+:Validation a flow:Activity ;
+    rdfs:label "The validation activity."@en ;
+    flow:hasBoundService flow:validation .
+
+#:Reasoning a flow:Activity ;
+#    rdfs:label "The reasoning activity."@en ;
+#    flow:hasBoundService flow:reasoning .

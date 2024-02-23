@@ -1,0 +1,66 @@
+{% extends "index.html" %}
+
+    <!-- Script -->
+    {% block script %}
+    <script src="{{url_for('dagfactory.static', filename='dagfactory/js/dagrun.js')}}"></script>
+    {% endblock %}
+    
+    <!-- Header -->
+    {% block head %}
+    <header class="masthead bg-primary text-secondary text-center">
+      <div class="container">
+        
+      </div>
+    </header>
+	{% endblock %}
+    
+    
+    <!-- Read DAGs -->
+    {% block content %}
+    <section class="portfolio" id="dag-configs" dag_id="{{ dag_id }}">
+      <div class="container">
+      	<h2 class="text-center text-uppercase text-secondary mb-0">DAG Configurations</h2>
+      	<hr class="star-dark mb-5"></hr>
+      	
+      	<div class="row">
+      		<div class="col-md-12 col-lg-12">
+      			<p>
+      				<b>DAG ID:</b> {{ dag_id }}
+      				<a id="dagstatus" target="_blank" href="{{ airflow_endpoint }}/dags/{{dag_id.replace(':', '_').replace('/', '_')}}"><i style="width: 30px" class="fa fa-circle action-icon red" aria-hidden="true"></i></a> 
+      			</p>
+      		</div>
+      		<div class="col-md-12 col-lg-12">
+	      		<button type="button" dag_id="{{ dag_id }}" class="dagconfigure btn btn-info">Add configuration</button>
+	      	</div>
+	      	<div class="col-md-12 col-lg-12">
+		      	<table class="table">
+		  			<thead>
+		    			<tr>
+		      				<th scope="col">ID</th>
+		      				<th scope="col">Name</th>
+		      				<th scope="col">Description</th>
+		      				<th scope="col">Actions</th>
+		    			</tr>
+		  			</thead>
+		  			<tbody>
+		  			{% for config in configs %}
+		  				<tr>
+		      				<th scope="row">{{ config['id'] }}</th>
+		      				<td scope="row">{{ config['name'] }}</td>
+		      				<td scope="row">{{ config['description'] }}</td>
+		      				<td scope="row">
+		      					<a class="dagrun" dag_id="{{ dag_id }}" config_id="{{ config['id'] }}" href=""><i style="width: 30px" class="fa fa-play-circle action-icon" aria-hidden="true"></i></a>
+		      					<a dag_id="{{ dag_id }}" config_id="{{ config['id'] }}" href="http://localhost:5000/dag-config/api/{{dag_id}}?config_id={{config['id']}}"><i style="width: 30px" class="fa fa-eye action-icon" aria-hidden="true"></i></a>
+		      					<a class="dagrun" dag_id="{{ dag_id }}" config_id="{{ config['id'] }}" href="http://localhost:5000/dag-config/api/{{dag_id}}?config_id={{config['id']}}&mode=edit"><i style="width: 30px" class="fa fa-pencil-square action-icon" aria-hidden="true"></i></a>
+		      					<a class="dagdelete" dag_id="{{ dag_id }}" config_id="{{ config['id'] }}" href="http://localhost:5000/dag-config/api/{{dag_id}}?config_id={{config['id']}}&mode=edit"><i style="width: 30px" class="fa fa-trash action-icon" aria-hidden="true"></i></a>
+		      				</td>
+		  				</tr>
+		  			{% endfor %}
+		    		</tbody>
+		    	</table>
+		    </div>
+	    </div>
+      	
+      </div>
+    </section>
+	{% endblock %}

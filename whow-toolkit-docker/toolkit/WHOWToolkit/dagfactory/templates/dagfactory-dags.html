@@ -1,0 +1,46 @@
+{% extends "index.html" %}
+
+    <!-- Script -->
+    {% block script %}
+    <script src="{{url_for('dagfactory.static', filename='dagfactory/js/dagfactory.js')}}"></script>
+    {% endblock %}
+    
+    <!-- Header -->
+    {% block head %}
+    <header class="masthead bg-primary text-secondary text-center">
+      <div class="container">
+        
+      </div>
+    </header>
+	{% endblock %}
+    
+    
+    <!-- Read DAGs -->
+    {% block content %}
+    <section class="portfolio" id="triplifier-content">
+      <div class="container">
+      	<h2 class="text-center text-uppercase text-secondary mb-0">Existing Workflows for KG Creation</h2>
+      	<hr class="star-dark mb-5"></hr>
+      	
+      	<table class="table">
+  			<thead>
+    			<tr>
+      				<th scope="col">Workflow ID</th>
+      				<th scope="col">Description</th>
+      				<th scope="col">Actions</th>
+    			</tr>
+  			</thead>
+  			<tbody>
+  			{% for plan in plans %}
+  				<tr>
+      				<th scope="row">{{ plan[0] }}</th>
+      				<td scope="row">{{ plan[1] }}</td>
+      				<td scope="row"><a href="./dag-configs/api/{{ plan[0] }}"><img style="width: 30px" src="{{url_for('dagfactory.static', filename='dagfactory/img/configure.png')}}" /></a></td>
+  				</tr>
+  			{% endfor %}
+    		</tbody>
+    	</table>
+      	
+      </div>
+    </section>
+	{% endblock %}
