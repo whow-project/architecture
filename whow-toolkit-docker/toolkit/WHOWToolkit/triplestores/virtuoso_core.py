@@ -9,20 +9,36 @@ import logging
 
 @ComponentFactory("triplestore-factory")
 @Property('_graph_folder', 'graph.folder', '')
+@Property('_virtuoso_sparql', 'virtuoso.sparql', '')
+@Property('_virtuoso_service', 'virtuoso.service', '')
 @Provides("triplestore-manager")
 @Instantiate("virtuoso-triplestore-manager")
 class VirtuosoTriplestoreManager(TriplestoreManager):
+    
+    def __init__(self):
+        self._graph_folder = None
+        self._virtuoso_sparql = None
+        self._virtuoso_service = None
     
     @Validate
     def validate(self, context):
         print('Virtuoso manager is active!')
         
         self.__conf = Configuration('./triplestores/conf/props.json')
-        self._graph_folder= self.__conf.get_property('graph.folder')
+        self._graph_folder = self.__conf.get_property('graph.folder')
+        self._virtuoso_sparql = self.__conf.get_property('virtuoso.sparql')
+        self._virtuoso_service = self.__conf.get_property('virtuoso.service')
         
         if not os.path.exists(self._graph_folder):
             os.makedirs(self._graph_folder)
         
+    @property
+    def virtuoso_sparql(self):
+        return self._virtuoso_sparql
+    
+    @property
+    def virtuoso_service(self):
+        return self._virtuoso_service
         
     def do_job(self, _input: Input, *args, **kwargs):
         

@@ -212,6 +212,28 @@ class HTTPServer(RESTApp):
         print(f'2 Registered resource {func}')
     '''
     
+@ComponentFactory("ontonetweb-factory")
+@Property('_name', 'webcomponent.name', 'ontonet')
+@Property('_path', 'webcomponent.path', '/')
+@Property('_context', 'webcomponent.context', __name__)
+@Provides('webviewcomponent')
+@Instantiate("ontonetweb")
+class OntoNetWeb(WebView):
+    
+    def __init__(self):
+        super().__init__()
+        
+    def get(self):
+        logging.info(f'Services viewed by OntoNet {self.webservices}.')
+        
+        
+        logging.info("OntoNet page.")
+        return render_template('ontonet.html', services=self.webservices)
+    
+    
+    def set_web_services(self, services):
+        self.__services = services    
+
 @ComponentFactory("web-factory")
 @Property('_name', 'webcomponent.name', 'home')
 @Property('_path', 'webcomponent.path', '/')
@@ -234,3 +256,4 @@ class HomeWeb(WebView):
     
     def set_web_services(self, services):
         self.__services = services
+        

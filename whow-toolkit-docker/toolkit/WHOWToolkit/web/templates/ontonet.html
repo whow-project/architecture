@@ -1,0 +1,133 @@
+{% extends "index.html" %}
+
+    <!-- Header -->
+    {% block head %}
+    <header class="masthead bg-primary text-secondary text-center">
+      <div class="container">
+      </div>
+    </header>
+	{% endblock %}
+    
+    <!-- Ontologie -->
+    {% block content %}
+    <section class="portfolio" id="ontologies">
+      <div class="container">
+        <h2 class="text-center text-uppercase text-secondary mb-0">WHOW Ontology Network</h2>
+        <hr class="star-dark mb-5">
+		
+		<div class="row">
+          <div class="col-md-12 col-lg-12">
+			<p class="justify">
+				The WHOW ontology network consists of 5 ontology modules and 3
+				ontology modules of the partner ISPRA that have been revised during
+				the WHOW project and extensively re-used, with a direct approach,
+				as the basis for the definition of the WHOW ontologies. The overall
+				network and interactions with other ontologies is shown in figure below
+				where each ontology is represented as a circle, whilst the arrows
+				represent owl:imports axioms among the ontologies.
+			</p>
+			<p class="center">
+				<img class="fullsize-img" alt="Ontology network graph" src="{{url_for('home.static', filename='img/whow-ontonet-diagram.png')}}" />
+			</p>
+			
+		  </div>
+		</div>
+		
+		<h2 class="text-center text-uppercase text-secondary mb-0">Ontologies</h2>
+        <hr class="star-dark mb-5">
+		
+		<div class="row">
+          <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/flow/latest/flow.rdf">
+              <div class="ontology-title text-center text-white"><h3>KG creation workflow</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/flow-ontology.png')}}" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+			  <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/health-monitoring/latest/health-monitoring.rdf">
+              <div class="ontology-title text-center text-white"><h3>Health Monitoring</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/health-monitoring-ontology.png')}}" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/hydrography/latest/hydrography.rdf">
+              <div class="ontology-title text-center text-white"><h3>Hydrography</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/hydrography.png')}}" alt="">
+            </a>
+          </div>
+         </div>
+         <div class="row">
+          <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/water-indicator/latest/water-indicator.rdf">
+              <div class="ontology-title text-center text-white"><h3>Water Indicator</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/water-indicators.png')}}" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+			  <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/water-monitoring/latest/water-monitoring.rdf">
+              <div class="ontology-title text-center text-white"><h3>Water Monitoring</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/water-monitoring.png')}}" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="https://semscout.istc.cnr.it/whow/lode/extract?url=https://raw.githubusercontent.com/whow-project/assets/main/ontologies/weather-monitoring/latest/weather-monitoring.rdf">
+              <div class="ontology-title text-center text-white"><h3>Weather Monitoring</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="{{url_for('home.static', filename='img/weather-monitoring.png')}}" alt="">
+            </a>
+          </div>
+         </div>
+         </div>
+          <!--  div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="http://localhost:9090/lode/extract?url=http://stlab.istc.cnr.it/arco/docker_data/ontologies/identifiers.owl">	
+              <div class="ontology-title text-center text-white"><h3>Identifiers</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/identifiers.png" alt="">
+            </a>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <a class="portfolio-item d-block mx-auto" href="http://localhost:9090/lode/extract?url=http://stlab.istc.cnr.it/arco/docker_data/ontologies/location-geoamm.owl">	
+              <div class="ontology-title text-center text-white"><h3>Locations &amp; addresses</h3></div>
+              <div class="portfolio-item-caption d-flex position-absolute h-100 w-100">
+                <div class="portfolio-item-caption-content my-auto w-100 text-center text-white">
+                  <i class="fa fa-search-plus fa-3x"></i>
+                </div>
+              </div>
+              <img class="img-fluid" src="img/locations.png" alt="">
+            </a>
+          </div -->
+    </section>
+	{% endblock %}

@@ -1,4 +1,6 @@
 {
 	"graph.folder": "/graphs",
-	"http.endpoint": "http://localhost:5000/triplestore/"
+	"http.endpoint": "http://localhost:5000/triplestore/",
+	"virtuoso.sparql": "http://localhost:8890/sparql/",
+	"virtuoso.service": "virtuoso"
 }

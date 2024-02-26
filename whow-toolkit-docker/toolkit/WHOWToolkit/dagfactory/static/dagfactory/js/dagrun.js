@@ -20,7 +20,7 @@ function dagRun(){
 				window.location.href = "./dag-configs/api/" + dagId;
 			},
 			error: function(data){
-				$('.portfolio').append('<p>An error occurred while executing the DAG.</p>')
+				//$('.portfolio').append('<p>An error occurred while executing the DAG.</p>')
 			}
 		});
 	});
@@ -46,11 +46,11 @@ function dagStatus(){
 			}
 		},
 		error: function(data){
-			$('.portfolio').append('<p>An error occurred while getting the DAG status.</p>')
+			//$('.portfolio').append('<p>An error occurred while getting the DAG status.</p>')
 		}
 	});
 	
-	
+	/*
 	$("#dagstatus").on("click", function(e){
 		e.preventDefault();
 		dagId = $(this).attr("dag_id");
@@ -76,6 +76,7 @@ function dagStatus(){
 			}
 		});
 	});
+	*/
 
 }
 
@@ -600,7 +601,7 @@ function graphIDManagement(e) {
 $(document).ready( function (){
 	window.setInterval(function(){
 		dagStatus();	
-	}, 5000);
+	}, 2000);
 	dagRun();
 	dagConfigure();
 	addConfigurationButtons();

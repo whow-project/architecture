@@ -5,8 +5,9 @@
 
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
+    <meta name="description" content="WHOW Toolkit">
+    <meta name="author" content="Andrea Giovanni Nuzzolese">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('home.static', filename='logo-black-small.png')}}">
 
     <title>WHOW Toolkit - Home page</title>
 
@@ -35,7 +36,7 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg bg-secondary fixed-top text-uppercase" id="mainNav">
       <div class="container">
-        <a class="navbar-brand js-scroll-trigger" href="#page-top">
+        <a class="navbar-brand js-scroll-trigger" href="home">
          <img class="logo" src="{{url_for('home.static', filename='logo-white-small.png')}}">
         </a>
         <button class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -44,11 +45,21 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
+            {% set home = {'service': None} %}
           	{% for service in services %}
-          		<li class="nav-item mx-0 mx-lg-1">
-              		<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{service._name}}">{{ service._name }}</a>
-            	</li>
+          		{% if service._name.lower() == 'home' %}
+          			{% if home.update({'service': service}) %} {% endif %}
+          		{% else %}
+	          		<li class="nav-item mx-0 mx-lg-1">
+	              		<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{service._name}}">{{ service._name }}</a>
+	            	</li>
+	            {% endif %}
           	{% endfor %}
+          	{% if home['service'] %}
+          		<li class="nav-item mx-0 mx-lg-1">
+	           		<a class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{home['service']._name}}">{{ home['service']._name }}</a>
+	           	</li>
+          	{% endif %}
           </ul>
         </div>
       </div>
@@ -78,7 +89,7 @@
         		</div>
         		<div class="col-md-8 col-lg-8 middle">
         			<p>
-        				WHOW is a collaborative project funded under the Connecting European Facility (CEF) Programme of the European Union, within the Digital sector under grant agreement 2019-EU-IA-0089.
+        				WHOW is a project funded under the Connecting European Facility (CEF) Programme of the European Union, within the Digital sector under grant agreement 2019-EU-IA-0089.
         			</p>
         		</div>
         	</div>
