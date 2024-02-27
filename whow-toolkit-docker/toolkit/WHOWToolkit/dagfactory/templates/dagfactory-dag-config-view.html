@@ -153,7 +153,7 @@
 		 						<div class="input-group-prepend">
 		   							<span class="input-group-text">RML descriptor</span>
 		 						</div>
-		 						<input type="text" name="triplification-rml" placeholder="http://someuri.foo" class="form-control" aria-label="RML ID" value="{{graph['id']}}" {{'readonly=readonly' if not edit else ''}} required />
+		 						<input type="text" name="triplification-rml" placeholder="http://someuri.foo" class="form-control" aria-label="RML ID" value="{{rml['uri']}}" {{'readonly=readonly' if not edit else ''}} required />
 							</div>
 						</div>
 						{% endfor %}

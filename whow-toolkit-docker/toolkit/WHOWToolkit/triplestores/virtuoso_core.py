@@ -106,6 +106,7 @@ class VirtuosoTriplestoreManager(TriplestoreManager):
         self.query('CHECKPOINT')
         self.query('COMMIT WORK')
         self.query('CHECKPOINT')
+        self.query('DELETE FROM DB.DBA.LOAD_LIST')
         
         print('Loaded graphs into Virtuoso!')
 
