@@ -19,13 +19,13 @@
     {% block content %}
     <section class="portfolio" id="dag-configs" dag_id="{{ dag_id }}">
       <div class="container">
-      	<h2 class="text-center text-uppercase text-secondary mb-0">DAG Configurations</h2>
+      	<h2 class="text-center text-uppercase text-secondary mb-0">Workflow Configurations</h2>
       	<hr class="star-dark mb-5"></hr>
       	
       	<div class="row">
       		<div class="col-md-12 col-lg-12">
       			<p>
-      				<b>DAG ID:</b> {{ dag_id }}
+      				<b>Workflow ID:</b> {{ dag_id }}
       				<a id="dagstatus" target="_blank" href="{{ airflow_endpoint }}/dags/{{dag_id.replace(':', '_').replace('/', '_')}}"><i style="width: 30px" class="fa fa-circle action-icon red" aria-hidden="true"></i></a> 
       			</p>
       		</div>

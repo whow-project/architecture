@@ -6,7 +6,7 @@ import os, csv, codecs, sys
 from pathlib import Path
 import logging
 
-logging.basicConfig(filename='./logs/mapping.log', level=logging.INFO)
+logging.basicConfig(filename='./logs/toolkit.log', level=logging.INFO)
         
 class Toolkit(object): 
     

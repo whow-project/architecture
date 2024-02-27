@@ -23,8 +23,8 @@
       	<form action="./dagfactory/api/dag/create" method="POST" enctype="multipart/form-data">
       		<div class="form-group">
 	      		<label for="graph">Upload an RDF file with the workflow details.</label>
-	      		<input name="graph" class="form-control" type="file"/>
-	      		<input type="submit" accept="text/turtle" class="btn btn-primary" value="load" />
+	      		<input name="graph" class="form-control" accept=".ttl,.rdf,.nt,.n3,.json-ld" type="file"/>
+	      		<input type="submit" class="btn btn-primary" value="load" />
 	      	</div>
       	</form>
       	
